@@ -1,0 +1,9 @@
+{
+  "response": {
+    "user_profile_img_url: "/mantis/v3/media/user_profile/big-smiley-001.gif",
+    "status_code: 200,
+    "name: "opcadmin",
+    "user: "jonardrosas",
+    "ACL_techtype: null,
+  }
+}

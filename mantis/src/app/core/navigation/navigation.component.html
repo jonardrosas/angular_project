@@ -1,0 +1,29 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark m3-nav-dark-bg">
+    <a class="navbar-brand" href="/">
+      <i class="fas fa-th-large"></i>
+      <img [src]="logo" style="height:30px;width:150px;margin-top:0px;"/>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto text-white">
+            <li class="m3-tab-lclass" [ngClass]="tab.lclass" *ngFor="let tab of tablist">
+                <a class="m3-tab-aclass" [href]="tab.url">
+                    <span class="m3-tab-sclass">{{ tab.name }}</span>
+                </a>
+            </li>
+        </ul>
+        <!--
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                {{ group_info }}
+                <a class="btn btn-xs rounded-circle" (click)="showProfile" class="m3-profile-icon-link">
+                    <img [src]="group_info.user_profile_img_url" width=41 height=41 class="rounded-circle border border-secondary">
+                </a>
+            </li>
+        </ul>
+        -->
+    </div>
+</nav>
