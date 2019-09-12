@@ -1,0 +1,40 @@
+.m3-nav-dark-bg{
+    background-color: #2b2b2b !important;
+}
+
+.m3-tab-lclass{
+    border-radius: 3px;
+    border-top: #b2b2b2 1px solid;
+    border-left: #b2b2b2 1px solid;
+    -moz-box-shadow: inset -1px -2px 5px #000000;
+    -webkit-box-shadow: inset -1px -7px 5px #000000;
+    box-shadow: inset -1px -2px 5px #000000;
+    margin-left: 5px;
+    margin-top: 7px;
+    height: 40px;
+    background-color: #353535;
+}
+
+.m3-tab-aclass{
+    padding: 20px 10px 10px 10px;
+    color: #FFF !important;
+    font-size: 12px;
+}
+
+.m3-tab-sclass {
+    padding-top: 20px;
+}
+
+.m3-tab-aclass.active{
+    border-radius: 3px;
+    padding: 10px 4px 9px 10px;
+    -moz-box-shadow: inset -1px -2px 5px #3F51B5;
+    -webkit-box-shadow: inset -1px -7px 5px #3F51B5;
+    box-shadow: inset -1px -2px 5px #3F51B5;
+    background-image: -webkit-linear-gradient(top,#2d597e 0,#3085d0 100%);
+    background-image: -o-linear-gradient(top,#2d597e 0,#3085d0 100%);
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#2d597e),to(#3085d0));
+    background-image: linear-gradient(to bottom,#2d597e 0,#3085d0 100%);
+
+}
+

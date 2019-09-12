@@ -1,14 +1,8 @@
 // Angular imports
 import { Component, OnInit, Input } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { FormBuilder } from '@angular/forms';
-
-// Third party imports
-import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
-// Local imports
-import { UpdateSessionObj, UpdateSessionResponse,  NgDtSettings, TestInterFace} from './interface/interface';
-
+import { AuthenticationService } from './../services';
+import { APP_CONFIG } from './../../configs';
+import { AuthenticationComponent } from './../authentication/authentication.component';
 
 @Component({
     selector: 'app-navigation',
@@ -17,44 +11,31 @@ import { UpdateSessionObj, UpdateSessionResponse,  NgDtSettings, TestInterFace} 
 })
 
 export class NavigationComponent implements OnInit {
+    @Input() tablist: string;
+    @Input() nav_type: string;
+    private logo = APP_CONFIG.LOGO;
+    private userInstance;
 
-  logo = 'assets/img/Mantis3.0004Logo.png';
-  tablist = [
-      {name: 'Manual Entry', url: '#/test'},
-  ]
-  data: any;
-  items;
-  checkoutForm;
- 
-  constructor(
-      private config: NgbModalConfig,
-      private modalService: NgbModal,
-      //private formBuilder: FormBuilder
-  ){
-      config.backdrop = 'static';
-      config.keyboard = false;
-  }
+    constructor(private authService: AuthenticationService){}
 
-  ngOnInit() {
-      //this.updateSession();
-  }
-
-  isAuthenticated(){
-      if(this.data.group_info.status_code == 401){
-          //self.open();
-      }
-  }
-
-  /*
-  updateSession(){
-      this._navConfigService.updateSession()
-        .subscribe(data =>
-              this.data =  {
-                'group_info': data['response']
-              },
-              err => console.error('this is error'),
-              () => this.isAuthenticated()
+    ngOnInit() {
+        this.authService.authenticate(AuthenticationComponent);
+        this.authService.currentUserSubject.subscribe(
+          (data) => this.setUserInstance(data)
         )
-  }*/
-  
+    }
+
+    setUserInstance(data){
+        return this.userInstance = data;
+    }
+
+    updateTablist(tablist){
+        this.tablist = tablist;
+    }
+
+    logOut() {
+        alert('logout');
+        this.authService.logOut()
+    }
+
 }

@@ -10,34 +10,44 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'ngx-cookie-service';
 
 // Local imports
+import { APP_CONFIG } from './configs';
 import { CoreModule } from './core/core.module';
+import { OrcModule } from './modules/orc/orc.module';
+import { NavigationComponent } from './core/navigation/navigation.component';
+import { AuthenticationComponent } from './core/authentication/authentication.component';
+import { SharedModule } from './shared/shared.module';
+import { BootstrapNavigationComponent } from './shared/components/bootstrap-navigation';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavigationComponent } from './core/navigation/navigation.component';
-import { AuthenticationComponent } from './core/authentication/authentication.component'
+
 
 @NgModule({
-  declarations: [
-      AppComponent,
-      NavigationComponent,
-      AuthenticationComponent
-  ],
-  imports: [
-      BrowserModule,
-      CoreModule,
-      AppRoutingModule,
-      HttpClientModule,
-      ReactiveFormsModule,
-      NgbModule,
-      HttpClientXsrfModule.withOptions({
-          cookieName: 'mantis3_token',
-          headerName: 'X-CSRFToken',
-      }),
-  ],
-  entryComponents: [AuthenticationComponent],
-  providers: [
-      CookieService
+    declarations: [
+        AppComponent,
+        NavigationComponent,
+        AuthenticationComponent,
+        BootstrapNavigationComponent
     ],
-  bootstrap: [AppComponent]
+    imports: [
+        BrowserModule,
+        CoreModule,
+        SharedModule,
+        AppRoutingModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        NgbModule,
+        HttpClientXsrfModule.withOptions({
+            cookieName: APP_CONFIG.CSRF_COOKIE_NAME,
+            headerName: APP_CONFIG.CSRF_HEADER_NAME
+        }),
+        OrcModule
+    ],
+    entryComponents: [AuthenticationComponent],
+    providers: [
+        CookieService
+      ],
+    bootstrap: [AppComponent]
 })
+
+
 export class AppModule { }

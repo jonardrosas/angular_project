@@ -4,11 +4,12 @@ import { ApiService } from './api.service';
 import {  JwtService} from './jwt.service';
 import { User } from '../models';
 import { map ,  distinctUntilChanged } from 'rxjs/operators';
+import { APP_CONFIG, URLS  } from './../../configs';
 
 @Injectable()
 export class JwtAuthenticationService {
-    private AUTH_URL: string = '/user_accounts/get_session/';
-    private LOGIN_URL: string = '/jwt_api/token/';
+    private  AUTH_URL: string = URLS.JWT_BASED_GET_SESSION;
+    private  LOGIN_URL: string = URLS.JWT_BASED_LOGIN_URL;
     private jwtService;
     private access_key_token: string = 'access';
     private refresh_key_token: string = 'refresh';
@@ -36,21 +37,19 @@ export class JwtAuthenticationService {
             return this.apiService.get(this.AUTH_URL)
               .subscribe(
                 data => this.setAuth(data),
-                err => this.purgeAuth()
+                err => this.logout()
               );
         } else {
-            return this.purgeAuth();
+            return this.logout();
         }
     }
 	
     setAuth(resp) {
-        console.log("Login Response", resp);
         this.jwtService.saveToken(this.access_key_token, resp.access);
     }
 
-    purgeAuth() {
+    logout() {
         this.jwtService.destroyToken(this.access_key_token);
-        return this.apiService.get(this.AUTH_URL);
     }
 
     /*

@@ -29,15 +29,11 @@ export class AuthenticationComponent {
    
   }
   
-  success(){
-      this.activeModal.close();
-  }
-
   completed(){
       if(this._service.isAuthenticated.pipe(take(1))){
           this.activeModal.close();
       }
-      alert('Login Completed');
+      this.activeModal.close();
   }
 
   onSubmit(customerData) {

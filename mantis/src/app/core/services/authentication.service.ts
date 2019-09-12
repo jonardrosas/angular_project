@@ -11,14 +11,11 @@ import { environment } from './../../../environments/environment';
 
 @Injectable()
 export class AuthenticationService {
-    private  DJANGO_AUTH_URL: string = '/user_accounts/session_update/';
-    private  JWT_AUTH_URL: string = 'user_accounts/get_session/';
-    private  LOGIN_URL: string = '/accounts/login2/';
     private backend;
     private loginComponent;
     private isProduction = environment.production;
 
-    private currentUserSubject = new BehaviorSubject<User>({} as User);
+    public currentUserSubject = new BehaviorSubject<User>({} as User);
     public currentUser = this.currentUserSubject.asObservable().pipe(distinctUntilChanged());
 
     private isAuthenticatedSubject = new ReplaySubject<boolean>(1);
@@ -41,7 +38,6 @@ export class AuthenticationService {
     }
 	
     validateSession(data){
-        console.log("Validation a session", data)
         if(data.response.status_code == 401){
           this.currentUserSubject.next({} as User);
           this.isAuthenticatedSubject.next(false);
@@ -58,7 +54,6 @@ export class AuthenticationService {
     }
 
     getSession(){
-        console.log("Getting a session");
         this.backend.getSession()
         .subscribe(
             data => this.validateSession(data),
@@ -74,18 +69,18 @@ export class AuthenticationService {
     validateLoginResponse(data){
         if(data.status == 'success'){
           this.getSession();
-        }else{
-          console.log("Login Response", data)
         }
     }
 
     logIn(body): Observable<any>{
         return this.backend.attemptAuth(body)
-        /*.subscribe(
-            data => this.getSession(),
-            err => console.error(err),
-            //() => this.isAuthenticated()
-        )*/
+    }
+
+
+    logOut(){
+        this.backend.logout();
+        this.currentUserSubject.next({} as User);
+        this.isAuthenticatedSubject.next(false);
     }
 
 }
