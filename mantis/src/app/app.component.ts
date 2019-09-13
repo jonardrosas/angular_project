@@ -1,5 +1,6 @@
 // Angular  imports
 import { Component, OnInit} from '@angular/core';
+import { take, map } from 'rxjs/operators';
 
 // Third party import
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -21,19 +22,47 @@ import { environment } from './../environments/environment';
 
 export class AppComponent implements OnInit{
     private title = APP_CONFIG.TITLE;
-    private nav_type = APP_CONFIG.NAV_TYPE;  // default is bootstrap, but can switch to different type
-    private tablist = [
+    public nav_type = APP_CONFIG.NAV_TYPE;  // default is bootstrap, but can switch to different type
+    public tablist = [
         {name: 'Orc Worklist', url: 'orc/list'},
     ];
 
-    constructor(private _service: AuthenticationService) {}
+    constructor(private authService: AuthenticationService, private modalService: NgbModal,	public config: NgbModalConfig) {
+        config.backdrop = 'static';
+        config.keyboard = false;
+    }
 
     ngOnInit() {
         this.authenticate();
     }
 
+    isAuthenticed(loggedIn){
+        if(!loggedIn){
+            this.loginPopUp();
+        }
+    }
+
     authenticate(){
-        this._service.authenticate(AuthenticationComponent)
+        this.authService.authenticate('app component')
+        this.authService.isAuthenticated
+        .pipe(
+            map( n=> {
+              console.log('Mapping=', n)
+              return n
+            })
+        )
+        .subscribe(
+            data => this.isAuthenticed(data),
+            err => alert(err),
+            () => alert('completed')
+        )
+    }
+
+    loginPopUp() {
+        if(!this.modalService.hasOpenModals()){
+            // prevent opening multiple modals
+            this.modalService.open(AuthenticationComponent);
+        }
     }
 
 }

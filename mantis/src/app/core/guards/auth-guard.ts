@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { take } from 'rxjs/operators';
+import { Observable ,  BehaviorSubject ,  ReplaySubject } from 'rxjs'
 
 import { AuthenticationService } from '../services';
 
-@Injectable({ providedIn: 'root' })
-export class AuthGuard implements CanActivate {
-    constructor(private router: Router, private authenticationService: AuthenticationService) {
-		console.log('This is auth guard');
-	}
+@Injectable()
+export class CanActivateTeam implements CanActivate {
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        return this.authenticationService.isAuthenticated.pipe(take(1));
-    }
+  constructor(private authService: AuthenticationService){}
 
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot ) {
+      debugger;
+      return this.authService.isAuthenticated.pipe(take(1));
+  }
 }

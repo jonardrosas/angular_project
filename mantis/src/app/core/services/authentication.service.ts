@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable ,  BehaviorSubject ,  ReplaySubject } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { ApiService } from './api.service';
 import { JwtService } from './jwt.service';
 import { User } from '../models';
@@ -8,6 +9,7 @@ import { JwtAuthenticationService } from './auth_token.service';
 import { CookieAuthenticationService } from './auth_cookie.service';
 import { map ,  distinctUntilChanged } from 'rxjs/operators';
 import { environment } from './../../../environments/environment';
+import {} from './';
 
 @Injectable()
 export class AuthenticationService {
@@ -18,7 +20,7 @@ export class AuthenticationService {
     public currentUserSubject = new BehaviorSubject<User>({} as User);
     public currentUser = this.currentUserSubject.asObservable().pipe(distinctUntilChanged());
 
-    private isAuthenticatedSubject = new ReplaySubject<boolean>(1);
+    public isAuthenticatedSubject = new ReplaySubject<boolean>(1);
     public isAuthenticated = this.isAuthenticatedSubject.asObservable();
 
     constructor(private apiService: ApiService, private modalService: NgbModal,	public config: NgbModalConfig){
@@ -26,8 +28,8 @@ export class AuthenticationService {
       config.keyboard = false;
     }
 
-    authenticate(loginComponent){
-        this.loginComponent = loginComponent;
+    authenticate(source){
+        console.log("Authenticate called from ", source);
         if(this.isProduction){
           this.backend = new CookieAuthenticationService(this.apiService);
           this.getSession();
@@ -39,13 +41,11 @@ export class AuthenticationService {
 	
     validateSession(data){
         if(data.response.status_code == 401){
-          this.currentUserSubject.next({} as User);
-          this.isAuthenticatedSubject.next(false);
-          this.loginPopUp();
+            this.currentUserSubject.next({} as User);
+            this.isAuthenticatedSubject.next(false);
         }else{
-          this.isAuthenticatedSubject.next(true);
-          this.currentUserSubject.next(data.response);
-          console.log("This is the current user", this.currentUserSubject.value);
+            this.currentUserSubject.next(data.response);
+            this.isAuthenticatedSubject.next(true);
         }
     }
 
@@ -57,19 +57,8 @@ export class AuthenticationService {
         this.backend.getSession()
         .subscribe(
             data => this.validateSession(data),
-            err => this.loginPopUp(),
-            //() => this.isAuthenticated()
+            err => this.isAuthenticatedSubject.next(false)
         )
-    }
-
-    loginPopUp() {
-        this.modalService.open(this.loginComponent);
-    }
-
-    validateLoginResponse(data){
-        if(data.status == 'success'){
-          this.getSession();
-        }
     }
 
     logIn(body): Observable<any>{

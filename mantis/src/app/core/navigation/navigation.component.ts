@@ -2,7 +2,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthenticationService } from './../services';
 import { APP_CONFIG } from './../../configs';
-import { AuthenticationComponent } from './../authentication/authentication.component';
 
 @Component({
     selector: 'app-navigation',
@@ -13,19 +12,24 @@ import { AuthenticationComponent } from './../authentication/authentication.comp
 export class NavigationComponent implements OnInit {
     @Input() tablist: string;
     @Input() nav_type: string;
-    private logo = APP_CONFIG.LOGO;
-    private userInstance;
+    public logo = APP_CONFIG.LOGO;
+    public userInstance;
 
     constructor(private authService: AuthenticationService){}
 
     ngOnInit() {
-        this.authService.authenticate(AuthenticationComponent);
+      this.getUserProfile();
+    }
+
+    getUserProfile(){
+        this.authService.authenticate('navigation');
         this.authService.currentUserSubject.subscribe(
-          (data) => this.setUserInstance(data)
+            (data) => this.setUserInstance(data)
         )
     }
 
     setUserInstance(data){
+        console.log("There's a data", data);
         return this.userInstance = data;
     }
 
@@ -34,7 +38,6 @@ export class NavigationComponent implements OnInit {
     }
 
     logOut() {
-        alert('logout');
         this.authService.logOut()
     }
 

@@ -1,8 +1,7 @@
-<!--The content below is only a placeholder and can be replaced.-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark m3-nav-dark-bg">
     <a class="navbar-brand" href="/">
       <i class="fas fa-th-large"></i>
-      <img [src]="logo" style="height:26px;width:150px;margin-top:0px;"/>
+      <img [src]="logo" class="m3-logo"/>
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -17,8 +16,8 @@
         </ul>
         <ul class="navbar-nav text-white">
             <li class="nav-item">
-              <a class="btn btn-xs rounded-circle" class="m3-profile-icon-link">
-                <img  [src]="base_url + userInstance.user_profile_img_url" width=41 height=41 class="rounded-circle border border-secondary">
+              <a class="btn btn-xs rounded-circle">
+                <img  [src]="base_url + userInstance.user_profile_img_url" class="rounded-circle border border-secondary m3-profile-img">
               </a>
             </li>
             <li class="nav-item dropdown dropleft">
@@ -28,7 +27,7 @@
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <div class="dropdown-divider"></div>
                   <a class="dropdown-item"><i class="fas fa-user"></i> {{ userInstance.name }}</a>
-                  <a class="btn btn-sm btn-danger btn-block" (click)="logOut()">Logout2</a>
+                  <a class="btn btn-sm btn-danger btn-block" (click)="logOut()">Logout</a>
               </div>
             </li>
         </ul>

@@ -30,18 +30,18 @@ export class AuthenticationComponent {
   }
   
   completed(){
-      if(this._service.isAuthenticated.pipe(take(1))){
-          this.activeModal.close();
-      }
       this.activeModal.close();
   }
-
-  onSubmit(customerData) {
+  
+  onSubmit() {
       const credentials = this.loginForm.value;
       this._service.logIn(credentials)
           .subscribe(
-              data => this._service.getSession(),
-              err => console.error(err),
+              data => this._service.authenticate("from auth component"),
+              //err => console.error(err),
+              //() => this.completed()
+              //data => this.completed(),
+              err => alert(2),
               () => this.completed()
           )
   }

@@ -1,4 +1,4 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <div class="modal-header">
       <h4 class="modal-title" id="modal-basic-title">Please Login</h4>
     </div>
@@ -11,7 +11,7 @@
                          <div class="input-group-prepend">
                              <span class="input-group-text" id="basic-addon1"><i class="glyphicon glyphicon-user"></i> Username: </span>
                          </div>
-                         <input class="form-control" id="username_id" maxlength="10" formControlName="username" type="text" placeholder="USERNAME"/>
+                         <input class="form-control" maxlength="10" formControlName="username" type="text" placeholder="USERNAME"/>
                      </div>
                  </div>
                 <div class="form-group row">
@@ -19,7 +19,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1"><i class="glyphicon glyphicon-lock"></i>  Password:</span>
                         </div>
-                        <input class="form-control" id="password" maxlength="30" formControlName="password" type="password" placeholder="PASSWORD"/>
+                        <input class="form-control" maxlength="30" formControlName="password" type="password" placeholder="PASSWORD"/>
                     </div>
                 </div>
             </div>

@@ -12,6 +12,7 @@ import { CookieService } from 'ngx-cookie-service';
 // Local imports
 import { APP_CONFIG } from './configs';
 import { CoreModule } from './core/core.module';
+import { CanActivateTeam }  from './core/guards'
 import { OrcModule } from './modules/orc/orc.module';
 import { NavigationComponent } from './core/navigation/navigation.component';
 import { AuthenticationComponent } from './core/authentication/authentication.component';
@@ -44,7 +45,7 @@ import { AppComponent } from './app.component';
     ],
     entryComponents: [AuthenticationComponent],
     providers: [
-        CookieService
+        CookieService, CanActivateTeam
       ],
     bootstrap: [AppComponent]
 })

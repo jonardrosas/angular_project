@@ -13,7 +13,7 @@ export class BootstrapNavigationComponent implements OnInit {
     @Input() logo: string[];
     @Output() logout = new EventEmitter<boolean>();
     private _userInstance: any;
-    private base_url = APP_CONFIG.BASE_URL;
+    public base_url = APP_CONFIG.BASE_URL;
 
     @Input() set userInstance(value: any) {
        this._userInstance = value;
