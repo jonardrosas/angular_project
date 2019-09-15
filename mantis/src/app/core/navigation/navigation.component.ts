@@ -15,26 +15,19 @@ export class NavigationComponent implements OnInit {
     public logo = APP_CONFIG.LOGO;
     public userInstance;
 
-    constructor(private authService: AuthenticationService){}
-
-    ngOnInit() {
-      this.getUserProfile();
+    constructor(private authService: AuthenticationService){
+        console.log("Navigation Component Instanced Created");
     }
 
-    getUserProfile(){
-        this.authService.authenticate('navigation');
+    ngOnInit() {
         this.authService.currentUserSubject.subscribe(
             (data) => this.setUserInstance(data)
-        )
+        );
     }
 
     setUserInstance(data){
         console.log("There's a data", data);
         return this.userInstance = data;
-    }
-
-    updateTablist(tablist){
-        this.tablist = tablist;
     }
 
     logOut() {

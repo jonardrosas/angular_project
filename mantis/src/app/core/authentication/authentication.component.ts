@@ -3,12 +3,13 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder } from '@angular/forms';
 import { take } from 'rxjs/operators';
 import { AuthenticationService } from './../services';
+import { Alert } from './../models';
 import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from './../../../environments/environment';
 
 @Component({
   selector: 'app-authentication',
-  templateUrl: './login.component.html',
+  templateUrl: './authentication.component.html',
   styleUrls: ['./authentication.component.css']
 })
 
@@ -33,6 +34,11 @@ export class AuthenticationComponent {
       this.activeModal.close();
   }
   
+  invalid(err){
+      debugger;
+      //this.alerts.push({msg: 'Invalid Username or Password', type: 'danger'});
+  }
+  
   onSubmit() {
       const credentials = this.loginForm.value;
       this._service.logIn(credentials)
@@ -41,7 +47,7 @@ export class AuthenticationComponent {
               //err => console.error(err),
               //() => this.completed()
               //data => this.completed(),
-              err => alert(2),
+              err => this.invalid(err),
               () => this.completed()
           )
   }

@@ -8,9 +8,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto text-white">
-            <li class="m3-tab-lclass" [ngClass]="tab.lclass" *ngFor="let tab of tablist">
-                <a class="m3-tab-aclass" routerLink="{{ tab.url }}">
-                    <span class="m3-tab-sclass">{{ tab.name }}</span>
+            <li routerLinkActive="active" class="m3-tab-lclass" [ngClass]="tab.lclass" *ngFor="let tab of tablist">
+                <a class="m3-tab-aclass" [routerLink]="[tab.url]">
+                    <i [class]="tab.icon"></i> <span class="m3-tab-sclass">{{ tab.name }}</span>
                 </a>
             </li>
         </ul>

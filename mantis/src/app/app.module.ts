@@ -12,8 +12,10 @@ import { CookieService } from 'ngx-cookie-service';
 // Local imports
 import { APP_CONFIG } from './configs';
 import { CoreModule } from './core/core.module';
-import { CanActivateTeam }  from './core/guards'
+import { LoginRequired }  from './core/guards'
+import { AuthenticationService }  from './core/services'
 import { OrcModule } from './modules/orc/orc.module';
+import { HomeModule } from './modules/home/home.module';
 import { NavigationComponent } from './core/navigation/navigation.component';
 import { AuthenticationComponent } from './core/authentication/authentication.component';
 import { SharedModule } from './shared/shared.module';
@@ -41,11 +43,12 @@ import { AppComponent } from './app.component';
             cookieName: APP_CONFIG.CSRF_COOKIE_NAME,
             headerName: APP_CONFIG.CSRF_HEADER_NAME
         }),
-        OrcModule
+        OrcModule,
+        HomeModule
     ],
     entryComponents: [AuthenticationComponent],
     providers: [
-        CookieService, CanActivateTeam
+        CookieService, LoginRequired, AuthenticationService
       ],
     bootstrap: [AppComponent]
 })

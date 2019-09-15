@@ -1,14 +1,32 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CanActivateTeam }  from './core/guards'
+import { LoginRequired }  from './core/guards'
+import { LoginComponent } from './core/login/login.component';
+import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
+import { HomeComponent } from './modules/home/pages/home/home.component';
 
 
 const routes: Routes = [
     {
+        path: 'home',
+        component: HomeComponent,
+        canActivate: [LoginRequired]
+    },
+    {
         path: 'orc',
         loadChildren: () => import('./modules/orc/orc.module').then(mod => mod.OrcModule),
-        canActivate: [CanActivateTeam]
-    }
+    },
+    {
+        path: 'login',
+        component: LoginComponent
+    },
+    {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full'
+    },
+    { path: '**', component: PageNotFoundComponent }
+
 ];
 
 @NgModule({

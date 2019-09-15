@@ -1,9 +1,9 @@
 // Angular  imports
 import { Component, OnInit} from '@angular/core';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { take, map } from 'rxjs/operators';
 
 // Third party import
-import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'ngx-cookie-service';
 
 // Internall Apps
@@ -24,45 +24,44 @@ export class AppComponent implements OnInit{
     private title = APP_CONFIG.TITLE;
     public nav_type = APP_CONFIG.NAV_TYPE;  // default is bootstrap, but can switch to different type
     public tablist = [
+        {name: 'Home', url: '/', icon: 'fas fa-home'},
         {name: 'Orc Worklist', url: 'orc/list'},
     ];
 
-    constructor(private authService: AuthenticationService, private modalService: NgbModal,	public config: NgbModalConfig) {
-        config.backdrop = 'static';
-        config.keyboard = false;
-    }
+    constructor(
+        private authService: AuthenticationService,
+        private route: ActivatedRoute,
+        private router: Router
+    ) {}
 
     ngOnInit() {
-        this.authenticate();
+        //this.authenticate();
     }
 
     isAuthenticed(loggedIn){
+        console.log('Mapping=', loggedIn)
         if(!loggedIn){
-            this.loginPopUp();
+            this.router.navigate(['/login']);
         }
     }
 
     authenticate(){
         this.authService.authenticate('app component')
+        /*if(!this.authService.isAuthenticated.pipe(take(1))){
+            this.router.navigate(['/login']);
+        }*/
         this.authService.isAuthenticated
-        .pipe(
+        /*.pipe(
             map( n=> {
               console.log('Mapping=', n)
               return n
             })
-        )
+        )*/
         .subscribe(
             data => this.isAuthenticed(data),
             err => alert(err),
             () => alert('completed')
         )
-    }
-
-    loginPopUp() {
-        if(!this.modalService.hasOpenModals()){
-            // prevent opening multiple modals
-            this.modalService.open(AuthenticationComponent);
-        }
     }
 
 }

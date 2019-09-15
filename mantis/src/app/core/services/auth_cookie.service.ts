@@ -16,7 +16,6 @@ export class CookieAuthenticationService {
     }
 
     getSession(): Observable<any>{
-        console.log('get session cookie base');
         return this.apiService.get(this.AUTH_URL)
     }
 

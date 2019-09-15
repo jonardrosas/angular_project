@@ -8,6 +8,7 @@ export const APP_CONFIG = {
     TITLE: 'Mantis',
     NAV_TYPE: 'boostrap',
     LOGO: 'assets/img/mantis4_logo.png',
+    PAGENOTFOUND: 'assets/img/filenotfound404.jpg',
 };
 
 
