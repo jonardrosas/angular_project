@@ -18,8 +18,7 @@ import { OrcModule } from './modules/orc/orc.module';
 import { HomeModule } from './modules/home/home.module';
 import { NavigationComponent } from './core/navigation/navigation.component';
 import { AuthenticationComponent } from './core/authentication/authentication.component';
-import { SharedModule } from './shared/shared.module';
-import { BootstrapNavigationComponent } from './shared/components/bootstrap-navigation';
+import { SharedModule, BootstrapNavigationComponent, BootstrapLoginComponent } from './shared';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -29,6 +28,7 @@ import { AppComponent } from './app.component';
         AppComponent,
         NavigationComponent,
         AuthenticationComponent,
+        BootstrapLoginComponent,
         BootstrapNavigationComponent
     ],
     imports: [
