@@ -19,6 +19,7 @@ export class JwtAuthenticationService {
     private jwtService;
     private access_key_token: string = 'access';
     private refresh_key_token: string = 'refresh';
+    public dummyLogoutSubjet = new BehaviorSubject<any>({});
 
     constructor( private apiService: ApiService){
         this.jwtService = new JwtService();
@@ -33,10 +34,12 @@ export class JwtAuthenticationService {
         this.jwtService.saveToken(this.access_key_token, resp.access);
     }
 
-    logout() {
+    logout():Observable<any> {
         this.jwtService.destroyToken(this.access_key_token);
+        debugger;
+        return this.dummyLogoutSubjet;
     }
-
+    
     attemptAuth(credentials): Observable<any> {
         return this.apiService.post(this.LOGIN_URL, credentials)
             .pipe(map(

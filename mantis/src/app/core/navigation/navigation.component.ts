@@ -31,7 +31,7 @@ export class NavigationComponent implements OnInit {
     }
 
     logOut() {
-        this.authService.logOut()
+        return this.authService.logOut();
     }
 
 }

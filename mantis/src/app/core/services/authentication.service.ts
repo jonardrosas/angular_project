@@ -51,10 +51,8 @@ export class AuthenticationService {
 	
     validateSession(data){
         if(data.response.status_code == 401){
-            debugger;
             this.setUnAuthorized()
         }else{
-            debugger;
             this.setAuthorized(data)
         }
     }
@@ -87,7 +85,9 @@ export class AuthenticationService {
     }
 
     logOut(){
-        this.backend.logout();
+        this.backend.logout().subscribe(
+            (data) => console.log("Logging out")
+        )
         this.setUnAuthorized()
         this.router.navigate(['/login']);
     }
