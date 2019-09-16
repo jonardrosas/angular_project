@@ -5,8 +5,9 @@ import {
 } from '@angular/common/http';
 
 import { JwtService } from './../services';
-
 import { environment } from './../../../environments/environment';
+import { APP_CONFIG } from './../../configs';
+
 
 
 @Injectable()
@@ -25,7 +26,7 @@ export class AuthInterceptor implements HttpInterceptor {
             setHeaders: {
                 'Content-Type' : 'application/json',
                 'Accept': 'application/json',
-                'Authorization': `Bearer ${token}`,
+                'Authorization': `${APP_CONFIG.AUTHORIZATION_TYPE} ${token}`,
             }
         });
         return next.handle(authReq);
@@ -34,4 +35,3 @@ export class AuthInterceptor implements HttpInterceptor {
     }
   }
 }
-

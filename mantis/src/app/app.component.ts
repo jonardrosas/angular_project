@@ -9,7 +9,6 @@ import { CookieService } from 'ngx-cookie-service';
 // Internall Apps
 import { APP_CONFIG } from './configs';
 import { AuthenticationService } from './core/services';
-import { AuthenticationComponent } from './core/authentication/authentication.component'
 import { environment } from './../environments/environment';
 
 
@@ -20,7 +19,7 @@ import { environment } from './../environments/environment';
 })
 
 
-export class AppComponent implements OnInit{
+export class AppComponent{
     private title = APP_CONFIG.TITLE;
     public nav_type = APP_CONFIG.NAV_TYPE;  // default is bootstrap, but can switch to different type
     public tablist = [
@@ -28,41 +27,7 @@ export class AppComponent implements OnInit{
         {name: 'Orc Worklist', url: 'orc/list'},
     ];
 
-    constructor(
-        private authService: AuthenticationService,
-        private route: ActivatedRoute,
-        private router: Router
-    ) {}
-
-    ngOnInit() {
-        //this.authenticate();
-    }
-
-    isAuthenticed(loggedIn){
-        console.log('Mapping=', loggedIn)
-        if(!loggedIn){
-            this.router.navigate(['/login']);
-        }
-    }
-
-    authenticate(){
-        this.authService.authenticate('app component')
-        /*if(!this.authService.isAuthenticated.pipe(take(1))){
-            this.router.navigate(['/login']);
-        }*/
-        this.authService.isAuthenticated
-        /*.pipe(
-            map( n=> {
-              console.log('Mapping=', n)
-              return n
-            })
-        )*/
-        .subscribe(
-            data => this.isAuthenticed(data),
-            err => alert(err),
-            () => alert('completed')
-        )
-    }
+    constructor() {}
 
 }
 

@@ -17,8 +17,8 @@ export class JwtAuthenticationService {
     private  AUTH_URL: string = URLS.JWT_BASED_GET_SESSION;
     private  LOGIN_URL: string = URLS.JWT_BASED_LOGIN_URL;
     private jwtService;
-    private access_key_token: string = 'access';
-    private refresh_key_token: string = 'refresh';
+    private access_key_token = APP_CONFIG.JWT_ACCESS_TOKEN;
+    private refresh_key_token = APP_CONFIG.JWT_REFRESH_TOKEN;
     public dummyLogoutSubjet = new BehaviorSubject<any>({});
 
     constructor( private apiService: ApiService){
@@ -36,7 +36,6 @@ export class JwtAuthenticationService {
 
     logout():Observable<any> {
         this.jwtService.destroyToken(this.access_key_token);
-        debugger;
         return this.dummyLogoutSubjet;
     }
     

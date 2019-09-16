@@ -17,7 +17,6 @@ export class LoginRequired implements CanActivate {
       // But we dont store local storage on production environment.
       // For development environment, yes its possible because we use JWT, but we need
       // to make it compatible to both environment
-              debugger;
       return this.authService.getSession()
           .pipe(
               map(data => {

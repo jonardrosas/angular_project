@@ -1,5 +1,5 @@
 // Angular core module
-
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
@@ -17,7 +17,6 @@ import { AuthenticationService }  from './core/services'
 import { OrcModule } from './modules/orc/orc.module';
 import { HomeModule } from './modules/home/home.module';
 import { NavigationComponent } from './core/navigation/navigation.component';
-import { AuthenticationComponent } from './core/authentication/authentication.component';
 import { SharedModule, BootstrapNavigationComponent, BootstrapLoginComponent } from './shared';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,7 +26,6 @@ import { AppComponent } from './app.component';
     declarations: [
         AppComponent,
         NavigationComponent,
-        AuthenticationComponent,
         BootstrapLoginComponent,
         BootstrapNavigationComponent
     ],
@@ -46,9 +44,11 @@ import { AppComponent } from './app.component';
         OrcModule,
         HomeModule
     ],
-    entryComponents: [AuthenticationComponent],
     providers: [
-        CookieService, LoginRequired, AuthenticationService
+        CookieService,
+        LoginRequired,
+        AuthenticationService,
+        {provide: LocationStrategy, useClass: HashLocationStrategy},
       ],
     bootstrap: [AppComponent]
 })

@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { DataTablesModule } from 'angular-datatables';
 import { SharedModule } from './../../shared/shared.module';
+
+
 import { 
     DeviceSummaryComponent,
     BootstrapLoginComponent,
@@ -26,7 +29,8 @@ import { DetailComponent } from './detail/detail.component';
     imports: [
         CommonModule,
         OrcRoutingModule,
-        SharedModule
+        SharedModule,
+        DataTablesModule
     ]
 })
 export class OrcModule { }
