@@ -4,6 +4,9 @@
       <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
         <div class="card card-signin my-5">
           <div class="card-body">
+            <p *ngFor="let alert of alerts">
+                <ngb-alert [type]="alert.type" (close)="close(alert)">{{ alert.message }}</ngb-alert>
+            </p>
             <h5 class="card-title text-center">Sign In </h5>
               <div class="form-label-group">
                 <label for="inputEmail">Username</label>

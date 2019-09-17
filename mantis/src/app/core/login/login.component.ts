@@ -2,24 +2,31 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute, ParamMap, RouterStateSnapshot } from '@angular/router';
 import { take } from 'rxjs/operators';
+import { NgbAlertConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AuthenticationService } from './../services';
+import { Alert } from './../models';
+
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
-    styleUrls: ['./login.component.css']
+    styleUrls: ['./login.component.css'],
+    providers: [NgbAlertConfig],
 })
 
 
 export class LoginComponent implements OnInit {
     public loginForm;
+    public alerts: Alert[] = [];
 
     constructor(
         private authService: AuthenticationService,
         public formBuilder: FormBuilder,
         private router: Router,
         private activatedRoute: ActivatedRoute,
+        public alertConfig: NgbAlertConfig
     ){
+        alertConfig.dismissible = false;
         this.loginForm = this.formBuilder.group({
             username: '',
             password: ''
@@ -47,7 +54,10 @@ export class LoginComponent implements OnInit {
     }
 
     invalidResponse(){
-        alert('Please fill in username and password');
+        debugger;
+        this.alerts.push({message: 'Incorrect username or password', type: 'warning'});
+        //this.alerts.push({type: 'danger', message: 'Incorrect username or password'});
+        // alert('Please fill in username and password');
     }
 
     authenticate(){

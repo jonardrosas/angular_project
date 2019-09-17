@@ -9,6 +9,7 @@ export const APP_CONFIG = {
     NAV_TYPE: 'boostrap',
     LOGO: 'assets/img/mantis4_logo.png',  //Brand Logo
     PAGENOTFOUND: 'assets/img/filenotfound404.jpg',
+    DEFAULT_PROFILE_IMG: 'assets/img/default_profile.JPEG',
     // https://github.com/davesque/django-rest-framework-simplejwt
     JWT_ACCESS_TOKEN: 'access',
     JWT_REFRESH_TOKEN: 'refresh',

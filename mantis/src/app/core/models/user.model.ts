@@ -11,4 +11,5 @@ export interface User {
     ACL_sub_group: string;
     status_code: number;
     ACL_fab: string;
+    name: string;
 }
