@@ -1,21 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DataTablesModule } from 'angular-datatables';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { BootstrapLoginComponent } from './components/bootstrap-login/bootstrap-login.component';
+import { ViolationViewerComponent } from './components/violation-viewer/violation-viewer.component';
 import { DeviceSummaryComponent } from './components/device-summary/device-summary.component';
-import { ErrorStatisticsComponent } from './components/error-statistics/error-statistics.component';
-import { ChecksTableComponent } from './components/checks-table/checks-table.component';
-import { WorklistComponent } from './components/worklist/worklist.component';
 
 @NgModule({
-  declarations: [
-        //BootstrapLoginComponent, DeviceSummaryComponent, ErrorStatisticsComponent, ChecksTableComponent, WorklistComponent
-  ],
   imports: [
-    CommonModule,
-    DataTablesModule,
+      CommonModule,
+      NgbModule
+  ],
+  declarations: [
+      ViolationViewerComponent,
+      DeviceSummaryComponent
+  ],
+  exports: [
+      ViolationViewerComponent,
+      DeviceSummaryComponent
   ]
+
 })
 export class SharedModule { }

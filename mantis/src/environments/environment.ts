@@ -5,3 +5,5 @@ export const environment = {
     csrf_cookie_name: "mantis3_token",
     csrf_header_name: "X-CSRFToken",
 };
+
+

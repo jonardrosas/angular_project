@@ -1,17 +1,9 @@
-<div class="container"><br/><br/>
-    <div class="row bg-dark text-light mt-10">
-        <div class="col-md-12">
-              <app-device-summary></app-device-summary>
-        </div>
-    </div><br/>
-    <div class="row bg-dark text-light mt-10">
-        <div class="col-md-12">
-            Error statistics
-        </div>
-    </div><br/>
-    <div class="row bg-dark text-light mt-10">
-        <div class="col-md-12">
-            Job History
-        </div>
-    </div>    
+<div>
+    <app-violation-viewer [object]="object"></app-violation-viewer>
 </div>
+<div *ngIf="alerts.length > 0">
+  <p *ngFor="let alert of alerts">
+      <ngb-alert [type]="alert.type" (close)="close(alert)">{{ alert.message }}</ngb-alert>
+  </p>
+</div>
+

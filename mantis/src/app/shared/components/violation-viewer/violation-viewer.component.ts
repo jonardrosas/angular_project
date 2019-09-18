@@ -2,11 +2,11 @@ import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { OrcRecordModel } from './../../models/';
 
 @Component({
-  selector: 'app-device-summary',
-  templateUrl: './device-summary.component.html',
-  styleUrls: ['./device-summary.component.css']
+  selector: 'app-violation-viewer',
+  templateUrl: './violation-viewer.component.html',
+  styleUrls: ['./violation-viewer.component.css']
 })
-export class DeviceSummaryComponent implements OnInit {
+export class ViolationViewerComponent implements OnInit {
   @Input() object: OrcRecordModel;
 
   constructor() { }

@@ -54,7 +54,6 @@ export class LoginComponent implements OnInit {
     }
 
     invalidResponse(){
-        debugger;
         this.alerts.push({message: 'Incorrect username or password', type: 'warning'});
         //this.alerts.push({type: 'danger', message: 'Incorrect username or password'});
         // alert('Please fill in username and password');

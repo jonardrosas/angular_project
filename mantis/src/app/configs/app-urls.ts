@@ -6,4 +6,7 @@ export const URLS = {
     JWT_BASED_LOGIN_URL: '/jwt_api/token/',
     JWT_BASED_GET_SESSION: '/user_accounts/get_session/',
 
+    // ORC URL
+    ORC_RECORD_URL: '/orcjobreport/api/v1/orc/'
+
 };

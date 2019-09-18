@@ -1,16 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DataTablesModule } from 'angular-datatables';
-import { SharedModule } from './../../shared/shared.module';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { 
-    DeviceSummaryComponent,
-    BootstrapLoginComponent,
-    ErrorStatisticsComponent, 
-    ChecksTableComponent,
-    WorklistComponent
-} from './../../shared';
+import { OrcRecordService } from './../../shared/services';
+import { SharedModule } from './../../shared';
+import { NgDatatableWrapperModule } from './../ng-datatable-wrapper';
 
 import { OrcRoutingModule } from './orc-routing.module';
 import { ListComponent } from './list/list.component';
@@ -18,19 +13,18 @@ import { DetailComponent } from './detail/detail.component';
 
 
 @NgModule({
+    imports: [
+        CommonModule,
+        NgbModule,
+        OrcRoutingModule,
+        SharedModule,
+        NgDatatableWrapperModule
+    ],  
     declarations: [
         ListComponent,
         DetailComponent,
-        ErrorStatisticsComponent, 
-        ChecksTableComponent,
-        WorklistComponent,
-        DeviceSummaryComponent
     ],
-    imports: [
-        CommonModule,
-        OrcRoutingModule,
-        SharedModule,
-        DataTablesModule
-    ]
+
+     providers: [OrcRecordService]
 })
 export class OrcModule { }
