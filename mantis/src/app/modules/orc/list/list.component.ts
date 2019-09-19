@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { OrcRecordService } from './../../../shared/services';
+import { Component, OnInit, ViewChild, AfterViewInit, TemplateRef } from '@angular/core';
+import { OrcRecordService, MantisRecordService } from './../../../shared/services';
 import { OrcRecordModel } from './../../../shared/models';
 import { Alert } from './../../../core/models';
 import { NgxDtTableOptionsModel, NgxDtTablePage} from './../../ng-datatable-wrapper/components/ngx-dt-table/ngx-dt-table.models';
@@ -11,31 +11,42 @@ import { NgxDtTableOptionsModel, NgxDtTablePage} from './../../ng-datatable-wrap
 })
 
 
-export class ListComponent implements OnInit {
-    rows: OrcRecordModel[] = [];
-    alerts: Alert[] = [];
-    page = new NgxDtTablePage();
-    options = new NgxDtTableOptionsModel();
+export class ListComponent implements OnInit, AfterViewInit  {
+    private rows: OrcRecordModel[] = [];
+    private alerts: Alert[] = [];
+    private page = new NgxDtTablePage();
+    private options = new NgxDtTableOptionsModel();
 
     private columns = [
-        {prop: 'id', name: 'Id'},
-        {prop: 'mantis_id', name: 'Mantis id'},
+        {
+            prop: 'id',
+            name: 'Mantis id',
+            type: 'link'
+        },
         {prop: 'maskset', name: 'Maskset'},
+        {prop: 'device', name: 'Device'},
+        {prop: 'ptrf', name: 'PTRF'},
+        {prop: 'layer', name: 'Layer'},
+        {prop: 'operation', name: 'Operation'},
+        {prop: 'techtype', name: 'Techtype'},
+        {prop: 'status', name: 'Stage'},
+        {prop: 'resolution', name: 'Status'},
     ]
 
-    constructor(private service: OrcRecordService) { }
+    constructor(private service: OrcRecordService, private mantisService: MantisRecordService) { }
 
     ngOnInit() {
         this.getQuerySet()
     }
+    
+    ngAfterViewInit() {
+    }
 
     getQuerySet(): void {
-        this.service.getQuerySet().subscribe(
+        let filters = {order_by: '-id'};
+        this.mantisService.getQuerySet(filters).subscribe(
             (data) => {
                 this.rows = data.objects;
-                /*this.page = {
-
-                }*/
             },
             (err) => {
                 this.alerts.push({message: 'No Record Found', type: 'danger'});

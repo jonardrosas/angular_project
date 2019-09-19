@@ -1,6 +1,6 @@
 <div [ngSwitch]="nav_type">
     <div *ngSwitchCase="'material'">
-        This a material navigation
+          <button mat-button [matMenuTriggerFor]="animals">Menu</button>
     </div>
     <div *ngSwitchDefault>
         <app-bootstrap-navigation [tablist]="tablist" [userInstance]="userInstance" [logo]="logo" (logout)="logOut()"></app-bootstrap-navigation>

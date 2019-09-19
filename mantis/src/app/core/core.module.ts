@@ -5,6 +5,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth-cookie.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { MaterialModule } from './../modules/material/material.module';
 import {
   AuthenticationService,
   ApiService,
@@ -13,6 +14,7 @@ import {
   CookieAuthenticationService,
   //AuthGuard,
 } from './services';
+
 import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
@@ -21,7 +23,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
       CommonModule,
       FormsModule,
       NgbModule,
-      ReactiveFormsModule
+      ReactiveFormsModule,
+      MaterialModule
   ],
   providers: [
       { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, TemplateRef, ViewChild } from '@angular/core';
 import { NgxDtTableOptionsModel, NgxDtTablePage} from './ngx-dt-table.models';
 
 @Component({
@@ -6,13 +6,34 @@ import { NgxDtTableOptionsModel, NgxDtTablePage} from './ngx-dt-table.models';
   templateUrl: './ngx-dt-table.component.html',
   styleUrls: ['./ngx-dt-table.component.css']
 })
-export class NgxDtTableComponent implements OnInit {
+export class NgxDtTableComponent implements OnInit, AfterViewInit {
     @Input() rows;
-    @Input() columns;
     @Input() options;
-    //@Input() page;
-    //private _options = new NgxDtTableOptionsModel()
+    private _columns;
     private page = new NgxDtTablePage();
+    @ViewChild('linkTemplate', {static: false}) linkTemplate: TemplateRef<any>;
+
+    @Input()
+    set columns(cols){
+        this._columns = cols;
+    }
+
+    get columns(){
+        return this._columns;
+    }
+
+    ngAfterViewInit() {
+        let newColumns = [];
+        for (var col_index in this.columns){
+            let col = this.columns[col_index]
+            if('type' in col && col.type == 'link'){
+                col.cellTemplate = this.linkTemplate;
+            }
+            newColumns.push(col)
+        }
+        this._columns = newColumns;
+    }
+   
     constructor() {
         this.page.pageNumber = 0;
         this.page.size = 20;

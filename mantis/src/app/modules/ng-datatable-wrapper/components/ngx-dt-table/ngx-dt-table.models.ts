@@ -3,6 +3,7 @@ export class NgxDtTableOptionsModel {
     externalPaging: boolean = true;
     externalSorting: boolean = true;
     footerHeight: number = 0;
+    loadingIndicator: boolean = true;
     limit: number;
     offset: number;
     count: number;

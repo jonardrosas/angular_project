@@ -10,6 +10,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'ngx-cookie-service';
 import { DataTablesModule } from 'angular-datatables';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { MatButtonModule } from '@angular/material/button';
 
 // Local imports
 import { APP_CONFIG } from './configs';
@@ -19,10 +20,12 @@ import { AuthenticationService }  from './core/services'
 import { OrcModule } from './modules/orc/orc.module';
 import { NgDatatableWrapperModule } from './modules/ng-datatable-wrapper/ng-datatable-wrapper.module';
 import { HomeModule } from './modules/home/home.module';
+import { MaterialModule } from './modules/material/material.module';
 import { NavigationComponent } from './core/navigation/navigation.component';
 import { SharedModule, BootstrapNavigationComponent } from './shared';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -38,10 +41,12 @@ import { AppComponent } from './app.component';
             cookieName: APP_CONFIG.CSRF_COOKIE_NAME,
             headerName: APP_CONFIG.CSRF_HEADER_NAME
         }),
+        MaterialModule,
         DataTablesModule,
         NgDatatableWrapperModule,
         OrcModule,
-        HomeModule
+        HomeModule,
+        BrowserAnimationsModule
     ],
     declarations: [
         AppComponent,

@@ -13,7 +13,7 @@ import { DeviceSummaryComponent } from './components/device-summary/device-summa
   ],
   declarations: [
       ViolationViewerComponent,
-      DeviceSummaryComponent
+      DeviceSummaryComponent,
   ],
   exports: [
       ViolationViewerComponent,

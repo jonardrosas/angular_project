@@ -7,6 +7,7 @@ export const URLS = {
     JWT_BASED_GET_SESSION: '/user_accounts/get_session/',
 
     // ORC URL
-    ORC_RECORD_URL: '/orcjobreport/api/v1/orc/'
+    ORC_RECORD_URL: '/orcjobreport/api/v1/orc/',
+    MANTIS_RECORD_URL: '/mantis/api/v1/mantis/'
 
 };

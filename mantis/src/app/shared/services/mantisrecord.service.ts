@@ -4,15 +4,14 @@ import { Observable ,  BehaviorSubject ,  ReplaySubject } from 'rxjs';
 import { map ,  distinctUntilChanged, take, catchError } from 'rxjs/operators';
 import { URLS } from  './../../configs';
 import { ApiService } from './../../core/services';
-import { OrcRecordModel } from './../models/';
+import { MantisRecordModel } from './../models/';
 
 @Injectable()
-export class OrcRecordService {
-    private orcRecordUrl = URLS.ORC_RECORD_URL;
-    public orcRecodSubject = new BehaviorSubject<OrcRecordModel>({} as OrcRecordModel);
+export class MantisRecordService {
+    private mantisRecordUrl = URLS.MANTIS_RECORD_URL;
 
     constructor(private apiService: ApiService){
-        console.log("OrcRecordService Created")
+        console.log("MantisRecordService Created")
     }
 
     buildFilter(filters){
@@ -29,12 +28,11 @@ export class OrcRecordService {
         //const options = this.buildFilter(filters);
         let params = new HttpParams();
         params = params.append('order_by', '-id')
-        debugger;
-        return this.apiService.get(this.orcRecordUrl, params)
+        return this.apiService.get(this.mantisRecordUrl, params)
     }
 
     getObject(id): Observable<any>{
-        return this.apiService.get(this.orcRecordUrl+id+'/');
+        return this.apiService.get(this.mantisRecordUrl+id+'/');
     }
 
 }
