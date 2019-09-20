@@ -16,18 +16,15 @@ export class MantisRecordService {
 
     buildFilter(filters){
         let params = new HttpParams();
-        params = params.append('order_by', '-id');
-        /*for (let field in filters){
+        for (let field in filters){
             let value = filters[field]
             params = params.append(field, value)
-        }*/
+        }
         return params;
     }
 
     getQuerySet(filters): Observable<any>{
-        //const options = this.buildFilter(filters);
-        let params = new HttpParams();
-        params = params.append('order_by', '-id')
+        const params = this.buildFilter(filters);
         return this.apiService.get(this.mantisRecordUrl, params)
     }
 

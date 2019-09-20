@@ -9,6 +9,7 @@ import { DataTablesModule } from 'angular-datatables';
 import { NgDtTableComponent } from './components/ng-dt-table/ng-dt-table.component';
 import { NgDtFilterComponent } from './components/ng-dt-filter/ng-dt-filter.component';
 import { NgxDtTableComponent } from './components/ngx-dt-table/ngx-dt-table.component';
+import { NgxDtTableService } from './components/ngx-dt-table/ngx-dt-table.service';
 
 
 @NgModule({
@@ -24,7 +25,9 @@ import { NgxDtTableComponent } from './components/ngx-dt-table/ngx-dt-table.comp
     declarations: [NgDtTableComponent, NgDtFilterComponent, NgxDtTableComponent],
     exports: [
         NgDtTableComponent, NgDtFilterComponent, NgxDtTableComponent
-    ]
+    ],
+    providers: [NgxDtTableService]
+    
 })
 
 export class NgDatatableWrapperModule { }

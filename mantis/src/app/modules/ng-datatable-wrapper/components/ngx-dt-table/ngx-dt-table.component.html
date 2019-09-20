@@ -1,22 +1,31 @@
 <div class="container-fluid">
     <div class="row">
+        <div class="col-md-12">
+            <input type="text" style="padding:8px;margin:15px auto;width:30%;" placeholder="Keyword..." (keyup)="updateFilter($event)" />
+        </div>
+    </div>
+    <div class="row">
           <div class="col-md-12">
               <ngx-datatable
                   class="material"
+                  [columnMode]="'force'"
                   [rows]="rows"
                   [columns]="columns"
                   [headerHeight]="options.headerHeight"
                   [footerHeight]="options.footerHeight"
-                  [rowHeight]="options.rowHeight"></ngx-datatable>
-                  <!--[count]="page.totalElements"
-                  [externalPaging]="true"
-                  [offset]="page.pageNumber"
-                  [limit]="page.size"
-                  (page)="setPage($event)"-->
+                  (sort)="onSort($event)"
+                  (page)="setPage($event)" 
+                  [rowHeight]="options.rowHeight"
+                  [externalPaging]="options.externalPaging"
+                  [externalSorting]="options.externalSorting"
+                  [limit]="limit.limit"
+                  [count]="page.total_count"
+                  [loadingIndicator]="options.loadingIndicator"
+                  [scrollbarH]=true
+                  [offset]="page.pageNumber"></ngx-datatable>
           </div>
     </div>
 </div>
-
 <ng-template #linkTemplate let-row="row" let-value="value" let-i="index">
   <a [routerLink]="['/orc/view/', value]">{{ value }}</a>
 </ng-template>

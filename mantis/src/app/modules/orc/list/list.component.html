@@ -1,4 +1,19 @@
 <!--<app-ng-dt-filter></app-ng-dt-filter>
 <app-ng-dt-table></app-ng-dt-table>-->
-<h2>General List</h2><br/>
-<app-ngx-dt-table [rows]="rows" [columns]="columns" [options]="options"></app-ngx-dt-table>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>General List</h2><br/>
+        </div>
+    </div>
+</div>
+<app-ngx-dt-table
+    [rows]="rows"
+    [columns]="columns" 
+    [options]="options"
+    [limit]="limit"
+    [page]="page"
+    [sort]="sort"
+    [filters]="filters"
+    (ngxpage)="getQuerySet($event)"
+    (ngxsort)="getQuerySet($event)"></app-ngx-dt-table>
