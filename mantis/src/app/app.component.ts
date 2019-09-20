@@ -24,7 +24,7 @@ export class AppComponent{
     public nav_type = APP_CONFIG.NAV_TYPE;  // default is bootstrap, but can switch to different type
     public tablist = [
         {name: 'Home', url: '/', icon: 'fas fa-home'},
-        {name: 'Orc Worklist', url: 'orc/list'},
+        {name: 'General Worklist', url: 'orc/list'},
     ];
 
     constructor() {}
