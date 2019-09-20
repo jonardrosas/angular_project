@@ -1,9 +1,8 @@
 <div>
-    <app-violation-viewer [object]="object"></app-violation-viewer>
 </div>
 <div *ngIf="alerts.length > 0">
   <p *ngFor="let alert of alerts">
-      <ngb-alert [type]="alert.type" (close)="close(alert)">{{ alert.message }}</ngb-alert>
+      <ngb-alert [type]="alert.type">{{ alert.message }}</ngb-alert>
   </p>
 </div>
 

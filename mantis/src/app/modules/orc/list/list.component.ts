@@ -14,14 +14,14 @@ import { NgxDtTableOptionsModel, NgxDtTablePage, TastypieSort, TastypiePage, Tas
 export class ListComponent implements OnInit  {
     private alerts: Alert[] = [];
     /* NgxComponent property */
-    private rows: OrcRecordModel[] = [];
-    private limit = new TastypieLimit();
-    private page = new TastypiePage();
-    private sort = new TastypieSort();
-    private filters = new OrcRecordModel();
-    private queryParams;
-    private options = new NgxDtTableOptionsModel();
-    private columns = [
+    rows: OrcRecordModel[];
+    limit = new TastypieLimit();
+    page = new TastypiePage();
+    sort = new TastypieSort();
+    filters = new OrcRecordModel();
+    queryParams;
+    options = new NgxDtTableOptionsModel();
+    columns = [
         {
             prop: 'id',
             name: 'Mantis id',

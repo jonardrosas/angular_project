@@ -13,7 +13,7 @@ import { NgxDtTableService } from './ngx-dt-table.service';
 export class NgxDtTableComponent implements OnInit, AfterViewInit {
     @Input() rows;
     @Input() options;
-    @Input() page: NgxDtTablePage;
+    @Input() page;
     @Input() sort;
     @Input() limit;
     @Input() filters;
