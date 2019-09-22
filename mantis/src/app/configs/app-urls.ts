@@ -8,6 +8,7 @@ export const URLS = {
 
     // ORC URL
     ORC_RECORD_URL: '/orcjobreport/api/v1/orc/',
-    MANTIS_RECORD_URL: '/mantis/api/v1/mantis/'
+    MANTIS_RECORD_URL: '/mantis/api/v1/mantis/',
+    ORC_CHECK_URL: '/orc/api/v1/check_poc/'
 
 };

@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginRequired }  from './core/guards'
 import { LoginComponent } from './core/login/login.component';
 import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
-import { HomeComponent } from './modules/home/pages/home/home.component';
+import { HomeComponent } from './modules/internal_modules/home/pages/home/home.component';
 
 
 const routes: Routes = [
@@ -14,7 +14,7 @@ const routes: Routes = [
     },
     {
         path: 'orc',
-        loadChildren: () => import('./modules/orc/orc.module').then(mod => mod.OrcModule),
+        loadChildren: () => import('./modules/internal_modules/orc/orc.module').then(mod => mod.OrcModule),
     },
     {
         path: 'login',

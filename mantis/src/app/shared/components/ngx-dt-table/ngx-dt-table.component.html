@@ -1,0 +1,23 @@
+<div class="ngx-dt-table-container">
+    <ngx-datatable
+       [ngClass]="options.ngxClass"
+       [columnMode]="'force'"
+       [rows]="rows"
+       [columns]="columns"
+       [headerHeight]="options.headerHeight"
+       [footerHeight]="options.footerHeight"
+       (sort)="onSort($event)"
+       (page)="setPage($event)"
+       [rowHeight]="options.rowHeight"
+       [externalPaging]="options.externalPaging"
+       [externalSorting]="options.externalSorting"
+       [limit]="limit.limit"
+       [count]="page.total_count"
+       [loadingIndicator]="options.loadingIndicator"
+       [scrollbarH]=true
+       [offset]="page.pageNumber"></ngx-datatable>
+ </div>
+<ng-template #linkTemplate let-row="row" let-value="value" let-i="index">
+  <a [routerLink]="['/orc/view/', value]">{{ value }}</a>
+</ng-template>
+

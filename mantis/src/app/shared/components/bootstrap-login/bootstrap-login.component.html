@@ -1,1 +1,30 @@
-<p>bootstrap-login works!</p>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card card-signin my-5">
+          <div class="card-body">
+            <p *ngIf="alert">
+                <ngb-alert [type]="alert.type">{{ alert.message }}</ngb-alert>
+            </p>
+            <h5 class="card-title text-center">Sign In </h5>
+              <div class="form-label-group">
+                <label for="inputEmail">Username</label>
+                <input class="form-control" maxlength="20" formControlName="username" type="text" placeholder="USERNAME"/>
+              </div>
+              <div class="form-label-group">
+                <label for="inputPassword">Password</label>
+                <input class="form-control" maxlength="30" formControlName="password" type="password" placeholder="PASSWORD"/>
+              </div>
+              <div class="custom-control custom-checkbox mb-3">
+                <input type="checkbox" class="custom-control-input" id="customCheck1">
+                <label class="custom-control-label" for="customCheck1">Remember password</label>
+              </div>
+              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+              <hr class="my-4">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

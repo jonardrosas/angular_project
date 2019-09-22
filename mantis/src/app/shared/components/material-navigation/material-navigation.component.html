@@ -1,0 +1,33 @@
+<mat-toolbar color="primary">
+    <button
+      type="button"
+      aria-label="Toggle sidenav"
+      mat-icon-button
+      (click)="drawer.toggle()"
+      *ngIf="isHandset$ | async">
+      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+    </button>
+    <button mat-icon-button (click)="navigate('/')">
+        <mat-icon aria-label="Side nav toggle icon">apps</mat-icon>
+    </button>
+    <span>
+       <img [src]="logo" class="m3-logo"/>
+    </span>
+    <button mat-button *ngFor="let tab of tablist" (click)="navigate(tab.url)">
+        {{ tab.name }}
+    </button>
+    <span class="fill-remaining-space"></span>
+    <button mat-button [matMenuTriggerFor]="menu">
+        <mat-icon aria-label="Side nav toggle icon">account_circle</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+         <mat-icon >assignment_ind</mat-icon>
+        {{ userInstance.name }}
+      </button>
+      <button mat-menu-item  (click)="logOut()">
+         <mat-icon >exit_to_app</mat-icon>
+            Logout
+      </button>
+    </mat-menu>
+</mat-toolbar>

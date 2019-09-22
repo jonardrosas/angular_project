@@ -1,5 +1,4 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
-import { OrcRecordModel } from './../../models/';
 
 @Component({
   selector: 'app-device-summary',
@@ -7,7 +6,6 @@ import { OrcRecordModel } from './../../models/';
   styleUrls: ['./device-summary.component.css']
 })
 export class DeviceSummaryComponent implements OnInit {
-  @Input() object: OrcRecordModel;
 
   constructor() { }
 

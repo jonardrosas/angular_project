@@ -1,0 +1,18 @@
+.m3-logo{
+    height: 37px;
+    width:150px;
+    margin-top:0px;
+}
+
+.m3-profile-img{
+  width: 38px;
+  height: 38px;
+}
+
+
+.fill-remaining-space {
+  /* This fills the remaining space, by using flexbox.
+     Every toolbar row uses a flexbox row layout. */
+  flex: 1 1 auto;
+
+}

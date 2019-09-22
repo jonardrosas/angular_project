@@ -11,7 +11,7 @@ import { APP_CONFIG } from './../../configs';
 
 export class NavigationComponent implements OnInit {
     @Input() tablist: string;
-    @Input() nav_type: string;
+    @Input() navType: string;
     public logo = APP_CONFIG.LOGO;
     public userInstance;
 

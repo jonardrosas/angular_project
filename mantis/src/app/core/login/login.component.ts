@@ -1,38 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute, ParamMap, RouterStateSnapshot } from '@angular/router';
 import { take } from 'rxjs/operators';
-import { NgbAlertConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAlertConfig } from './../../modules/third_party_modules/ng_bootstrap';
 import { AuthenticationService } from './../services';
 import { Alert } from './../models';
+import { APP_CONFIG } from './../../configs';
 
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css'],
-    providers: [NgbAlertConfig],
 })
 
 
 export class LoginComponent implements OnInit {
-    public loginForm;
-    public alerts: Alert[] = [];
+    alert;
+    appTheme = APP_CONFIG.APP_THEME;
 
     constructor(
         private authService: AuthenticationService,
-        public formBuilder: FormBuilder,
         private router: Router,
         private activatedRoute: ActivatedRoute,
-        public alertConfig: NgbAlertConfig
-    ){
-        alertConfig.dismissible = false;
-        this.loginForm = this.formBuilder.group({
-            username: '',
-            password: ''
-        });
-
-    }
+    ){}
 
     ngOnInit(){
         this.authenticate()
@@ -54,9 +44,7 @@ export class LoginComponent implements OnInit {
     }
 
     invalidResponse(){
-        this.alerts.push({message: 'Incorrect username or password', type: 'warning'});
-        //this.alerts.push({type: 'danger', message: 'Incorrect username or password'});
-        // alert('Please fill in username and password');
+        this.alert = {message: 'Incorrect username or password', type: 'warning'}
     }
 
     authenticate(){
@@ -69,8 +57,9 @@ export class LoginComponent implements OnInit {
         )      
     }
 
-    onSubmit() {
-        const credentials = this.loginForm.value;
+    onSubmit(credentials) {
+        // const credentials = this.loginForm.value;
+        debugger;
         this.authService.logIn(credentials)
             .subscribe(
                 data => this.authenticate(),

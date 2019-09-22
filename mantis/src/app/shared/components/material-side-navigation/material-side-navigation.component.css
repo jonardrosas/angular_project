@@ -1,0 +1,42 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+    width: 200px;
+    box-shadow: 3px 0 6px rgba(0,0,0,.24);
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-sidenav-content{
+    height: 100vh;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.fill-remaining-space {
+  flex: 1 1 auto;
+}
+
+.m3-logo{
+    height: 37px;
+    width:150px;
+    margin-top:0px;
+}
+
+.m3-profile-img{
+  width: 38px;
+  height: 38px;
+}
+
+.m3-profile-username{
+    font-size: 10px;
+}
+

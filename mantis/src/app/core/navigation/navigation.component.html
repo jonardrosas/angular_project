@@ -1,5 +1,9 @@
-<div [ngSwitch]="nav_type">
+<div [ngSwitch]="navType">
     <div *ngSwitchCase="'material'">
+        <app-material-navigation [tablist]="tablist" [userInstance]="userInstance" [logo]="logo" (logout)="logOut()"></app-material-navigation>
+    </div>
+    <div *ngSwitchCase="'material-sidenav'">
+        <app-material-side-navigation [tablist]="tablist" [userInstance]="userInstance" [logo]="logo" (logout)="logOut()"></app-material-side-navigation>
     </div>
     <div *ngSwitchDefault>
         <app-bootstrap-navigation [tablist]="tablist" [userInstance]="userInstance" [logo]="logo" (logout)="logOut()"></app-bootstrap-navigation>

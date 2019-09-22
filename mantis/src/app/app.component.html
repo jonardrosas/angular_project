@@ -1,2 +1,16 @@
-<app-navigation [tablist]="tablist" [nav_type]="nav_type"></app-navigation>
-<router-outlet></router-outlet>
+<div [ngSwitch]="navType">
+    <div *ngSwitchCase="'material'">
+        <app-navigation [tablist]="tablist" [navType]="'material'"></app-navigation>
+        <router-outlet></router-outlet>
+    </div>
+    <div *ngSwitchCase="'material-sidenav'">
+        <app-navigation [tablist]="tablist" [navType]="'material-sidenav'"></app-navigation>
+        <!-- router outlet is inside the content of the navigation bar -->
+    </div>
+    <div *ngSwitchDefault>
+        <app-navigation [tablist]="tablist" [navType]="'bootstrap'"></app-navigation>
+        <router-outlet></router-outlet>
+    </div>
+</div>
+
+
