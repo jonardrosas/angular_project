@@ -1,5 +1,8 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Observable ,  BehaviorSubject ,  ReplaySubject } from 'rxjs';
 import { Router, ActivatedRoute, ParamMap, RouterStateSnapshot } from '@angular/router';
+import { map ,  distinctUntilChanged, take, catchError, shareReplay } from 'rxjs/operators';
 import { APP_CONFIG } from './../../../configs';
 
 @Component({
@@ -28,7 +31,13 @@ export class MaterialNavigationComponent implements OnInit {
         return this._userInstance;
     }
 
-    constructor(private router: Router){}
+    isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+        .pipe(
+            map(result => result.matches),
+            shareReplay()
+            ); 
+
+    constructor(private breakpointObserver: BreakpointObserver, private router: Router) {}     
 
     ngOnInit() {
     }

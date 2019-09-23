@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./material-violation-viewer.component.css']
 })
 export class MaterialViolationViewerComponent implements OnInit {
+    dataSource;
+    displayedColumns;
 
   constructor() { }
 
