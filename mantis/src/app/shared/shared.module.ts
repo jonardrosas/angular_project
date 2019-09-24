@@ -7,12 +7,8 @@ import { AgGridModule } from 'ag-grid-angular';
 import { NgBootstrapModule } from './../modules/third_party_modules/ng_bootstrap/ng_bootstrap.module';
 import { MaterialModule } from './../modules/third_party_modules/material/material.module';
 
-import { DeviceSummaryComponent } from './components/device-summary/device-summary.component';
 import { BootstrapLoginComponent } from './components/bootstrap-login/bootstrap-login.component';
 import { BootstrapNavigationComponent } from './components/bootstrap-navigation/bootstrap-navigation.component';
-import { ChecksTableComponent} from './components/checks-table/checks-table.component';
-import { ErrorStatisticsComponent} from './components/error-statistics/error-statistics.component';
-import { WorklistComponent} from './components/worklist/worklist.component';
 import { NgxDtTableComponent } from './components/ngx-dt-table';
 import { MaterialNavigationComponent } from './components/material-navigation/material-navigation.component';
 import { MaterialSideNavigationComponent } from './components/material-side-navigation/material-side-navigation.component';
@@ -30,13 +26,9 @@ import { AgGridWrapperComponent } from './components/ag-grid-wrapper/ag-grid-wra
       MaterialModule,
       FormsModule,
       AgGridModule.withComponents([]),
-      ReactiveFormsModule 
+      ReactiveFormsModule,
   ],
   declarations: [
-      DeviceSummaryComponent,
-      ChecksTableComponent,
-      ErrorStatisticsComponent,
-      WorklistComponent,
       NgxDtTableComponent,
       MaterialNavigationComponent,
       BootstrapLoginComponent,
@@ -47,7 +39,6 @@ import { AgGridWrapperComponent } from './components/ag-grid-wrapper/ag-grid-wra
       AgGridWrapperComponent,
   ],
   exports: [
-      DeviceSummaryComponent,
       NgxDtTableComponent,
       BootstrapLoginComponent,
       BootstrapNavigationComponent,

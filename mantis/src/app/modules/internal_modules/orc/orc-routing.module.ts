@@ -13,7 +13,8 @@ const routes: Routes = [
     },
     {
         path: 'view/:id',
-        component: DetailComponent
+        component: DetailComponent,
+        canActivate: [LoginRequired]
     }
 ];
 

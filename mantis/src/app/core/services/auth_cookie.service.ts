@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable ,  BehaviorSubject ,  ReplaySubject } from 'rxjs';
-import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { ApiService } from './api.service';
-import { map ,  distinctUntilChanged } from 'rxjs/operators';
-import { APP_CONFIG, URLS } from './../../configs';
+import { URLS } from './../../configs';
 
 @Injectable()
 export class CookieAuthenticationService {

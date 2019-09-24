@@ -11,17 +11,13 @@ import { APP_CONFIG } from './../../../configs';
   styleUrls: ['./material-side-navigation.component.css']
 })
 export class MaterialSideNavigationComponent {
-    @Input() tablist: string[];
-    @Input() logo: string[];
-    @Output() logout = new EventEmitter<boolean>();
+    @Input() public tablist: string[];
+    @Input() public logo: string[];
+    @Output() public logout = new EventEmitter<boolean>();
     private _userInstance;
-    media_url = APP_CONFIG.MEDIA_URL;
-    defaultProfileImg = APP_CONFIG.DEFAULT_PROFILE_IMG;
-    themes = [
-        'primary',
-        'accent',
-        'warn',
-    ]
+    public media_url = APP_CONFIG.MEDIA_URL;
+    public defaultProfileImg = APP_CONFIG.DEFAULT_PROFILE_IMG;
+
 
     @Input() set userInstance(value: any) {
        this._userInstance = value;

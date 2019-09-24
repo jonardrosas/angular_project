@@ -12,7 +12,6 @@ import { DataTablesModule } from 'angular-datatables';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { MaterialModule } from './modules/third_party_modules/material/material.module';
 import { NgBootstrapModule } from './modules/third_party_modules/ng_bootstrap/ng_bootstrap.module';
-import { AgGridModule } from 'ag-grid-angular';
 
 // Local imports
 import { APP_CONFIG } from './configs';
@@ -42,7 +41,6 @@ import { AppComponent } from './app.component';
         OrcModule,
         HomeModule,
         BrowserAnimationsModule,
-        AgGridModule.withComponents([])
     ],
     declarations: [
         AppComponent,

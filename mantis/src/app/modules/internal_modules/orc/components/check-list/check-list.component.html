@@ -1,0 +1,11 @@
+<button mat-raised-button (click)="changeStatus()">Change Status</button><br/>
+<div class="check-row">
+    <ag-grid-angular
+        #agGrid
+        style="width: '100%'; height: 500px;"
+        class="ag-theme-balham"
+        [rowData]="rowData"
+        [columnDefs]="columnDefs"
+        >
+    </ag-grid-angular>    
+</div>

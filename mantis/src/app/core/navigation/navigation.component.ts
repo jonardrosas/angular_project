@@ -10,8 +10,8 @@ import { APP_CONFIG } from './../../configs';
 })
 
 export class NavigationComponent implements OnInit {
-    @Input() tablist: string;
-    @Input() navType: string;
+    @Input() public tablist: string;
+    @Input() public navType: string;
     public logo = APP_CONFIG.LOGO;
     public userInstance;
 
@@ -26,7 +26,6 @@ export class NavigationComponent implements OnInit {
     }
 
     setUserInstance(data){
-        console.log("There's a data", data);
         return this.userInstance = data;
     }
 

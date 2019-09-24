@@ -49,6 +49,8 @@ export class ListComponent implements OnInit  {
     constructor(private service: OrcRecordService, private mantisService: MantisRecordService) {
         this.options.externalPaging = true;
         this.options.externalSorting = true;
+        this.sort.order_by = "-id";
+        //this.filters = {operation__in: 'ORC,MRC,LMC'}
         this.options.ngxClass = APP_CONFIG.APP_THEME;
         this.limit.limit = 10;
         this.queryParams = {

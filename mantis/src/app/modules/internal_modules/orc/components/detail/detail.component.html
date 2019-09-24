@@ -1,14 +1,24 @@
 <!--<app-material-violation-viewer></app-material-violation-viewer>-->
-<ag-grid-angular
-    #agGrid
-    style="width: '100%'; height: 500px;"
-    class="ag-theme-balham"
-    [rowData]="rowData"
-    [columnDefs]="columnDefs"
-    rowSelection="multiple"
-    >
-</ag-grid-angular>
+
 <!--
 <app-ag-grid-wrapper [rowData]="rowData" [columnDefs]="columnDefs"></app-ag-grid-wrapper>
 -->
-<br/>
+<!--
+<div class="detail-card-container">
+    <mat-divider></mat-divider>
+    <app-check-list [columnDefs]="columnDefs" [rowData]="rowData" [options]="options"></app-check-list>
+    <mat-divider></mat-divider>
+</div>
+-->
+<div class="detail-card-container">
+    <mat-accordion>
+      <mat-expansion-panel togglePosition="before" expanded="panelIsOpen.check">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Check Section
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-check-list [columnDefs]="columnDefs" [rowData]="rowData" [options]="options"></app-check-list>
+      </mat-expansion-panel>
+    </mat-accordion>
+</div>

@@ -15,9 +15,12 @@ import { URLS, APP_CONFIG } from './../../../../../configs';
 export class DetailComponent implements OnInit {
     private alerts: Alert[] = [];
     private object: OrcRecordModel;
+    public panelIsOpen = {
+        check: true
+    };
     rowData: any;
     columnDefs = [
-        {headerName: 'Rule Name', field: 'name', sortable: true, filter: true},
+        {headerName: 'Rule Name', field: 'name', sortable: true, filter: true, checkboxSelection: true},
         {headerName: 'Raw Error Counts', field: 'flat_error_count', sortable: true, filter: true},
         {headerName: 'Status', field: 'status', sortable: true, filter: true},
     ];
@@ -36,8 +39,6 @@ export class DetailComponent implements OnInit {
         });
     }
     
-    
-
     getObject(id){
         this.orcRecordService.getQuerySet({mantis_id: id}).subscribe(
             (data) => {

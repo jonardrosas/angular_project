@@ -5,9 +5,6 @@ import {  JwtService} from './jwt.service';
 import { User } from '../models';
 import { map ,  distinctUntilChanged } from 'rxjs/operators';
 import { APP_CONFIG, URLS  } from './../../configs';
-
-
-
 /*
  *For Development Only
  *
