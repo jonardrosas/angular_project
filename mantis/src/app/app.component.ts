@@ -19,7 +19,7 @@ import { environment } from './../environments/environment';
 })
 
 
-export class AppComponent{
+export class AppComponent {
     private title: string = APP_CONFIG.TITLE;
     appTheme: string = APP_CONFIG.APP_THEME;  // default is bootstrap, but can switch to different type
     navType: string;
@@ -32,7 +32,7 @@ export class AppComponent{
         // There are 2 type of material nav,
         // 1. material-sidenav
         // 2. normal material nav
-        if(this.appTheme.includes('material')){
+        if (this.appTheme.includes('material')){
             this.navType = APP_CONFIG.MAT_DEFAULT_NAVIGATION;
         }
     }

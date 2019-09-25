@@ -54,12 +54,11 @@ export class LoginComponent implements OnInit {
             data => this.isAuthenticated(data),
             err => this.invalidResponse(),
             () => alert('completed')
-        )      
+        )
     }
 
     onSubmit(credentials) {
         // const credentials = this.loginForm.value;
-        debugger;
         this.authService.logIn(credentials)
             .subscribe(
                 data => this.authenticate(),

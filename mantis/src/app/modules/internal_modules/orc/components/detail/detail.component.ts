@@ -14,16 +14,11 @@ import { URLS, APP_CONFIG } from './../../../../../configs';
 
 export class DetailComponent implements OnInit {
     private alerts: Alert[] = [];
-    private object: OrcRecordModel;
+    public orcRecord: OrcRecordModel;
+    private checkIns;
     public panelIsOpen = {
         check: true
     };
-    rowData: any;
-    columnDefs = [
-        {headerName: 'Rule Name', field: 'name', sortable: true, filter: true, checkboxSelection: true},
-        {headerName: 'Raw Error Counts', field: 'flat_error_count', sortable: true, filter: true},
-        {headerName: 'Status', field: 'status', sortable: true, filter: true},
-    ];
 
     constructor(
         private route: ActivatedRoute,
@@ -42,25 +37,12 @@ export class DetailComponent implements OnInit {
     getObject(id){
         this.orcRecordService.getQuerySet({mantis_id: id}).subscribe(
             (data) => {
-                this.object = data.objects[0];
-                this.getChecks(this.object.id)
+                this.orcRecord = data.objects[0];
             },
             (err) => {
                 this.alerts.push({message: 'No Record Found', type: 'danger'});
             }
         )
     }
-
-    getChecks(id){
-        this.checkService.getQuerySet({record_id: id}).subscribe(
-            (data) => {
-                this.rowData = data.objects;
-            },
-            (err) => {
-                this.alerts.push({message: 'No Checks Found', type: 'danger'});
-            }
-        )
-    }
-
 
 }

@@ -1,4 +1,4 @@
-export class OrcCheckModel{
+export class OrcCheckModel {
     id: number;
     name: string;
     type: string;
@@ -18,3 +18,4 @@ export class OrcCheckModel{
     vio_bin_unbin_cnt: number;
     record_id: number;
 }
+

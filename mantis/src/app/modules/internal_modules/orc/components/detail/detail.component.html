@@ -1,24 +1,29 @@
-<!--<app-material-violation-viewer></app-material-violation-viewer>-->
-
-<!--
-<app-ag-grid-wrapper [rowData]="rowData" [columnDefs]="columnDefs"></app-ag-grid-wrapper>
--->
-<!--
 <div class="detail-card-container">
-    <mat-divider></mat-divider>
-    <app-check-list [columnDefs]="columnDefs" [rowData]="rowData" [options]="options"></app-check-list>
-    <mat-divider></mat-divider>
-</div>
--->
-<div class="detail-card-container">
-    <mat-accordion>
-      <mat-expansion-panel togglePosition="before" expanded="panelIsOpen.check">
+    <h2>{{ orcRecord.operation }} Violation Viewer</h2>
+    <mat-accordion multi="false">
+      <mat-expansion-panel togglePosition="before" expanded="panelIsOpen.deviceSummary">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            Check Section
+            Device Summary
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <app-check-list [columnDefs]="columnDefs" [rowData]="rowData" [options]="options"></app-check-list>
+        ...<br/>
+        ...<br/>
+        ...<br/>
+        ...<br/>
+        ...<br/>
+        ...<br/>
+        ...<br/>
       </mat-expansion-panel>
+
+      <mat-expansion-panel togglePosition="before" expanded="panelIsOpen.check">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Check Section
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <app-check-list [orcRecord]="orcRecord"></app-check-list>
+        </mat-expansion-panel>      
+
     </mat-accordion>
 </div>
