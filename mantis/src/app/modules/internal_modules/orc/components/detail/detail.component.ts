@@ -39,6 +39,14 @@ export class DetailComponent implements OnInit {
         });
     }
 
+    isCollapse(val){
+        if(val){
+            return 'fas fa-caret-right';
+        }else{
+            return 'fas fa-caret-down';
+        }
+    }
+
     getObject(mantisId) {
         this.mantisRecordService.getObject(mantisId).subscribe(
             (data) => {
