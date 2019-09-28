@@ -18,7 +18,7 @@ export class CheckListComponent implements OnInit {
     public columnDefs;
 
     @ViewChild('agGrid', { static: false }) agGrid: AgGridAngular;
-    private options = {
+    public options = {
         theme: `ag-theme-balham`
     };
 
