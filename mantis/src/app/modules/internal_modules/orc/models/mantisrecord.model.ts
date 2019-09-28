@@ -1,3 +1,5 @@
+import { OrcRecordModel } from './orcrecord.model';
+
 export class MantisRecordModel {
 	assignee: string;
 	device: string;
@@ -26,4 +28,7 @@ export class MantisRecordModel {
 	techtype: string;
 	timestamp: number;
 	checks;
+	orc_record: OrcRecordModel;
+	orc_record_id: number;
+	bug_text_id: number;
 }

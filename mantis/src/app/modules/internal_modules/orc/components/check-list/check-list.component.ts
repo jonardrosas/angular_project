@@ -1,8 +1,10 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, AfterViewInit, AfterContentInit
+} from '@angular/core';
 import { AgGridAngular } from './../../../../third_party_modules/ag-grid';
 import { APP_CONFIG } from './../../../../../configs';
 import { CheckTableModel } from './../check-list/models/table.model';
-import { OrcCheckService } from './../../services/orccheck.service';
+import { OrcCheckService, MantisRecordService } from './../../services/';
+import { MantisRecordModel } from './../../models';
 
 
 @Component({
@@ -12,30 +14,51 @@ import { OrcCheckService } from './../../services/orccheck.service';
 })
 
 
-export class CheckListComponent implements OnInit {
-    private tableInstance;
-    public rowData;
-    public columnDefs;
+export class CheckListComponent implements OnInit, AfterViewInit {
+    private tableInstance: any;
+    public rowData: any;
+    public columnDefs: any;
+    mantisRecord: any;
 
     @ViewChild('agGrid', { static: false }) agGrid: AgGridAngular;
     public options = {
-        theme: `ag-theme-balham`
+        // theme: `detail-check ag-theme-material`
+        // theme: `detail-check ag-theme-bootstrap`
+        theme: `detail-check ag-theme-balham`
     };
 
-    constructor(private checkService: OrcCheckService) {
+    constructor(
+        private checkService: OrcCheckService,
+        private mantisRecordService: MantisRecordService
+    ) {
     }
 
-    ngOnInit() { }
-
-    @Input() set orcRecord(orcRecord) {
-        if (orcRecord) {
-            this.tableInstance = new CheckTableModel(orcRecord);
-            this.columnDefs = this.tableInstance.columnDefs;
-            this.getChecks(orcRecord.id);
-        }
+    ngOnInit() {
+        this.getObject();
     }
 
-    getChecks(id) {
+    ngAfterViewInit() {
+        this.agGrid.api.sizeColumnsToFit();
+    }
+
+    errorResponse(err) {
+        alert('Internal Error');
+    }
+
+    getObject() {
+        this.mantisRecordService.mantisRecordSubject.subscribe(
+            (data) => {
+                this.tableInstance = new CheckTableModel(data);
+                this.columnDefs = this.tableInstance.columnDefs;
+                this.getChecks(data.orc_record_id);
+            },
+            (err) => {
+                this.errorResponse(err);
+            },
+        );
+    }
+
+    getChecks(id: number) {
         this.checkService.getQuerySet({ record_id: id }).subscribe(
             (data) => {
                 this.rowData = data.objects;

@@ -58,14 +58,13 @@ export class ListComponent implements OnInit  {
             ...this.filters,
             ...this.page,
             ...this.sort,
-        }
+        };
     }
 
     ngOnInit() {
-        debugger;
-        this.getQuerySet(this.queryParams)
+        this.getQuerySet(this.queryParams);
     }
-    
+
     getQuerySet(queryParams): void {
         this.options.loadingIndicator = true;
         this.mantisService.getQuerySet(queryParams).subscribe(

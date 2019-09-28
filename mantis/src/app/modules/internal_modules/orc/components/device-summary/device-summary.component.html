@@ -1,0 +1,15 @@
+<table class="device-summary-table table table-secondary table-bordered table-sm table-striped">
+    <thead class="thead-dark" *ngFor="let row of rows">
+        <tr>
+            <th *ngFor="let column of row">
+                {{ column.headerName }} 
+            </th>
+        </tr>
+        <tr>
+            <td *ngFor="let column of row">
+                {{ getColumnValue(column.field) }} 
+            </td>            
+        </tr>
+    </thead>
+</table>
+
