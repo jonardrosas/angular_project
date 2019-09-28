@@ -15,7 +15,7 @@ export class NavigationComponent implements OnInit {
     public logo = APP_CONFIG.LOGO;
     public userInstance;
 
-    constructor(private authService: AuthenticationService){
+    constructor(private authService: AuthenticationService) {
         console.log("Navigation Component Instanced Created");
     }
 

@@ -1,0 +1,9 @@
+.device-summary-table{
+    font-size: 12px;
+}
+
+.device-summary-table .table-light th{
+    color: #161616;
+    background-color: #b3b6b9;
+    border-color: #454d55;    
+}

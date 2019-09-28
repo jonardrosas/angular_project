@@ -1,29 +1,111 @@
-<div class="detail-card-container">
-    <h2>{{ orcRecord.operation }} Violation Viewer</h2>
-    <mat-accordion multi="false">
-      <mat-expansion-panel togglePosition="before" expanded="panelIsOpen.deviceSummary">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Device Summary
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        ...<br/>
-        ...<br/>
-        ...<br/>
-        ...<br/>
-        ...<br/>
-        ...<br/>
-        ...<br/>
-      </mat-expansion-panel>
+<div class="container-fluid detail-card-container detail-font" *ngIf="mantisRecord">
+    <div class="row row-break">
+        <div class="col-md-12">
+            <h2>{{ mantisRecord.operation }} Job Report</h2>
+        </div>
+    </div>
 
-      <mat-expansion-panel togglePosition="before" expanded="panelIsOpen.check">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Check Section
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <app-check-list [orcRecord]="orcRecord"></app-check-list>
-        </mat-expansion-panel>      
+    <div class="col-md-12">
+        <div class="d-block p-2 text-white">
+            <app-detail-job-action-section></app-detail-job-action-section>
+        </div>
+    </div>
 
-    </mat-accordion>
+    <hr/>
+    <div class="row row-break">
+        <div class="col-md-12">
+            <button type="button" class="btn btn-toggle" (click)="panelIsOpen.deviceSummary = !panelIsOpen.deviceSummary"
+                    [attr.aria-expanded]="!isCollapsed" aria-controls="deviceSummary">
+                <i [ngClass]="{true: 'fas fa-caret-right', false: 'fas fa-caret-down'}[panelIsOpen.deviceSummary]"></i> Device Summary
+            </button>      
+        </div>
+        <div id="deviceSummary" class="row-break col-md-12" [ngbCollapse]="panelIsOpen.deviceSummary">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <app-device-summary></app-device-summary>
+                </div>
+            </div>           
+        </div>
+    </div>  
+
+    <div class="row row-break">
+        <div class="col-md-12">
+            <button type="button" class="btn btn-toggle" (click)="panelIsOpen.errorStatistics = !panelIsOpen.errorStatistics"
+                    [attr.aria-expanded]="!panelIsOpen.errorStatistics" aria-controls="errorStatistics">
+                <i [ngClass]="{true: 'fas fa-caret-right', false: 'fas fa-caret-down'}[panelIsOpen.errorStatistics]"></i> Error Summary
+            </button>      
+        </div>
+        <div id="errorStatistics" class="row-break col-md-12" [ngbCollapse]="panelIsOpen.errorStatistics">
+            <div class="card bg-light">
+                <div class="card-body">
+                        <app-detail-error-statistics [close]="panelIsOpen.errorStatistics" [mantisId]="mantisRecord.bug_text_id"></app-detail-error-statistics>
+                </div>
+            </div>           
+        </div>
+    </div>      
+
+
+    <div class="row row-break">
+        <div class="col-md-12">
+            <button type="button" class="btn btn-toggle" (click)="panelIsOpen.notesSection = !panelIsOpen.notesSection"
+                    [attr.aria-expanded]="!panelIsOpen.notesSection" aria-controls="notesSection">
+                <i [ngClass]="{true: 'fas fa-caret-right', false: 'fas fa-caret-down'}[panelIsOpen.notesSection]"></i>  Job Notes
+            </button>      
+        </div>
+        <div id="notesSection" class="row-break col-md-12" [ngbCollapse]="panelIsOpen.notesSection">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <app-detail-notes-section [mantisId]="mantisRecord.mantis_id"></app-detail-notes-section>
+                </div>
+            </div>           
+        </div>
+    </div>        
+
+    <div class="row row-break">
+        <div class="col-md-12">
+            <button type="button" class="btn btn-toggle" (click)="panelIsOpen.attachmentSection = !panelIsOpen.attachmentSection"
+                    [attr.aria-expanded]="!panelIsOpen.attachmentSection" aria-controls="attachmentSection">
+                <i [ngClass]="{true: 'fas fa-caret-right', false: 'fas fa-caret-down'}[panelIsOpen.attachmentSection]"></i>  Attachment
+            </button>      
+        </div>
+        <div id="attachmentSection" class="row-break col-md-12" [ngbCollapse]="panelIsOpen.attachmentSection">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <app-detail-attachment-section></app-detail-attachment-section>
+                </div>
+            </div>           
+        </div>
+    </div>       
+
+    <div class="row row-break">
+        <div class="col-md-12">
+            <button type="button" class="btn btn-toggle" (click)="panelIsOpen.historySection = !panelIsOpen.historySection"
+                    [attr.aria-expanded]="!panelIsOpen.historySection" aria-controls="historySection">
+                <i [ngClass]="{true: 'fas fa-caret-right', false: 'fas fa-caret-down'}[panelIsOpen.historySection]"></i>  Job History
+            </button>      
+        </div>
+        <div id="historySection" class="row-break col-md-12" [ngbCollapse]="panelIsOpen.historySection">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <app-detail-job-history-section></app-detail-job-history-section>
+                </div>
+            </div>           
+        </div>
+    </div>       
+
+    <div class="row row-break">
+        <div class="col-md-12">
+            <button type="button" class="btn btn-toggle" (click)="panelIsOpen.check = !panelIsOpen.check"
+                    [attr.aria-expanded]="!isCollapsed" aria-controls="historySection">
+            <i [ngClass]="{true: 'fas fa-caret-right', false: 'fas fa-caret-down'}[panelIsOpen.check]"></i> Check Section
+            </button>      
+        </div>
+        <div id="historySection" class="row-break col-md-12" [ngbCollapse]="panelIsOpen.check">
+            <div class="card bg-light">
+                <div class="card-body">
+                <app-check-list></app-check-list>          
+                </div>
+            </div>           
+        </div>
+    </div>
 </div>

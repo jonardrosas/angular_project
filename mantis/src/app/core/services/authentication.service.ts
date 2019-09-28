@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Observable ,  BehaviorSubject ,  ReplaySubject } from 'rxjs';
-import { Router } from '@angular/router'
+import { Observable, BehaviorSubject, ReplaySubject } from 'rxjs';
+import { Router } from '@angular/router';
 import { ApiService } from './api.service';
 import { JwtService } from './jwt.service';
 import { User } from '../models';
 import { JwtAuthenticationService } from './auth_token.service';
 import { CookieAuthenticationService } from './auth_cookie.service';
-import { map ,  distinctUntilChanged, take, catchError } from 'rxjs/operators';
+import { map, distinctUntilChanged, take, catchError } from 'rxjs/operators';
 import { environment } from './../../../environments/environment';
 
 @Injectable()
@@ -18,42 +18,42 @@ export class AuthenticationService {
     public currentUser = this.currentUserSubject.asObservable().pipe(distinctUntilChanged());
     public isAuthenticatedSubject = new ReplaySubject<boolean>(1);
     public isAuthenticated = this.isAuthenticatedSubject.asObservable();
-    public unAuthorizedResponseSubject = new BehaviorSubject<any>({response: {status_code: 401}});
+    public unAuthorizedResponseSubject = new BehaviorSubject<any>({ response: { status_code: 401 } });
 
-    constructor(private apiService: ApiService, private router: Router){
-        console.log("Authentication Service Created.")
-        if(this.isProduction){
+    constructor(private apiService: ApiService, private router: Router) {
+        console.log('Authentication Service Created.');
+        if (this.isProduction) {
             this.backend = new CookieAuthenticationService(this.apiService);
-        }else{
+        } else {
             this.backend = new JwtAuthenticationService(this.apiService);
         }
-        this.authenticate('Authenticate Service')
+        this.authenticate('Authenticate Service');
     }
 
-    authenticate(source){
-        console.log("Authenticate method called from ", source);
+    authenticate(source) {
+        console.log('Authenticate method called from ', source);
         this.backend.getSession()
-        .subscribe(
-            data => this.validateSession(data),
-            err => this.errorResponseHander()
-        )
+            .subscribe(
+                data => this.validateSession(data),
+                err => this.errorResponseHander()
+            );
     }
 
-    setUnAuthorized(){
+    setUnAuthorized() {
         this.currentUserSubject.next({} as User);
         this.isAuthenticatedSubject.next(false);
     }
 
-    setAuthorized(data){
+    setAuthorized(data) {
         this.currentUserSubject.next(data.response);
         this.isAuthenticatedSubject.next(true);
     }
-	
-    validateSession(data){
-        if(data.response.status_code == 401){
-            this.setUnAuthorized()
-        }else{
-            this.setAuthorized(data)
+
+    validateSession(data) {
+        if (data.response.status_code === 401) {
+            this.setUnAuthorized();
+        } else {
+            this.setAuthorized(data);
         }
     }
 
@@ -66,11 +66,11 @@ export class AuthenticationService {
      * 403 error will execute incase no csrf token (403 forbidden repsonse)
      *
      */
-    errorResponseHander(){
+    errorResponseHander() {
         this.setUnAuthorized()
     }
 
-    getSession(): Observable<any>{
+    getSession(): Observable<any> {
         console.log('Get session')
         return this.backend.getSession().pipe(
             catchError(val => {
@@ -80,11 +80,11 @@ export class AuthenticationService {
 
     }
 
-    logIn(body): Observable<any>{
+    logIn(body): Observable<any> {
         return this.backend.attemptAuth(body)
     }
 
-    logOut(){
+    logOut() {
         this.backend.logout().subscribe(
             (data) => console.log("Logging out")
         )

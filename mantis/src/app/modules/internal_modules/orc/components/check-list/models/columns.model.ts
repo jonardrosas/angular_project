@@ -1,9 +1,16 @@
 import { CheckBaseModel } from './base';
 
 class OrcCheckOpsModel extends CheckBaseModel {
-    public assigedGroupField = { headerName: 'Assigned Group', field: '', sortable: true, filter: true };
-    public assignedSoaGroupField = { headerName: 'Assigned SOA Group', field: 'assigned_soa_groups', sortable: true, filter: true };
-    public pdbViolationCountField = { headerName: 'PDB Violation counts', field: '', sortable: true, filter: true };
+    public assigedGroupField = { headerName: 'Assigned Group', field: '', sortable: true, filter: true,  width: 50 };
+    public assignedSoaGroupField = { headerName: 'Assigned SOA Group', field: 'assigned_soa_groups', sortable: true, filter: true,  width: 50 };
+    public pdbViolationCountField = {
+        headerName: 'PDB Violation counts',
+        field: 'vio_count',
+        sortable: true, width: 50,
+        valueGetter(params){
+            return params.data.vio_cnt;
+        }
+    };
     public pdbValidatedField = {
         headerName: 'PDB validated',
         field: 'validated',
@@ -15,7 +22,8 @@ class OrcCheckOpsModel extends CheckBaseModel {
             } else {
                 return 'N';
             }
-        }
+        },
+        width: 90
     };
 
     constructor() {
@@ -29,6 +37,8 @@ class OrcCheckOpsModel extends CheckBaseModel {
             this.rawErrorCountField,
             this.assigedGroupField,
             this.assignedSoaGroupField,
+            this.pdbViolationCountField,
+            this.pdbValidatedField,
             this.statusField
         ];
     }
@@ -93,6 +103,40 @@ class DrcCheckOpsModel extends CheckBaseModel {
 
 }
 
+class ValidatorCheckOpsModel extends CheckBaseModel {
+    public assignedGroupField = {
+        headerName: 'Assigned Group',
+        field: 'assigned_group',
+        cellRenderer: params => {
+            let assignedGroups = [];
+            for(let review in params.reviews){
+                if(params.reviews[review]){
+                    assignedGroups.push(params.reviews[review])
+                }
+            }
+        }        
+    };
+    public drcDescriptionField = { headerName: 'DRC Description', field: 'drc_desc', sortable: true, filter: true };
+    public drcUtilField = { headerName: 'DRC Util', field: 'drc_util', sortable: true, filter: true };
+
+    constructor() {
+        super();
+        this.getColumnDefs();
+    }
+
+    getColumnDefs() {
+        this.columnDefs = [
+            this.ruleNameField,
+            this.rawErrorCountField,
+            this.assignedGroupField,
+            this.drcUtilField,
+            this.statusField
+        ];
+    }
+
+}
+
 export { OrcCheckOpsModel };
 export { LMCCheckOpsModel };
 export { DrcCheckOpsModel };
+export { ValidatorCheckOpsModel };

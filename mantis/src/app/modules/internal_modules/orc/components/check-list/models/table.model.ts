@@ -1,4 +1,4 @@
-import { OrcCheckOpsModel, LMCCheckOpsModel, DrcCheckOpsModel } from './columns.model';
+import { OrcCheckOpsModel, LMCCheckOpsModel, DrcCheckOpsModel, ValidatorCheckOpsModel } from './columns.model';
 import { OrcRecordModel } from './../../../models/orcrecord.model';
 
 class CheckTableModel {
@@ -6,9 +6,11 @@ class CheckTableModel {
     public table;
 
     // Registed Flow by Operation
-    orcFlow = ['ORC'];
-    lmcFlow = ['LMC'];
-    drcFlow = ['DRC', 'PDKDRC'];
+    orcFlow = ['ORC', 'OPCV', 'ORC_DEV', 'decomp', 'target', 'pm', 'opc', 'matchXOR', 'opc_orc', 'MRC'];
+    lmcFlow = ['LMC', 'TFLEXLMC_WRAPPER'];
+    pgrcFlow = ['pgrc'];
+    validatorFlow = ['Validator'];
+    drcFlow = ['DRC', 'PDKDRC', 'FABDRC', 'PFDRC', 'ENGDRC', 'FrameDRC', 'POSTDSDRC', 'FAB_DRC'];
     dfmFlow = ['DFM'];
 
     constructor(private orcRecord: OrcRecordModel) {
@@ -17,6 +19,8 @@ class CheckTableModel {
             this.table = new LMCCheckOpsModel();
         } else if ( this.drcFlow.indexOf(operation) !== -1 ) {
             this.table = new DrcCheckOpsModel();
+        } else if ( this.validatorFlow.indexOf(operation) !== -1 ) {
+            this.table = new ValidatorCheckOpsModel();
         } else {
             this.table = new OrcCheckOpsModel();
         }

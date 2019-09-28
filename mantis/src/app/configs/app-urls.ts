@@ -1,3 +1,4 @@
+
 export const URLS = {
     // auth urls
     COOKIE_BASED_LOGIN_URL: '/accounts/login2/',
@@ -9,7 +10,10 @@ export const URLS = {
     // ORC URL
     ORC_RECORD_URL: '/orc/api/v1/orc/',
     MANTIS_RECORD_URL: '/mantis/api/v1/mantis/',
-    ORC_CHECK_URL: '/orc/api/v1/check/'
-    //ORC_CHECK_URL: '/orc/api/v1/check_poc/'
+    ORC_CHECK_URL: '/orc/api/v1/check/',
+    CHECK_SUMMARY_URL: '/mantis/api/v1/mantiserrorstat/',
+    JOB_NOTES_URL: '/orc/api/v1/notes/',
+    JOB_ATTACHMENT_URL: '/orc/api/v1/attachments/',
+    // ORC_CHECK_URL: '/orc/api/v1/check_poc/'
 
 };

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { OrcRecordService, OrcCheckService } from './../../services';
-import { OrcRecordModel, OrcCheckModel } from './../../models';
+import { OrcRecordService, MantisRecordService } from './../../services';
+import { OrcRecordModel, MantisRecordModel } from './../../models';
 import { Alert } from './../../../../../core/models';
 import { URLS, APP_CONFIG } from './../../../../../configs';
 
@@ -14,10 +14,15 @@ import { URLS, APP_CONFIG } from './../../../../../configs';
 
 export class DetailComponent implements OnInit {
     private alerts: Alert[] = [];
-    public orcRecord: OrcRecordModel;
-    private checkIns;
+    public mantisRecord: MantisRecordModel;
+    private checkIns: any;
     public panelIsOpen = {
-        check: true
+        deviceSummary: false,
+        errorStatistics: true,
+        notesSection: true,
+        attachmentSection: true,
+        historySection: true,
+        check: false,
     };
 
     constructor(
@@ -25,24 +30,26 @@ export class DetailComponent implements OnInit {
         private orcRecordService: OrcRecordService,
         private router: Router,
         private http: HttpClient,
-        private checkService: OrcCheckService
-    ) {}
+        private mantisRecordService: MantisRecordService
+    ) { }
 
-    ngOnInit () {
+    ngOnInit() {
         this.route.paramMap.subscribe(params => {
             this.getObject(params.get('id'));
         });
     }
-    
-    getObject(id){
-        this.orcRecordService.getQuerySet({mantis_id: id}).subscribe(
+
+    getObject(mantisId) {
+        this.mantisRecordService.getObject(mantisId).subscribe(
             (data) => {
-                this.orcRecord = data.objects[0];
+                this.mantisRecordService.mantisRecordSubject.next(data);
+                this.mantisRecord = data;
             },
             (err) => {
-                this.alerts.push({message: 'No Record Found', type: 'danger'});
-            }
-        )
+                this.alerts.push({ message: 'No Record Found', type: 'danger' });
+            },
+            () => console.log('Loaded successfully...')
+        );
     }
 
 }
