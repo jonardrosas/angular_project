@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 import { NgBootstrapModule } from './../../third_party_modules/ng_bootstrap/ng_bootstrap.module';
 import { MaterialModule } from './../../third_party_modules/material/material.module';
@@ -8,9 +10,10 @@ import { NgAgGridModule } from './../../third_party_modules/ag-grid/ag-grid.modu
 import { SharedModule } from './../../../shared';
 import { OrcRecordService, MantisRecordService, OrcCheckService} from './services';
 
+import * as fromOrcModuleReducer from './store';
 import { OrcRoutingModule } from './orc-routing.module';
 import { ListComponent } from './components/list/list.component';
-import { DetailComponent } from './components/detail/detail.component';
+import { DetailComponent } from './containers/detail/detail.component';
 import { CheckListComponent } from './components/check-list/check-list.component';
 import { DeviceSummaryComponent } from './components/device-summary/device-summary.component';
 import { DetailJobActionSectionComponent } from './components/detail-job-action-section/detail-job-action-section.component';
@@ -27,8 +30,10 @@ import { DetailJobHistorySectionComponent } from './components/detail-job-histor
         OrcRoutingModule,
         SharedModule,
         MaterialModule,
-        NgAgGridModule
-    ],  
+        NgAgGridModule,
+        StoreModule.forFeature('orc', fromOrcModuleReducer.reducers),
+        EffectsModule.forFeature(fromOrcModuleReducer.effects)
+    ],
     declarations: [
         ListComponent,
         DetailComponent,

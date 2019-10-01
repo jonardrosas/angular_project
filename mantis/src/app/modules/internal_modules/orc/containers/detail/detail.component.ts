@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { OrcRecordService, MantisRecordService } from './../../services';
-import { OrcRecordModel, MantisRecordModel } from './../../models';
+import { Store, select } from '@ngrx/store';
+
+import * as orcModuleStore from './../../store';
+import { MantisRecordModel, MantisNotesInterface, MantisRecordInterface } from './../../models';
 import { Alert } from './../../../../../core/models';
-import { URLS, APP_CONFIG } from './../../../../../configs';
 
 @Component({
     selector: 'app-detail',
@@ -27,37 +27,34 @@ export class DetailComponent implements OnInit {
 
     constructor(
         private route: ActivatedRoute,
-        private orcRecordService: OrcRecordService,
-        private router: Router,
-        private http: HttpClient,
-        private mantisRecordService: MantisRecordService
+        private store: Store<any>
     ) { }
 
     ngOnInit() {
         this.route.paramMap.subscribe(params => {
-            this.getObject(params.get('id'));
+            this.getObjectUsingStore(params.get('id'));
         });
     }
 
-    isCollapse(val){
-        if(val){
+    isCollapse(val) {
+        if (val) {
             return 'fas fa-caret-right';
-        }else{
+        } else {
             return 'fas fa-caret-down';
         }
     }
 
-    getObject(mantisId) {
-        this.mantisRecordService.getObject(mantisId).subscribe(
+    loadMantisRecord() {
+        this.store.pipe(select(orcModuleStore.getMantisRecordObjectStateSelector)).subscribe(
             (data) => {
-                this.mantisRecordService.mantisRecordSubject.next(data);
                 this.mantisRecord = data;
-            },
-            (err) => {
-                this.alerts.push({ message: 'No Record Found', type: 'danger' });
-            },
-            () => console.log('Loaded successfully...')
+            }
         );
+    }
+
+    getObjectUsingStore(mantisId) {
+        this.store.dispatch(orcModuleStore.getMantisObjectAction({id: mantisId}));
+        this.loadMantisRecord();
     }
 
 }

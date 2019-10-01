@@ -1,4 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
+import { Store, select } from '@ngrx/store';
+import * as orcModuleStore from './../../store';
+
 import { MantisRecordModel } from './../../models';
 import { MantisRecordService } from './../../services';
 import { DeviceSummaryTable } from './../device-summary/models/tables.model';
@@ -15,7 +18,8 @@ export class DeviceSummaryComponent implements OnInit {
     public rows;
 
     constructor(
-        private mantisRecordService: MantisRecordService
+        private mantisRecordService: MantisRecordService,
+        private store: Store<any>
     ) { }
 
     ngOnInit() {
@@ -32,7 +36,7 @@ export class DeviceSummaryComponent implements OnInit {
     }
 
     getObject() {
-        this.mantisRecordService.mantisRecordSubject.subscribe(
+        this.store.pipe(select(orcModuleStore.getMantisRecordObjectStateSelector)).subscribe(
             (data) => {
                 const orcRecord = { ...data.orc_record };
                 delete data.orc_record;
@@ -41,12 +45,6 @@ export class DeviceSummaryComponent implements OnInit {
                     ...orcRecord
                 };
                 this.createTable(this.mantisRecord);
-            },
-            (err) => {
-                alert('Internall Error');
-            },
-            () => {
-                alert('Completed');
             }
         );
     }

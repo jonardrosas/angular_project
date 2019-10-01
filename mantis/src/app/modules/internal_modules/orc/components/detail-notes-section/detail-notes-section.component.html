@@ -1,2 +1,20 @@
-<p>detail-notes-section works!</p>
-{{ notes | json }}
+<table class="table table-bordered table-secondary">
+    <thead class="thead-dark">
+        <tr>
+            <th>Id</th>
+            <th>User</th>
+            <th>Created</th>
+            <th>Stage</th>
+            <th>Note</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let note of notes$ | async">
+            <td> {{note.id }}</td>
+            <td> {{note.reporter }}</td>
+            <td> {{note.date_submitted }}</td>
+            <td> {{note.bug_status }}</td>
+            <td> {{note.note }}</td>
+        </tr>
+    </tbody>
+</table>

@@ -38,7 +38,7 @@
         <div id="errorStatistics" class="row-break col-md-12" [ngbCollapse]="panelIsOpen.errorStatistics">
             <div class="card bg-light">
                 <div class="card-body">
-                        <app-detail-error-statistics [close]="panelIsOpen.errorStatistics" [mantisId]="mantisRecord.bug_text_id"></app-detail-error-statistics>
+                        <app-detail-error-statistics [close]="panelIsOpen.errorStatistics" [bugTextId]="mantisRecord.bug_text_id"></app-detail-error-statistics>
                 </div>
             </div>           
         </div>
@@ -55,7 +55,7 @@
         <div id="notesSection" class="row-break col-md-12" [ngbCollapse]="panelIsOpen.notesSection">
             <div class="card bg-light">
                 <div class="card-body">
-                    <app-detail-notes-section [mantisId]="mantisRecord.mantis_id"></app-detail-notes-section>
+                    <app-detail-notes-section [mantisId]="mantisRecord.id"></app-detail-notes-section>
                 </div>
             </div>           
         </div>

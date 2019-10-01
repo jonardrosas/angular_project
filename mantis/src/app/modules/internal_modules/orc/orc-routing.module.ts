@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginRequired } from './../../../core/guards'
+import { LoginRequired } from './../../../core/guards';
 
 import { ListComponent } from './components/list/list.component';
-import { DetailComponent } from './components/detail/detail.component';
+import { DetailComponent } from './containers/detail/detail.component';
 
 const routes: Routes = [
     {
