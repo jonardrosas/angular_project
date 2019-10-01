@@ -14,6 +14,6 @@ export const URLS = {
     CHECK_SUMMARY_URL: '/mantis/api/v1/mantiserrorstat/',
     JOB_NOTES_URL: '/orc/api/v1/notes/',
     JOB_ATTACHMENT_URL: '/orc/api/v1/attachments/',
-    // ORC_CHECK_URL: '/orc/api/v1/check_poc/'
+    JOB_HISTORY_URL: '/mantis/api/v1/mantishistory/',
 
 };

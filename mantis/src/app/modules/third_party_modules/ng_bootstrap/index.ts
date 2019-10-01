@@ -1,3 +1,1 @@
-export {
- NgbAlertConfig,    
-} from '@ng-bootstrap/ng-bootstrap';
+export * from '@ng-bootstrap/ng-bootstrap';

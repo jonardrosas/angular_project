@@ -1,5 +1,5 @@
 import { OrcCheckOpsModel, LMCCheckOpsModel, DrcCheckOpsModel, ValidatorCheckOpsModel } from './columns.model';
-import { OrcRecordModel } from './../../../models/orcrecord.model';
+import { OrcRecordModel } from './../../../../models/orcrecord.model';
 
 class CheckTableModel {
     public columnDefs;
@@ -14,7 +14,12 @@ class CheckTableModel {
     dfmFlow = ['DFM'];
 
     constructor(private orcRecord: OrcRecordModel) {
+        this.setTable();
+    }
+
+    private setTable() {
         const operation = this.orcRecord.operation;
+        const fab = this.orcRecord.fab;
         if (this.lmcFlow.indexOf(operation) !== -1) {
             this.table = new LMCCheckOpsModel();
         } else if ( this.drcFlow.indexOf(operation) !== -1 ) {
@@ -25,6 +30,10 @@ class CheckTableModel {
             this.table = new OrcCheckOpsModel();
         }
         this.columnDefs = this.table.columnDefs;
+    }
+
+    public getTableColumn() {
+        return this.columnDefs;
     }
 
 }

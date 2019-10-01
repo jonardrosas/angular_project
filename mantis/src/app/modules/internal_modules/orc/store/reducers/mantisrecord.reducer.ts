@@ -8,6 +8,8 @@ export const initialState: MantisRecordState = {
     mantisObject: {},
     loaded: false,
     loading: false,
+    histories: [],
+    attachments: [],
     mantisErrorSummary: null,
     mantisNotes: []
 };
@@ -50,6 +52,32 @@ const mantisRecordReducer = createReducer(
         MantisRecordAction.setMantisJobNotesAction,
         (state, { notes }) => {
             state.mantisNotes = notes;
+            return { ...state, loading: false };
+        }
+    ),
+    on(
+        MantisRecordAction.getMantisAttachmentAction,
+        (state, { bug_id }) => {
+            return { ...state };
+        }
+    ),
+    on(
+        MantisRecordAction.setMantisAttachmentAction,
+        (state, { attachments }) => {
+            state.attachments = attachments;
+            return { ...state, loading: false };
+        }
+    ),
+    on(
+        MantisRecordAction.getMantisHistoryAction,
+        (state, { bug_id }) => {
+            return { ...state };
+        }
+    ),
+    on(
+        MantisRecordAction.setMantisHistoryAction,
+        (state, { histories }) => {
+            state.histories = histories;
             return { ...state, loading: false };
         }
     ),

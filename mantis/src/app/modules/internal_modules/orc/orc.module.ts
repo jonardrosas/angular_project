@@ -21,6 +21,7 @@ import { DetailErrorStatisticsComponent } from './components/detail-error-statis
 import { DetailNotesSectionComponent } from './components/detail-notes-section/detail-notes-section.component';
 import { DetailAttachmentSectionComponent } from './components/detail-attachment-section/detail-attachment-section.component';
 import { DetailJobHistorySectionComponent } from './components/detail-job-history-section/detail-job-history-section.component';
+import { CheckChangeStatusComponent } from './components/check-list/components/check-change-status/check-change-status.component';
 
 
 @NgModule({
@@ -44,6 +45,10 @@ import { DetailJobHistorySectionComponent } from './components/detail-job-histor
         DetailNotesSectionComponent,
         DetailAttachmentSectionComponent,
         DetailJobHistorySectionComponent,
+        CheckChangeStatusComponent,
+    ],
+    entryComponents: [
+        CheckChangeStatusComponent
     ],
     providers: [OrcRecordService, MantisRecordService, OrcCheckService]
 })

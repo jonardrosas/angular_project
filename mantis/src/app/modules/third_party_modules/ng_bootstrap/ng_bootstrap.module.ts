@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
-import { NgbModule,
-    NgbAlertModule, 
-    NgbAlertConfig, 
+import {
+    NgbModule,
+    NgbAlertModule,
+    NgbAlertConfig,
     NgbCollapseModule,
-} 
-from '@ng-bootstrap/ng-bootstrap';
+    NgbModalModule,
+} from '@ng-bootstrap/ng-bootstrap';
 
 const BootstrapComponents = [
     NgbAlertModule,
     NgbCollapseModule,
-]
+    NgbModalModule,
+];
 
 @NgModule({
     imports: [BootstrapComponents],

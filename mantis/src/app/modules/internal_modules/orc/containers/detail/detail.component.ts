@@ -14,6 +14,7 @@ import { Alert } from './../../../../../core/models';
 
 export class DetailComponent implements OnInit {
     private alerts: Alert[] = [];
+    public mantisId: number;
     public mantisRecord: MantisRecordModel;
     private checkIns: any;
     public panelIsOpen = {
@@ -32,7 +33,8 @@ export class DetailComponent implements OnInit {
 
     ngOnInit() {
         this.route.paramMap.subscribe(params => {
-            this.getObjectUsingStore(params.get('id'));
+            this.mantisId = +params.get('id');
+            this.getObjectUsingStore(this.mantisId);
         });
     }
 
@@ -52,7 +54,7 @@ export class DetailComponent implements OnInit {
         );
     }
 
-    getObjectUsingStore(mantisId) {
+    getObjectUsingStore(mantisId: number) {
         this.store.dispatch(orcModuleStore.getMantisObjectAction({id: mantisId}));
         this.loadMantisRecord();
     }

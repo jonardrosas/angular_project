@@ -43,18 +43,47 @@ export class MantisRecordEffects {
     );
 
     loadMantisRecordJobNotesEffect = createEffect(() => this.actions$.pipe(
-        ofType(mantisRecordActions.GET_MANTIS_JOB_NOTES),
-        mergeMap(
-            (payload: any) => this.mantisRecordService.getJobNotes({bug_id: payload.bug_id})
-            .pipe(
-                map(
-                    notes => mantisRecordActions.setMantisJobNotesAction({notes: notes.objects}),
-                    catchError(() => EMPTY)
+            ofType(mantisRecordActions.GET_MANTIS_JOB_NOTES),
+            mergeMap(
+                (payload: any) => this.mantisRecordService.getJobNotes({bug_id: payload.bug_id})
+                .pipe(
+                    map(
+                        notes => mantisRecordActions.setMantisJobNotesAction({notes: notes.objects}),
+                        catchError(() => EMPTY)
+                    )
                 )
             )
         )
-    )
-);
+    );
+
+    loadMantisRecordAttachmentEffect = createEffect(() => this.actions$.pipe(
+            ofType(mantisRecordActions.GET_MANTIS_ATTACHMENT),
+            mergeMap(
+                (payload: any) => this.mantisRecordService.getAttachmentSvs({bug_id: payload.bug_id})
+                .pipe(
+                    map(
+                        data => mantisRecordActions.setMantisAttachmentAction({attachments: data.objects}),
+                        catchError(() => EMPTY)
+                    )
+                )
+            )
+        )
+    );
+
+
+    loadMantisRecordHisotryEffect = createEffect(() => this.actions$.pipe(
+        ofType(mantisRecordActions.GET_MANTIS_HISTORY),
+            mergeMap(
+                (payload: any) => this.mantisRecordService.getHistorytSvs({bug_id: payload.bug_id})
+                .pipe(
+                    map(
+                        data => mantisRecordActions.setMantisHistoryAction({histories: data.objects}),
+                        catchError(() => EMPTY)
+                    )
+                )
+            )
+        )
+    );
 
 }
 

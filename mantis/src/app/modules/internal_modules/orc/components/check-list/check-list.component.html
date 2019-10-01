@@ -1,4 +1,7 @@
 <button mat-raised-button (click)="changeStatus()">Change Status</button><br/>
+<p *ngFor="let alert of alerts">
+    <ngb-alert [type]="alert.type" (close)="close(alert)">{{ alert.message }}</ngb-alert>
+</p>
 <div class="check-row">
     <ag-grid-angular
         #agGrid

@@ -1,1 +1,18 @@
-<p>detail-job-history-section works!</p>
+<table class="table table-sm table-bordered table-light table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>Date</th>
+            <th>User</th>
+            <th>Field</th>
+            <th>Change</th>
+        </tr>
+    </thead>
+    <tbody class="thead-light">
+        <tr *ngFor="let history of histories$ | async">
+            <td>{{ history.date_modified_string }} </td>
+            <td>{{ history.username }} </td>
+            <td>{{ history.field_name }} </td>
+            <td>{{ history.old_value }} => {{  history.new_value }} </td>
+        </tr>
+    </tbody>
+</table>

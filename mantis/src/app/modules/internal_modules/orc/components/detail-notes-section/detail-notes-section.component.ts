@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MantisRecordService } from './../../services';
 import { MantisNotesInterface } from './../../models';
 import { Observable } from 'rxjs';
 

@@ -2,15 +2,19 @@ import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/s
 import { OrcRecordState, OrcModuleState } from './../state';
 
 export const getOrcObjectFn = (state: OrcRecordState) => state.orcObject;
-export const getOrcQuerysetFn = (state: OrcRecordState) => state.orcQuerysets;
+export const getOrcCheckFn = (state: OrcRecordState) => state.checks;
 
 
 // selectors
 const getOrcModuleState = createFeatureSelector<OrcModuleState>('orc');
+
 export const getOrcRecordStateSelector = createSelector(
     getOrcModuleState,
-    (state) =>  {
-        return state.orcRecordState;
-    }
+    (state: OrcModuleState) => state.orcRecordState
+);
+
+export const getOrcRecordCheckStateSelector = createSelector(
+    getOrcRecordStateSelector,
+    getOrcCheckFn
 );
 

@@ -5,11 +5,8 @@ import { OrcRecordState } from './../state';
 
 
 export const initialState: OrcRecordState = {
-    orcQuerysets: [],
-    orcObject: {
-        device: 'Test',
-        id: 12,
-    },
+    orcObject: {},
+    checks: [],
     loaded: false,
     loading: false,
 };
@@ -20,13 +17,22 @@ const orcRecordReducer = createReducer(
         orcRecordActions.getOrcObjectAction,
         state => ({ ...state, id: 1 })
     ),
+    on(
+        orcRecordActions.getOrcChecksAction,
+        (state, { record_id }) => {
+            return { ...state, id: 1 };
+        }
+    ),
+    on(
+        orcRecordActions.setOrcChecksAction,
+        (state, { checks }) => {
+            state.checks = checks;
+            return { ...state, loading: false };
+        }
+    ),
 );
 
 
 export function reducer(state: OrcRecordState, action: Action) {
     return orcRecordReducer(state, action);
 }
-
-export const getOrcObjectSelector = (state: OrcRecordState) => state.orcObject;
-export const getOrcQuerysetSelecctor = (state: OrcRecordState) => state.orcQuerysets;
-

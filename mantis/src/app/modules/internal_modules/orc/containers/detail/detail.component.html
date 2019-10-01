@@ -20,11 +20,7 @@
             </button>      
         </div>
         <div id="deviceSummary" class="row-break col-md-12" [ngbCollapse]="panelIsOpen.deviceSummary">
-            <div class="card bg-light">
-                <div class="card-body">
-                    <app-device-summary></app-device-summary>
-                </div>
-            </div>           
+            <app-device-summary></app-device-summary>
         </div>
     </div>  
 
@@ -55,7 +51,7 @@
         <div id="notesSection" class="row-break col-md-12" [ngbCollapse]="panelIsOpen.notesSection">
             <div class="card bg-light">
                 <div class="card-body">
-                    <app-detail-notes-section [mantisId]="mantisRecord.id"></app-detail-notes-section>
+                    <app-detail-notes-section [mantisId]="mantisId"></app-detail-notes-section>
                 </div>
             </div>           
         </div>
@@ -71,7 +67,7 @@
         <div id="attachmentSection" class="row-break col-md-12" [ngbCollapse]="panelIsOpen.attachmentSection">
             <div class="card bg-light">
                 <div class="card-body">
-                    <app-detail-attachment-section></app-detail-attachment-section>
+                    <app-detail-attachment-section [mantisId]="mantisId"></app-detail-attachment-section>
                 </div>
             </div>           
         </div>
@@ -87,7 +83,7 @@
         <div id="historySection" class="row-break col-md-12" [ngbCollapse]="panelIsOpen.historySection">
             <div class="card bg-light">
                 <div class="card-body">
-                    <app-detail-job-history-section></app-detail-job-history-section>
+                    <app-detail-job-history-section [mantisId]="mantisId"></app-detail-job-history-section>
                 </div>
             </div>           
         </div>
@@ -103,7 +99,7 @@
         <div id="historySection" class="row-break col-md-12" [ngbCollapse]="panelIsOpen.check">
             <div class="card bg-light">
                 <div class="card-body">
-                <app-check-list></app-check-list>          
+                <app-check-list [mantisId]="mantisId"></app-check-list>          
                 </div>
             </div>           
         </div>

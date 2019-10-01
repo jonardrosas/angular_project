@@ -1,6 +1,12 @@
 import { createAction, props } from '@ngrx/store';
-
-export const getOrcObjectAction = createAction('[Orc Record] GetMantisObject', props<{id: number}>());
-export const getOrcChecksAction = createAction('[Orc Record] GetMantisChecks', props<{record_id: number}>());
+import { OrcCheckModel, OrcRecordInterface } from '../../models';
 
 
+export const GET_ORC_CHECK = '[Orc Record] GetOrcChecks';
+export const SET_ORC_CHECK = '[Orc Record] SetOrcChecks';
+
+export const getOrcObjectAction = createAction('[Orc Record] GetOrcObject', props<{id: number}>());
+export const setOrcObjectAction = createAction('[Orc Record] setOrcObject', props<{objects: OrcRecordInterface}>());
+
+export const getOrcChecksAction = createAction(GET_ORC_CHECK, props<{record_id: number}>());
+export const setOrcChecksAction = createAction(SET_ORC_CHECK, props<{checks: OrcCheckModel[]}>());

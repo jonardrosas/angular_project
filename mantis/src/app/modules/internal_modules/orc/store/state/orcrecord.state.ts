@@ -1,6 +1,8 @@
+import { OrcCheckInterface } from './../../models';
+
 export interface OrcRecordState {
-    orcQuerysets: any[];
     orcObject: any;
+    checks: OrcCheckInterface[];
     loaded: boolean;
     loading: boolean;
 }

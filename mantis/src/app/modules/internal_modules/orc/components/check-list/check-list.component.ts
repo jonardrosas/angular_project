@@ -1,10 +1,15 @@
 import { Component, OnInit, Input, ViewChild, AfterViewInit, AfterContentInit
 } from '@angular/core';
+import { Store, select } from '@ngrx/store';
+
+import { NgbModal } from './../../../../third_party_modules/ng_bootstrap';
 import { AgGridAngular } from './../../../../third_party_modules/ag-grid';
-import { APP_CONFIG } from './../../../../../configs';
-import { CheckTableModel } from './../check-list/models/table.model';
-import { OrcCheckService, MantisRecordService } from './../../services/';
-import { MantisRecordModel } from './../../models';
+
+import { CheckTableModel } from './models/table/table.model';
+import * as orcModuleStore from './../../store';
+import * as checkComponentBase from './models/common/component-base-class';
+
+import { CheckChangeStatusComponent } from './components/check-change-status/check-change-status.component';
 
 
 @Component({
@@ -14,11 +19,11 @@ import { MantisRecordModel } from './../../models';
 })
 
 
-export class CheckListComponent implements OnInit, AfterViewInit {
+export class CheckListComponent extends checkComponentBase.AlertClass implements OnInit, AfterViewInit {
     private tableInstance: any;
+    @Input() public mantisId: number;
     public rowData: any;
     public columnDefs: any;
-    mantisRecord: any;
 
     @ViewChild('agGrid', { static: false }) agGrid: AgGridAngular;
     public options = {
@@ -28,51 +33,61 @@ export class CheckListComponent implements OnInit, AfterViewInit {
     };
 
     constructor(
-        private checkService: OrcCheckService,
-        private mantisRecordService: MantisRecordService
+        private store: Store<any>,
+        private modalService: NgbModal
     ) {
+        super();
     }
 
     ngOnInit() {
-        this.getObject();
+        this.loadTable();
     }
 
     ngAfterViewInit() {
         this.agGrid.api.sizeColumnsToFit();
     }
 
-    errorResponse(err) {
-        alert('Internal Error');
-    }
 
-    getObject() {
-        this.mantisRecordService.mantisRecordSubject.subscribe(
+    loadTable() {
+        this.store.pipe(select(orcModuleStore.getMantisRecordObjectStateSelector)).subscribe(
             (data) => {
                 this.tableInstance = new CheckTableModel(data);
                 this.columnDefs = this.tableInstance.columnDefs;
-                this.getChecks(data.orc_record_id);
-            },
-            (err) => {
-                this.errorResponse(err);
-            },
-        );
-    }
-
-    getChecks(id: number) {
-        this.checkService.getQuerySet({ record_id: id }).subscribe(
-            (data) => {
-                this.rowData = data.objects;
-            },
-            (err) => {
-                alert('Internal Error');
+                if (data.orc_record_id) {
+                    this.getChecks(data.orc_record_id);
+                }
             }
         );
     }
 
+    getChecks(id: number) {
+        this.store.dispatch(orcModuleStore.getOrcChecksAction({record_id: id}));
+        this.store.pipe(select(orcModuleStore.getOrcRecordCheckStateSelector)).subscribe(
+            (data) => {
+                this.clearAlert();
+                if (data.length > 0) {
+                    this.rowData = data;
+                } else {
+                    this.rowData = [];
+                    this.setAlert('No Check Available');
+                }
+                this.agGrid.api.sizeColumnsToFit();
+            },
+            (err) => {
+                this.setAlert(err);
+            }
+        );
+    }
+
+    getSelectedRows() {
+        const selectedNodes = this.agGrid.api.getSelectedNodes();
+        return selectedNodes.map(node => node.data);
+    }
 
     changeStatus() {
-        const selectedNodes = this.agGrid.api.getSelectedNodes();
-        const selectedData = selectedNodes.map(node => node.data);
+        const selectedData = this.getSelectedRows();
+        const modalRef = this.modalService.open(CheckChangeStatusComponent);
+        modalRef.componentInstance.selectedData = selectedData;
     }
 
 }

@@ -5,11 +5,11 @@ import { MantisRecordInterface, MantisRecordModel } from './../../models';
 export const getMantisObjectFn = (state: MantisRecordState) => state.mantisObject;
 export const getMantisSummaryFn = (state: MantisRecordState) => state.mantisErrorSummary;
 export const getMantisJobNotesFn = (state: MantisRecordState) => state.mantisNotes;
+export const getMantisAttachmentFn = (state: MantisRecordState) => state.attachments;
+export const getMantisHistoriesFn = (state: MantisRecordState) => state.histories;
 
 // selectors
 const getOrcModuleState = createFeatureSelector<OrcModuleState>('orc');
-const getMantisRecordState = createFeatureSelector<MantisRecordState>('mantisRecordState');
-const getMantisRecordObjectState = createFeatureSelector<MantisRecordModel>('mantisObject');
 
 export const getMantisRecordStateSelector = createSelector(
     getOrcModuleState,
@@ -30,5 +30,17 @@ export const getMantisRecordJobNotesStateSelector = createSelector(
     getMantisRecordStateSelector,
     getMantisJobNotesFn
 );
+
+export const getMantisRecordJobAttachmentStateSelector = createSelector(
+    getMantisRecordStateSelector,
+    getMantisAttachmentFn
+);
+
+export const getMantisRecordJobHistoryStateSelector = createSelector(
+    getMantisRecordStateSelector,
+    getMantisHistoriesFn
+);
+
+
 
 
