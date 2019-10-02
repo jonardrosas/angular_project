@@ -5,7 +5,7 @@ import { Store, select } from '@ngrx/store';
 import { NgbModal } from './../../../../third_party_modules/ng_bootstrap';
 import { AgGridAngular } from './../../../../third_party_modules/ag-grid';
 
-import { CheckTableModel } from './models/table/table.model';
+import { OrcDetailMain } from './../../scripts/main';
 import * as orcModuleStore from './../../store';
 import * as checkComponentBase from './models/common/component-base-class';
 
@@ -20,10 +20,11 @@ import { CheckChangeStatusComponent } from './components/check-change-status/che
 
 
 export class CheckListComponent extends checkComponentBase.AlertClass implements OnInit, AfterViewInit {
-    private tableInstance: any;
+    private checkTableInstance: any;
     @Input() public mantisId: number;
     public rowData: any;
     public columnDefs: any;
+    public orcDetailMain: OrcDetailMain;
 
     @ViewChild('agGrid', { static: false }) agGrid: AgGridAngular;
     public options = {
@@ -47,12 +48,12 @@ export class CheckListComponent extends checkComponentBase.AlertClass implements
         this.agGrid.api.sizeColumnsToFit();
     }
 
-
     loadTable() {
         this.store.pipe(select(orcModuleStore.getMantisRecordObjectStateSelector)).subscribe(
             (data) => {
-                this.tableInstance = new CheckTableModel(data);
-                this.columnDefs = this.tableInstance.columnDefs;
+                this.orcDetailMain = new OrcDetailMain(data);
+                this.checkTableInstance = this.orcDetailMain.getChecksTable();
+                this.columnDefs = this.checkTableInstance.columnDefs;
                 if (data.orc_record_id) {
                     this.getChecks(data.orc_record_id);
                 }

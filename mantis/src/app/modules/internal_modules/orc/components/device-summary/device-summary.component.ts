@@ -4,7 +4,7 @@ import * as orcModuleStore from './../../store';
 
 import { MantisRecordModel } from './../../models';
 import { MantisRecordService } from './../../services';
-import { DeviceSummaryTable } from './../device-summary/models/tables.model';
+import { DeviceSummaryTable } from './../../scripts/summary/tables.model';
 
 @Component({
     selector: 'app-device-summary',
@@ -14,8 +14,8 @@ import { DeviceSummaryTable } from './../device-summary/models/tables.model';
 
 export class DeviceSummaryComponent implements OnInit {
     public mantisRecord: MantisRecordModel;
-    private deviceTable: any;
-    public rows;
+    public deviceSummaryInstance: DeviceSummaryTable;
+    public table: object;
 
     constructor(
         private mantisRecordService: MantisRecordService,
@@ -27,8 +27,8 @@ export class DeviceSummaryComponent implements OnInit {
     }
 
     createTable(mantisRecord: MantisRecordModel) {
-        this.deviceTable = new DeviceSummaryTable(mantisRecord);
-        this.rows = this.deviceTable.getColumn();
+        this.deviceSummaryInstance = new DeviceSummaryTable(mantisRecord);
+        this.table = this.deviceSummaryInstance.getTables();
     }
 
     getColumnValue(columnField: string) {

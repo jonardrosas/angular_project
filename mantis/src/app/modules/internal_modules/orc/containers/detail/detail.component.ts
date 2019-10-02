@@ -16,7 +16,6 @@ export class DetailComponent implements OnInit {
     private alerts: Alert[] = [];
     public mantisId: number;
     public mantisRecord: MantisRecordModel;
-    private checkIns: any;
     public panelIsOpen = {
         deviceSummary: false,
         errorStatistics: true,

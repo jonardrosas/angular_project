@@ -3,9 +3,13 @@
  Check default column definition
  ****/
 
+interface CheckTableInterface {
+    columnDefs;
+    getColumnDefs(): void;
+}
 
-export class CheckBaseModel {
-    public columnDefs;
+export class CheckBaseModel implements CheckTableInterface {
+    columnDefs: object[];
     public ruleNameField = {
         headerName: 'Rule Name',
         field: 'name',
@@ -90,6 +94,19 @@ export class CheckBaseModel {
 
     formatStatus(val) {
         return `<button mat-mini-fab mat-raised-button type="button">${val}</button>`;
+    }
+
+    /* Default Columns Incase Operation is unknown */
+    getColumnDefs() {
+        this.columnDefs = [
+            this.ruleNameField,
+            this.rawErrorCountField,
+            this.assigedGroupField,
+            this.assignedSoaGroupField,
+            this.pdbViolationCountField,
+            this.pdbValidatedField,
+            this.statusField
+        ];
     }
 
 }
