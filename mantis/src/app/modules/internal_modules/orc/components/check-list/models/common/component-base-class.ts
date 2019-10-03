@@ -16,4 +16,8 @@ export class AlertClass {
     clearAlert() {
         this.alerts = [];
     }
+
+    close(alert: NgAlertInterface) {
+        this.alerts.splice(this.alerts.indexOf(alert), 1);
+    }
 }

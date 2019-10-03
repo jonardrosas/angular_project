@@ -15,7 +15,10 @@ import { DeviceSummaryTable } from './../../scripts/summary/tables.model';
 export class DeviceSummaryComponent implements OnInit {
     public mantisRecord: MantisRecordModel;
     public deviceSummaryInstance: DeviceSummaryTable;
-    public table: object;
+    public table: {
+        headTable;
+        mainTable;
+    };
 
     constructor(
         private mantisRecordService: MantisRecordService,
