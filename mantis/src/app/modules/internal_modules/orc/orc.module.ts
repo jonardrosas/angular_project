@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -26,6 +27,8 @@ import { CheckChangeStatusComponent } from './components/check-list/components/c
 
 @NgModule({
     imports: [
+        FormsModule,
+        ReactiveFormsModule,
         CommonModule,
         NgBootstrapModule,
         OrcRoutingModule,

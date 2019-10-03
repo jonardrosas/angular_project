@@ -20,7 +20,11 @@
             </button>      
         </div>
         <div id="deviceSummary" class="row-break col-md-12" [ngbCollapse]="panelIsOpen.deviceSummary">
-            <app-device-summary></app-device-summary>
+            <div class="card bg-light">
+                <div class="card-body">            
+                    <app-device-summary></app-device-summary>
+                </div>
+            </div>
         </div>
     </div>  
 
