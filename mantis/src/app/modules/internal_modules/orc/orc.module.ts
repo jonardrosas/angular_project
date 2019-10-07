@@ -22,7 +22,10 @@ import { DetailNotesSectionComponent } from './components/detail-notes-section/d
 import { DetailAttachmentSectionComponent } from './components/detail-attachment-section/detail-attachment-section.component';
 import { DetailJobHistorySectionComponent } from './components/detail-job-history-section/detail-job-history-section.component';
 import { CheckChangeStatusComponent } from './components/check-list/components/check-change-status/check-change-status.component';
-
+import { DefaultTableViewComponent } from './components/device-summary/table_view/table_default/table_default.component';
+import { TableView1Component } from './components/device-summary/table_view/table_view1/table_view1.component';
+import { DirectorySummaryComponent } from './components/directory-summary/directory-summary.component';
+import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 
 @NgModule({
     imports: [
@@ -46,6 +49,10 @@ import { CheckChangeStatusComponent } from './components/check-list/components/c
         DetailAttachmentSectionComponent,
         DetailJobHistorySectionComponent,
         CheckChangeStatusComponent,
+        DefaultTableViewComponent,
+        TableView1Component,
+        DirectorySummaryComponent,
+        ProgressBarComponent
     ],
     entryComponents: [
         CheckChangeStatusComponent

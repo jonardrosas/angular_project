@@ -1,24 +1,22 @@
 import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import * as orcModuleStore from './../../store';
+import * as orcModuleStore from '../../../../store';
 
-import { MantisRecordModel } from './../../models';
-import { MantisRecordService } from './../../services';
-import { DeviceSummaryTable } from './../../scripts/summary/tables.model';
-import { DefaultTableViewComponent } from './table_view/table_default/table_default.component';
-import { TableView1Component } from './table_view/table_view1/table_view1.component';
+import { MantisRecordModel } from '../../../../models';
+import { MantisRecordService } from '../../../../services';
+import { DeviceSummaryTable } from '../../../../scripts/summary/tables.model';
 
 @Component({
-    selector: 'app-device-summary',
-    templateUrl: './device-summary.component.html',
-    styleUrls: ['./device-summary.component.css']
+    selector: 'table-view-1',
+    templateUrl: './table_view1.component.html',
+    styleUrls: ['./table_view1.component.css']
 })
 
-export class DeviceSummaryComponent implements OnInit {
+export class TableView1Component implements OnInit {
     public mantisRecord: MantisRecordModel;
     public deviceSummaryInstance: DeviceSummaryTable;
     public table: object;
-    public viewType: string = "default";
+    // public listCounter = [1, 2, 3, 4, 5. 6];
 
     constructor(
         private mantisRecordService: MantisRecordService,
@@ -51,13 +49,4 @@ export class DeviceSummaryComponent implements OnInit {
             }
         );
     }
-    
-    defaultClick(){
-        this.viewType = "default";
-    }
-    
-    view1Click(){
-        this.viewType = "view1";
-    }
-
 }
