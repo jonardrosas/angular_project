@@ -4,7 +4,7 @@ import * as orcModuleStore from './../../store';
 
 import { MantisRecordModel } from './../../models';
 import { MantisRecordService } from './../../services';
-import { DeviceSummaryTable } from './../../scripts/summary/tables.model';
+import { MantisDispositionManager } from './../../scripts';
 
 @Component({
     selector: 'app-device-summary',
@@ -13,41 +13,39 @@ import { DeviceSummaryTable } from './../../scripts/summary/tables.model';
 })
 
 export class DeviceSummaryComponent implements OnInit {
+    @Input() dispoManagerInstance: MantisDispositionManager;
     public mantisRecord: MantisRecordModel;
-    public deviceSummaryInstance: DeviceSummaryTable;
-    public table: {
-        headTable;
-        mainTable;
-    };
+    public summaryTableInstance;
+    public table;
 
     constructor(
         private mantisRecordService: MantisRecordService,
         private store: Store<any>
     ) { }
 
+
     ngOnInit() {
         this.getObject();
+        this.summaryTableInstance = this.dispoManagerInstance.getDeviceSummaryTables();
+        debugger;
+        this.table = this.summaryTableInstance.getTables();
     }
-
-    createTable(mantisRecord: MantisRecordModel) {
-        this.deviceSummaryInstance = new DeviceSummaryTable(mantisRecord);
-        this.table = this.deviceSummaryInstance.getTables();
-    }
-
+    
     getColumnValue(columnField: string) {
         return this.mantisRecord[columnField];
     }
 
     getObject() {
+        debugger;
         this.store.pipe(select(orcModuleStore.getMantisRecordObjectStateSelector)).subscribe(
             (data) => {
+                debugger;
                 const orcRecord = { ...data.orc_record };
                 delete data.orc_record;
                 this.mantisRecord = {
                     ...data,
                     ...orcRecord
                 };
-                this.createTable(this.mantisRecord);
             }
         );
     }

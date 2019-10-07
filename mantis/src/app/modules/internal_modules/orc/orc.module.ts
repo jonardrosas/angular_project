@@ -6,9 +6,9 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { NgBootstrapModule } from './../../third_party_modules/ng_bootstrap/ng_bootstrap.module';
 import { MaterialModule } from './../../third_party_modules/material/material.module';
-import { NgAgGridModule } from './../../third_party_modules/ag-grid/ag-grid.module';
+import { AgGridModule } from './../../third_party_modules/ag-grid';
 
-import { SharedModule } from './../../../shared';
+import { SharedModule, BootstrapAlertComponent } from './../../../shared';
 import { OrcRecordService, MantisRecordService, OrcCheckService} from './services';
 
 import * as fromOrcModuleReducer from './store';
@@ -23,6 +23,8 @@ import { DetailNotesSectionComponent } from './components/detail-notes-section/d
 import { DetailAttachmentSectionComponent } from './components/detail-attachment-section/detail-attachment-section.component';
 import { DetailJobHistorySectionComponent } from './components/detail-job-history-section/detail-job-history-section.component';
 import { CheckChangeStatusComponent } from './components/check-list/components/check-change-status/check-change-status.component';
+import { CheckStatusTemplateComponent } from './components/check-list/components/check-status-template/check-status-template.component';
+// import { CheckEscalteIstStatusComponent } from './components/check-list/components/check-escalte-ist-status/check-escalte-ist-status.component';
 
 
 @NgModule({
@@ -34,7 +36,7 @@ import { CheckChangeStatusComponent } from './components/check-list/components/c
         OrcRoutingModule,
         SharedModule,
         MaterialModule,
-        NgAgGridModule,
+        AgGridModule.withComponents([CheckStatusTemplateComponent]),
         StoreModule.forFeature('orc', fromOrcModuleReducer.reducers),
         EffectsModule.forFeature(fromOrcModuleReducer.effects)
     ],
@@ -49,9 +51,13 @@ import { CheckChangeStatusComponent } from './components/check-list/components/c
         DetailAttachmentSectionComponent,
         DetailJobHistorySectionComponent,
         CheckChangeStatusComponent,
+        CheckStatusTemplateComponent,
+        // CheckEscalteIstStatusComponent,
     ],
     entryComponents: [
-        CheckChangeStatusComponent
+        CheckChangeStatusComponent,
+        BootstrapAlertComponent,
+        // CheckStatusTemplateComponent,
     ],
     providers: [OrcRecordService, MantisRecordService, OrcCheckService]
 })

@@ -1,64 +1,51 @@
-import {
-    OrcCheckOpsModel,
-    LMCCheckOpsModel,
-    DrcCheckOpsModel,
-    ValidatorCheckOpsModel
-} from './checks/columns.model';
+import { OrcModuleOperation } from './common/operation.class';
+import { DispostionParameter, DrcDispostion, LMCDispostion, ValidatorDispostion, OrcDispostion  } from './disposition';
 
-import { OrcRecordModel } from '../models';
-import { CheckTableModel } from './../scripts/checks/table.model';
-
-
-interface JobReportInterface {
-    getJobActionButtons(): void;
-    getSummaryColumns(): void;
-    getCheckActionButtons(): void;
-    getChecksTable(): void;
+interface MantisDispositionContainerInterface {
+    dispositionInstance;
+    checkTableInstance;
+    checkDispoButtonsInstance;    
+    deviceSummaryInstance;    
 }
 
 
-class OrcModuleBaseClass implements JobReportInterface {
-    public operation: string;
-    public fab: string;
-    public orcOps = ['ORC', 'OPCV', 'ORC_DEV', 'decomp', 'target', 'pm', 'opc', 'matchXOR', 'opc_orc', 'MRC'];
-    public lmcOps = ['LMC', 'TFLEXLMC_WRAPPER'];
-    public pgrOps = ['pgrc'];
-    public validatorOps = ['Validator'];
-    public drcOps = ['DRC', 'PDKDRC', 'FABDRC', 'PFDRC', 'ENGDRC', 'FrameDRC', 'POSTDSDRC', 'FAB_DRC'];
-    public dfmOps = ['DFM'];
+export class MantisDispositionManager extends OrcModuleOperation {
+    public dispositionInstance;
+    public checkTableInstance;
+    public checkDispoButtonsInstance;
+    public deviceSummaryInstance;
 
-    constructor(public orcRecord: OrcRecordModel) {
-        this.operation =  this.orcRecord.operation;
-        this.fab =  this.orcRecord.fab;
+    constructor(private dispoParams: DispostionParameter){
+        super();
+        const operation = this.dispoParams.mantisRecord.operation;
+        const fab = this.dispoParams.mantisRecord.fab;
+        const techtype = this.dispoParams.mantisRecord.techtype;
+
+        if (this.drcOperation.indexOf(operation) !== -1) {
+            this.dispositionInstance = new  DrcDispostion(this.dispoParams);
+        }else if(this.lmcOperation.indexOf(operation) !== -1){
+            this.dispositionInstance = new  LMCDispostion(this.dispoParams);
+        }else if(this.validatorOperation.indexOf(operation) !== -1){
+            this.dispositionInstance = new ValidatorDispostion(this.dispoParams);
+        } else {
+            this.dispositionInstance = new OrcDispostion(this.dispoParams);
+        }   
     }
 
-    getJobActionButtons() {
-        return 1;
-    }
-
-    getSummaryColumns() {
-        return 1;
+    getCheckTableColDefs(){
+        this.checkTableInstance = this.dispositionInstance.getChecksTable();
+        return this.checkTableInstance.columnDefs;
     }
 
     getCheckActionButtons() {
-        return 1;
+        this.checkDispoButtonsInstance = this.dispositionInstance.getCheckActionButtons();
+        return this.checkDispoButtonsInstance.buttons;
     }
 
-    getChecksTable() {
-        return new CheckTableModel(this.orcRecord);
+    getDeviceSummaryTables() {
+        this.deviceSummaryInstance = this.dispositionInstance.getDeviceSummaryTable();
+        return this.deviceSummaryInstance;
     }
-
 
 }
-
-export class OrcDetailMain extends OrcModuleBaseClass {
-
-    constructor(public orcRecord: OrcRecordModel) {
-        super(orcRecord);
-    }
-}
-
-
-
-
 

@@ -1,14 +1,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <button class="btn btn-primary btn-sm" (click)="changeStatus()">Change Status</button>
-        </div>
-    </div>
-    <div class="row" *ngIf="alerts.length > 0">
-        <div class="col-md-12"><br/>
-            <p *ngFor="let alert of alerts"class="row-break">
-                <ngb-alert [type]="alert.type" (close)="close(alert)">{{ alert.message }}</ngb-alert>
-            </p>
+            <button class="ml-2" [ngClass]="button.class" (click)="button.function(agGrid)" *ngFor="let button of buttons" >{{ button.label }}</button>
         </div>
     </div>
     <div class="row">
@@ -22,6 +15,7 @@
                 rowSelection="multiple"
                 [suppressRowClickSelection]="true"
                 [suppressAutoSize]="true"
+                [frameworkComponents]="frameworkComponents"
                 [defaultColDef]="{resizable: true}"
                 >
             </ag-grid-angular>

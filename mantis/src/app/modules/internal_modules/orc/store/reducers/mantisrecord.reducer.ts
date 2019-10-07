@@ -1,6 +1,5 @@
 import { createReducer, on, Action} from '@ngrx/store';
 import * as MantisRecordAction from './../actions/mantisrecord.actions';
-import { MantisRecordInterface } from './../../models';
 import { MantisRecordState } from './../state';
 
 

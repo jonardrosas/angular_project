@@ -20,9 +20,9 @@
             </button>      
         </div>
         <div id="deviceSummary" class="row-break col-md-12" [ngbCollapse]="panelIsOpen.deviceSummary">
-            <div class="card bg-light">
+            <div class="card bg-light" *ngIf="dispoManagerInstance">
                 <div class="card-body">            
-                    <app-device-summary></app-device-summary>
+                    <app-device-summary [dispoManagerInstance]="dispoManagerInstance"></app-device-summary>
                 </div>
             </div>
         </div>
@@ -102,8 +102,8 @@
         </div>
         <div id="historySection" class="row-break col-md-12" [ngbCollapse]="panelIsOpen.check">
             <div class="card bg-light">
-                <div class="card-body">
-                <app-check-list [mantisId]="mantisId"></app-check-list>          
+                <div class="card-body" *ngIf="dispoManagerInstance">
+                    <app-check-list [mantisId]="mantisId" [dispoManagerInstance]="dispoManagerInstance"></app-check-list>          
                 </div>
             </div>           
         </div>

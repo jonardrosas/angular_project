@@ -15,6 +15,7 @@ import { MaterialSideNavigationComponent } from './components/material-side-navi
 import { MaterialViolationViewerComponent } from './components/material-violation-viewer/material-violation-viewer.component';
 import { MaterialLoginComponent } from './components/material-login/material-login.component';
 import { AgGridWrapperComponent } from './components/ag-grid-wrapper/ag-grid-wrapper.component';
+import { BootstrapAlertComponent } from './components/bootstrap-alert/bootstrap-alert.component';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { AgGridWrapperComponent } from './components/ag-grid-wrapper/ag-grid-wra
       MaterialViolationViewerComponent,
       MaterialLoginComponent,
       AgGridWrapperComponent,
+      BootstrapAlertComponent,
   ],
   exports: [
       NgxDtTableComponent,
@@ -46,8 +48,9 @@ import { AgGridWrapperComponent } from './components/ag-grid-wrapper/ag-grid-wra
       MaterialSideNavigationComponent,
       MaterialViolationViewerComponent,
       MaterialLoginComponent,
-      AgGridWrapperComponent
-  ]
+      AgGridWrapperComponent,
+      BootstrapAlertComponent
+  ],
 
 })
 export class SharedModule { }

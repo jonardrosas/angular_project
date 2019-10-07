@@ -28,7 +28,7 @@ export class CheckStatusBase implements ChangeStatusInterface {
         { value: 'FS', label: 'FS: fail-software', group: 'Fail' },
     ];
 
-    private setGroupStatus() {
+    protected setGroupStatus() {
         this.checkStatusGroup = {};
         for ( const statusIndex in this.checkStatus) {
             if (this.checkStatus[statusIndex]) {

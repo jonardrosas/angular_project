@@ -3,7 +3,7 @@ import { Validators } from '@angular/forms';
 import { MantisRecordModel } from './../../../../models';
 import { NgbActiveModal } from './../../../../../../third_party_modules/ng_bootstrap';
 import { NgAlertInterface } from './../../../../../../../core/models';
-import { CheckchangeStatusMod } from './../../../../scripts/check-status/main';
+// import { MantisDispositionManager } from '../../../../scripts/main';
 import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
@@ -19,14 +19,16 @@ export class CheckChangeStatusComponent implements OnInit {
     public statusGroup;
     public changeStatusForm;
     public alerts: NgAlertInterface[] = [];
-    public showSelectedChecks = false;
+    public showSelectedChecks = false ;
 
-    constructor(public activeModal: NgbActiveModal) {
-    }
+    constructor(public activeModal: NgbActiveModal) {}
 
     ngOnInit() {
-        this.statusInstance = new CheckchangeStatusMod(this.mantisRecord);
-        this.statusGroup = this.statusInstance.statusGroup;
+        const paramsIns = {
+            mantisRecord: this.mantisRecord
+        }
+        // this.statusInstance = new MantisDispositionManager(paramsIns);
+        // this.statusGroup = this.statusInstance.statusGroup;
         this.changeStatusForm = new FormGroup({
             status: new FormControl('', Validators.required),
             description: new FormControl(''),
@@ -53,7 +55,6 @@ export class CheckChangeStatusComponent implements OnInit {
     }
 
     close(alert: NgAlertInterface) {
-        this.alerts.splice(this.alerts.indexOf(alert), 1);
+        this.alerts.splice(this.alerts.indexOf(alert), 1)
     }
-
 }

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
-
+import { NgbModal } from './../../../../third_party_modules/ng_bootstrap';
 import * as orcModuleStore from './../../store';
-import { MantisRecordModel, MantisNotesInterface, MantisRecordInterface } from './../../models';
+import { MantisRecordModel } from './../../models';
+import { MantisDispositionManager, DispostionParameter } from './../../scripts';
 import { Alert } from './../../../../../core/models';
 
 @Component({
@@ -13,7 +14,7 @@ import { Alert } from './../../../../../core/models';
 })
 
 export class DetailComponent implements OnInit {
-    private alerts: Alert[] = [];
+    public dispoManagerInstance: MantisDispositionManager = null;
     public mantisId: number;
     public mantisRecord: MantisRecordModel;
     public panelIsOpen = {
@@ -27,6 +28,7 @@ export class DetailComponent implements OnInit {
 
     constructor(
         private route: ActivatedRoute,
+        private modalService: NgbModal,
         private store: Store<any>
     ) { }
 
@@ -49,6 +51,15 @@ export class DetailComponent implements OnInit {
         this.store.pipe(select(orcModuleStore.getMantisRecordObjectStateSelector)).subscribe(
             (data) => {
                 this.mantisRecord = data;
+
+                if (data.orc_record_id) {
+                    const paramsIns: DispostionParameter = {
+                        mantisRecord: data,
+                        modalService: this.modalService,
+                    }
+                    this.dispoManagerInstance = new MantisDispositionManager(paramsIns);
+                }
+
             }
         );
     }

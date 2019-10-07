@@ -1,4 +1,4 @@
-import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/store';
+import { ActionReducerMap } from '@ngrx/store';
 import { OrcModuleState } from './../state';
 
 import * as fromMantisReducer from './mantisrecord.reducer';

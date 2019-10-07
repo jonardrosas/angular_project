@@ -5,12 +5,11 @@ import { Store, select } from '@ngrx/store';
 import { NgbModal } from './../../../../third_party_modules/ng_bootstrap';
 import { AgGridAngular } from './../../../../third_party_modules/ag-grid';
 
-import { OrcDetailMain } from './../../scripts/main';
+import { MantisDispositionManager, DispostionParameter } from './../../scripts';
+import { BootstrapAlertComponent } from './../../../../../shared';
 import * as orcModuleStore from './../../store';
-import * as checkComponentBase from './models/common/component-base-class';
 import { MantisRecordModel } from './../../models';
-
-import { CheckChangeStatusComponent } from './components/check-change-status/check-change-status.component';
+import { CheckStatusTemplateComponent } from './../../components/check-list/components/check-status-template/check-status-template.component';
 
 
 @Component({
@@ -20,18 +19,20 @@ import { CheckChangeStatusComponent } from './components/check-change-status/che
 })
 
 
-export class CheckListComponent extends checkComponentBase.AlertClass implements OnInit, AfterViewInit {
-    private checkTableInstance: any;
+export class CheckListComponent implements OnInit, AfterViewInit {
     @Input() public mantisId: number;
     public rowData: any;
     public columnDefs: any;
-    public orcDetailMain: OrcDetailMain;
+    @Input() dispoManagerInstance: MantisDispositionManager;
     public mantisRecord: MantisRecordModel;
+    private frameworkComponents = {
+        checkStatusTemplateComponent: CheckStatusTemplateComponent
+    }
+
+    public buttons;
 
     @ViewChild('agGrid', { static: false }) agGrid: AgGridAngular;
     public options = {
-        // theme: `detail-check ag-theme-material`
-        // theme: `detail-check ag-theme-bootstrap`
         theme: `detail-check ag-theme-balham`
     };
 
@@ -39,7 +40,6 @@ export class CheckListComponent extends checkComponentBase.AlertClass implements
         private store: Store<any>,
         private modalService: NgbModal
     ) {
-        super();
     }
 
     ngOnInit() {
@@ -54,10 +54,9 @@ export class CheckListComponent extends checkComponentBase.AlertClass implements
         this.store.pipe(select(orcModuleStore.getMantisRecordObjectStateSelector)).subscribe(
             (data) => {
                 this.mantisRecord = data;
-                this.orcDetailMain = new OrcDetailMain(data);
-                this.checkTableInstance = this.orcDetailMain.getChecksTable();
-                this.columnDefs = this.checkTableInstance.columnDefs;
                 if (data.orc_record_id) {
+                    this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs();
+                    this.buttons = this.dispoManagerInstance.getCheckActionButtons(); 
                     this.getChecks(data.orc_record_id);
                 }
             }
@@ -68,35 +67,20 @@ export class CheckListComponent extends checkComponentBase.AlertClass implements
         this.store.dispatch(orcModuleStore.getOrcChecksAction({record_id: id}));
         this.store.pipe(select(orcModuleStore.getOrcRecordCheckStateSelector)).subscribe(
             (data) => {
-                this.clearAlert();
                 if (data.length > 0) {
                     this.rowData = data;
                 } else {
                     this.rowData = [];
                 }
-                this.agGrid.api.sizeColumnsToFit();
+                if(this.agGrid){
+                    this.agGrid.api.sizeColumnsToFit();
+                }
             },
             (err) => {
-                this.setAlert(err);
+                const modalRef = this.modalService.open(BootstrapAlertComponent, {backdrop: 'static', keyboard: false})
+                modalRef.componentInstance.data = {type: 'danger', message: err, title: 'Warning'};                
             }
         );
-    }
-
-    getSelectedRows() {
-        const selectedNodes = this.agGrid.api.getSelectedNodes();
-        return selectedNodes.map(node => node.data);
-    }
-
-    changeStatus() {
-        this.clearAlert();
-        const selectedData = this.getSelectedRows();
-        if (selectedData.length === 0) {
-            this.alerts.push({message: 'No check selected', type: 'danger'});
-        } else {
-            const modalRef = this.modalService.open(CheckChangeStatusComponent, {backdrop: 'static', keyboard: false});
-            modalRef.componentInstance.selectedData = selectedData;
-            modalRef.componentInstance.mantisRecord = this.mantisRecord;
-        }
     }
 
 }

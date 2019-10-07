@@ -5,18 +5,19 @@
 
 interface CheckTableInterface {
     columnDefs;
-    getColumnDefs(): void;
+    setColumnDefs(): void;
 }
 
 export class CheckBaseModel implements CheckTableInterface {
     columnDefs: object[];
+    statusCellTemplate;
     public ruleNameField = {
         headerName: 'Rule Name',
         field: 'name',
         sortable: true,
         filter: true,
         checkboxSelection: true,
-        width: 100,
+        width: 130,
         headerCheckboxSelection: true
     };
     public rawErrorCountField = {
@@ -26,7 +27,7 @@ export class CheckBaseModel implements CheckTableInterface {
         cellRenderer: params => {
             return `${params.value}(${params.data.flat_error_count})`;
         },
-        width: 30
+        width: 100
     };
     public statusField = {
         headerName: 'Status',
@@ -34,9 +35,7 @@ export class CheckBaseModel implements CheckTableInterface {
         sortable: true,
         filter: true,
         width: 30,
-        cellRenderer: params => {
-            return this.formatStatus(params.value);
-        }
+        cellRenderer: 'checkStatusTemplateComponent',
     };
     public assigedGroupField = { headerName: 'Assigned Group', field: '', sortable: true, filter: true, width: 50 };
     public assignedSoaGroupField = {
@@ -92,12 +91,22 @@ export class CheckBaseModel implements CheckTableInterface {
         }
     };
 
+    constructor() {
+        this.setColumnDefs()
+    }
+
     formatStatus(val) {
-        return `<button mat-mini-fab mat-raised-button type="button">${val}</button>`;
+        debugger;
+        return `<button [ngClass]="getClass()" type="button">${val}</button>`;
+    }
+
+    getClass(){
+        debugger;
+        return 'btn btn-danger';
     }
 
     /* Default Columns Incase Operation is unknown */
-    getColumnDefs() {
+    setColumnDefs() {
         this.columnDefs = [
             this.ruleNameField,
             this.rawErrorCountField,
@@ -107,6 +116,10 @@ export class CheckBaseModel implements CheckTableInterface {
             this.pdbValidatedField,
             this.statusField
         ];
+    }
+
+    getColumnDefs() {
+        return this.columnDefs;
     }
 
 }

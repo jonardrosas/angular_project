@@ -23,7 +23,9 @@
     "@angular/router": "~8.2.6",
     "@ng-bootstrap/ng-bootstrap": "^5.1.1",
     "@ngrx/effects": "^8.3.0",
+    "@ngrx/entity": "^8.3.0",
     "@ngrx/store": "^8.3.0",
+    "@ngrx/store-devtools": "^8.3.0",
     "@swimlane/ngx-datatable": "^16.0.2",
     "ag-grid-angular": "^21.2.1",
     "ag-grid-community": "^21.2.1",
@@ -63,6 +65,6 @@
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
-    "typescript": "~3.5.3"
+    "typescript": "^3.5.3"
   }
 }

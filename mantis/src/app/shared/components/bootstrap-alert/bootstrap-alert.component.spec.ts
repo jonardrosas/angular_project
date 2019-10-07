@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CheckChangeStatusComponent } from './check-change-status.component';
+import { BootstrapAlertComponent } from './bootstrap-alert.component';
 
-describe('CheckChangeStatusComponent', () => {
-  let component: CheckChangeStatusComponent;
-  let fixture: ComponentFixture<CheckChangeStatusComponent>;
+describe('BootstrapAlertComponent', () => {
+  let component: BootstrapAlertComponent;
+  let fixture: ComponentFixture<BootstrapAlertComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CheckChangeStatusComponent ]
+      declarations: [ BootstrapAlertComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CheckChangeStatusComponent);
+    fixture = TestBed.createComponent(BootstrapAlertComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

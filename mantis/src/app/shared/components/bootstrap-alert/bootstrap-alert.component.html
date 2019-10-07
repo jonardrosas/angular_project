@@ -1,0 +1,9 @@
+<div class="modal-header" [ngClass]="alertType">
+    <h4 class="modal-title" > {{ data.title }} </h4>
+</div>
+<div class="modal-body">
+    <p>{{ data.message }}</p>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Ok</button>
+</div>

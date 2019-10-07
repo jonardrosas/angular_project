@@ -3,7 +3,10 @@ import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth-cookie.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
+import * as coreModuleStore from './store/';
 import { MaterialModule } from './../modules/third_party_modules/material/material.module';
 import { NgBootstrapModule } from './../modules/third_party_modules/ng_bootstrap/ng_bootstrap.module';
 import { SharedModule } from './../shared';
@@ -27,7 +30,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
       SharedModule,
       ReactiveFormsModule,
       MaterialModule,
-      NgBootstrapModule
+      NgBootstrapModule,
+      StoreModule.forFeature('core', coreModuleStore.reducers),
+      EffectsModule.forFeature(coreModuleStore.effects)      
   ],
   providers: [
       { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

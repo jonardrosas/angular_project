@@ -1,4 +1,4 @@
-<div [ngSwitch]="appTheme">
+<div [ngSwitch]="appTheme" class="login-container">
     <div *ngSwitchCase="'material'">
         <app-material-login [alert]="alert" (login)="onSubmit($event)"></app-material-login>
     </div>

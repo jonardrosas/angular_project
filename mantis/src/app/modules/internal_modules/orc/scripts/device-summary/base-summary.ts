@@ -61,6 +61,7 @@ export class DetailSummaryBase implements DetailSummaryInterface {
     public mainTable: object;
     public directoriesTable: object;
     public additionalInfoTable: object;
+    public tables
 
     constructor() {
         this.setHeadTable();
@@ -145,6 +146,15 @@ export class DetailSummaryBase implements DetailSummaryInterface {
             ]
         };
     }
+
+    getTables() {
+        debugger;
+        return {
+            headTable: this.headTable,
+            mainTable: this.mainTable,
+            directoriesTable: this.directoriesTable,
+        };
+    }    
 
 
 }

@@ -1,6 +1,7 @@
-import { CheckBaseModel } from './base-columns';
+import { CheckBaseModel } from './base-table';
 
-export class OrcCheckOpsModel extends CheckBaseModel {
+
+export class OrcCheckTable extends CheckBaseModel {
     columnDefs = [
         this.ruleNameField,
         this.rawErrorCountField,
@@ -11,7 +12,7 @@ export class OrcCheckOpsModel extends CheckBaseModel {
         this.statusField
     ];
 
-    constructor(fab: string = 'all') {
+    constructor(private dispoParams) {
         super();
     }
 
@@ -20,7 +21,8 @@ export class OrcCheckOpsModel extends CheckBaseModel {
     }
 }
 
-export class LMCCheckOpsModel extends CheckBaseModel {
+
+export class LMCCheckTable extends CheckBaseModel {
     columnDefs = [
         this.ruleNameField,
         this.subjobField,
@@ -29,7 +31,8 @@ export class LMCCheckOpsModel extends CheckBaseModel {
         this.assignedSoaGroupField,
         this.statusField
     ];
-    constructor(fab: string = 'all') {
+
+    constructor(private dispoParams) {
         super();
     }
 
@@ -38,7 +41,8 @@ export class LMCCheckOpsModel extends CheckBaseModel {
     }
 }
 
-export class DrcCheckOpsModel extends CheckBaseModel {
+
+export class DrcCheckTable extends CheckBaseModel {
     columnDefs = [
         this.ruleNameField,
         this.rawErrorCountField,
@@ -51,7 +55,7 @@ export class DrcCheckOpsModel extends CheckBaseModel {
         this.statusField
     ];
 
-    constructor(fab: string = 'all') {
+    constructor(private dispoParams) {
         super();
     }
 
@@ -61,7 +65,8 @@ export class DrcCheckOpsModel extends CheckBaseModel {
 
 }
 
-export class ValidatorCheckOpsModel extends CheckBaseModel {
+
+export class ValidatorCheckTable extends CheckBaseModel {
     columnDefs = [
         this.ruleNameField,
         this.rawErrorCountField,
@@ -70,7 +75,7 @@ export class ValidatorCheckOpsModel extends CheckBaseModel {
         this.statusField
     ];
 
-    constructor(fab: string = 'all') {
+    constructor(private dispoParams) {
         super();
     }
 

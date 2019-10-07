@@ -1,7 +1,7 @@
 <div class="check-change-status-container">
 <form [formGroup]="changeStatusForm" (ngSubmit)="onSubmit()">
-    <div class="modal-header">
-        <h4 class="modal-title">Change Status  <span class="badge badge-primary">{{ selectedData.length }}</span> </h4>
+    <div class="modal-header bg-dark text-light">
+        <h4 class="modal-title">Change Status  <span class="badge badge-primary">{{ selectedData.length }} selected</span> </h4>
         <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>

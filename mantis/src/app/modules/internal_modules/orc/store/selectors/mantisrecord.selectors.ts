@@ -1,6 +1,5 @@
-import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/store';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { MantisRecordState, OrcModuleState  } from './../state';
-import { MantisRecordInterface, MantisRecordModel } from './../../models';
 
 export const getMantisObjectFn = (state: MantisRecordState) => state.mantisObject;
 export const getMantisSummaryFn = (state: MantisRecordState) => state.mantisErrorSummary;
