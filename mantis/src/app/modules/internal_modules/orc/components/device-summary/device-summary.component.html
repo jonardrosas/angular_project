@@ -6,10 +6,10 @@
 <div>
     <div [ngSwitch]="viewType">
         <div *ngSwitchCase="'default'">
-            <table-default></table-default>
+            <table-default [table]="table" [mantisRecord]="mantisRecord"></table-default>
         </div>
         <div *ngSwitchCase="'view1'">
-            <table-view-1></table-view-1>
+            <table-view-1 [table]="table" [mantisRecord]="mantisRecord"></table-view-1>
         </div>    
     <div>
 </div>
