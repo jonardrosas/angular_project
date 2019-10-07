@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
+
 import { MantisRecordModel } from '../../../../models';
 
 @Component({
