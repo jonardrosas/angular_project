@@ -1,33 +1,15 @@
 <div>
-    <table class="table table-light table-bordered table-sm table-striped">
-        <thead class="thead-secondary" *ngFor="let fields of table.headTable.fields">
-            <tr>
-                <th *ngFor="let column of fields">
-                    {{ column.headerName }} 
-                </th>                
-            </tr>
-            <tr>
-                <td *ngFor="let column of fields"  >
-                    {{ getColumnValue(column.field) }}
-                </td>            
-            </tr>            
-        </thead>
-    </table>
+    <button type="button" class="btn btn-toggle" (click)= "defaultClick()">Default View</button>
+    <button type="button" class="btn btn-toggle" (click)= "view1Click()">Alternate View</button>
 </div>
-
+<br>
 <div>
-    <table class="table table-light table-bordered table-sm table-striped">
-        <thead class="thead-secondary" *ngFor="let fields of table.mainTable.fields">
-            <tr>
-                <th *ngFor="let column of fields" [attr.colspan]="column.colspan">
-                    {{ column.headerName }} 
-                </th>
-            </tr>
-            <tr>
-                <td *ngFor="let column of fields" [attr.colspan]="column.colspan">
-                    {{ getColumnValue(column.field) }} 
-                </td>            
-            </tr>
-        </thead>
-    </table>
+    <div [ngSwitch]="viewType">
+        <div *ngSwitchCase="'default'">
+            <table-default></table-default>
+        </div>
+        <div *ngSwitchCase="'view1'">
+            <table-view-1></table-view-1>
+        </div>    
+    <div>
 </div>

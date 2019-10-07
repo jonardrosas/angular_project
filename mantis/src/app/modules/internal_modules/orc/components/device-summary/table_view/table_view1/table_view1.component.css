@@ -1,0 +1,8 @@
+.col-header{
+    /*table-layout: fixed;*/
+    width: 10%;
+}
+
+.table-bordered th, .table-bordered td {
+    border: 1px solid #d2cbcb !important;
+}

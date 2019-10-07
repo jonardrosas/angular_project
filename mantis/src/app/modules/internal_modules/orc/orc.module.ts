@@ -25,7 +25,8 @@ import { DetailJobHistorySectionComponent } from './components/detail-job-histor
 import { CheckChangeStatusComponent } from './components/check-list/components/check-change-status/check-change-status.component';
 import { CheckStatusTemplateComponent } from './components/check-list/components/check-status-template/check-status-template.component';
 // import { CheckEscalteIstStatusComponent } from './components/check-list/components/check-escalte-ist-status/check-escalte-ist-status.component';
-
+import { DefaultTableViewComponent } from './components/device-summary/table_view/table_default/table_default.component';
+import { TableView1Component } from './components/device-summary/table_view/table_view1/table_view1.component';
 
 @NgModule({
     imports: [
@@ -53,6 +54,8 @@ import { CheckStatusTemplateComponent } from './components/check-list/components
         CheckChangeStatusComponent,
         CheckStatusTemplateComponent,
         // CheckEscalteIstStatusComponent,
+        DefaultTableViewComponent,
+        TableView1Component,
     ],
     entryComponents: [
         CheckChangeStatusComponent,

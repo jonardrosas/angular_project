@@ -5,6 +5,8 @@ import * as orcModuleStore from './../../store';
 import { MantisRecordModel } from './../../models';
 import { MantisRecordService } from './../../services';
 import { MantisDispositionManager } from './../../scripts';
+import { DefaultTableViewComponent } from './table_view/table_default/table_default.component';
+import { TableView1Component } from './table_view/table_view1/table_view1.component';
 
 @Component({
     selector: 'app-device-summary',
@@ -17,6 +19,7 @@ export class DeviceSummaryComponent implements OnInit {
     public mantisRecord: MantisRecordModel;
     public summaryTableInstance;
     public table;
+    public viewType: string = "default";
 
     constructor(
         private mantisRecordService: MantisRecordService,
@@ -27,7 +30,6 @@ export class DeviceSummaryComponent implements OnInit {
     ngOnInit() {
         this.getObject();
         this.summaryTableInstance = this.dispoManagerInstance.getDeviceSummaryTables();
-        debugger;
         this.table = this.summaryTableInstance.getTables();
     }
     
@@ -48,6 +50,14 @@ export class DeviceSummaryComponent implements OnInit {
                 };
             }
         );
+    }
+    
+    defaultClick(){
+        this.viewType = "default";
+    }
+    
+    view1Click(){
+        this.viewType = "view1";
     }
 
 }
