@@ -5,10 +5,11 @@ import { Store, select } from '@ngrx/store';
 import { NgbModal } from './../../../../third_party_modules/ng_bootstrap';
 import { AgGridAngular } from './../../../../third_party_modules/ag-grid';
 
-import { MantisDispositionManager, DispostionParameter } from './../../scripts';
+import { MantisDispositionManager } from './../../scripts';
 import { BootstrapAlertComponent } from './../../../../../shared';
 import * as orcModuleStore from './../../store';
 import { MantisRecordModel } from './../../models';
+import { ButtonCollapse } from '../../scripts/common/add-jobreport-section';
 import { CheckStatusTemplateComponent } from './../../components/check-list/components/check-status-template/check-status-template.component';
 
 
@@ -19,7 +20,7 @@ import { CheckStatusTemplateComponent } from './../../components/check-list/comp
 })
 
 
-export class CheckListComponent implements OnInit, AfterViewInit {
+export class CheckListComponent extends ButtonCollapse implements OnInit, AfterViewInit {
     @Input() public mantisId: number;
     public rowData: any;
     public columnDefs: any;
@@ -40,6 +41,7 @@ export class CheckListComponent implements OnInit, AfterViewInit {
         private store: Store<any>,
         private modalService: NgbModal
     ) {
+        super()
     }
 
     ngOnInit() {
@@ -53,18 +55,20 @@ export class CheckListComponent implements OnInit, AfterViewInit {
     loadTable() {
         this.store.pipe(select(orcModuleStore.getMantisRecordObjectStateSelector)).subscribe(
             (data) => {
+                debugger;
                 this.mantisRecord = data;
-                if (data.orc_record_id) {
+                if (data.orc_record.id) {
                     this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs();
                     this.buttons = this.dispoManagerInstance.getCheckActionButtons(); 
-                    this.getChecks(data.orc_record_id);
+                    this.getChecks(data.orc_record.id);
                 }
             }
         );
     }
 
     getChecks(id: number) {
-        this.store.dispatch(orcModuleStore.getOrcChecksAction({record_id: id}));
+        debugger;
+        this.store.dispatch(orcModuleStore.getOrcChecksAction({record: id}));
         this.store.pipe(select(orcModuleStore.getOrcRecordCheckStateSelector)).subscribe(
             (data) => {
                 if (data.length > 0) {

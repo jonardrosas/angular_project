@@ -6,7 +6,7 @@ import {
 } from './../../models';
 
 export interface MantisRecordState {
-    mantisObject: any;
+    mantisObject;
     mantisErrorSummary: any;
     mantisNotes: MantisNotesInterface[];
     attachments: MantisAttachmentInterface[];

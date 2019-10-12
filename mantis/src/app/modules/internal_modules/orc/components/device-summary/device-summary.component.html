@@ -1,15 +1,13 @@
 <div>
-    <button type="button" class="btn btn-toggle" (click)= "defaultClick()">Default View</button>
-    <button type="button" class="btn btn-toggle" (click)= "view1Click()">Alternate View</button>
+    <button type="button" class="btn btn-toggle" (click)="data.panelIsOpen = !data.panelIsOpen"
+            [attr.aria-expanded]="!data.panelIsOpen" aria-controls="deviceSummary">
+        <i [ngClass]="isCollapse(data.panelIsOpen)"></i> Device Summary
+    </button>      
 </div>
-<br>
-<div>
-    <div [ngSwitch]="viewType">
-        <div *ngSwitchCase="'default'">
-            <table-default [table]="table" [mantisRecord]="mantisRecord"></table-default>
+<div id="deviceSummary" class="row-break" [ngbCollapse]="data.panelIsOpen">
+    <div class="card bg-light">
+        <div class="card-body">            
+            <app-list-view [fields]="fields" [tables]="tables" [mantisRecord]="mantisRecord"></app-list-view>
         </div>
-        <div *ngSwitchCase="'view1'">
-            <table-view-1 [table]="table" [mantisRecord]="mantisRecord"></table-view-1>
-        </div>    
-    <div>
+    </div>
 </div>

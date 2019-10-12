@@ -41,7 +41,7 @@ export const setMantisObjectAction = createAction(SET_MANTIS_OBJECT, props<{data
 export const getMantisErrorSummaryAction = createAction(GET_MANTIS_ERROR_SUMMARY, props<{id: number}>());
 export const setMantisErrorSummaryAction = createAction(SET_MANTIS_ERROR_SUMMARY, props<{description: string}>());
 
-export const getMantisJobNotesAction = createAction(GET_MANTIS_JOB_NOTES, props<{bug_id: number}>());
+export const getMantisJobNotesAction = createAction(GET_MANTIS_JOB_NOTES, props<{bug: number}>());
 export const setMantisJobNotesAction = createAction(SET_MANTIS_JOB_NOTES, props<{notes: MantisNotesInterface[]}>());
 
 
@@ -50,5 +50,5 @@ export const setMantisAttachmentAction = createAction(SET_MANTIS_ATTACHMENT, pro
 export const addtMantisAttachmentAction = createAction(ADD_MANTIS_ATTACHMENT, props<{data: any}>());
 export const deletetMantisAttachmentAction = createAction(DELETE_MANTIS_ATTACHMENT, props<{id: number}>());
 
-export const getMantisHistoryAction = createAction(GET_MANTIS_HISTORY, props<{bug_id: number}>());
+export const getMantisHistoryAction = createAction(GET_MANTIS_HISTORY, props<{bug: number}>());
 export const setMantisHistoryAction = createAction(SET_MANTIS_HISTORY, props<{histories: MantisRecordHistoryInterface[]}>());

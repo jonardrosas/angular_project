@@ -19,7 +19,7 @@ const orcRecordReducer = createReducer(
     ),
     on(
         orcRecordActions.getOrcChecksAction,
-        (state, { record_id }) => {
+        (state, { record }) => {
             return { ...state, id: 1 };
         }
     ),

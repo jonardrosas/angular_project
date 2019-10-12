@@ -5,3 +5,4 @@ export * from './mantisnotes.model';
 export * from './orcrecordext.model';
 export * from './mantisrecordattachment.model';
 export * from './mantishistory.model';
+export * from './mantisrecordtext.model';

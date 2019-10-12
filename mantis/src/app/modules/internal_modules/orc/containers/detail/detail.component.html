@@ -1,111 +1,25 @@
-<div class="container-fluid detail-card-container detail-font" *ngIf="mantisRecord">
-    <div class="row row-break">
+<div class="container-fluid detail-card-container detail-font" >
+    <div class="row row-break" *ngIf="(dispoManagerInstanceSubject | async) as dispoManagerInstance; else loading">
         <div class="col-md-12">
-            <h2>{{ mantisRecord.operation }} Job Report</h2>
-        </div>
-    </div>
-
-    <div class="col-md-12">
-        <div class="d-block p-2 text-white">
+            <h2>{{ dispoManagerInstance.jobReportTitle }}</h2>
+        </div>        
+    </div>           
+    <div class="row">
+        <div class="col-md-12">
             <app-detail-job-action-section></app-detail-job-action-section>
         </div>
     </div>
-
     <hr/>
-    <div class="row row-break">
+    <div class="row">
         <div class="col-md-12">
-            <button type="button" class="btn btn-toggle" (click)="panelIsOpen.deviceSummary = !panelIsOpen.deviceSummary"
-                    [attr.aria-expanded]="!panelIsOpen.deviceSummary" aria-controls="deviceSummary">
-                <i [ngClass]="isCollapse(panelIsOpen.deviceSummary)"></i> Device Summary
-            </button>      
-        </div>
-        <div id="deviceSummary" class="row-break col-md-12" [ngbCollapse]="panelIsOpen.deviceSummary">
-            <div class="card bg-light" *ngIf="dispoManagerInstance">
-                <div class="card-body">            
-                    <app-device-summary [dispoManagerInstance]="dispoManagerInstance"></app-device-summary>
-                </div>
-            </div>
-        </div>
-    </div>  
-
-    <div class="row row-break">
-        <div class="col-md-12">
-            <button type="button" class="btn btn-toggle" (click)="panelIsOpen.errorStatistics = !panelIsOpen.errorStatistics"
-                    [attr.aria-expanded]="!panelIsOpen.errorStatistics" aria-controls="errorStatistics">
-                <i [ngClass]="isCollapse(panelIsOpen.errorStatistics)"></i> Error Summary
-            </button>      
-        </div>
-        <div id="errorStatistics" class="row-break col-md-12" [ngbCollapse]="panelIsOpen.errorStatistics">
-            <div class="card bg-light">
-                <div class="card-body">
-                        <app-detail-error-statistics [close]="panelIsOpen.errorStatistics" [bugTextId]="mantisRecord.bug_text_id"></app-detail-error-statistics>
-                </div>
-            </div>           
-        </div>
-    </div>      
-
-
-    <div class="row row-break">
-        <div class="col-md-12">
-            <button type="button" class="btn btn-toggle" (click)="panelIsOpen.notesSection = !panelIsOpen.notesSection"
-                    [attr.aria-expanded]="!panelIsOpen.notesSection" aria-controls="notesSection">
-                <i [ngClass]="isCollapse(panelIsOpen.notesSection)"></i>  Job Notes
-            </button>      
-        </div>
-        <div id="notesSection" class="row-break col-md-12" [ngbCollapse]="panelIsOpen.notesSection">
-            <div class="card bg-light">
-                <div class="card-body">
-                    <app-detail-notes-section [mantisId]="mantisId"></app-detail-notes-section>
-                </div>
-            </div>           
-        </div>
-    </div>        
-
-    <div class="row row-break">
-        <div class="col-md-12">
-            <button type="button" class="btn btn-toggle" (click)="panelIsOpen.attachmentSection = !panelIsOpen.attachmentSection"
-                    [attr.aria-expanded]="!panelIsOpen.attachmentSection" aria-controls="attachmentSection">
-                <i [ngClass]="isCollapse(panelIsOpen.attachmentSection)"></i>  Attachment
-            </button>      
-        </div>
-        <div id="attachmentSection" class="row-break col-md-12" [ngbCollapse]="panelIsOpen.attachmentSection">
-            <div class="card bg-light">
-                <div class="card-body">
-                    <app-detail-attachment-section [mantisId]="mantisId"></app-detail-attachment-section>
-                </div>
-            </div>           
-        </div>
-    </div>       
-
-    <div class="row row-break">
-        <div class="col-md-12">
-            <button type="button" class="btn btn-toggle" (click)="panelIsOpen.historySection = !panelIsOpen.historySection"
-                    [attr.aria-expanded]="!panelIsOpen.historySection" aria-controls="historySection">
-                <i [ngClass]="isCollapse(panelIsOpen.historySection)"></i>  Job History
-            </button>      
-        </div>
-        <div id="historySection" class="row-break col-md-12" [ngbCollapse]="panelIsOpen.historySection">
-            <div class="card bg-light">
-                <div class="card-body">
-                    <app-detail-job-history-section [mantisId]="mantisId"></app-detail-job-history-section>
-                </div>
-            </div>           
-        </div>
-    </div>       
-
-    <div class="row row-break">
-        <div class="col-md-12">
-            <button type="button" class="btn btn-toggle" (click)="panelIsOpen.check = !panelIsOpen.check"
-                    [attr.aria-expanded]="!panelIsOpen.check" aria-controls="historySection">
-            <i [ngClass]="isCollapse(panelIsOpen.check)"></i> Check Section
-            </button>      
-        </div>
-        <div id="historySection" class="row-break col-md-12" [ngbCollapse]="panelIsOpen.check">
-            <div class="card bg-light">
-                <div class="card-body" *ngIf="dispoManagerInstance">
-                    <app-check-list [mantisId]="mantisId" [dispoManagerInstance]="dispoManagerInstance"></app-check-list>          
-                </div>
-            </div>           
+            <ng-template appJobreportSection></ng-template>
         </div>
     </div>
+    <div class="row row-break">
+        <div class="col-md-12">
+            <ng-template #loading>
+                <img [src]="loadingImg" alt="Loading...."/>
+            </ng-template>            
+        </div>    
+    </div>    
 </div>

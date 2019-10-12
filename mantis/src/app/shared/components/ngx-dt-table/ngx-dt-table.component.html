@@ -15,9 +15,8 @@
        [count]="page.total_count"
        [loadingIndicator]="options.loadingIndicator"
        [scrollbarH]=true
-       [offset]="page.pageNumber"></ngx-datatable>
+       [offset]="page.page"></ngx-datatable>
  </div>
 <ng-template #linkTemplate let-row="row" let-value="value" let-i="index">
   <a [routerLink]="['/orc/view/', value]">{{ value }}</a>
 </ng-template>
-

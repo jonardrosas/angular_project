@@ -1,0 +1,12 @@
+<table class="table table-light table-bordered table-sm table-striped">
+    <tr>
+        <th *ngFor="let fields of fields.headTable">
+            {{ fields.headerName }} 
+        </th>                
+    </tr>
+    <tr>
+        <td *ngFor="let fields of fields.headTable">
+            <div [innerHTML]="getColumnValue(fields) | safeHtml"></div>
+        </td>            
+    </tr>            
+</table>

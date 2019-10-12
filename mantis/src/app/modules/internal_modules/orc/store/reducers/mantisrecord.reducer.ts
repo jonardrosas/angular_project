@@ -43,7 +43,7 @@ const mantisRecordReducer = createReducer(
     ),
     on(
         MantisRecordAction.getMantisJobNotesAction,
-        (state, { bug_id }) => {
+        (state, { bug }) => {
             return { ...state };
         }
     ),
@@ -69,7 +69,7 @@ const mantisRecordReducer = createReducer(
     ),
     on(
         MantisRecordAction.getMantisHistoryAction,
-        (state, { bug_id }) => {
+        (state, { bug }) => {
             return { ...state };
         }
     ),

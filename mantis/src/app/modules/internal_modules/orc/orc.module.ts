@@ -9,11 +9,11 @@ import { MaterialModule } from './../../third_party_modules/material/material.mo
 import { AgGridModule } from './../../third_party_modules/ag-grid';
 
 import { SharedModule, BootstrapAlertComponent } from './../../../shared';
-import { OrcRecordService, MantisRecordService, OrcCheckService} from './services';
+import { OrcRecordService, MantisRecordService, OrcCheckService, DispoMangerService} from './services';
 
 import * as fromOrcModuleReducer from './store';
 import { OrcRoutingModule } from './orc-routing.module';
-import { ListComponent } from './components/list/list.component';
+import { ListComponent } from './containers/list/list.component';
 import { DetailComponent } from './containers/detail/detail.component';
 import { CheckListComponent } from './components/check-list/check-list.component';
 import { DeviceSummaryComponent } from './components/device-summary/device-summary.component';
@@ -25,8 +25,12 @@ import { DetailJobHistorySectionComponent } from './components/detail-job-histor
 import { CheckChangeStatusComponent } from './components/check-list/components/check-change-status/check-change-status.component';
 import { CheckStatusTemplateComponent } from './components/check-list/components/check-status-template/check-status-template.component';
 // import { CheckEscalteIstStatusComponent } from './components/check-list/components/check-escalte-ist-status/check-escalte-ist-status.component';
-import { DefaultTableViewComponent } from './components/device-summary/table_view/table_default/table_default.component';
-import { TableView1Component } from './components/device-summary/table_view/table_view1/table_view1.component';
+import { TableViewComponent } from './components/device-summary/components/table-view/table-view.component';
+import { ListViewComponent } from './components/device-summary/components/list-view/list-view.component';
+import { Safe } from './../../../shared/pipes/safe-html';
+import { DetailHeaderTableComponent } from './components/detail-header-table/detail-header-table.component';
+import { JobreportSectionDirective } from './directives/jobreport-section.directive';
+import { TestDivComponent } from './components/test-div/test-div.component';
 
 @NgModule({
     imports: [
@@ -42,6 +46,7 @@ import { TableView1Component } from './components/device-summary/table_view/tabl
         EffectsModule.forFeature(fromOrcModuleReducer.effects)
     ],
     declarations: [
+        Safe,
         ListComponent,
         DetailComponent,
         CheckListComponent,
@@ -54,14 +59,25 @@ import { TableView1Component } from './components/device-summary/table_view/tabl
         CheckChangeStatusComponent,
         CheckStatusTemplateComponent,
         // CheckEscalteIstStatusComponent,
-        DefaultTableViewComponent,
-        TableView1Component,
+        TableViewComponent,
+        ListViewComponent,
+        DetailHeaderTableComponent,
+        JobreportSectionDirective,
+        TestDivComponent,
     ],
     entryComponents: [
+        CheckListComponent,
+        DeviceSummaryComponent,
+        DetailJobActionSectionComponent,
+        DetailErrorStatisticsComponent,
+        DetailNotesSectionComponent,
+        DetailAttachmentSectionComponent,
+        DetailJobHistorySectionComponent,        
         CheckChangeStatusComponent,
         BootstrapAlertComponent,
+        TestDivComponent,
         // CheckStatusTemplateComponent,
     ],
-    providers: [OrcRecordService, MantisRecordService, OrcCheckService]
+    providers: [OrcRecordService, MantisRecordService, OrcCheckService, DispoMangerService]
 })
 export class OrcModule { }

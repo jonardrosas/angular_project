@@ -15,7 +15,7 @@ export class TastypiePage{
     //limit: number;
     offset: number;
     total_count: number;
-    pageNumber: number;
+    page: number;
 }
 
 export class TastypieLimit{
@@ -25,10 +25,12 @@ export class TastypieLimit{
 
 export class TastypieSort{
     order_by: string;
+    ordering: string;
 
     constructor(prop?: string){
         if(prop){
             this.order_by = prop;
+            this.ordering = prop;
         }
     }
 
@@ -36,8 +38,10 @@ export class TastypieSort{
         if(event.sorts.length > 0){
             if(event.sorts[0].dir == 'desc'){
                 this.order_by = "-" + event.sorts[0].prop
+                this.ordering = "-" + event.sorts[0].prop
             }else{
                 this.order_by = event.sorts[0].prop
+                this.ordering = event.sorts[0].prop
             }
 
         }

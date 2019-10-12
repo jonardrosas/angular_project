@@ -16,4 +16,14 @@ export const URLS = {
     JOB_ATTACHMENT_URL: '/orc/api/v1/attachments/',
     JOB_HISTORY_URL: '/mantis/api/v1/mantishistory/',
 
+    // NEW DJANGO REST FRAMEWORK
+    DRF_MANTIS_RECORD_URL: '/mantis/api/v2/mantis_record/',
+    DRF_MANTIS_RECORD_LIST_URL: '/mantis/api/v2/mantis_record_worklist/',
+    DRF_MANTIS_RECORD_TEXT_URL: '/mantis/api/v2/mantis_record_text/',
+    DRF_MANTIS_RECORD_NOTE_URL: '/mantis/api/v2/mantis_record_note/',
+    DRF_MANTIS_RECORD_ATTACHMENT_URL: '/mantis/api/v2/mantis_record_attachment/',
+    DRF_MANTIS_RECORD_HISTORY_URL: '/mantis/api/v2/mantis_record_history/',
+    DRF_ORC_RECORD_URL: '/mantis/api/v2/orc_record/',
+    DRF_ORC_RECORD_EXT_URL: '/mantis/api/v2/orc_record_ext/',
+    DRF_ORC_RECORD_CHECK_URL: '/mantis/api/v2/orc_record_check/',
 };

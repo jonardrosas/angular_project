@@ -1,20 +1,38 @@
-<table class="table table-sm table-bordered table-light table-striped">
-    <thead class="thead-dark">
-        <tr>
-            <th>Id</th>
-            <th>User</th>
-            <th>Created</th>
-            <th>Stage</th>
-            <th>Note</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let note of notes$ | async">
-            <td> {{note.id }}</td>
-            <td> {{note.reporter }}</td>
-            <td> {{note.date_submitted }}</td>
-            <td> {{note.bug_status }}</td>
-            <td> {{note.note }}</td>
-        </tr>
-    </tbody>
-</table>
+<div class="row-break">
+    <button type="button" class="btn btn-toggle" (click)="data.panelIsOpen = !data.panelIsOpen"
+            [attr.aria-expanded]="!data.panelIsOpen" aria-controls="notesSection">
+        <i [ngClass]="isCollapse(data.panelIsOpen)"></i>  Job Notes
+    </button>      
+</div>
+<div id="notesSection" class="row-break" [ngbCollapse]="data.panelIsOpen">
+    <div class="card bg-light">
+        <div class="card-body">
+            <table class="table table-sm table-bordered table-light table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Id</th>
+                            <th>User</th>
+                            <th>Created</th>
+                            <th>Stage</th>
+                            <th>Note</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let note of notes$ | async">
+                            <td> {{note.id }}</td>
+                            <td> {{note.reporter.username }}</td>
+                            <td> {{note.date_submitted }}</td>
+                            <td> {{note.bug_status }}</td>
+                            <td> {{note.bugnote_text.note }}</td>
+                        </tr>
+                    </tbody>
+            </table>
+        </div>
+    </div>           
+</div>
+
+
+
+
+
+

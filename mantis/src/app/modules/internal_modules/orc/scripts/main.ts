@@ -1,25 +1,31 @@
 import { OrcModuleOperation } from './common/operation.class';
 import { DispostionParameter, DrcDispostion, LMCDispostion, ValidatorDispostion, OrcDispostion  } from './disposition';
+import { ReportSectionComponent } from './detail-job-report-sections/section-components';
 
 interface MantisDispositionContainerInterface {
     dispositionInstance;
     checkTableInstance;
     checkDispoButtonsInstance;    
     deviceSummaryInstance;    
+    reportSectionsComponents;
+    jobReportTitle;
+    dispoParams;
 }
 
 
-export class MantisDispositionManager extends OrcModuleOperation {
+export class MantisDispositionManager extends OrcModuleOperation implements MantisDispositionContainerInterface {
     public dispositionInstance;
     public checkTableInstance;
     public checkDispoButtonsInstance;
     public deviceSummaryInstance;
+    public jobReportTitle: string;
+    public reportSectionsComponents = ReportSectionComponent;
 
-    constructor(private dispoParams: DispostionParameter){
+    constructor(public dispoParams: DispostionParameter){
         super();
         const operation = this.dispoParams.mantisRecord.operation;
-        const fab = this.dispoParams.mantisRecord.fab;
-        const techtype = this.dispoParams.mantisRecord.techtype;
+        this.jobReportTitle = `${operation} Job Report`;
+
 
         if (this.drcOperation.indexOf(operation) !== -1) {
             this.dispositionInstance = new  DrcDispostion(this.dispoParams);

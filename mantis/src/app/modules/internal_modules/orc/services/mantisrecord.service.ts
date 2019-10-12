@@ -8,16 +8,23 @@ import { Observable, BehaviorSubject, ReplaySubject } from 'rxjs';
 
 @Injectable()
 export class MantisRecordService extends QueryHelper {
-    public url = URLS.MANTIS_RECORD_URL;
-    public errorSummaryUrl = URLS.CHECK_SUMMARY_URL;
-    public jobNotesUrl = URLS.JOB_NOTES_URL;
-    public jobAttachmentUrl = URLS.JOB_ATTACHMENT_URL;
-    public jobHistoryUrl = URLS.JOB_HISTORY_URL;
+    public url = URLS.DRF_MANTIS_RECORD_URL;
+    public mantisRecordListUrl = URLS.DRF_MANTIS_RECORD_LIST_URL;
+    public errorSummaryUrl = URLS.DRF_MANTIS_RECORD_TEXT_URL;
+    public jobNotesUrl = URLS.DRF_MANTIS_RECORD_NOTE_URL;
+    public jobAttachmentUrl = URLS.DRF_MANTIS_RECORD_ATTACHMENT_URL;
+    public jobHistoryUrl = URLS.DRF_MANTIS_RECORD_HISTORY_URL;
     public mantisRecordSubject = new BehaviorSubject<MantisRecordModel>({} as MantisRecordModel);
 
     constructor(public apiService: ApiService) {
         super();
         this.setApiService(this.apiService);
+    }
+
+    // override the default to use new url
+    getQuerySet(filters): Observable<any> {
+        const params = this.buildFilter(filters);
+        return this.apiService.get(this.mantisRecordListUrl, params);
     }
 
     getErrorSummary(filters): Observable<any> {
