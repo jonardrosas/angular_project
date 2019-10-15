@@ -24,9 +24,7 @@ import { DetailAttachmentSectionComponent } from './components/detail-attachment
 import { DetailJobHistorySectionComponent } from './components/detail-job-history-section/detail-job-history-section.component';
 import { CheckChangeStatusComponent } from './components/check-list/components/check-change-status/check-change-status.component';
 import { CheckStatusTemplateComponent } from './components/check-list/components/check-status-template/check-status-template.component';
-// import { CheckEscalteIstStatusComponent } from './components/check-list/components/check-escalte-ist-status/check-escalte-ist-status.component';
-import { TableViewComponent } from './components/device-summary/components/table-view/table-view.component';
-import { ListViewComponent } from './components/device-summary/components/list-view/list-view.component';
+import { CheckEscalateIstComponent } from './components/check-list/components/check-escalte-ist-status/check-escalate-ist-status.component';
 import { Safe } from './../../../shared/pipes/safe-html';
 import { DetailHeaderTableComponent } from './components/detail-header-table/detail-header-table.component';
 import { JobreportSectionDirective } from './directives/jobreport-section.directive';
@@ -58,9 +56,7 @@ import { TestDivComponent } from './components/test-div/test-div.component';
         DetailJobHistorySectionComponent,
         CheckChangeStatusComponent,
         CheckStatusTemplateComponent,
-        // CheckEscalteIstStatusComponent,
-        TableViewComponent,
-        ListViewComponent,
+        CheckEscalateIstComponent,
         DetailHeaderTableComponent,
         JobreportSectionDirective,
         TestDivComponent,
@@ -74,6 +70,7 @@ import { TestDivComponent } from './components/test-div/test-div.component';
         DetailAttachmentSectionComponent,
         DetailJobHistorySectionComponent,        
         CheckChangeStatusComponent,
+        CheckEscalateIstComponent,
         BootstrapAlertComponent,
         TestDivComponent,
         // CheckStatusTemplateComponent,

@@ -26,4 +26,12 @@ export const URLS = {
     DRF_ORC_RECORD_URL: '/mantis/api/v2/orc_record/',
     DRF_ORC_RECORD_EXT_URL: '/mantis/api/v2/orc_record_ext/',
     DRF_ORC_RECORD_CHECK_URL: '/mantis/api/v2/orc_record_check/',
+    DRF_AUTH_GROUP_PROFILE_URL: '/mantis/api/v2/auth_group_profile/',
+
+
+
+
+
+
+
 };

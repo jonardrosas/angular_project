@@ -22,6 +22,7 @@ export class DetailComponent implements OnInit, AfterViewInit {
     public mantisId: number;
     public mantisRecord: MantisRecordModel;
     public loadingImg: string = APP_CONFIG.LOADING_IMG;
+    public isSectionComponentLoaded: boolean = false;
     @ViewChild(JobreportSectionDirective, {static: false}) adSection: JobreportSectionDirective;
 
     constructor(
@@ -56,7 +57,7 @@ export class DetailComponent implements OnInit, AfterViewInit {
                     this.dispoManagerInstanceSubject = this.dispInstanceMangerService.dispoMangerSubject;
                     this.dispoManagerInstanceSubject.next(this.dispoManagerInstance);
                 }
-            }
+            },
         );
     }
 
@@ -66,15 +67,18 @@ export class DetailComponent implements OnInit, AfterViewInit {
     }
 
     loadComponent() {
-        for(let k in this.reportSectionsComponents){
-            const componentInstance = this.reportSectionsComponents[k]
-            const componentFactory = this.componentFactoryResolver.resolveComponentFactory(componentInstance.component);
-            const viewContainerRef = this.adSection.viewContainerRef;
-            const componentRef = viewContainerRef.createComponent(componentFactory);
-            (componentRef.instance as any).data =  componentInstance.data;
-            (componentRef.instance as any).dispoManagerInstance =  this.dispoManagerInstance;
-            (componentRef.instance as any).mantisId =  this.mantisId;
-        }        
+        if(this.reportSectionsComponents.length > 0){
+            for(let k in this.reportSectionsComponents){
+                const componentInstance = this.reportSectionsComponents[k]
+                const componentFactory = this.componentFactoryResolver.resolveComponentFactory(componentInstance.component);
+                const viewContainerRef = this.adSection.viewContainerRef;
+                const componentRef = viewContainerRef.createComponent(componentFactory);
+                (componentRef.instance as any).data =  componentInstance.data;
+                (componentRef.instance as any).dispoManagerInstance =  this.dispoManagerInstance;
+                (componentRef.instance as any).mantisId =  this.mantisId;
+            }        
+        }
+        this.isSectionComponentLoaded = true;
     }
 
 }

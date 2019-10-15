@@ -32,7 +32,33 @@ export class DeviceSummaryComponent extends ButtonCollapse implements OnInit {
             ...this.dispoManagerInstance.dispoParams.mantisRecord,
         }
         this.tables = this.summaryTableInstance.getTables();
-        this.fields = this.summaryTableInstance.getAllFields();
     }
 
+    getClass(field) {
+        if(field.col){
+            return field.col;
+        }
+        return '3';
+    }
+
+    getColumnValue(columnField) {
+          if(columnField.field){
+              const fields = columnField.field.split('__');
+              let value;
+              for (let key in fields){
+                  const field = fields[key];
+                  value = value ? value[field] : this.mantisRecord[field];
+              }
+              if (!value){
+                  return '';
+              }
+              if(columnField.cellTemplate){
+                  return columnField.cellTemplate(value, this.mantisRecord)
+              }
+              return value
+          }else{
+              return '';
+          }
+         
+    }
 }

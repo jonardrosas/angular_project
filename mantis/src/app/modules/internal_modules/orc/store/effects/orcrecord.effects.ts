@@ -28,6 +28,21 @@ export class OrcRecordEffects {
             )
         )
     );
+
+    loadOrcIstGroupsFn = createEffect(() => this.actions$.pipe(
+        ofType(orcRecordActions.GET_ORC_CHECK),
+        mergeMap(
+            (payload: any) => this.orcCheckService.getOrcIstGroup({status: payload.status})
+            .pipe(
+                map(
+                    checks => orcRecordActions.setOrcChecksAction({checks: checks.results}),
+                    catchError(() => EMPTY)
+                )
+            )
+        )
+    )
+);
+
 }
 
 

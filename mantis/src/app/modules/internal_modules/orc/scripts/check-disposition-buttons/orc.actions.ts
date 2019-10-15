@@ -1,5 +1,6 @@
 import { CheckDisposeButtonBase } from './base';
 import { CheckChangeStatusComponent } from './../../components/check-list/components/check-change-status/check-change-status.component';
+import { CheckEscalateIstComponent } from './../../components/check-list/components/check-escalte-ist-status/check-escalate-ist-status.component';
 import { BootstrapAlertComponent } from './../../../../../shared/';
 
 
@@ -33,7 +34,7 @@ export class OrcCheckDispositionButtonClass extends CheckDisposeButtonBase {
             const selectedNodes = this.agGridApi.getSelectedNodes()
             const selectedData = selectedNodes.map(node => node.data);
             if(selectedData.length > 0){
-                const modalRef = this.modalService.open(CheckChangeStatusComponent, {backdrop: 'static', keyboard: false})
+                const modalRef = this.modalService.open(CheckEscalateIstComponent, {backdrop: 'static', keyboard: false})
                 modalRef.componentInstance.selectedData = selectedData;
                 modalRef.componentInstance.mantisRecord = this.mantisRecord;
             }else{

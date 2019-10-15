@@ -1,17 +1,16 @@
 import { DetailSummaryBase } from './base-summary';
+import { OrcDeviceSummary } from './orc-summary';
 
 
-export class LMCDeviceSummary extends DetailSummaryBase {
-    additionalInfoTable = {
+export class LMCDeviceSummary extends OrcDeviceSummary {
+    directoriesTable = {
         fields: [
-            [
-                this.topCell,
-                this.tapeoutLayers,
-                this.topupLayers,
-                this.ptrfStatus,
-            ],
+            this.tapeoutWorkdir,
+            this.logfile,
+            this.layoutPath,
+            this.resultPath,
         ]
-    }
+    };
 
     constructor(dispoParams) {
         super(dispoParams);

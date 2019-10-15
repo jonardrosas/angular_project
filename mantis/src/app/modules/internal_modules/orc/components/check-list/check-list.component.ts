@@ -55,7 +55,6 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
     loadTable() {
         this.store.pipe(select(orcModuleStore.getMantisRecordObjectStateSelector)).subscribe(
             (data) => {
-                debugger;
                 this.mantisRecord = data;
                 if (data.orc_record.id) {
                     this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs();
@@ -67,7 +66,6 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
     }
 
     getChecks(id: number) {
-        debugger;
         this.store.dispatch(orcModuleStore.getOrcChecksAction({record: id}));
         this.store.pipe(select(orcModuleStore.getOrcRecordCheckStateSelector)).subscribe(
             (data) => {
