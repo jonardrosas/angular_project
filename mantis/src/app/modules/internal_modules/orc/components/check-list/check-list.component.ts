@@ -25,7 +25,7 @@ export class CheckListComponent implements OnInit, AfterViewInit {
     public columnDefs: any;
     @Input() dispoManagerInstance: MantisDispositionManager;
     public mantisRecord: MantisRecordModel;
-    private frameworkComponents = {
+    public frameworkComponents = {
         checkStatusTemplateComponent: CheckStatusTemplateComponent
     }
 
