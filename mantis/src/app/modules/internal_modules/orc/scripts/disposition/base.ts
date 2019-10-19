@@ -38,7 +38,7 @@ export class MantisDispositionBase implements MantisDispositionBase {
 
     getDeviceSummaryTable(){
         if(this.deviceSummaryClass){
-            return new this.deviceSummaryClass()
+            return new this.deviceSummaryClass(this.dispoParams)
         }
         throw new Error('deviceSummaryClass required')
     }

@@ -1,8 +1,11 @@
+import { BaseModel } from './base.model';
+import { URLS } from './../../../../configs';
 import { OrcRecordModel } from './orcrecord.model';
+import { MantisRecordText } from './mantisrecordtext.model';
 
 export interface MantisRecordInterface {
     bug_text_id: number;
-    date_generated: string;
+    date_generated: number;
     device: string;
     gto_db: string;
     id: number;
@@ -13,44 +16,83 @@ export interface MantisRecordInterface {
     orc_record_id: number;
     ptrf: string;
     resolution: string;
-    resolution_code: number;
+    reviewer: string;
+    run_history?: number;
+    status?: string;
+    techtype: string;
+    status_code?: number;
+    resolution_code?: number;
+    orc_record?: OrcRecordModel;
+    pdbstatus?: string;
+    customer?: string;
+    layer_rev?: string;
+    process_id?: string;
+    workdir?: string;
+    outputdir?: string;
+    logfile?: string;
+    runfile?: string;
+    date_submitted?: number;
+    last_updated?: number;
+    gto_last_updater?: string;
+    gto_update_time?: string;
+    gto_status_code?: number;
+    gto_review_status?;
+    profile_id?: number;
+    generic_info?: string;
+    archived?: number;
+    project?: number;
+    reporter?: number;
+    handler?: number;
+    bug_text?: MantisRecordText;
+    category?: number;
+    drcentry?;
+}
+
+
+export class MantisRecordModel extends BaseModel implements MantisRecordInterface {
+    __url = URLS.DRF_MANTIS_RECORD_URL;
+    bug_text_id: number;
+    date_generated: number;
+    device: string;
+    gto_db: string;
+    id: number;
+    job_id: number;
+    layer: string;
+    maskset: string;
+    operation: string;
+    orc_record_id: number;
+    ptrf: string;
+    resolution: string;
     reviewer: string;
     run_history: number;
     status: string;
     techtype: string;
-    orc_record?: any;
-}
+    status_code?: number;
+    resolution_code: number;
+    orc_record?: OrcRecordModel;
+    pdbstatus?: string;
+    customer?: string;
+    layer_rev?: string;
+    process_id?: string;
+    workdir?: string;
+    outputdir?: string;
+    logfile?: string;
+    runfile?: string;
+    date_submitted?: number;
+    last_updated?: number;
+    gto_last_updater?: string;
+    gto_update_time?: string;
+    gto_status_code?: number;
+    gto_review_status?;
+    profile_id?: number;
+    generic_info?: string;
+    archived?: number;
+    project?: number;
+    reporter?: number;
+    handler?: number;
+    bug_text?: MantisRecordText;
+    category?: number;
+    drcentry?;    
 
-export class MantisRecordModel {
-    assignee: string;
-    device: string;
-    disposition_method: string;
-    fab: string;
-    gto_db: string;
-    id: number;
-    job_id: string;
-    layer: string;
-    mantis_id: number;
-    mantis_stage;
-    maskset: string;
-    mrs_status: string;
-    nm_exists_flag: boolean;
-    nm_rules;
-    operation: string;
-    orc_check_status_map;
-    orc_status_map;
-    pcf_mask_lay: string;
-    pdb_status: string;
-    ptrf: string;
-    review_path: string;
-    run_history: number;
-    sbldevice_piye: string;
-    status: string;
-    techtype: string;
-    timestamp: number;
-    checks;
-    orc_record: OrcRecordModel;
-    orc_record_id: number;
-    bug_text_id: number;
 }
 

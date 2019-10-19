@@ -18,16 +18,31 @@ export class OrcRecordEffects {
     loadOrcRecordCheckFn = createEffect(() => this.actions$.pipe(
             ofType(orcRecordActions.GET_ORC_CHECK),
             mergeMap(
-                (payload: any) => this.orcCheckService.getQuerySet({record_id: payload.record_id})
+                (payload: any) => this.orcCheckService.getQuerySet({record: payload.record})
                 .pipe(
                     map(
-                        checks => orcRecordActions.setOrcChecksAction({checks: checks.objects}),
+                        checks => orcRecordActions.setOrcChecksAction({checks: checks.results}),
                         catchError(() => EMPTY)
                     )
                 )
             )
         )
     );
+
+    loadOrcIstGroupsFn = createEffect(() => this.actions$.pipe(
+        ofType(orcRecordActions.GET_ORC_CHECK),
+        mergeMap(
+            (payload: any) => this.orcCheckService.getOrcIstGroup({status: payload.status})
+            .pipe(
+                map(
+                    checks => orcRecordActions.setOrcChecksAction({checks: checks.results}),
+                    catchError(() => EMPTY)
+                )
+            )
+        )
+    )
+);
+
 }
 
 

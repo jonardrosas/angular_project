@@ -60,7 +60,8 @@ export class NgxDtTableComponent implements OnInit, AfterViewInit {
     setPage(pageInfo){
         // attach filter and sorting
         this.limit.limit = pageInfo.limit;
-        this.newPage.offset = pageInfo.offset * pageInfo.limit;
+        this.newPage.page = pageInfo.offset;
+        this.newPage.offset = (pageInfo.pageSize * pageInfo.offset);
         this.newPage.total_count = pageInfo.count;
         const queryParams = {
             ...this.limit,

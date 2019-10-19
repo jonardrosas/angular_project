@@ -34,7 +34,7 @@ export class MantisRecordEffects {
                 (payload: any) => this.mantisRecordService.getErrorSummary({id: payload.id})
                 .pipe(
                     map(
-                        summary => mantisRecordActions.setMantisErrorSummaryAction({description: summary.objects[0].description}),
+                        summary => mantisRecordActions.setMantisErrorSummaryAction({description: summary.results[0].description}),
                         catchError(() => EMPTY)
                     )
                 )
@@ -45,10 +45,10 @@ export class MantisRecordEffects {
     loadMantisRecordJobNotesEffect = createEffect(() => this.actions$.pipe(
             ofType(mantisRecordActions.GET_MANTIS_JOB_NOTES),
             mergeMap(
-                (payload: any) => this.mantisRecordService.getJobNotes({bug_id: payload.bug_id})
+                (payload: any) => this.mantisRecordService.getJobNotes({bug: payload.bug})
                 .pipe(
                     map(
-                        notes => mantisRecordActions.setMantisJobNotesAction({notes: notes.objects}),
+                        notes => mantisRecordActions.setMantisJobNotesAction({notes: notes.results}),
                         catchError(() => EMPTY)
                     )
                 )
@@ -62,7 +62,7 @@ export class MantisRecordEffects {
                 (payload: any) => this.mantisRecordService.getAttachmentSvs({bug_id: payload.bug_id})
                 .pipe(
                     map(
-                        data => mantisRecordActions.setMantisAttachmentAction({attachments: data.objects}),
+                        data => mantisRecordActions.setMantisAttachmentAction({attachments: data.results}),
                         catchError(() => EMPTY)
                     )
                 )
@@ -74,10 +74,10 @@ export class MantisRecordEffects {
     loadMantisRecordHisotryEffect = createEffect(() => this.actions$.pipe(
         ofType(mantisRecordActions.GET_MANTIS_HISTORY),
             mergeMap(
-                (payload: any) => this.mantisRecordService.getHistorytSvs({bug_id: payload.bug_id})
+                (payload: any) => this.mantisRecordService.getHistorytSvs({bug: payload.bug})
                 .pipe(
                     map(
-                        data => mantisRecordActions.setMantisHistoryAction({histories: data.objects}),
+                        data => mantisRecordActions.setMantisHistoryAction({histories: data.results}),
                         catchError(() => EMPTY)
                     )
                 )

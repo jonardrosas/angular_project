@@ -2,6 +2,11 @@
     font-size: 12px;
 }
 
+.btn-small{
+    font-size: 10px;
+}
+
+
 .device-summary-table .table-light th{
     color: #161616;
     background-color: #b3b6b9;

@@ -1,10 +1,7 @@
-import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
-import { Store, select } from '@ngrx/store';
-import * as orcModuleStore from './../../store';
-
+import { Component, OnInit, Input, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { MantisRecordModel } from './../../models';
-import { MantisRecordService } from './../../services';
 import { MantisDispositionManager } from './../../scripts';
+import { ButtonCollapse } from '../../scripts/common/add-jobreport-section';
 
 @Component({
     selector: 'app-device-summary',
@@ -12,42 +9,56 @@ import { MantisDispositionManager } from './../../scripts';
     styleUrls: ['./device-summary.component.css']
 })
 
-export class DeviceSummaryComponent implements OnInit {
+export class DeviceSummaryComponent extends ButtonCollapse implements OnInit {
     @Input() dispoManagerInstance: MantisDispositionManager;
-    public mantisRecord: MantisRecordModel;
+    public mantisRecord;
     public summaryTableInstance;
-    public table;
+    public tables;
+    public fields: {
+        headTable;
+        mainTable;
+        directoriesTable;
+        additionalInfoTable;
+    };    
 
     constructor(
-        private mantisRecordService: MantisRecordService,
-        private store: Store<any>
-    ) { }
-
+    ) {
+        super()
+    }
 
     ngOnInit() {
-        this.getObject();
         this.summaryTableInstance = this.dispoManagerInstance.getDeviceSummaryTables();
-        debugger;
-        this.table = this.summaryTableInstance.getTables();
-    }
-    
-    getColumnValue(columnField: string) {
-        return this.mantisRecord[columnField];
+        this.mantisRecord = {
+            ...this.dispoManagerInstance.dispoParams.mantisRecord,
+        }
+        this.tables = this.summaryTableInstance.getTables();
     }
 
-    getObject() {
-        debugger;
-        this.store.pipe(select(orcModuleStore.getMantisRecordObjectStateSelector)).subscribe(
-            (data) => {
-                debugger;
-                const orcRecord = { ...data.orc_record };
-                delete data.orc_record;
-                this.mantisRecord = {
-                    ...data,
-                    ...orcRecord
-                };
-            }
-        );
+    getClass(field) {
+        if(field.col){
+            return field.col;
+        }
+        return '3';
     }
 
+    getColumnValue(columnField) {
+          if(columnField.field){
+              const fields = columnField.field.split('__');
+              let value;
+              for (let key in fields){
+                  const field = fields[key];
+                  value = value ? value[field] : this.mantisRecord[field];
+              }
+              if (!value){
+                  return '';
+              }
+              if(columnField.cellTemplate){
+                  return columnField.cellTemplate(value, this.mantisRecord)
+              }
+              return value
+          }else{
+              return '';
+          }
+         
+    }
 }

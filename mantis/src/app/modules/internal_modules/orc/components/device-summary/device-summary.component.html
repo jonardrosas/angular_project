@@ -1,33 +1,61 @@
 <div>
-    <table class="table table-light table-bordered table-sm table-striped">
-        <thead class="thead-secondary" *ngFor="let fields of table.headTable.fields">
-            <tr>
-                <th *ngFor="let column of fields">
-                    {{ column.headerName }} 
-                </th>                
-            </tr>
-            <tr>
-                <td *ngFor="let column of fields"  >
-                    {{ getColumnValue(column.field) }}
-                </td>            
-            </tr>            
-        </thead>
-    </table>
+    <button type="button" class="btn btn-toggle" (click)="data.panelIsOpen = !data.panelIsOpen"
+            [attr.aria-expanded]="!data.panelIsOpen" aria-controls="deviceSummary">
+        <i [ngClass]="isCollapse(data.panelIsOpen)"></i> Device Summary
+    </button>      
 </div>
-
-<div>
-    <table class="table table-light table-bordered table-sm table-striped">
-        <thead class="thead-secondary" *ngFor="let fields of table.mainTable.fields">
-            <tr>
-                <th *ngFor="let column of fields" [attr.colspan]="column.colspan">
-                    {{ column.headerName }} 
-                </th>
-            </tr>
-            <tr>
-                <td *ngFor="let column of fields" [attr.colspan]="column.colspan">
-                    {{ getColumnValue(column.field) }} 
-                </td>            
-            </tr>
-        </thead>
-    </table>
+<div id="deviceSummary" class="row-break" [ngbCollapse]="data.panelIsOpen">
+    <div class="card bg-light">
+        <div class="card-body">            
+            <h6>Mantis Info:</h6>
+            <div class="container-fluid border border-top-0 border-right-0 border-secondary">
+                <div class="row bg-white">
+                    <div class="col-md-{{ getClass(field) }} border border-bottom-0 border-top border-left-0 border-secondary" *ngFor="let field of tables.mantisInfoTable.fields">
+                        <span class="p-1 font-weight-bold">
+                            {{ field.headerName }}: 
+                        </span>                 
+                        <span class="p-1" [innerHTML]="getColumnValue(field) | safeHtml"></span>
+                    </div>
+                </div>
+            </div><br/>
+            <h6>Basic Info:</h6>
+            <div class="container-fluid  border border-top-0 border-right-0 border-secondary">
+                <div class="row bg-white">
+                    <div class="col-md-{{ getClass(field) }} border border-bottom-0 border-top border-left-0 border-secondary" *ngFor="let field of tables.cadInfoTable.fields">
+                        <span class="p-1 font-weight-bold">
+                            {{ field.headerName }}: 
+                        </span>                 
+                        <span class="p-1" [innerHTML]="getColumnValue(field) | safeHtml"></span>
+                    </div>
+                </div>
+            </div><br/>
+            <h6>Directories:</h6>
+            <div class="container-fluid  border-top border-left border-secondary">
+                <div class="row bg-white">
+                    <div class="col-md-12 border border-bottom border-top-0 border-left-0 border-secondary" *ngFor="let field of tables.directoriesTable.fields">
+                        <span class="p-1 font-weight-bold">
+                            {{ field.headerName  }}: 
+                        </span>                 
+                        <span class="p-1" [innerHTML]="getColumnValue(field)"></span>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div *ngIf="tables.additionalInfoTable.fields.length > 0">
+                <h6>Additional Information:</h6>
+                <div class="container-fluid  border-top border-left border-secondary">
+                    <div class="row bg-white">
+                        <div class="col-md-3 border border-bottom border-top-0 border-left-0 border-secondary" *ngFor="let field of tables.additionalInfoTable.fields">
+                            <span class="p-1 font-weight-bold">
+                                {{ field.headerName }}: 
+                            </span>                 
+                            <span class="p-1">
+                                {{ getColumnValue(field.field) }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

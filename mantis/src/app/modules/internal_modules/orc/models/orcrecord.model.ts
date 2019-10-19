@@ -1,3 +1,5 @@
+import { BaseModel } from './base.model';
+import { URLS } from './../../../../configs';
 import { OrcRecordExtInterface } from './orcrecordext.model';
 
 
@@ -41,38 +43,55 @@ export interface OrcRecordInterface {
     task_id: string;
     techfile: string;
     techtype: string;
-    timestamp: string;
+    timestamp: number;
     workdir: string;
-    orc_ext: OrcRecordExtInterface;
+    orc_ext?: OrcRecordExtInterface;
 }
 
 
-export class OrcRecordModel {
-    assignee: string;
+export class OrcRecordModel extends BaseModel implements OrcRecordInterface {
+    __url = URLS.DRF_ORC_RECORD_URL;
+    archived: boolean;
+    autopassed?: string;
+    customer: string;
+    date: string;
     device: string;
-    disposition_method: string;
-    fab: string;
-    gto_db: string;
+    flow_status: string;
+    generic_info: string;
+    gto_db?: string;
+    gto_last_updater: string;
+    gto_review_status: string;
+    gto_status_code: number;
+    gto_update_time: number;
     id: number;
-    job_id: string;
+    is_main_record: boolean;
+    job_end_time: boolean;
+    job_id: number;
+    job_start_time: string;
     layer: string;
+    layer_rev: string;
+    logfile: string;
     mantis_id: number;
-    mantis_stage;
+    mantis_resolution: string;
     maskset: string;
-    mrs_status: string;
-    nm_exists_flag: boolean;
-    nm_rules;
+    neutralfile: string;
     operation: string;
-    orc_check_status_map;
-    orc_status_map;
-    pcf_mask_lay: string;
+    orcn_id: string;
     pdb_status: string;
+    process_id: number;
     ptrf: string;
-    review_path: string;
+    ptrf2: string;
+    push_disposed: string;
+    reanalysis: boolean;
     run_history: number;
-    sbldevice_piye: string;
+    runfile: number;
+    siteloc: string;
     status: string;
+    task_id: string;
+    techfile: string;
     techtype: string;
     timestamp: number;
-    checks;
+    workdir: string;
+    orc_ext?: OrcRecordExtInterface;    
+    checks?;
 }

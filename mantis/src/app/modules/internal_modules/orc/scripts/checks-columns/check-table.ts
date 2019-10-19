@@ -29,6 +29,8 @@ export class LMCCheckTable extends CheckBaseModel {
         this.rawErrorCountField,
         this.assigedGroupField,
         this.assignedSoaGroupField,
+        this.pdbViolationCountField,
+        this.pdbValidatedField,        
         this.statusField
     ];
 

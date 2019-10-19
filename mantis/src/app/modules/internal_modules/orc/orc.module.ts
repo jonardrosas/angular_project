@@ -9,11 +9,11 @@ import { MaterialModule } from './../../third_party_modules/material/material.mo
 import { AgGridModule } from './../../third_party_modules/ag-grid';
 
 import { SharedModule, BootstrapAlertComponent } from './../../../shared';
-import { OrcRecordService, MantisRecordService, OrcCheckService} from './services';
+import { OrcRecordService, MantisRecordService, OrcCheckService, DispoMangerService} from './services';
 
 import * as fromOrcModuleReducer from './store';
 import { OrcRoutingModule } from './orc-routing.module';
-import { ListComponent } from './components/list/list.component';
+import { ListComponent } from './containers/list/list.component';
 import { DetailComponent } from './containers/detail/detail.component';
 import { CheckListComponent } from './components/check-list/check-list.component';
 import { DeviceSummaryComponent } from './components/device-summary/device-summary.component';
@@ -24,8 +24,11 @@ import { DetailAttachmentSectionComponent } from './components/detail-attachment
 import { DetailJobHistorySectionComponent } from './components/detail-job-history-section/detail-job-history-section.component';
 import { CheckChangeStatusComponent } from './components/check-list/components/check-change-status/check-change-status.component';
 import { CheckStatusTemplateComponent } from './components/check-list/components/check-status-template/check-status-template.component';
-// import { CheckEscalteIstStatusComponent } from './components/check-list/components/check-escalte-ist-status/check-escalte-ist-status.component';
-
+import { CheckEscalateIstComponent } from './components/check-list/components/check-escalte-ist-status/check-escalate-ist-status.component';
+import { Safe } from './../../../shared/pipes/safe-html';
+import { DetailHeaderTableComponent } from './components/detail-header-table/detail-header-table.component';
+import { JobreportSectionDirective } from './directives/jobreport-section.directive';
+import { TestDivComponent } from './components/test-div/test-div.component';
 
 @NgModule({
     imports: [
@@ -41,6 +44,7 @@ import { CheckStatusTemplateComponent } from './components/check-list/components
         EffectsModule.forFeature(fromOrcModuleReducer.effects)
     ],
     declarations: [
+        Safe,
         ListComponent,
         DetailComponent,
         CheckListComponent,
@@ -52,13 +56,25 @@ import { CheckStatusTemplateComponent } from './components/check-list/components
         DetailJobHistorySectionComponent,
         CheckChangeStatusComponent,
         CheckStatusTemplateComponent,
-        // CheckEscalteIstStatusComponent,
+        CheckEscalateIstComponent,
+        DetailHeaderTableComponent,
+        JobreportSectionDirective,
+        TestDivComponent,
     ],
     entryComponents: [
+        CheckListComponent,
+        DeviceSummaryComponent,
+        DetailJobActionSectionComponent,
+        DetailErrorStatisticsComponent,
+        DetailNotesSectionComponent,
+        DetailAttachmentSectionComponent,
+        DetailJobHistorySectionComponent,        
         CheckChangeStatusComponent,
+        CheckEscalateIstComponent,
         BootstrapAlertComponent,
+        TestDivComponent,
         // CheckStatusTemplateComponent,
     ],
-    providers: [OrcRecordService, MantisRecordService, OrcCheckService]
+    providers: [OrcRecordService, MantisRecordService, OrcCheckService, DispoMangerService]
 })
 export class OrcModule { }

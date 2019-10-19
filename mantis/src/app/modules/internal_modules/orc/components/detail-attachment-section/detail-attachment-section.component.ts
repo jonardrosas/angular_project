@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
+import { ButtonCollapse } from '../../scripts/common/add-jobreport-section';
 
 import * as orcModuleStore from './../../store';
 import { MantisAttachmentInterface } from './../../models';
@@ -10,14 +11,15 @@ import { MantisAttachmentInterface } from './../../models';
     templateUrl: './detail-attachment-section.component.html',
     styleUrls: ['./detail-attachment-section.component.css']
 })
-
-export class DetailAttachmentSectionComponent implements OnInit {
+export class DetailAttachmentSectionComponent extends ButtonCollapse implements OnInit {
     @Input() public mantisId: number;
     public attachments$: Observable<MantisAttachmentInterface[]>;
 
     constructor(
       private store: Store<any>
-    ) { }
+    ) {
+      super()
+    }
 
     ngOnInit() {
       this.store.dispatch(orcModuleStore.getMantisAttachmentAction({ bug_id: this.mantisId }));

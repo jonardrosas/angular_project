@@ -1,1 +1,13 @@
-<div class="error-stat-container" *ngIf="description" [innerHTML]="description"></div>
+<div class="row-break">
+    <button type="button" class="btn btn-toggle" (click)="data.panelIsOpen = !data.panelIsOpen"
+            [attr.aria-expanded]="!data.panelIsOpen" aria-controls="errorStatistics">
+        <i [ngClass]="isCollapse(data.panelIsOpen)"></i> Error Summary
+    </button>      
+</div>
+<div id="errorStatistics" class="row-break" [ngbCollapse]="data.panelIsOpen">
+    <div class="card bg-light">
+        <div class="card-body">
+            <div class="error-stat-container" [innerHTML]="description"></div>
+        </div>
+    </div>           
+</div>

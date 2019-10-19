@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MantisNotesInterface } from './../../models';
 import { Observable } from 'rxjs';
+import { MantisDispositionManager } from './../../scripts';
+import { ButtonCollapse } from '../../scripts/common/add-jobreport-section';
 
 import { Store, select } from '@ngrx/store';
 
@@ -11,18 +13,21 @@ import * as orcModuleStore from './../../store';
   templateUrl: './detail-notes-section.component.html',
   styleUrls: ['./detail-notes-section.component.css']
 })
-export class DetailNotesSectionComponent implements OnInit {
+export class DetailNotesSectionComponent extends ButtonCollapse implements OnInit {
+    @Input() dispoManagerInstance: MantisDispositionManager;    
     @Input() public mantisId: number;
     public notes$: Observable<MantisNotesInterface[]>;
 
 
     constructor(
         private store: Store<any>
-    ) { }
+    ) {
+        super()
+     }
 
 
     ngOnInit() {
-        this.store.dispatch(orcModuleStore.getMantisJobNotesAction({bug_id: this.mantisId}));
+        this.store.dispatch(orcModuleStore.getMantisJobNotesAction({bug: this.mantisId}));
         this.getObject();
     }
 

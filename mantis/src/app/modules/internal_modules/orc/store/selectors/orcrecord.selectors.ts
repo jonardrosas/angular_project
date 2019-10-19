@@ -3,6 +3,7 @@ import { OrcRecordState, OrcModuleState } from './../state';
 
 export const getOrcObjectFn = (state: OrcRecordState) => state.orcObject;
 export const getOrcCheckFn = (state: OrcRecordState) => state.checks;
+export const getIstSupportTeamGroupFn = (state: OrcRecordState) => state.istSupportTeamGroup;
 
 
 // selectors
@@ -13,8 +14,15 @@ export const getOrcRecordStateSelector = createSelector(
     (state: OrcModuleState) => state.orcRecordState
 );
 
+
 export const getOrcRecordCheckStateSelector = createSelector(
     getOrcRecordStateSelector,
     getOrcCheckFn
+);
+
+
+export const getIstSupportTeamGroupSelector = createSelector(
+    getOrcRecordStateSelector,
+    getIstSupportTeamGroupFn
 );
 

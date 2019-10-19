@@ -49,10 +49,12 @@ export class ListComponent implements OnInit  {
     constructor(private service: OrcRecordService, private mantisService: MantisRecordService) {
         this.options.externalPaging = true;
         this.options.externalSorting = true;
-        this.sort.order_by = "-id";
+        this.sort.ordering = "-id";
         //this.filters = {operation__in: 'ORC,MRC,LMC'}
         this.options.ngxClass = APP_CONFIG.APP_THEME;
         this.limit.limit = 10;
+        this.page.offset = 0;
+        this.page.page = 0;
         this.queryParams = {
             ...this.limit,
             ...this.filters,
@@ -69,11 +71,11 @@ export class ListComponent implements OnInit  {
         this.options.loadingIndicator = true;
         this.mantisService.getQuerySet(queryParams).subscribe(
             (data) => {
-                this.rows = data.objects;
-                this.limit.limit = data.meta.limit;
-                this.page.offset = data.meta.offset;
-                this.page.total_count = data.meta.total_count;
-                this.page.pageNumber = (data.meta.offset / data.meta.limit);
+                this.rows =  data.results;
+                this.limit.limit =  queryParams.limit;
+                this.page.offset = queryParams.offset;
+                this.page.total_count = data.count;
+                this.page.page = queryParams.page;
                 this.options.loadingIndicator = false;
             },
             (err) => {
