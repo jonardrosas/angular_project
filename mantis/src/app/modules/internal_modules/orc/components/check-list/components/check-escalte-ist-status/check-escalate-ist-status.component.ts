@@ -18,6 +18,7 @@ export class CheckEscalateIstComponent implements OnInit {
     public statusGroup;
     public escalateIstForm;
     public alerts: NgAlertInterface[] = [];
+    public showSelectedChecks;
 
     constructor(public activeModal: NgbActiveModal) {}
 
