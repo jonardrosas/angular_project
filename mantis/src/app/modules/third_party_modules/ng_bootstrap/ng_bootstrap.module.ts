@@ -5,12 +5,14 @@ import {
     NgbAlertConfig,
     NgbCollapseModule,
     NgbModalModule,
+    NgbTabsetModule,
 } from '@ng-bootstrap/ng-bootstrap';
 
 const BootstrapComponents = [
     NgbAlertModule,
     NgbCollapseModule,
     NgbModalModule,
+    NgbTabsetModule,
 ];
 
 @NgModule({

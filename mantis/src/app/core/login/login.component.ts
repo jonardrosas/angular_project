@@ -16,6 +16,7 @@ import { APP_CONFIG } from './../../configs';
 
 export class LoginComponent implements OnInit {
     alert;
+    nextUrl: string;
     appTheme = APP_CONFIG.APP_THEME;
 
     constructor(
@@ -30,16 +31,8 @@ export class LoginComponent implements OnInit {
 
     isAuthenticated(isLoggedIn){
         if(isLoggedIn){
-            this.activatedRoute.queryParams.subscribe(params => {
-                  let next = params['next'];
-                  if(next){
-                      let decodedParams =  decodeURIComponent(next);
-                      this.router.navigate([decodedParams]);
-                  }else{
-                      this.router.navigate(['/home']);
-                  }
-            });            
-           // this.router.navigate(['/home']);
+            this.nextUrl = this.activatedRoute.snapshot.queryParams['next'] || '/home';
+            this.router.navigateByUrl(this.nextUrl);
         }
     }
 

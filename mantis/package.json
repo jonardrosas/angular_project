@@ -21,6 +21,8 @@
     "@angular/platform-browser": "~8.2.6",
     "@angular/platform-browser-dynamic": "~8.2.6",
     "@angular/router": "~8.2.6",
+    "@ckeditor/ckeditor5-angular": "^1.1.0",
+    "@ckeditor/ckeditor5-build-classic": "^12.4.0",
     "@ng-bootstrap/ng-bootstrap": "^5.1.1",
     "@ngrx/effects": "^8.3.0",
     "@ngrx/entity": "^8.3.0",
@@ -45,7 +47,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.803.4",
-    "@angular/cli": "^8.3.4",
+    "@angular/cli": "^8.3.9",
     "@angular/compiler-cli": "~8.2.6",
     "@angular/language-service": "~8.2.6",
     "@fortawesome/fontawesome-free": "^5.10.2",

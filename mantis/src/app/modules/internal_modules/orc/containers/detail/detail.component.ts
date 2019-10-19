@@ -26,7 +26,7 @@ export class DetailComponent implements OnInit, AfterViewInit {
     @ViewChild(JobreportSectionDirective, {static: false}) adSection: JobreportSectionDirective;
 
     constructor(
-        private route: ActivatedRoute,
+        private activatedRoute: ActivatedRoute,
         private modalService: NgbModal,
         private store: Store<any>,
         private dispInstanceMangerService: DispoMangerService,
@@ -34,14 +34,15 @@ export class DetailComponent implements OnInit, AfterViewInit {
     ) { }
 
     ngAfterViewInit() {
-        setTimeout(()=> this.loadComponent(), 2000);
+        setTimeout(()=> this.loadComponent(), 1500);
     }
 
     ngOnInit() {
-        this.route.paramMap.subscribe(params => {
+        this.activatedRoute.paramMap.subscribe(params => {
             this.mantisId = +params.get('id');
             this.getObjectUsingStore(this.mantisId);
         });
+
     }
 
     loadMantisRecord() {
@@ -56,6 +57,7 @@ export class DetailComponent implements OnInit, AfterViewInit {
                     this.dispoManagerInstance = new MantisDispositionManager(paramsIns);
                     this.dispoManagerInstanceSubject = this.dispInstanceMangerService.dispoMangerSubject;
                     this.dispoManagerInstanceSubject.next(this.dispoManagerInstance);
+                    
                 }
             },
         );
@@ -63,6 +65,8 @@ export class DetailComponent implements OnInit, AfterViewInit {
 
     getObjectUsingStore(mantisId: number) {
         this.store.dispatch(orcModuleStore.getMantisObjectAction({id: mantisId}));
+        this.store.dispatch(orcModuleStore.getIstGroupAction({status: 'iST'}));
+        this.store.dispatch(orcModuleStore.getSOAGroupAction({status: 'SOA'}));
         this.loadMantisRecord();
     }
 

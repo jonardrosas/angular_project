@@ -7,6 +7,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { NgBootstrapModule } from './../../third_party_modules/ng_bootstrap/ng_bootstrap.module';
 import { MaterialModule } from './../../third_party_modules/material/material.module';
 import { AgGridModule } from './../../third_party_modules/ag-grid';
+import { Ckeditor5AngularModule } from './../../third_party_modules/ckeditor5-angular'
 
 import { SharedModule, BootstrapAlertComponent } from './../../../shared';
 import { OrcRecordService, MantisRecordService, OrcCheckService, DispoMangerService} from './services';
@@ -29,6 +30,10 @@ import { Safe } from './../../../shared/pipes/safe-html';
 import { DetailHeaderTableComponent } from './components/detail-header-table/detail-header-table.component';
 import { JobreportSectionDirective } from './directives/jobreport-section.directive';
 import { TestDivComponent } from './components/test-div/test-div.component';
+import { CheckAddNotesComponent } from './components/check-list/components/check-add-notes/check-add-notes.component';
+import { CheckUploadImageComponent } from './components/check-list/components/check-upload-image/check-upload-image.component';
+import { CheckEscalateSoaComponent } from './components/check-list/components/check-escalate-soa/check-escalate-soa.component';
+import { CheckRecommendComponent } from './components/check-list/components/check-recommend/check-recommend.component';
 
 @NgModule({
     imports: [
@@ -41,7 +46,8 @@ import { TestDivComponent } from './components/test-div/test-div.component';
         MaterialModule,
         AgGridModule.withComponents([CheckStatusTemplateComponent]),
         StoreModule.forFeature('orc', fromOrcModuleReducer.reducers),
-        EffectsModule.forFeature(fromOrcModuleReducer.effects)
+        EffectsModule.forFeature(fromOrcModuleReducer.effects),
+        Ckeditor5AngularModule
     ],
     declarations: [
         Safe,
@@ -60,6 +66,10 @@ import { TestDivComponent } from './components/test-div/test-div.component';
         DetailHeaderTableComponent,
         JobreportSectionDirective,
         TestDivComponent,
+        CheckAddNotesComponent,
+        CheckUploadImageComponent,
+        CheckEscalateSoaComponent,
+        CheckRecommendComponent,
     ],
     entryComponents: [
         CheckListComponent,
@@ -73,7 +83,10 @@ import { TestDivComponent } from './components/test-div/test-div.component';
         CheckEscalateIstComponent,
         BootstrapAlertComponent,
         TestDivComponent,
-        // CheckStatusTemplateComponent,
+        CheckAddNotesComponent,
+        CheckUploadImageComponent,
+        CheckEscalateSoaComponent,
+        CheckRecommendComponent,
     ],
     providers: [OrcRecordService, MantisRecordService, OrcCheckService, DispoMangerService]
 })

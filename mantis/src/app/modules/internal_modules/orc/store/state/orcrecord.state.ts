@@ -5,5 +5,7 @@ export interface OrcRecordState {
     checks: OrcCheckInterface[];
     loaded: boolean;
     loading: boolean;
-    istSupportTeamGroup: GroupProfileInterface[];
+    istSupportTeamGroup?: GroupProfileInterface[];
+    soaSupportTeamGroup?: GroupProfileInterface[];
+    distinctFields?: any[]
 }

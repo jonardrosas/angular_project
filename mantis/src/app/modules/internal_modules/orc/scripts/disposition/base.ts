@@ -6,13 +6,23 @@ export interface DispostionParameter {
     status?;
 }
 
-export class MantisDispositionBase implements MantisDispositionBase {
+
+export interface MantisDispositionBaseInterface {
+    dispoParams: DispostionParameter;
+    deviceSummaryClass;
+    checkTableClass;
+    checkTableButtonsClass;
+}
+
+export class MantisDispositionBase implements MantisDispositionBaseInterface {
+    dispoParams: DispostionParameter;
     checkTableClass = null;
     checkTableButtonsClass = null;
     deviceSummaryClass = null;
-    checkStatusClass = null;
-    dispoParams: DispostionParameter;
-    checkTableButtonsInstance;
+
+    constructor(dispoParams: DispostionParameter) {
+        this.dispoParams = dispoParams
+    }    
 
     getChecksTable(){
         if(this.checkTableClass){
@@ -23,14 +33,7 @@ export class MantisDispositionBase implements MantisDispositionBase {
 
     getCheckActionButtons(){
         if(this.checkTableButtonsClass){
-            if(this.checkStatusClass){
-                const checkStatusInstance = new this.checkStatusClass()
-                const status = checkStatusInstance.checkStatusGroup;
-                this.dispoParams.status = status;
-            }
-
-            this.checkTableButtonsInstance = new this.checkTableButtonsClass(this.dispoParams);
-            return this.checkTableButtonsInstance;
+            return new this.checkTableButtonsClass(this.dispoParams);
         }
         throw new Error('checkTableButtonsClass required')
 
@@ -43,10 +46,4 @@ export class MantisDispositionBase implements MantisDispositionBase {
         throw new Error('deviceSummaryClass required')
     }
 
-    getcheckStatusClass(){
-        if(this.checkStatusClass){
-            return new this.checkStatusClass()
-        }
-        throw new Error('checkStatusclass is required')
-    }    
 }

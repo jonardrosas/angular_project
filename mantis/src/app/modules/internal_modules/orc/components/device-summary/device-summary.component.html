@@ -4,13 +4,13 @@
         <i [ngClass]="isCollapse(data.panelIsOpen)"></i> Device Summary
     </button>      
 </div>
-<div id="deviceSummary" class="row-break" [ngbCollapse]="data.panelIsOpen">
+<div id="deviceSummary" class="row-break device-summary-container" [ngbCollapse]="data.panelIsOpen">
     <div class="card bg-light">
         <div class="card-body">            
             <h6>Mantis Info:</h6>
-            <div class="container-fluid border border-top-0 border-right-0 border-secondary">
+            <div class="container-fluid border border-top-0 border-right-0 border-secondary border-device-summary">
                 <div class="row bg-white">
-                    <div class="col-md-{{ getClass(field) }} border border-bottom-0 border-top border-left-0 border-secondary" *ngFor="let field of tables.mantisInfoTable.fields">
+                    <div class="col-md-{{ getClass(field) }} border border-bottom-0 border-top border-left-0 border-secondary border-device-summary" *ngFor="let field of tables.mantisInfoTable.fields">
                         <span class="p-1 font-weight-bold">
                             {{ field.headerName }}: 
                         </span>                 
@@ -19,9 +19,9 @@
                 </div>
             </div><br/>
             <h6>Basic Info:</h6>
-            <div class="container-fluid  border border-top-0 border-right-0 border-secondary">
+            <div class="container-fluid  border border-top-0 border-right-0 border-secondary border-device-summary">
                 <div class="row bg-white">
-                    <div class="col-md-{{ getClass(field) }} border border-bottom-0 border-top border-left-0 border-secondary" *ngFor="let field of tables.cadInfoTable.fields">
+                    <div class="col-md-{{ getClass(field) }} border border-bottom-0 border-top border-left-0 border-secondary border-device-summary" *ngFor="let field of tables.cadInfoTable.fields">
                         <span class="p-1 font-weight-bold">
                             {{ field.headerName }}: 
                         </span>                 
@@ -30,9 +30,9 @@
                 </div>
             </div><br/>
             <h6>Directories:</h6>
-            <div class="container-fluid  border-top border-left border-secondary">
+            <div class="container-fluid  border-top border-left border-secondary border-device-summary">
                 <div class="row bg-white">
-                    <div class="col-md-12 border border-bottom border-top-0 border-left-0 border-secondary" *ngFor="let field of tables.directoriesTable.fields">
+                    <div class="col-md-12 border border-bottom border-top-0 border-left-0 border-secondary border-device-summary" *ngFor="let field of tables.directoriesTable.fields">
                         <span class="p-1 font-weight-bold">
                             {{ field.headerName  }}: 
                         </span>                 
@@ -43,9 +43,9 @@
             <br/>
             <div *ngIf="tables.additionalInfoTable.fields.length > 0">
                 <h6>Additional Information:</h6>
-                <div class="container-fluid  border-top border-left border-secondary">
+                <div class="container-fluid  border-top border-left border-secondary border-device-summary">
                     <div class="row bg-white">
-                        <div class="col-md-3 border border-bottom border-top-0 border-left-0 border-secondary" *ngFor="let field of tables.additionalInfoTable.fields">
+                        <div class="col-md-3 border border-bottom border-top-0 border-left-0 border-secondary border-device-summary" *ngFor="let field of tables.additionalInfoTable.fields">
                             <span class="p-1 font-weight-bold">
                                 {{ field.headerName }}: 
                             </span>                 

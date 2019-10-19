@@ -1,27 +1,28 @@
 <div>
     <form [formGroup]="escalateIstForm" (ngSubmit)="onSubmit()">
         <div class="modal-header bg-dark text-light">
-            <h4 class="modal-title">Escalate Ist <span class="badge badge-primary">{{ selectedData.length }} selected</span> </h4>
+            <h4 class="modal-title">Escalate To Ist <span class="badge badge-primary">{{ selectedData.length }} selected</span> </h4>
             <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
         <div class="modal-body">
             <div class="container-fluid">
+            {{ escalateIstForm.value | json }}
                 <div class="row bg-light border-dark">
                     <div class="col-md-12">
-                        Escalate iST
+                        <div class="form-group">
+                            <label for="group_id">Check Status</label>
+                            <select id="group_id" class="form-control" formControlName="group_id">
+                                <option value="" disabled>Choose your status</option>
+                                <option *ngFor="let group of istGroups$ | async" [ngValue]="group.id">{{  group.name }}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="comments">Check Disposition Comments</label>
+                            <textarea id="comments" class="form-control" formControlName="comments"></textarea>
+                        </div>                        
                     </div>
-                </div>
-                <div class="row row-break" *ngIf="showSelectedChecks">
-                    <table class="table table-sm table-bordered">
-                        <thead class="thead-secondary">
-                            <tr><th>RuleName</th></tr>
-                        </thead>
-                        <tr *ngFor="let check of selectedData">
-                            <td>{{ check.name }}</td>
-                        </tr>
-                    </table>
                 </div>
             </div>
         </div>

@@ -15,6 +15,7 @@ export class MantisRecordService extends QueryHelper {
     public jobAttachmentUrl = URLS.DRF_MANTIS_RECORD_ATTACHMENT_URL;
     public jobHistoryUrl = URLS.DRF_MANTIS_RECORD_HISTORY_URL;
     public mantisRecordSubject = new BehaviorSubject<MantisRecordModel>({} as MantisRecordModel);
+    public groupUrl = URLS.DRF_AUTH_GROUP_PROFILE_URL;
 
     constructor(public apiService: ApiService) {
         super();
@@ -47,5 +48,9 @@ export class MantisRecordService extends QueryHelper {
         return this.apiService.get(this.jobHistoryUrl, params);
     }
 
+    getGroups(filters): Observable<any> {
+        const params = this.buildFilter(filters);
+        return this.apiService.get(this.groupUrl, params);
+    }    
 
 }

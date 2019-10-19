@@ -3,7 +3,6 @@ import { Validators } from '@angular/forms';
 import { MantisRecordModel } from './../../../../models';
 import { NgbActiveModal } from './../../../../../../third_party_modules/ng_bootstrap';
 import { NgAlertInterface } from './../../../../../../../core/models';
-// import { MantisDispositionManager } from '../../../../scripts/main';
 import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
@@ -14,9 +13,10 @@ import { FormGroup, FormControl } from '@angular/forms';
 
 export class CheckChangeStatusComponent implements OnInit {
     @Input() selectedData;
+    @Input() dispoManagerInstance;
     @Input() mantisRecord: MantisRecordModel;
-    public statusInstance;
     public statusGroup;
+    public statusInstance;
     public changeStatusForm;
     public alerts: NgAlertInterface[] = [];
     public showSelectedChecks = false ;
@@ -24,15 +24,11 @@ export class CheckChangeStatusComponent implements OnInit {
     constructor(public activeModal: NgbActiveModal) {}
 
     ngOnInit() {
-        const paramsIns = {
-            mantisRecord: this.mantisRecord
-        }
-        // this.statusInstance = new MantisDispositionManager(paramsIns);
-        // this.statusGroup = this.statusInstance.statusGroup;
         this.changeStatusForm = new FormGroup({
             status: new FormControl('', Validators.required),
             description: new FormControl(''),
         });
+        this.statusGroup = this.dispoManagerInstance.dispositionInstance.changeStatusOptions;
     }
 
     clearAlerts() {

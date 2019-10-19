@@ -8,9 +8,10 @@ export class DrcCheckDispositionButtonClass extends CheckDisposeButtonBase {
     }    
  
     constructor(private dispoParams){
-        super();
+        super(dispoParams);
         this.buttons = [
             this.rvAssignment,
+            this.addNotes
         ]
     }
 
