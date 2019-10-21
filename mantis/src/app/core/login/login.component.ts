@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap, RouterStateSnapshot } from '@angular/router';
-import { take } from 'rxjs/operators';
+import { Store, select } from '@ngrx/store';
 import { NgbAlertConfig } from './../../modules/third_party_modules/ng_bootstrap';
-import { AuthenticationService } from './../services';
-import { Alert } from './../models';
+import { AuthenticationService, LoginService} from './../services';
+import { Alert, LoginCredentials } from './../models';
 import { APP_CONFIG } from './../../configs';
+import * as coreStore from './../store';
 
 
 @Component({
@@ -21,8 +22,10 @@ export class LoginComponent implements OnInit {
 
     constructor(
         private authService: AuthenticationService,
+        private logInService: LoginService,
         private router: Router,
         private activatedRoute: ActivatedRoute,
+        private store: Store<any>
     ){}
 
     ngOnInit(){
@@ -38,6 +41,7 @@ export class LoginComponent implements OnInit {
 
     invalidResponse(){
         this.alert = {message: 'Incorrect username or password', type: 'warning'}
+        return 
     }
 
     authenticate(){
@@ -51,8 +55,7 @@ export class LoginComponent implements OnInit {
     }
 
     onSubmit(credentials) {
-        // const credentials = this.loginForm.value;
-        this.authService.logIn(credentials)
+        this.logInService.logIn(credentials)
             .subscribe(
                 data => this.authenticate(),
                 err => this.invalidResponse(),

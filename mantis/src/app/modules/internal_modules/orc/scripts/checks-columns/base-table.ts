@@ -84,15 +84,17 @@ export class CheckBaseModel implements CheckTableInterface {
         field: 'checkassessments',
         cellRenderer: params => {
             const assignedGroups = [];
-            if(params.data.checkassessments.length > 0){
-                for (const review in params.data.checkassessments) {
-                    assignedGroups.push(params.data.checkassessments[review].assigned_group.name);
+            if(params.data.reviews.length > 0){
+                for (const review in params.data.reviews) {
+                    if(params.data.reviews[review].assigned_group){
+                        assignedGroups.push(params.data.reviews[review].assigned_group.name);
+                    }
                 }
             }
             const assignedGroupStr = assignedGroups.join(', ')
             return assignedGroupStr;
-        }        
-    }        
+        }
+    };        
     public drcDescriptionField = {
         headerName: 'DRC Description',
         field: 'check',
@@ -100,15 +102,30 @@ export class CheckBaseModel implements CheckTableInterface {
         filter: true,
         valueGetter(params) {
             const data_list = [];
-            if(params.data.check.length > 0){
+            if(params.data.check && params.data.check.length > 0){
                 for (const key in params.data.check) {
-                    data_list.push(params.data.check[key].desc);
+                    data_list.push(params.data.check[key].descr);
                 }
             }
             return data_list.join(', ')
         }   
+    };    
+
+    public drcUtilField = {
+        headerName: 'DRC Util',
+        field: 'drc_util',
+        sortable: true,
+        filter: true ,
+        valueGetter(params) {
+            const data_list = [];
+            if(params.data.check && params.data.check.length > 0){
+                for (const key in params.data.check) {
+                    data_list.push(params.data.check[key].drc_util);
+                }
+            }
+            return data_list.join(', ')
+        }  
     };
-    public drcUtilField = { headerName: 'DRC Util', field: 'drc_util', sortable: true, filter: true };
     public comparisonResultField = { headerName: 'Comparision Result', field: '' };
     public comparatorCheckReviewStatus = { headerName: 'Check Review Status', field: '' };
     public assignedGroupField = {

@@ -32,59 +32,58 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
         checkStatusTemplateComponent: CheckStatusTemplateComponent
     }
     public mainTabs = [
-        { title: 'All Checks', url: '/orc/view'},
-        { title: 'Assigned iST', url: '/orc/view?teset=2'},
-        { title: 'Assigned SOA', url: '/orc/view2?test=3'},
+        { id: 1, title: 'All Checks', url: '/orc/view', param: 'default', count: 0},
+        { id: 2, title: 'Assigned iST', url: '/orc/view', param: 'assinged_ist', count: 0},
+        { id: 3, title: 'Assigned SOA', url: '/orc/view', param: 'assinged_soa', count: 0},
     ];
-    public tabs: {
-        title;
-        url;
-        param;
-    }[] = [];
     public buttons;
-
     @ViewChild('agGrid', { static: false }) agGrid: AgGridAngular;
     public options = {
         theme: `detail-check ag-theme-balham`
     };
     public filters = {};
-    
-    public gridOptions = {
-        rowData: this.rowData,
-        columnDefs: this.columnDefs,
-        suppressRowClickSelection: 'true',
-        suppressAutoSize: 'true',
-        frameworkComponents: 'frameworkComponents',
-        defaultColDef: '{resizable: true}',
-        pagination: true,
-        floatingFilter: true,
-    }
-    public distinctField = 'checkassessments__assigned_group__name';
+    public checkAction;
+    public checkSelector;
 
+    public defaultAction;
+    public defaultSelector;
+    public getAssignedIstAction;
+    public getAssignedSoaAction;
+    public assignedIstSelector;
+    public assignedSoaSelector;
+    
     constructor(
         private store: Store<any>,
         private modalService: NgbModal,
         private activateRoute: ActivatedRoute,
-        private router: Router,
     ) {
         super()
     }
 
     ngOnInit() {
+        this.defaultAction = this.dispoManagerInstance.dispositionInstance.checkTableStoreAction;
+        this.defaultSelector = this.dispoManagerInstance.dispositionInstance.checkTableStoreSelector;
+        this.getAssignedIstAction = this.dispoManagerInstance.dispositionInstance.checkTableStoreAssignedIstAction;
+        this.getAssignedSoaAction = this.dispoManagerInstance.dispositionInstance.checkTableStoreAssignedSoaAction;
+        this.assignedIstSelector = this.dispoManagerInstance.dispositionInstance.checkTableStoreAssignedIstSelector;
+        this.assignedSoaSelector = this.dispoManagerInstance.dispositionInstance.checkTableStoreAssignedSoaSelector;
+
         this.mantisRecord = this.dispoManagerInstance.dispoParams.mantisRecord;
-        this.store.dispatch(orcModuleStore.getDistinctFieldAction({record: this.dispoManagerInstance.dispoParams.mantisRecord.orc_record.id, 'fields': this.distinctField}))
         this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs();
         this.buttons = this.dispoManagerInstance.getCheckActionButtons();         
+
+        this.filters = {};
+        this.filters['limit'] = 1000;
+        this.filters['record'] = this.mantisRecord.orc_record.id;        
+
         this.activateRoute.queryParams.subscribe(
             (data) => {
-                this.filters[this.distinctField] = this.activateRoute.snapshot.queryParams['assigned_to'] || null;
-                if(this.dispoManagerInstance.dispoParams.mantisRecord.orc_record.id){
-                    this.filters['record'] =  this.mantisRecord.orc_record.id;
-                    this.filters['limit'] = 1000                    
-                    this.getChecks(this.filters);
-                    if(this.agGrid){
-                        this.getDistinctValue()
-                    }
+                if(data.check_section == 'assinged_ist'){
+                    this.getChecks(this.assignedIstSelector);
+                }else if(data.check_section == 'assinged_soa'){
+                    this.getChecks(this.assignedSoaSelector);
+                }else if(data.check_section == 'default'){
+                    this.getChecks(this.defaultSelector);
                 }
             }
         )        
@@ -95,37 +94,25 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
         this.agGrid.api.setDomLayout('autoHeight');
     }
 
-    getDistinctValue(){
-        if(this.mantisRecord.orc_record.status == 'SOA'){
-            this.tabs = [];
-            this.store.pipe(select(orcModuleStore.getDistinctFieldsFnSelector)).subscribe(
-                (data) => {
-                    for (const key in data){
-                        const value = data[key];
-                        if(value[this.distinctField]){
-                            this.tabs.push(
-                                {title: value[this.distinctField], url: '/orc/view', param: value[this.distinctField]}
-                            )
-                        }                    
-                    }                    
-                }
-            )
+    getCount(id){
+        let count$;
+        if(id == 2){
+            count$ = this.store.pipe(select(this.assignedIstSelector));
+        }else if(id == 3){
+            count$ = this.store.pipe(select(this.assignedSoaSelector));
+        }else if(id == 1){
+            count$ = this.store.pipe(select(this.defaultSelector));
         }
+        return count$
     }
 
-    getChecks(filters) {
-        this.store.dispatch(orcModuleStore.getOrcChecksAction(filters));
-        this.store.pipe(select(orcModuleStore.getOrcRecordCheckStateSelector)).subscribe(
+    getChecks(selector) {
+        this.store.pipe(select(selector)).subscribe(
             (data) => {
-                if (data.length > 0) {
-                    this.rowData = data;
-                }
+                this.rowData = data;
                 if(this.agGrid){
                     this.agGrid.api.sizeColumnsToFit();
                     this.agGrid.api.setDomLayout('autoHeight');
-                    setTimeout(
-                        ()=>this.getDistinctValue(), 1000
-                    )
                 }
             },
             (err) => {

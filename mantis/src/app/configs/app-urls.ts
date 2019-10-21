@@ -24,6 +24,7 @@ export const URLS = {
     DRF_MANTIS_RECORD_ATTACHMENT_URL: '/mantis/api/v2/mantis_record_attachment/',
     DRF_MANTIS_RECORD_HISTORY_URL: '/mantis/api/v2/mantis_record_history/',
     DRF_ORC_RECORD_URL: '/mantis/api/v2/orc_record/',
+    DRF_DRC_RECORD_URL: '/mantis/api/v2/drc_record/',
     DRF_ORC_RECORD_EXT_URL: '/mantis/api/v2/orc_record_ext/',
     DRF_ORC_RECORD_CHECK_URL: '/mantis/api/v2/orc_record_check/',
     DRF_DRC_RECORD_CHECK_URL: '/mantis/api/v2/drc_record_check/',

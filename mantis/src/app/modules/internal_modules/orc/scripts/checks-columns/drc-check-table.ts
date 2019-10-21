@@ -3,6 +3,7 @@ import { CheckBaseModel } from './base-table';
 
 
 export class DrcCheckTable extends CheckBaseModel {
+
     columnDefs = [
         this.ruleNameField,
         this.rawErrorCountField,

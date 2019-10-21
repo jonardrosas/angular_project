@@ -1,6 +1,7 @@
 // Angular imports
 import { Component, OnInit, Input } from '@angular/core';
-import { AuthenticationService } from './../services';
+import { Router } from '@angular/router';
+import { AuthenticationService, LoginService } from './../services';
 import { APP_CONFIG } from './../../configs';
 
 @Component({
@@ -15,22 +16,25 @@ export class NavigationComponent implements OnInit {
     public logo = APP_CONFIG.LOGO;
     public userInstance;
 
-    constructor(private authService: AuthenticationService) {
+    constructor(
+        private authService: AuthenticationService,
+        private loginService: LoginService,
+        private router: Router,
+    ) {
         console.log("Navigation Component Instanced Created");
     }
 
     ngOnInit() {
         this.authService.currentUserSubject.subscribe(
-            (data) => this.setUserInstance(data)
+            (data) => {
+                this.userInstance = data;
+            }
         );
     }
 
-    setUserInstance(data){
-        return this.userInstance = data;
-    }
-
     logOut() {
-        return this.authService.logOut();
+        this.loginService.logOut()
+        this.router.navigate(['/login']);
     }
 
 }

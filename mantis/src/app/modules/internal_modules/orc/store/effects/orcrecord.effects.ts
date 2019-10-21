@@ -36,6 +36,8 @@ export class OrcRecordEffects {
         )
     );
 
+    
+
     loadOrcIstGroupsFn = createEffect(() => this.actions$.pipe(
         ofType(orcRecordActions.GET_IST_GROUP_OPTION),
         mergeMap(
@@ -74,6 +76,32 @@ export class OrcRecordEffects {
             )
         )
     ))
+
+    loadIstCheckFieldFn = createEffect(() => this.actions$.pipe(
+        ofType(orcRecordActions.getiSTChecksAction),
+        mergeMap(
+            (payload: any) => this.orcRecordService.getIstChecks(payload.record)
+            .pipe(
+                map(
+                    data => orcRecordActions.setiSTChecksAction({checks: data.results}),
+                    catchError(() => EMPTY)
+                )
+            )
+        )
+    ))    
+
+    loadSoaCheckFieldFn = createEffect(() => this.actions$.pipe(
+        ofType(orcRecordActions.getSoaChecksAction),
+        mergeMap(
+            (payload: any) => this.orcRecordService.getSoaChecks(payload.record)
+            .pipe(
+                map(
+                    data => orcRecordActions.setSoaChecksAction({checks: data.results}),
+                    catchError(() => EMPTY)
+                )
+            )
+        )
+    ))        
 
 }
 

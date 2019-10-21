@@ -42,7 +42,7 @@ export class JwtAuthenticationService {
                 data => {
                     this.setAuth(data);
                     return data;
-                }
+                },
             ));
     }    
 

@@ -27,7 +27,6 @@ export class DetailNotesSectionComponent extends ButtonCollapse implements OnIni
 
 
     ngOnInit() {
-        this.store.dispatch(orcModuleStore.getMantisJobNotesAction({bug: this.mantisId}));
         this.getObject();
     }
 

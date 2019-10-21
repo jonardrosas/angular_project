@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, BehaviorSubject, ReplaySubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { ApiService } from './api.service';
-import { JwtService } from './jwt.service';
 import { User } from '../models';
 import { JwtAuthenticationService } from './auth_token.service';
 import { CookieAuthenticationService } from './auth_cookie.service';
@@ -30,15 +28,6 @@ export class AuthenticationService {
         this.authenticate('Authenticate Service');
     }
 
-    authenticate(source) {
-        console.log('Authenticate method called from ', source);
-        this.backend.getSession()
-            .subscribe(
-                data => this.validateSession(data),
-                err => this.errorResponseHander()
-            );
-    }
-
     setUnAuthorized() {
         this.currentUserSubject.next({} as User);
         this.isAuthenticatedSubject.next(false);
@@ -55,41 +44,30 @@ export class AuthenticationService {
         } else {
             this.setAuthorized(data);
         }
-    }
-
-    getCurrentUser(): User {
-        return this.currentUserSubject.value;
-    }
-
-    /*
-     *  If backend is CookieAuthenticationService
-     * 403 error will execute incase no csrf token (403 forbidden repsonse)
-     *
-     */
-    errorResponseHander() {
-        this.setUnAuthorized()
-    }
+    }    
 
     getSession(): Observable<any> {
-        console.log('Get session')
         return this.backend.getSession().pipe(
             catchError(val => {
                 return this.unAuthorizedResponseSubject;  // dont send error to the subscriber, so that auth guard can handle it
             })
         );
 
+    }    
+
+    authenticate(source) {
+        this.getSession()
+            .subscribe(
+                data => this.validateSession(data),
+                err => this.errorResponseHander()
+            );
     }
 
-    logIn(body): Observable<any> {
-        return this.backend.attemptAuth(body)
+    getCurrentUser(): User {
+        return this.currentUserSubject.value;
     }
 
-    logOut() {
-        this.backend.logout().subscribe(
-            (data) => console.log("Logging out")
-        )
+    errorResponseHander() {
         this.setUnAuthorized()
-        this.router.navigate(['/login']);
     }
-
 }

@@ -84,7 +84,6 @@ export class OrcCheckDispositionButtonClass extends CheckDisposeButtonBase {
         }
     }    
 
-
     constructor(private dispoParams){
         super(dispoParams);
         this.buttons = [

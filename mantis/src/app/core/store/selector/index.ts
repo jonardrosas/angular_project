@@ -1,1 +1,1 @@
-export * from './user-session-selector';
+export * from './core-selector';

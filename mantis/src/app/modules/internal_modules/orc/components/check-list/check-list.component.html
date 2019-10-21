@@ -5,9 +5,18 @@
     </button>      
     <div id="historySection" class="row-break" [ngbCollapse]="data.panelIsOpen">
     <ul class="d-flex nav nav-tabs m4-nav" role="tablist">
-        <li class="shadow-sm ml-1 nav-item" *ngFor="let mainTab of mainTabs"><a class="shadow font-weight-bold text-dark border border-secondary nav-check-link" [routerLink]="[mainTab.url, mantisId]" routerLinkActive="active">{{ mainTab.title }} <span class="count-badge badge badge-md badge-info">{{ rowData.length }}</span></a></li>
+        <li class="shadow-sm ml-1 nav-item"
+            *ngFor="let mainTab of mainTabs">
+                <a 
+                    class="shadow font-weight-bold text-dark nav-check-link"
+                    [routerLink]="[mainTab.url, mantisId]"
+                    [queryParams]="{check_section: mainTab.param}" 
+                    routerLinkActive="active">
+                    {{ mainTab.title }} 
+                    <span *ngIf="(getCount(mainTab.id)| async)?.length > 0" class="count-badge badge badge-md badge-info">{{ (getCount(mainTab.id)| async)?.length }}</span>
+                </a>
+        </li>
         <li class="nav-item ml-auto"><a class="nav-check-link bg-light text-dark border border-secondary ml-1" [routerLink]="" ><i class="fas fa-cog fa-lg"></i> </a></li>
-        <!--<li class="nav-item" *ngFor="let tab of tabs"><a class="nav-link bg-light text-dark border border-secondary ml-1"  [routerLink]="[tab.url, mantisId]" [queryParams]="{assigned_to: tab.param}" >{{  tab.title }}</a></li>-->
     </ul>
     <div class="card bg-light">
         <div class="card-body">                        

@@ -23,6 +23,7 @@ export class DetailComponent implements OnInit, AfterViewInit {
     public mantisRecord: MantisRecordModel;
     public loadingImg: string = APP_CONFIG.LOADING_IMG;
     public isSectionComponentLoaded: boolean = false;
+    public checkFilter: {limit?: number; record?: number};
     @ViewChild(JobreportSectionDirective, {static: false}) adSection: JobreportSectionDirective;
 
     constructor(
@@ -54,10 +55,22 @@ export class DetailComponent implements OnInit, AfterViewInit {
                         mantisRecord: this.mantisRecord,
                         modalService: this.modalService,
                     }
+                    this.checkFilter = {};
+                    this.checkFilter['limit'] = 1000;
+                    this.checkFilter['record'] = this.mantisRecord.orc_record.id;
                     this.dispoManagerInstance = new MantisDispositionManager(paramsIns);
                     this.dispoManagerInstanceSubject = this.dispInstanceMangerService.dispoMangerSubject;
                     this.dispoManagerInstanceSubject.next(this.dispoManagerInstance);
-                    
+                    this.store.dispatch(orcModuleStore.getMantisErrorSummaryAction({id: this.mantisRecord.bug_text.id}));
+
+                    const loadAllCheckAction = this.dispoManagerInstance.dispositionInstance.checkTableStoreAction;
+                    const loadIstCheckAction  = this.dispoManagerInstance.dispositionInstance.checkTableStoreAssignedIstAction;
+                    const loadSoaCheckAction = this.dispoManagerInstance.dispositionInstance.checkTableStoreAssignedSoaAction;
+            
+                    this.store.dispatch(loadAllCheckAction(this.checkFilter));
+                    this.store.dispatch(loadIstCheckAction(this.checkFilter));
+                    this.store.dispatch(loadSoaCheckAction(this.checkFilter));     
+
                 }
             },
         );
@@ -65,6 +78,9 @@ export class DetailComponent implements OnInit, AfterViewInit {
 
     getObjectUsingStore(mantisId: number) {
         this.store.dispatch(orcModuleStore.getMantisObjectAction({id: mantisId}));
+        this.store.dispatch(orcModuleStore.getMantisJobNotesAction({bug: this.mantisId}));
+        this.store.dispatch(orcModuleStore.getMantisHistoryAction({bug: this.mantisId}));
+        this.store.dispatch(orcModuleStore.getMantisAttachmentAction({ bug_id: this.mantisId }));
         this.store.dispatch(orcModuleStore.getIstGroupAction({status: 'iST'}));
         this.store.dispatch(orcModuleStore.getSOAGroupAction({status: 'SOA'}));
         this.loadMantisRecord();

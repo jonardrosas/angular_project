@@ -2,6 +2,7 @@ import { createReducer, on, Action} from '@ngrx/store';
 import * as orcRecordActions from '../actions';
 import { OrcRecordInterface, OrcRecordModel } from '../../models';
 import { OrcRecordState } from './../state';
+import { setIstGroupAction } from '../actions/orcrecord.actions';
 
 
 export const initialState: OrcRecordState = {
@@ -11,6 +12,8 @@ export const initialState: OrcRecordState = {
     soaSupportTeamGroup: [],
     loaded: false,
     loading: false,
+    soaChecks: [],
+    istChecks: [],
     distinctFields: []
 };
 
@@ -72,6 +75,21 @@ const orcRecordReducer = createReducer(
             return { ...state, loading: false };
         }
     ),       
+    on(
+        orcRecordActions.setiSTChecksAction,
+        (state, { checks }) => {
+            state.istChecks = checks;
+            return { ...state, loading: false };
+        }
+    ),  
+    on(
+        orcRecordActions.setSoaChecksAction,
+        (state, { checks }) => {
+            state.soaChecks = checks;
+            return { ...state, loading: false };
+        }
+    ),      
+
 );
 
 

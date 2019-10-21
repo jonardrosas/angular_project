@@ -6,7 +6,8 @@ export const getOrcCheckFn = (state: OrcRecordState) => state.checks;
 export const getIstSupportTeamGroupFn = (state: OrcRecordState) => state.istSupportTeamGroup;
 export const getSOASupportTeamGroupFn = (state: OrcRecordState) => state.soaSupportTeamGroup;
 export const getdistinctFieldsFn = (state: OrcRecordState) => state.distinctFields;
-
+export const getIstChekcsFn = (state: OrcRecordState) => state.istChecks;
+export const getSoaChecksFn = (state: OrcRecordState) => state.soaChecks;
 
 // selectors
 const getOrcModuleState = createFeatureSelector<OrcModuleState>('orc');
@@ -38,4 +39,16 @@ export const getDistinctFieldsFnSelector = createSelector(
     getOrcRecordStateSelector,
     getdistinctFieldsFn
 );
+
+export const getIstCheckSelector = createSelector(
+    getOrcRecordStateSelector,
+    getIstChekcsFn
+);
+
+export const getSoaCheckSelector = createSelector(
+    getOrcRecordStateSelector,
+    getSoaChecksFn
+);
+
+
 

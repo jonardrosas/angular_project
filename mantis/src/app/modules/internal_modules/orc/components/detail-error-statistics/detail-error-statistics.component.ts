@@ -20,11 +20,10 @@ export class DetailErrorStatisticsComponent extends ButtonCollapse implements On
     }
 
     ngOnInit() {
-        this.getObject(this.dispoManagerInstance.dispoParams.mantisRecord.bug_text.id);
+        this.getObject();
     }
 
-    getObject(id) {
-        this.store.dispatch(orcModuleStore.getMantisErrorSummaryAction({id}));
+    getObject() {
         this.store.pipe(select(orcModuleStore.getMantisRecordSummaryStateSelector)).subscribe(
             (data) => {
                 this.description = data;
