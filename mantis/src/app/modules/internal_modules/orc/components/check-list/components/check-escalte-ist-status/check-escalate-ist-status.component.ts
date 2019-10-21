@@ -20,6 +20,7 @@ export class CheckEscalateIstComponent implements OnInit {
     public escalateIstForm;
     public istGroups$: Observable<GroupProfileInterface[]>;
     public alerts: NgAlertInterface[] = [];
+    public showSelectedChecks;
 
     constructor(
         public activeModal: NgbActiveModal,

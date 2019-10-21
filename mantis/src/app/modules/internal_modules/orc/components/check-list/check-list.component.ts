@@ -28,7 +28,7 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
     public columnDefs: any;
     @Input() dispoManagerInstance: MantisDispositionManager;
     public mantisRecord: MantisRecordModel;
-    private frameworkComponents = {
+    public frameworkComponents = {
         checkStatusTemplateComponent: CheckStatusTemplateComponent
     }
     public mainTabs = [
