@@ -2,11 +2,12 @@ import { AdSection } from './../common';
 import { 
     DeviceSummaryComponent , DetailErrorStatisticsComponent,
     DetailNotesSectionComponent, DetailAttachmentSectionComponent,
-    DetailJobHistorySectionComponent, CheckListComponent
+    DetailJobHistorySectionComponent, CheckListComponent, ProgressBarComponent
 } from './../../components';
 import { TestDivComponent } from './../../components/test-div/test-div.component';
 
 export const ReportSectionComponent = [
+    new AdSection(ProgressBarComponent, {title: 'Progress Bar', panelIsOpen: false}),
     new AdSection(DeviceSummaryComponent, {title: 'Device Summary', panelIsOpen: false}),
     new AdSection(DetailErrorStatisticsComponent, {title: 'Error Summary', panelIsOpen: true}),
     new AdSection(DetailNotesSectionComponent, {title: 'Job Notes', panelIsOpen: true}),

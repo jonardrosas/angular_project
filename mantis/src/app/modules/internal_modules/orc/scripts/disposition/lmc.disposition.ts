@@ -3,6 +3,7 @@ import { OrcCheckDispositionButtonClass } from './../check-disposition-buttons/'
 import { LMCCheckTable } from './../checks-columns';
 import { DispostionParameter } from './base';
 import { LMCDeviceSummary } from './../device-summary';
+import { OrcProgressBarTable } from './../progress-bar';
 
 export class LMCDispostion extends MantisDispositionBase {
     public checkTableClass = LMCCheckTable;

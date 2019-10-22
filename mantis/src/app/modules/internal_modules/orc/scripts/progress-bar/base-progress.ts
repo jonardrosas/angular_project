@@ -1,12 +1,12 @@
 import { MantisStageStatusModel } from './../common/stage';
 
 interface ProgressBarInterface {
-    progressBar;
+    progressBar: any;
     setProgressBar(): void;
 }
 
 export class ProgressBarModel implements ProgressBarInterface {
-    progressBar: object = MantisStageStatusModel;
+    progressBar = MantisStageStatusModel;
     
     constructor() {
         this.setProgressBar();

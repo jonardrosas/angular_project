@@ -18,7 +18,7 @@ export class ProgressBarComponent extends ButtonCollapse implements OnInit {
     @Input() dispoManagerInstance: MantisDispositionManager;
     public tableInstance;
     public tableItem;
-    public mantisRecord: MantisRecordModel;
+    public mantisRecord;
     public currentStage: string;
     public coloredTable: string = "white";
     public statusList: string;
