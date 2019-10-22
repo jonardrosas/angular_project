@@ -23,7 +23,6 @@ export class DetailJobHistorySectionComponent extends ButtonCollapse implements 
     }
 
     ngOnInit() {
-        this.store.dispatch(orcModuleStore.getMantisHistoryAction({bug: this.mantisId}));
         this.getObject();
   }
 

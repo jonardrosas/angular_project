@@ -1,4 +1,3 @@
-
 /****
  Check default column definition
  ****/
@@ -34,12 +33,8 @@ export class CheckBaseModel implements CheckTableInterface {
         field: 'status',
         sortable: true,
         filter: true,
-        width: 30,
+        width: 60,
         cellRenderer: 'checkStatusTemplateComponent',
-    };
-    public assigedGroupField = { headerName: 'Assigned Group', field: '', sortable: true, filter: true, width: 50 };
-    public assignedSoaGroupField = {
-        headerName: 'Assigned SOA Group', field: 'assigned_soa_groups', sortable: true, filter: true, width: 50
     };
     public pdbViolationCountField = {
         headerName: 'PDB Violation counts',
@@ -72,24 +67,99 @@ export class CheckBaseModel implements CheckTableInterface {
             return `${params.value}`;
         }
     };
-    public defaultRvField = { headerName: 'Default RV', field: '', sortable: true, filter: true };
-    public assignedRvField = { headerName: 'Assigned RV', field: '', sortable: true, filter: true };
-    public drcDescriptionField = { headerName: 'DRC Description', field: 'drc_desc', sortable: true, filter: true };
-    public drcUtilField = { headerName: 'DRC Util', field: 'drc_util', sortable: true, filter: true };
+    public defaultRvField = {
+        headerName: 'Default RV',
+        field: 'rule_owner',
+        sortable: true,
+        filter: true ,
+        valueGetter(params) {
+            if(params.data.rule_owner){
+                return params.data.rule_owner.drc_rule_owner;
+            }
+            return '';
+        }        
+    };
+    public assignedRvField = { 
+        headerName: 'Assigned RV',
+        field: 'checkassessments',
+        cellRenderer: params => {
+            const assignedGroups = [];
+            if(params.data.reviews.length > 0){
+                for (const review in params.data.reviews) {
+                    if(params.data.reviews[review].assigned_group){
+                        assignedGroups.push(params.data.reviews[review].assigned_group.name);
+                    }
+                }
+            }
+            const assignedGroupStr = assignedGroups.join(', ')
+            return assignedGroupStr;
+        }
+    };        
+    public drcDescriptionField = {
+        headerName: 'DRC Description',
+        field: 'check',
+        sortable: true,
+        filter: true,
+        valueGetter(params) {
+            const data_list = [];
+            if(params.data.check && params.data.check.length > 0){
+                for (const key in params.data.check) {
+                    data_list.push(params.data.check[key].descr);
+                }
+            }
+            return data_list.join(', ')
+        }   
+    };    
+
+    public drcUtilField = {
+        headerName: 'DRC Util',
+        field: 'drc_util',
+        sortable: true,
+        filter: true ,
+        valueGetter(params) {
+            const data_list = [];
+            if(params.data.check && params.data.check.length > 0){
+                for (const key in params.data.check) {
+                    data_list.push(params.data.check[key].drc_util);
+                }
+            }
+            return data_list.join(', ')
+        }  
+    };
     public comparisonResultField = { headerName: 'Comparision Result', field: '' };
     public comparatorCheckReviewStatus = { headerName: 'Check Review Status', field: '' };
     public assignedGroupField = {
         headerName: 'Assigned Group',
-        field: 'assigned_group',
+        field: 'reviews',
         cellRenderer: params => {
             const assignedGroups = [];
-            for (const review in params.reviews) {
-                if (params.reviews[review]) {
-                    assignedGroups.push(params.reviews[review]);
+            if(params.data.reviews.length > 0){
+                for (const review in params.data.reviews) {
+                    if(params.data.reviews[review].assigned_group){
+                        assignedGroups.push(params.data.reviews[review].assigned_group.name);
+                    }
                 }
             }
+            const assignedGroupStr = assignedGroups.join(', ')
+            return assignedGroupStr;
         }
     };
+
+    public assignedSoaGroupField = {
+        headerName: 'Assigned SOA',
+        field: 'checkassessments',
+        cellRenderer: params => {
+            const assignedGroups = [];
+            if(params.data.checkassessments.length > 0){
+                for (const review in params.data.checkassessments) {
+                    assignedGroups.push(params.data.checkassessments[review].assigned_group.name);
+                }
+            }
+            const assignedGroupStr = assignedGroups.join(', ')
+            return assignedGroupStr;
+        }
+    };
+
 
     constructor() {
         this.setColumnDefs()
@@ -110,7 +180,7 @@ export class CheckBaseModel implements CheckTableInterface {
         this.columnDefs = [
             this.ruleNameField,
             this.rawErrorCountField,
-            this.assigedGroupField,
+            this.assignedGroupField,
             this.assignedSoaGroupField,
             this.pdbViolationCountField,
             this.pdbValidatedField,

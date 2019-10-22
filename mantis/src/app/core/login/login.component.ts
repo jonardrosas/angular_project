@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap, RouterStateSnapshot } from '@angular/router';
-import { take } from 'rxjs/operators';
+import { Store, select } from '@ngrx/store';
 import { NgbAlertConfig } from './../../modules/third_party_modules/ng_bootstrap';
-import { AuthenticationService } from './../services';
-import { Alert } from './../models';
+import { AuthenticationService, LoginService} from './../services';
+import { Alert, LoginCredentials } from './../models';
 import { APP_CONFIG } from './../../configs';
+import * as coreStore from './../store';
 
 
 @Component({
@@ -16,12 +17,15 @@ import { APP_CONFIG } from './../../configs';
 
 export class LoginComponent implements OnInit {
     alert;
+    nextUrl: string;
     appTheme = APP_CONFIG.APP_THEME;
 
     constructor(
         private authService: AuthenticationService,
+        private logInService: LoginService,
         private router: Router,
         private activatedRoute: ActivatedRoute,
+        private store: Store<any>
     ){}
 
     ngOnInit(){
@@ -30,21 +34,14 @@ export class LoginComponent implements OnInit {
 
     isAuthenticated(isLoggedIn){
         if(isLoggedIn){
-            this.activatedRoute.queryParams.subscribe(params => {
-                  let next = params['next'];
-                  if(next){
-                      let decodedParams =  decodeURIComponent(next);
-                      this.router.navigate([decodedParams]);
-                  }else{
-                      this.router.navigate(['/home']);
-                  }
-            });            
-           // this.router.navigate(['/home']);
+            this.nextUrl = this.activatedRoute.snapshot.queryParams['next'] || '/home';
+            this.router.navigateByUrl(this.nextUrl);
         }
     }
 
     invalidResponse(){
         this.alert = {message: 'Incorrect username or password', type: 'warning'}
+        return 
     }
 
     authenticate(){
@@ -58,8 +55,7 @@ export class LoginComponent implements OnInit {
     }
 
     onSubmit(credentials) {
-        // const credentials = this.loginForm.value;
-        this.authService.logIn(credentials)
+        this.logInService.logIn(credentials)
             .subscribe(
                 data => this.authenticate(),
                 err => this.invalidResponse(),

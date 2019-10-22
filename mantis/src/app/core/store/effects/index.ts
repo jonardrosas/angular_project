@@ -1,7 +1,7 @@
-import {  UserSessionEffects } from  './user-session-effect';
+import {  CoreEffects } from  './core-effect';
 
 export const effects: any[] = [
-    UserSessionEffects,
+    CoreEffects,
 ];
 
-export * from './user-session-effect';
+export * from './core-effect';

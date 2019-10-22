@@ -16,12 +16,14 @@ import {
   JwtService,
   JwtAuthenticationService,
   CookieAuthenticationService,
+  LoginService,
   //AuthGuard,
 } from './services';
 
 import { LoginComponent } from './login/login.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   imports: [
@@ -41,13 +43,15 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
       JwtService,
       JwtAuthenticationService,
       CookieAuthenticationService,
+      LoginService
       //AuthGuard
   ],
-  declarations: [LoginComponent, PageNotFoundComponent, NavigationComponent],
+  declarations: [LoginComponent, PageNotFoundComponent, NavigationComponent, FooterComponent],
   exports:[
         LoginComponent,
         PageNotFoundComponent,
-        NavigationComponent
+        NavigationComponent,
+        FooterComponent
   ]
 })
 

@@ -7,9 +7,10 @@ import { EffectsModule } from '@ngrx/effects';
 import { NgBootstrapModule } from './../../third_party_modules/ng_bootstrap/ng_bootstrap.module';
 import { MaterialModule } from './../../third_party_modules/material/material.module';
 import { AgGridModule } from './../../third_party_modules/ag-grid';
+import { Ckeditor5AngularModule } from './../../third_party_modules/ckeditor5-angular'
 
 import { SharedModule, BootstrapAlertComponent } from './../../../shared';
-import { OrcRecordService, MantisRecordService, OrcCheckService, DispoMangerService} from './services';
+import { OrcRecordService, MantisRecordService, OrcCheckService, DispoMangerService, DrcRecordService, DrcCheckService} from './services';
 
 import * as fromOrcModuleReducer from './store';
 import { OrcRoutingModule } from './orc-routing.module';
@@ -26,10 +27,13 @@ import { CheckChangeStatusComponent } from './components/check-list/components/c
 import { CheckStatusTemplateComponent } from './components/check-list/components/check-status-template/check-status-template.component';
 import { CheckEscalateIstComponent } from './components/check-list/components/check-escalte-ist-status/check-escalate-ist-status.component';
 import { Safe } from './../../../shared/pipes/safe-html';
-import { DetailHeaderTableComponent } from './components/detail-header-table/detail-header-table.component';
 import { JobreportSectionDirective } from './directives/jobreport-section.directive';
 import { TestDivComponent } from './components/test-div/test-div.component';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
+import { CheckAddNotesComponent } from './components/check-list/components/check-add-notes/check-add-notes.component';
+import { CheckUploadImageComponent } from './components/check-list/components/check-upload-image/check-upload-image.component';
+import { CheckEscalateSoaComponent } from './components/check-list/components/check-escalate-soa/check-escalate-soa.component';
+import { CheckRecommendComponent } from './components/check-list/components/check-recommend/check-recommend.component';
 
 @NgModule({
     imports: [
@@ -42,7 +46,8 @@ import { ProgressBarComponent } from './components/progress-bar/progress-bar.com
         MaterialModule,
         AgGridModule.withComponents([CheckStatusTemplateComponent]),
         StoreModule.forFeature('orc', fromOrcModuleReducer.reducers),
-        EffectsModule.forFeature(fromOrcModuleReducer.effects)
+        EffectsModule.forFeature(fromOrcModuleReducer.effects),
+        Ckeditor5AngularModule
     ],
     declarations: [
         Safe,
@@ -58,10 +63,13 @@ import { ProgressBarComponent } from './components/progress-bar/progress-bar.com
         CheckChangeStatusComponent,
         CheckStatusTemplateComponent,
         CheckEscalateIstComponent,
-        DetailHeaderTableComponent,
         JobreportSectionDirective,
         TestDivComponent,
         ProgressBarComponent,
+        CheckAddNotesComponent,
+        CheckUploadImageComponent,
+        CheckEscalateSoaComponent,
+        CheckRecommendComponent,
     ],
     entryComponents: [
         CheckListComponent,
@@ -76,8 +84,11 @@ import { ProgressBarComponent } from './components/progress-bar/progress-bar.com
         BootstrapAlertComponent,
         ProgressBarComponent,
         TestDivComponent,
-        // CheckStatusTemplateComponent,
+        CheckAddNotesComponent,
+        CheckUploadImageComponent,
+        CheckEscalateSoaComponent,
+        CheckRecommendComponent,
     ],
-    providers: [OrcRecordService, MantisRecordService, OrcCheckService, DispoMangerService]
+    providers: [OrcRecordService, MantisRecordService, OrcCheckService, DispoMangerService, DrcRecordService, DrcCheckService]
 })
 export class OrcModule { }

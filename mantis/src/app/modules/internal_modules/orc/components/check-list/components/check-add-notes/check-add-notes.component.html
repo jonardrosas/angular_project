@@ -1,0 +1,29 @@
+<div>
+    <form [formGroup]="addNotesForm" (ngSubmit)="onSubmit()">
+        <div class="modal-header bg-dark text-light">
+            <h4 class="modal-title">{{ heading }}<span class="badge badge-primary">{{ selectedData.length }} selected</span> </h4>
+            <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="container-fluid">
+            {{ addNotesForm.value | json }}
+                <div class="row bg-light border-dark">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="notes">Notes</label>
+                            <ckeditor [editor]="Editor" formControlName="notes"></ckeditor>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <p *ngFor="let alert of alerts">
+                <ngb-alert [type]="alert.type" (close)="close(alert)">{{ alert.message }}</ngb-alert>
+            </p>        
+            <button type="submit" class="btn btn-success" [disabled]="!addNotesForm.valid">Submit</button>
+        </div>
+    </form>
+</div>

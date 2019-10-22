@@ -1,18 +1,11 @@
 .device-summary-table{
-    font-size: 12px;
+    font-size: 13px;
 }
 
 .btn-small{
     font-size: 10px;
 }
 
-
-.device-summary-table .table-light th{
-    color: #161616;
-    background-color: #b3b6b9;
-    border-color: #454d55;    
-}
-
-.table-bordered th, .table-bordered td {
-    border: 1px solid #d2cbcb !important;
+.border-secondary.border-device-summary{
+    border-color: lightgrey !important;
 }

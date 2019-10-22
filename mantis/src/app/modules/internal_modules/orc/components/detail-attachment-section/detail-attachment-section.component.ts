@@ -22,7 +22,6 @@ export class DetailAttachmentSectionComponent extends ButtonCollapse implements 
     }
 
     ngOnInit() {
-      this.store.dispatch(orcModuleStore.getMantisAttachmentAction({ bug_id: this.mantisId }));
       this.getObject();
     }
 

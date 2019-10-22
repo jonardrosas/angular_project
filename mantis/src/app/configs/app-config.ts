@@ -17,7 +17,6 @@ export const APP_CONFIG = {
     JWT_ACCESS_TOKEN: 'access',
     JWT_REFRESH_TOKEN: 'refresh',
     AUTHORIZATION_TYPE: 'Bearer',
-
 };
 
 

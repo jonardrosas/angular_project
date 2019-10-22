@@ -1,8 +1,7 @@
-import { UserInfoState } from './user-session-state';
-import * as fromUserSessionState from './../states/user-session-state';
+import * as fromUserSessionState from './core.state';
 
 export interface CoreModuleState {
-    userInfoState: fromUserSessionState.UserInfoState
+    sessionState: fromUserSessionState.SessionState
 }
 
-export * from './user-session-state';
+export * from './core.state';
