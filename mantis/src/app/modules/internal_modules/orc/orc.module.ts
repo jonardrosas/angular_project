@@ -29,6 +29,7 @@ import { CheckEscalateIstComponent } from './components/check-list/components/ch
 import { Safe } from './../../../shared/pipes/safe-html';
 import { JobreportSectionDirective } from './directives/jobreport-section.directive';
 import { TestDivComponent } from './components/test-div/test-div.component';
+import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 import { CheckAddNotesComponent } from './components/check-list/components/check-add-notes/check-add-notes.component';
 import { CheckUploadImageComponent } from './components/check-list/components/check-upload-image/check-upload-image.component';
 import { CheckEscalateSoaComponent } from './components/check-list/components/check-escalate-soa/check-escalate-soa.component';
@@ -65,6 +66,7 @@ import { CheckRecommendAsSoaComponent } from './components/check-list/components
         CheckEscalateIstComponent,
         JobreportSectionDirective,
         TestDivComponent,
+        ProgressBarComponent,
         CheckAddNotesComponent,
         CheckUploadImageComponent,
         CheckEscalateSoaComponent,
@@ -82,6 +84,7 @@ import { CheckRecommendAsSoaComponent } from './components/check-list/components
         CheckChangeStatusComponent,
         CheckEscalateIstComponent,
         BootstrapAlertComponent,
+        ProgressBarComponent,
         TestDivComponent,
         CheckAddNotesComponent,
         CheckUploadImageComponent,

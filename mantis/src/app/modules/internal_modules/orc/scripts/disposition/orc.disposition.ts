@@ -3,9 +3,9 @@ import { OrcCheckDispositionButtonClass } from './../check-disposition-buttons/'
 import { OrcCheckTable } from './../checks-columns';
 import { OrcDeviceSummary } from './../device-summary';
 import { DispostionParameter } from './base';
+import { OrcProgressBarTable } from './../progress-bar';
 import { checkChangeStatusList } from './../../scripts/common/status';
 import { STATUS_GROUP } from './../../scripts/enums';
-
 
 export class OrcDispostion extends MantisDispositionBase {
     public checkTableClass = OrcCheckTable;
@@ -13,6 +13,7 @@ export class OrcDispostion extends MantisDispositionBase {
     public recommendationOptions;
     public deviceSummaryClass = OrcDeviceSummary;
     public checkTableButtonsClass = OrcCheckDispositionButtonClass;
+    public progressBarClass = OrcProgressBarTable;
     readonly checkStatus = checkChangeStatusList;
 
     constructor(dispoParams: DispostionParameter) {

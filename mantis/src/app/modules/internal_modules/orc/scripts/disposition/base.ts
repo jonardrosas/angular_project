@@ -33,6 +33,7 @@ export class MantisDispositionBase implements MantisDispositionBaseInterface {
     checkTableClass = null;
     checkTableButtonsClass = null;
     deviceSummaryClass = null;
+    progressBarClass = null;
     checkTableStoreAction;
     checkTableStoreSelector;
     checkTableStoreAssignedIstAction;
@@ -72,4 +73,10 @@ export class MantisDispositionBase implements MantisDispositionBaseInterface {
         throw new Error('deviceSummaryClass required')
     }
 
+    getMantisStageProgressBar(){
+        if(this.progressBarClass){
+            return new this.progressBarClass()
+        }
+        throw new Error('progressBar is required')
+    }
 }
