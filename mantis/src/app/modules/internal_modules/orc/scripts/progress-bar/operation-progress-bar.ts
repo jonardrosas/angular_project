@@ -8,7 +8,7 @@ export class OrcProgressBarTable extends ProgressBarModel {
     
     constructor (private dispoParams) {
         super();
-        this.getProgressBar();
+        // this.getProgressBar();
     }
     
     getProgressBar() {
@@ -32,7 +32,7 @@ export class DrcProgressBarTable extends ProgressBarModel {
     
     constructor (private dispoParams) {
         super();
-        this.getProgressBar();
+        // this.getProgressBar();
     }
     
     getProgressBar() {
@@ -55,7 +55,7 @@ export class DfmProgressBarTable extends ProgressBarModel {
     
     constructor (private dispoParams) {
         super();
-        this.getProgressBar();
+        // this.getProgressBar();
     }
     
     getProgressBar() {

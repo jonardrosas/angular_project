@@ -1,8 +1,8 @@
 <div class="row row-break">
     <div class="col-md-12">
-        <div class="card bg-light">
-            <div class="card-body">
-                <table align="center" class="table table-bordered table-sm" style="width: 40%">
+        <div>
+            <div>
+                <table align="center" class="table table-bordered table-sm" style="width: 130px">
                     <tbody>
                         <tr>
                             <ng-container *ngFor="let fields of tableItem">
@@ -13,7 +13,7 @@
                                     </td>
                                 </ng-template>
                                 <ng-template #Default>
-                                    <td>
+                                    <td [attr.bgcolor] = "coloredTable">
                                         {{ fields.label }}
                                     </td>
                                 </ng-template>
