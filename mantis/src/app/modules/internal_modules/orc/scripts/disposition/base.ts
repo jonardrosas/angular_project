@@ -13,6 +13,7 @@ export class MantisDispositionBase implements MantisDispositionBase {
     checkStatusClass = null;
     dispoParams: DispostionParameter;
     checkTableButtonsInstance;
+    progressBarClass = null;
 
     getChecksTable(){
         if(this.checkTableClass){
@@ -48,5 +49,12 @@ export class MantisDispositionBase implements MantisDispositionBase {
             return new this.checkStatusClass()
         }
         throw new Error('checkStatusclass is required')
-    }    
+    }
+    
+    getMantisStageProgressBar(){
+        if(this.progressBarClass){
+            return new this.progressBarClass()
+        }
+        throw new Error('progressBar is required')
+    }
 }

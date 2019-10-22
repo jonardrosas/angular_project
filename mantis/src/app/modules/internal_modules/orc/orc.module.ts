@@ -29,6 +29,7 @@ import { Safe } from './../../../shared/pipes/safe-html';
 import { DetailHeaderTableComponent } from './components/detail-header-table/detail-header-table.component';
 import { JobreportSectionDirective } from './directives/jobreport-section.directive';
 import { TestDivComponent } from './components/test-div/test-div.component';
+import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 
 @NgModule({
     imports: [
@@ -60,6 +61,7 @@ import { TestDivComponent } from './components/test-div/test-div.component';
         DetailHeaderTableComponent,
         JobreportSectionDirective,
         TestDivComponent,
+        ProgressBarComponent,
     ],
     entryComponents: [
         CheckListComponent,
@@ -72,6 +74,7 @@ import { TestDivComponent } from './components/test-div/test-div.component';
         CheckChangeStatusComponent,
         CheckEscalateIstComponent,
         BootstrapAlertComponent,
+        ProgressBarComponent,
         TestDivComponent,
         // CheckStatusTemplateComponent,
     ],

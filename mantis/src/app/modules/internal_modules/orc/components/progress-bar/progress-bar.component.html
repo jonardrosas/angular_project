@@ -1,0 +1,28 @@
+<div class="row row-break">
+    <div class="col-md-12">
+        <div class="card bg-light">
+            <div class="card-body">
+                <table align="center" class="table table-bordered table-sm" style="width: 40%">
+                    <tbody>
+                        <tr>
+                            <ng-container *ngFor="let fields of tableItem">
+                                <ng-container *ngIf = "fields.truth == true; then Colored; else Default"></ng-container>
+                                <ng-template #Colored>
+                                    <td class="current-stage" [attr.bgcolor] = "fields.bg_color">
+                                        <b>{{ fields.label }}</b>
+                                    </td>
+                                </ng-template>
+                                <ng-template #Default>
+                                    <td>
+                                        {{ fields.label }}
+                                    </td>
+                                </ng-template>
+                            </ng-container>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<br>

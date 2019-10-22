@@ -10,6 +10,7 @@ interface MantisDispositionContainerInterface {
     reportSectionsComponents;
     jobReportTitle;
     dispoParams;
+    progressBarInstance?;
 }
 
 
@@ -20,6 +21,7 @@ export class MantisDispositionManager extends OrcModuleOperation implements Mant
     public deviceSummaryInstance;
     public jobReportTitle: string;
     public reportSectionsComponents = ReportSectionComponent;
+    public progressBarInstance;
 
     constructor(public dispoParams: DispostionParameter){
         super();
@@ -52,6 +54,10 @@ export class MantisDispositionManager extends OrcModuleOperation implements Mant
         this.deviceSummaryInstance = this.dispositionInstance.getDeviceSummaryTable();
         return this.deviceSummaryInstance;
     }
-
+    
+    getMantisStageProgressBars() {
+        this.progressBarInstance = this.dispositionInstance.getMantisStageProgressBar();
+        return this.progressBarInstance;
+    }
 }
 
