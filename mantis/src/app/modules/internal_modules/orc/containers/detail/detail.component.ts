@@ -41,6 +41,7 @@ export class DetailComponent implements OnInit, AfterViewInit {
     ngOnInit() {
         this.activatedRoute.paramMap.subscribe(params => {
             this.mantisId = +params.get('id');
+            debugger;
             this.getObjectUsingStore(this.mantisId);
         });
 
@@ -49,6 +50,7 @@ export class DetailComponent implements OnInit, AfterViewInit {
     loadMantisRecord() {
         this.store.pipe(select(orcModuleStore.getMantisRecordObjectStateSelector)).subscribe(
             (data) => {
+                debugger;
                 this.mantisRecord = data;
                 if (data.id) {
                     const paramsIns: DispostionParameter = {
@@ -77,6 +79,7 @@ export class DetailComponent implements OnInit, AfterViewInit {
     }
 
     getObjectUsingStore(mantisId: number) {
+        debugger;
         this.store.dispatch(orcModuleStore.getMantisObjectAction({id: mantisId}));
         this.store.dispatch(orcModuleStore.getMantisJobNotesAction({bug: this.mantisId}));
         this.store.dispatch(orcModuleStore.getMantisHistoryAction({bug: this.mantisId}));

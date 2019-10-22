@@ -9,19 +9,24 @@
             *ngFor="let mainTab of mainTabs">
                 <a 
                     class="shadow font-weight-bold text-dark nav-check-link"
-                    [routerLink]="[mainTab.url, mantisId]"
+                    [routerLink]="[mainTab.url, mantisRecord.id]"
                     [queryParams]="{check_section: mainTab.param}" 
                     routerLinkActive="active">
                     {{ mainTab.title }} 
-                    <span *ngIf="(getCount(mainTab.id)| async)?.length > 0" class="count-badge badge badge-md badge-info">{{ (getCount(mainTab.id)| async)?.length }}</span>
+                    <span *ngIf="(getCount(mainTab.id)| async)?.length > 0" class="count-badge badge badge-md badge-danger">{{ (getCount(mainTab.id)| async)?.length }}</span>
                 </a>
         </li>
         <li class="nav-item ml-auto"><a class="nav-check-link bg-light text-dark border border-secondary ml-1" [routerLink]="" ><i class="fas fa-cog fa-lg"></i> </a></li>
     </ul>
     <div class="card bg-light">
         <div class="card-body">                        
+            <div class="row">
+                <div class="col-md-12">
+                    <input class="ml-2" type="checkbox"> F1_BEOL_Support
+                </div>
+            </div>        
             <div class="row-break">
-                <button class="ml-2 shadow-sm" (click)="button.function(agGrid, dispoManagerInstance)" *ngFor="let button of buttons" ><i *ngIf="button.icon" [ngClass]="button.icon"></i>  {{ button.label }}</button>
+                <button class="ml-2 shadow-sm btn-check" (click)="button.function(agGrid, dispoManagerInstance)" *ngFor="let button of buttons" ><i *ngIf="button.icon" [ngClass]="button.icon"></i>  {{ button.label }}</button>
             </div>
             <div class="row-break">
                 <ag-grid-angular

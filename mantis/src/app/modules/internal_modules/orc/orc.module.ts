@@ -34,6 +34,7 @@ import { CheckAddNotesComponent } from './components/check-list/components/check
 import { CheckUploadImageComponent } from './components/check-list/components/check-upload-image/check-upload-image.component';
 import { CheckEscalateSoaComponent } from './components/check-list/components/check-escalate-soa/check-escalate-soa.component';
 import { CheckRecommendComponent } from './components/check-list/components/check-recommend/check-recommend.component';
+import { CheckRecommendAsSoaComponent } from './components/check-list/components/check-recommend-as-soa/check-recommend-as-soa.component';
 
 @NgModule({
     imports: [
@@ -70,6 +71,7 @@ import { CheckRecommendComponent } from './components/check-list/components/chec
         CheckUploadImageComponent,
         CheckEscalateSoaComponent,
         CheckRecommendComponent,
+        CheckRecommendAsSoaComponent,
     ],
     entryComponents: [
         CheckListComponent,
@@ -88,6 +90,7 @@ import { CheckRecommendComponent } from './components/check-list/components/chec
         CheckUploadImageComponent,
         CheckEscalateSoaComponent,
         CheckRecommendComponent,
+        CheckRecommendAsSoaComponent
     ],
     providers: [OrcRecordService, MantisRecordService, OrcCheckService, DispoMangerService, DrcRecordService, DrcCheckService]
 })
