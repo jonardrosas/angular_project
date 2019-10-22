@@ -14,7 +14,6 @@ export class DrcRecordService extends QueryHelper {
     }
 
     getIstChecks(id: number): Observable<any> {
-        debugger;
         let url = `${this.url}${id}/get_assigned_ist_jobs/`;
         return this.apiService.get(url);
     }
