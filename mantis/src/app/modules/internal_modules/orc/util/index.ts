@@ -6,6 +6,7 @@ export class AdSection {
 
 export class ButtonCollapse {
     @Input() data;
+
     isCollapse(val){
         if (val) {
             return 'fas fa-caret-right';
@@ -14,4 +15,3 @@ export class ButtonCollapse {
         }
   }
 }
-

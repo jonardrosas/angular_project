@@ -1,6 +1,6 @@
 import { OrcCheckInterface, GroupProfileInterface } from './../../models';
 
-export interface OrcRecordState {
+export interface OrcRecordStateInterface {
     orcObject: any;
     checks: OrcCheckInterface[];
     istChecks?: OrcCheckInterface[];
@@ -11,3 +11,15 @@ export interface OrcRecordState {
     soaSupportTeamGroup?: GroupProfileInterface[];
     distinctFields?: any[]
 }
+
+export const orcRecordInitialState: OrcRecordStateInterface = {
+    orcObject: {},
+    checks: [],
+    istSupportTeamGroup: [],
+    soaSupportTeamGroup: [],
+    loaded: false,
+    loading: false,
+    soaChecks: [],
+    istChecks: [],
+    distinctFields: []
+};

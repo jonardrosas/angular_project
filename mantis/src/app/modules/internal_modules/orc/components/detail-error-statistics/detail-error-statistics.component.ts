@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import * as orcModuleStore from './../../store';
 import { MantisDispositionManager } from './../../scripts';
-import { ButtonCollapse } from '../../scripts/common/add-jobreport-section';
+import { ButtonCollapse } from './../../util/';
 
 @Component({
   selector: 'app-detail-error-statistics',
