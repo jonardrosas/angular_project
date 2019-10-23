@@ -36,7 +36,8 @@ export class ProgressBarComponent extends ButtonCollapse implements OnInit {
         this.tableInstance = this.dispoManagerInstance.getMantisStageProgressBars();
         this.getCurrentStage(this.mantisRecord.status);
         this.tableItem = this.tableInstance.progressBar;
-        // this.setBackgroundColor();
+        this.searchCurrentColor();
+        this.setBackgroundColor();
         this.getColorList();
     }
     
@@ -52,18 +53,26 @@ export class ProgressBarComponent extends ButtonCollapse implements OnInit {
     
     getColorList() {
         for(let progressBarElem of this.tableItem){
-            this.currentColor = progressBarElem.bg_color;
-            progressBarElem.bg_color = this.defaultColor;
+            // this.currentColor = progressBarElem.bg_color;
+            // progressBarElem.bg_color = this.defaultColor;
+            // this.setBackgroundColor();
             if(this.currentStage == progressBarElem.label){
                 progressBarElem.truth = true;
                 progressBarElem.bold = true;
-                // this.statusList = progressBarElem.status;
                 progressBarElem.bg_color = this.currentColor;
-                // break;
+                break;
             }
             else{
                 progressBarElem.bg_color = this.passedColor;
                 progressBarElem.passed = true;
+            }
+        }
+    }
+    
+    searchCurrentColor(){
+        for(let progressBarElem of this.tableItem){
+            if(this.currentStage == progressBarElem.label){
+                this.currentColor = progressBarElem.bg_color;
             }
         }
     }
