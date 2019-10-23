@@ -5,7 +5,6 @@ import { CheckEscalateSoaComponent } from './../../components/check-list/compone
 import { CheckRecommendComponent } from './../../components/check-list/components/check-recommend/check-recommend.component';
 import { CheckRecommendAsSoaComponent } from './../../components/check-list/components/check-recommend-as-soa/check-recommend-as-soa.component';
 import { BootstrapAlertComponent } from './../../../../../shared/';
-import { initialState } from '../../store/reducers/orcrecord.reducer';
 
 
 export class OrcCheckDispositionButtonBase extends CheckDisposeButtonBase {

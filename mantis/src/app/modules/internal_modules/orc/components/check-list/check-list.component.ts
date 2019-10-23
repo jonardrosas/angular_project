@@ -10,7 +10,7 @@ import { MantisDispositionManager } from './../../scripts';
 import { BootstrapAlertComponent } from './../../../../../shared';
 import * as orcModuleStore from './../../store';
 import { MantisRecordModel } from './../../models';
-import { ButtonCollapse } from '../../scripts/common/add-jobreport-section';
+import { ButtonCollapse } from './../../util/';
 import { CheckStatusTemplateComponent } from './../../components/check-list/components/check-status-template/check-status-template.component';
 import { getDistinctFieldAction, setSOAGroupAction } from '../../store/actions/orcrecord.actions';
 
@@ -51,7 +51,7 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
     public getAssignedSoaAction;
     public assignedIstSelector;
     public assignedSoaSelector;
-    
+
     constructor(
         private store: Store<any>,
         private modalService: NgbModal,
@@ -67,12 +67,14 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
         this.getAssignedSoaAction = this.dispoManagerInstance.dispositionInstance.checkTableStoreAssignedSoaAction;
         this.assignedIstSelector = this.dispoManagerInstance.dispositionInstance.checkTableStoreAssignedIstSelector;
         this.assignedSoaSelector = this.dispoManagerInstance.dispositionInstance.checkTableStoreAssignedSoaSelector;
-
-        this.mantisRecord = this.dispoManagerInstance.dispoParams.mantisRecord;
         this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs();
-        this.buttons = this.dispoManagerInstance.getCheckActionButtons().allCheckButtons;         
+        this.buttons = this.dispoManagerInstance.getCheckActionButtons().allCheckButtons;   
 
-    
+        this.store.pipe(select(orcModuleStore.getMantisRecordObjectStateSelector)).subscribe(
+            (data) => {
+                this.mantisRecord = data;
+            }
+        )
 
         this.activateRoute.queryParams.subscribe(
             (data) => {
@@ -89,7 +91,6 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
                     this.getChecks(this.defaultSelector);
                     this.buttons = this.dispoManagerInstance.getCheckActionButtons().allCheckButtons;         
                 }else{
-                    debugger;
                     this.getChecks(this.defaultSelector);
                     this.buttons = this.dispoManagerInstance.getCheckActionButtons().allCheckButtons;         
                 }

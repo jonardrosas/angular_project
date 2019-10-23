@@ -33,7 +33,6 @@ export const DELETE_MANTIS_ATTACHMENT = '[Mantis Record] DeleteMantisJobAttachme
 export const GET_MANTIS_HISTORY = '[Mantis Record] GetMantisJobHistory';
 export const SET_MANTIS_HISTORY = '[Mantis Record] SetMantisJobHistory';
 
-
 // ACTION CREATORS
 export const getMantisObjectAction = createAction(GET_MANTIS_OBJECT, props<{id: number}>());
 export const setMantisObjectAction = createAction(SET_MANTIS_OBJECT, props<{data: MantisRecordInterface}>());

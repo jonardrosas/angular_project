@@ -1,10 +1,9 @@
-import { AdSection } from './../common';
+import { AdSection } from './../../util';
 import { 
     DeviceSummaryComponent , DetailErrorStatisticsComponent,
     DetailNotesSectionComponent, DetailAttachmentSectionComponent,
     DetailJobHistorySectionComponent, CheckListComponent, ProgressBarComponent
 } from './../../components';
-import { TestDivComponent } from './../../components/test-div/test-div.component';
 
 export const ReportSectionComponent = [
     new AdSection(ProgressBarComponent, {title: 'Progress Bar', panelIsOpen: false}),

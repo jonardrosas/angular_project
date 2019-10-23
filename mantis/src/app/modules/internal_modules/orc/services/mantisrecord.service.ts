@@ -22,6 +22,10 @@ export class MantisRecordService extends QueryHelper {
         this.setApiService(this.apiService);
     }
 
+    getObject(id): Observable<any> {
+        return this.apiService.get(this.url + id + '/');
+    }    
+
     // override the default to use new url
     getQuerySet(filters): Observable<any> {
         const params = this.buildFilter(filters);

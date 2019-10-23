@@ -6,7 +6,7 @@ import { MantisRecordService } from './../../services';
 import { MantisRecordModel } from './../../models';
 import { MantisDispositionManager, DispostionParameter } from './../../scripts';
 // import { DeviceSummaryComponent } from './../device-summary/device-summary.component';
-import { ButtonCollapse } from '../../scripts/common/add-jobreport-section';
+import { ButtonCollapse } from './../../util/';
 
 @Component({
     selector: 'progress-bar',
