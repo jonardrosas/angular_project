@@ -2,7 +2,7 @@ import { ProgressBarModel } from './base-progress';
 import { FAB } from '../common/fab';
 
 export class OrcProgressBarTable extends ProgressBarModel {
-    private stages: string[] = ['new', 'assigned', 'disposing', 'patching', 'closed'];
+    private stagesORC: string[] = ['new', 'assigned', 'disposing', 'patching', 'closed'];
     temporary: any[] = [];
     public index: number = 0;
     
@@ -26,7 +26,7 @@ export class OrcProgressBarTable extends ProgressBarModel {
 }
 
 export class DrcProgressBarTable extends ProgressBarModel {
-    private stages: string[] = ['new', 'assigned', 'disposing', 'escalatedSOA', 'escalatedFST', 'submitting', 'submitted', 'closed'];
+    private stagesDRC: string[] = ['new', 'assigned', 'disposing', 'escalatedSOA', 'escalatedFST', 'submitting', 'submitted', 'closed'];
     temporary: any[] = [];
     public index: number = 0;
     
@@ -49,7 +49,7 @@ export class DrcProgressBarTable extends ProgressBarModel {
 }
 
 export class DfmProgressBarTable extends ProgressBarModel {
-    private stages: string[] = ['new', 'closed'];
+    private stagesDFM: string[] = ['new', 'closed'];
     temporary: any[] = [];
     public index: number = 0;
     

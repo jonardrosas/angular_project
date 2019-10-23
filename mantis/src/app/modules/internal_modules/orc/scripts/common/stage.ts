@@ -4,6 +4,8 @@ export const MantisStageStatusModel = [
         label: 'new',
         truth: false,
         bold: false,
+        passed: false,
+        arrow: true,
         status: [
             "wait",
             "notified",
@@ -17,6 +19,8 @@ export const MantisStageStatusModel = [
         label: 'assigned',
         truth: false,
         bold: false,
+        passed: false,
+        arrow: true,
         status: [
             "assigned"
         ]
@@ -26,6 +30,8 @@ export const MantisStageStatusModel = [
         label: 'disposing',
         truth: false,
         bold: false,
+        passed: false,
+        arrow: true,
         status: [
             "init-supportteam-comment",
             "owner-check",
@@ -41,6 +47,8 @@ export const MantisStageStatusModel = [
         label: 'escalatedFST',
         truth: false,
         bold: false,
+        passed: false,
+        arrow: true,
         status: [
             "final-supportteam-comment"
         ]
@@ -50,6 +58,8 @@ export const MantisStageStatusModel = [
         label: 'escalatedSOA',
         truth: false,
         bold: false,
+        passed: false,
+        arrow: true,
         status: [
             "stake-owner-action"
         ]
@@ -59,6 +69,8 @@ export const MantisStageStatusModel = [
         label: 'escalatedPOA',
         truth: false,
         bold: false,
+        passed: false,
+        arrow: true,
         status: [
            "proto-owner-action"
         ]
@@ -68,6 +80,7 @@ export const MantisStageStatusModel = [
         label: 'reescalated',
         truth: false,
         bold: false,
+        passed: false,
         status: [
             "collaborator-revert-request"
         ]
@@ -77,6 +90,8 @@ export const MantisStageStatusModel = [
         label: 'submitting',
         truth: false,
         bold: false,
+        passed: false,
+        arrow: true,
         status: [
             "pending-board-action"
         ]
@@ -86,6 +101,8 @@ export const MantisStageStatusModel = [
         label: 'submitted',
         truth: false,
         bold: false,
+        passed: false,
+        arrow: true,
         status:[
             "pending-collaborator-action"
         ]
@@ -95,6 +112,8 @@ export const MantisStageStatusModel = [
         label: 'patching',
         truth: false,
         bold: false,
+        passed: false,
+        arrow: true,
         status: [
             "manual-patch"
         ]
@@ -104,6 +123,8 @@ export const MantisStageStatusModel = [
         label: 'closed',
         truth: false,
         bold: false,
+        passed: false,
+        arrow: false,
         status: [
             "passed-not-inspect-region",
             "passed-auto",
