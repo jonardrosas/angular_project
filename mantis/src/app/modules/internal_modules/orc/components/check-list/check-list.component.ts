@@ -12,7 +12,7 @@ import * as orcModuleStore from './../../store';
 import { MantisRecordModel } from './../../models';
 import { ButtonCollapse } from '../../scripts/common/add-jobreport-section';
 import { CheckStatusTemplateComponent } from './../../components/check-list/components/check-status-template/check-status-template.component';
-import { getDistinctFieldAction } from '../../store/actions/orcrecord.actions';
+import { getDistinctFieldAction, setSOAGroupAction } from '../../store/actions/orcrecord.actions';
 
 
 @Component({
@@ -70,20 +70,28 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
 
         this.mantisRecord = this.dispoManagerInstance.dispoParams.mantisRecord;
         this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs();
-        this.buttons = this.dispoManagerInstance.getCheckActionButtons();         
+        this.buttons = this.dispoManagerInstance.getCheckActionButtons().allCheckButtons;         
 
-        this.filters = {};
-        this.filters['limit'] = 1000;
-        this.filters['record'] = this.mantisRecord.orc_record.id;        
+    
 
         this.activateRoute.queryParams.subscribe(
             (data) => {
+                this.filters = {};
+                this.filters['limit'] = 1000;
+                this.filters['record'] = this.mantisRecord.orc_record.id;
                 if(data.check_section == 'assinged_ist'){
                     this.getChecks(this.assignedIstSelector);
+                    this.buttons = this.dispoManagerInstance.getCheckActionButtons().iSTCheckButtons;         
                 }else if(data.check_section == 'assinged_soa'){
                     this.getChecks(this.assignedSoaSelector);
+                    this.buttons = this.dispoManagerInstance.getCheckActionButtons().sOACheckButtons;         
                 }else if(data.check_section == 'default'){
                     this.getChecks(this.defaultSelector);
+                    this.buttons = this.dispoManagerInstance.getCheckActionButtons().allCheckButtons;         
+                }else{
+                    debugger;
+                    this.getChecks(this.defaultSelector);
+                    this.buttons = this.dispoManagerInstance.getCheckActionButtons().allCheckButtons;         
                 }
             }
         )        

@@ -3,8 +3,10 @@ import { CheckAddNotesComponent } from './../../components/check-list/components
 import { CheckUploadImageComponent } from './../../components/check-list/components/check-upload-image/check-upload-image.component';
 
 
-interface CheckDisposeButtonInterface{
-    buttons;
+export interface CheckDisposeButtonInterface{
+    allCheckButtons?;
+    iSTCheckButtons?;
+    sOACheckButtons?;
 }
 
 interface checkDispoInterface {
@@ -16,7 +18,9 @@ interface checkDispoInterface {
 
 /** All commoon function and buttons should be declared here */
 export class CheckDisposeButtonBase implements CheckDisposeButtonInterface {
-    public buttons = [];
+    public allCheckButtons;
+    public iSTCheckButtons;
+    public sOACheckButtons;
     protected agGridApi;
     protected modalService;
     protected mantisRecord;
@@ -26,7 +30,18 @@ export class CheckDisposeButtonBase implements CheckDisposeButtonInterface {
         this.modalService = dispoParams.modalService;
         this.mantisRecord = dispoParams.mantisRecord;
         this.buttonStatusClass = dispoParams.status;        
-        this.buttons = []
+        this.allCheckButtons = [
+            this.addNotes,
+            this.addImage,
+        ];
+        this.iSTCheckButtons = [
+            this.addNotes,
+            this.addImage
+        ];
+        this.sOACheckButtons = [
+            this.addNotes,
+            this.addImage            
+        ];
     }
 
     public addNotes = {

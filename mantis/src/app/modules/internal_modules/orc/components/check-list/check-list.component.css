@@ -30,6 +30,13 @@
     border: 1px solid #aaa;
 }
 
+.btn-check{
+    border-top: 2px solid #212529;
+    border-right: 1px solid #212529;
+    border-left: 1px solid #212529;
+    border-bottom: 1px solid #212529;    
+}
+
 a.nav-check-link{
     padding: 6px 5px 3px 5px;
     display: block;
@@ -38,6 +45,6 @@ a.nav-check-link{
 
 a.active{
     background-color: #FFF;
-    border-top: 2px solid red;
+    border-top: 2px solid blue;
     color: #000 !important;
 }

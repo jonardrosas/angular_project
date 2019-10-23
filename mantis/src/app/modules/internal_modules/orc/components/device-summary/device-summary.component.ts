@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { MantisRecordModel } from './../../models';
+import { Store, select } from '@ngrx/store';
+import * as orcModuleStore from './../../store';
 import { MantisDispositionManager } from './../../scripts';
 import { ButtonCollapse } from '../../scripts/common/add-jobreport-section';
 
@@ -22,15 +24,20 @@ export class DeviceSummaryComponent extends ButtonCollapse implements OnInit {
     };    
 
     constructor(
+        private store: Store<any>
     ) {
         super()
     }
 
     ngOnInit() {
+        debugger;
         this.summaryTableInstance = this.dispoManagerInstance.getDeviceSummaryTables();
-        this.mantisRecord = {
-            ...this.dispoManagerInstance.dispoParams.mantisRecord,
-        }
+        this.store.pipe(select(orcModuleStore.getMantisRecordObjectStateSelector)).subscribe(
+            (data) => {
+                this.mantisRecord = data;
+            }
+       
+        )
         this.tables = this.summaryTableInstance.getTables();
     }
 
