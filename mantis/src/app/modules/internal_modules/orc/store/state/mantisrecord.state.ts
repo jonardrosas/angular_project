@@ -1,12 +1,10 @@
 import {
-    MantisRecordModel,
     MantisNotesInterface,
     MantisAttachmentInterface,
     MantisRecordHistoryInterface
 } from './../../models';
 
-export interface MantisRecordState {
-    mantisObject;
+export interface MantisRecordStateInterface {
     mantisErrorSummary: any;
     mantisNotes: MantisNotesInterface[];
     attachments: MantisAttachmentInterface[];
@@ -15,3 +13,12 @@ export interface MantisRecordState {
     loading: boolean;
 }
 
+export const mantisRecordInitialState: MantisRecordStateInterface = {
+    // mantisObject: {},
+    loaded: false,
+    loading: false,
+    histories: [],
+    attachments: [],
+    mantisErrorSummary: null,
+    mantisNotes: []
+};

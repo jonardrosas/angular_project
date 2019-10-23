@@ -1,39 +1,30 @@
 import { createReducer, on, Action} from '@ngrx/store';
 import * as MantisRecordAction from './../actions/mantisrecord.actions';
-import { MantisRecordState } from './../state';
+import { mantisRecordInitialState, MantisRecordStateInterface } from './../state';
 
-
-export const initialState: MantisRecordState = {
-    mantisObject: {},
-    loaded: false,
-    loading: false,
-    histories: [],
-    attachments: [],
-    mantisErrorSummary: null,
-    mantisNotes: []
-};
 
 const mantisRecordReducer = createReducer(
-    initialState,
-    on(
-        MantisRecordAction.getMantisObjectAction,
-        (state, { id }) => {
-            return { ...state };
-        }
-    ),
-    on(
-        MantisRecordAction.setMantisObjectAction,
-        (state, {data}) => {
-            state.mantisObject = data;
-            return { ...state, loading: false };
-        }
-    ),
-    on(
-        MantisRecordAction.getMantisErrorSummaryAction,
-        (state, { id }) => {
-            return { ...state };
-        }
-    ),
+    mantisRecordInitialState,
+    // on(
+    //    MantisRecordAction.getMantisObjectAction,
+    //    (state, { id }) => {
+    //        return { ...state };
+    //    }
+    // ),
+    // on(
+    //    MantisRecordAction.setMantisObjectAction,
+    //    (state, {data}) => {
+    //        debugger;
+    //        state.mantisObject = data;
+    //        return { ...state, loading: false };
+    //    }
+    // ),
+    // on(
+    //    MantisRecordAction.getMantisErrorSummaryAction,
+    //    (state, { id }) => {
+    //         return { ...state };
+    //    }
+    // ),
     on(
         MantisRecordAction.setMantisErrorSummaryAction,
         (state, {description}) => {
@@ -41,12 +32,12 @@ const mantisRecordReducer = createReducer(
             return { ...state, loading: false };
         }
     ),
-    on(
-        MantisRecordAction.getMantisJobNotesAction,
-        (state, { bug }) => {
-            return { ...state };
-        }
-    ),
+    // on(
+    //     MantisRecordAction.getMantisJobNotesAction,
+    //    (state, { bug }) => {
+    //        return { ...state };
+    //    }
+    // ),
     on(
         MantisRecordAction.setMantisJobNotesAction,
         (state, { notes }) => {
@@ -54,12 +45,12 @@ const mantisRecordReducer = createReducer(
             return { ...state, loading: false };
         }
     ),
-    on(
-        MantisRecordAction.getMantisAttachmentAction,
-        (state, { bug_id }) => {
-            return { ...state };
-        }
-    ),
+    // on(
+    //    MantisRecordAction.getMantisAttachmentAction,
+    //    (state, { bug_id }) => {
+    //        return { ...state };
+    //    }
+    // ),
     on(
         MantisRecordAction.setMantisAttachmentAction,
         (state, { attachments }) => {
@@ -67,12 +58,12 @@ const mantisRecordReducer = createReducer(
             return { ...state, loading: false };
         }
     ),
-    on(
-        MantisRecordAction.getMantisHistoryAction,
-        (state, { bug }) => {
-            return { ...state };
-        }
-    ),
+    // on(
+    //    MantisRecordAction.getMantisHistoryAction,
+    //    (state, { bug }) => {
+    //        return { ...state };
+    //    }
+    // ),
     on(
         MantisRecordAction.setMantisHistoryAction,
         (state, { histories }) => {
@@ -82,6 +73,6 @@ const mantisRecordReducer = createReducer(
     ),
 );
 
-export function reducer(state: MantisRecordState, action: Action) {
+export function reducer(state: MantisRecordStateInterface, action: Action) {
     return mantisRecordReducer(state, action);
 }

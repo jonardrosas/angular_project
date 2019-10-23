@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { MantisNotesInterface } from './../../models';
 import { Observable } from 'rxjs';
 import { MantisDispositionManager } from './../../scripts';
-import { ButtonCollapse } from '../../scripts/common/add-jobreport-section';
+import { ButtonCollapse } from './../../util/';
 
 import { Store, select } from '@ngrx/store';
 

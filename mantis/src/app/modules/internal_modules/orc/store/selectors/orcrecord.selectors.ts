@@ -1,13 +1,8 @@
 import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/store';
-import { OrcRecordState, OrcModuleState } from './../state';
+import { OrcRecordStateInterface, OrcModuleState } from './../state';
 
-export const getOrcObjectFn = (state: OrcRecordState) => state.orcObject;
-export const getOrcCheckFn = (state: OrcRecordState) => state.checks;
-export const getIstSupportTeamGroupFn = (state: OrcRecordState) => state.istSupportTeamGroup;
-export const getSOASupportTeamGroupFn = (state: OrcRecordState) => state.soaSupportTeamGroup;
-export const getdistinctFieldsFn = (state: OrcRecordState) => state.distinctFields;
-export const getIstChekcsFn = (state: OrcRecordState) => state.istChecks;
-export const getSoaChecksFn = (state: OrcRecordState) => state.soaChecks;
+export const getOrcObjectFn = (state: OrcRecordStateInterface) => state.orcObject;
+export const getSoaChecksFn = (state: OrcRecordStateInterface) => state.soaChecks;
 
 // selectors
 const getOrcModuleState = createFeatureSelector<OrcModuleState>('orc');
@@ -17,37 +12,34 @@ export const getOrcRecordStateSelector = createSelector(
     (state: OrcModuleState) => state.orcRecordState
 );
 
-
 export const getOrcRecordCheckStateSelector = createSelector(
     getOrcRecordStateSelector,
-    getOrcCheckFn
+    (state: OrcRecordStateInterface) => state.checks
 );
-
 
 export const getIstSupportTeamGroupSelector = createSelector(
     getOrcRecordStateSelector,
-    getIstSupportTeamGroupFn
+    (state: OrcRecordStateInterface) => state.istSupportTeamGroup
 );
-
 
 export const getSOASupportTeamGroupSelector = createSelector(
     getOrcRecordStateSelector,
-    getSOASupportTeamGroupFn
+    (state: OrcRecordStateInterface) => state.soaSupportTeamGroup
 );
 
 export const getDistinctFieldsFnSelector = createSelector(
     getOrcRecordStateSelector,
-    getdistinctFieldsFn
+    (state: OrcRecordStateInterface) => state.distinctFields
 );
 
 export const getIstCheckSelector = createSelector(
     getOrcRecordStateSelector,
-    getIstChekcsFn
+    (state: OrcRecordStateInterface) => state.istChecks
 );
 
 export const getSoaCheckSelector = createSelector(
     getOrcRecordStateSelector,
-    getSoaChecksFn
+    (state: OrcRecordStateInterface) => state.soaChecks
 );
 
 

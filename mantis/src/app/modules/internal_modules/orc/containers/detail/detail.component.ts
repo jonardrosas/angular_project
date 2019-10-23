@@ -1,12 +1,14 @@
 import { Component, OnInit, ViewChild, ComponentFactoryResolver, AfterViewInit} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
+import { take } from 'rxjs/operators';
 import { NgbModal } from './../../../../third_party_modules/ng_bootstrap';
 import * as orcModuleStore from './../../store';
 import { MantisRecordModel } from './../../models';
 import { APP_CONFIG } from './../../../../../configs';
 import { JobreportSectionDirective } from './../../directives';
-import { MantisDispositionManager, DispostionParameter, ReportSectionComponent } from './../../scripts';
+import { MantisDispositionManager, DispostionParameter } from './../../scripts';
+import { ReportSectionComponent } from './../detail/detail.registered.section';
 import { DispoMangerService } from './../../services';
 
 @Component({
@@ -14,7 +16,6 @@ import { DispoMangerService } from './../../services';
     templateUrl: './detail.component.html',
     styleUrls: ['./detail.component.css']
 })
-
 export class DetailComponent implements OnInit, AfterViewInit {
     public reportSectionsComponents = ReportSectionComponent;
     public dispoManagerInstance: MantisDispositionManager;
@@ -23,7 +24,7 @@ export class DetailComponent implements OnInit, AfterViewInit {
     public mantisRecord: MantisRecordModel;
     public loadingImg: string = APP_CONFIG.LOADING_IMG;
     public isSectionComponentLoaded: boolean = false;
-    public checkFilter: {limit?: number; record?: number};
+    public checkFilter: {limit?: number; record?: number} = {};
     @ViewChild(JobreportSectionDirective, {static: false}) adSection: JobreportSectionDirective;
 
     constructor(
@@ -41,25 +42,22 @@ export class DetailComponent implements OnInit, AfterViewInit {
     ngOnInit() {
         this.activatedRoute.paramMap.subscribe(params => {
             this.mantisId = +params.get('id');
-            debugger;
             this.getObjectUsingStore(this.mantisId);
         });
 
     }
 
     loadMantisRecord() {
-        this.store.pipe(select(orcModuleStore.getMantisRecordObjectStateSelector)).subscribe(
+        this.store.pipe(select(orcModuleStore.getMantisRecordObjectStateSelector))
+        .subscribe(
             (data) => {
-                debugger;
                 this.mantisRecord = data;
                 if (data.id) {
                     const paramsIns: DispostionParameter = {
                         mantisRecord: this.mantisRecord,
                         modalService: this.modalService,
                     }
-                    this.checkFilter = {};
                     this.checkFilter['limit'] = 1000;
-                    this.checkFilter['record'] = this.mantisRecord.orc_record.id;
                     this.dispoManagerInstance = new MantisDispositionManager(paramsIns);
                     this.dispoManagerInstanceSubject = this.dispInstanceMangerService.dispoMangerSubject;
                     this.dispoManagerInstanceSubject.next(this.dispoManagerInstance);
@@ -68,10 +66,14 @@ export class DetailComponent implements OnInit, AfterViewInit {
                     const loadAllCheckAction = this.dispoManagerInstance.dispositionInstance.checkTableStoreAction;
                     const loadIstCheckAction  = this.dispoManagerInstance.dispositionInstance.checkTableStoreAssignedIstAction;
                     const loadSoaCheckAction = this.dispoManagerInstance.dispositionInstance.checkTableStoreAssignedSoaAction;
-            
-                    this.store.dispatch(loadAllCheckAction(this.checkFilter));
-                    this.store.dispatch(loadIstCheckAction(this.checkFilter));
-                    this.store.dispatch(loadSoaCheckAction(this.checkFilter));     
+
+                    if(this.checkFilter.record != data.orc_record.id){
+                        this.checkFilter['record'] = this.mantisRecord.orc_record.id;
+                        this.store.dispatch(loadAllCheckAction(this.checkFilter));
+                        this.store.dispatch(loadIstCheckAction(this.checkFilter));
+                        this.store.dispatch(loadSoaCheckAction(this.checkFilter));                          
+                    }
+   
 
                 }
             },
@@ -79,7 +81,6 @@ export class DetailComponent implements OnInit, AfterViewInit {
     }
 
     getObjectUsingStore(mantisId: number) {
-        debugger;
         this.store.dispatch(orcModuleStore.getMantisObjectAction({id: mantisId}));
         this.store.dispatch(orcModuleStore.getMantisJobNotesAction({bug: this.mantisId}));
         this.store.dispatch(orcModuleStore.getMantisHistoryAction({bug: this.mantisId}));

@@ -1,24 +1,10 @@
 import { createReducer, on, Action} from '@ngrx/store';
 import * as orcRecordActions from '../actions';
-import { OrcRecordInterface, OrcRecordModel } from '../../models';
-import { OrcRecordState } from './../state';
-import { setIstGroupAction } from '../actions/orcrecord.actions';
+import { orcRecordInitialState, OrcRecordStateInterface } from './../state';
 
-
-export const initialState: OrcRecordState = {
-    orcObject: {},
-    checks: [],
-    istSupportTeamGroup: [],
-    soaSupportTeamGroup: [],
-    loaded: false,
-    loading: false,
-    soaChecks: [],
-    istChecks: [],
-    distinctFields: []
-};
 
 const orcRecordReducer = createReducer(
-    initialState,
+    orcRecordInitialState,
     on(
         orcRecordActions.getOrcObjectAction,
         state => ({ ...state, id: 1 })
@@ -26,6 +12,7 @@ const orcRecordReducer = createReducer(
     on(
         orcRecordActions.getOrcChecksAction,
         (state, { record }) => {
+            state.checks = []
             return { ...state, id: 1 };
         }
     ),
@@ -93,6 +80,6 @@ const orcRecordReducer = createReducer(
 );
 
 
-export function reducer(state: OrcRecordState, action: Action) {
+export function reducer(state: OrcRecordStateInterface, action: Action) {
     return orcRecordReducer(state, action);
 }

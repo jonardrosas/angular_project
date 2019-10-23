@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { ButtonCollapse } from '../../scripts/common/add-jobreport-section';
+import { ButtonCollapse } from './../../util/';
 
 import { MantisRecordHistoryInterface } from './../../models';
 import * as orcModuleStore from './../../store';

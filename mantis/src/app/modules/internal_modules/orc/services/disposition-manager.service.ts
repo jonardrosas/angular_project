@@ -1,7 +1,6 @@
 import { BehaviorSubject } from 'rxjs'
 import { Injectable } from '@angular/core';
-import { DispostionParameter } from './../scripts/disposition';
-import { MantisDispositionManager } from './../scripts';
+import { MantisDispositionManager } from './../scripts/main';
 
 @Injectable()
 export class DispoMangerService {
