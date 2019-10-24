@@ -6,7 +6,7 @@ import { MantisRecordService } from './../../services';
 import { MantisRecordModel } from './../../models';
 import { MantisDispositionManager, DispostionParameter } from './../../scripts';
 // import { DeviceSummaryComponent } from './../device-summary/device-summary.component';
-import { ButtonCollapse } from './../../util/';
+// import { ButtonCollapse } from '../../scripts/common/add-jobreport-section';
 
 @Component({
     selector: 'progress-bar',
@@ -14,7 +14,7 @@ import { ButtonCollapse } from './../../util/';
     styleUrls: ['./progress-bar.component.css']
 })
 
-export class ProgressBarComponent extends ButtonCollapse implements OnInit {
+export class ProgressBarComponent implements OnInit {
     @Input() dispoManagerInstance: MantisDispositionManager;
     public tableInstance;
     public tableItem;
@@ -28,7 +28,7 @@ export class ProgressBarComponent extends ButtonCollapse implements OnInit {
         private mantisRecordService: MantisRecordService,
         private store: Store<any>        
     ) {
-        super();
+        // super();
     }
     
     ngOnInit(){

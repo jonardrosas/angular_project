@@ -1,6 +1,9 @@
 
-<!--
-                <table align="center" class="table table-bordered table-sm" style="width: 130px">
+<div class="row row-break">
+    <div class="col-md-12">
+        <div>
+            <div>
+                <table align="center" class="table-bordered table-sm">
                     <tbody>
                         <tr>
                             <ng-container *ngTemplateOutlet = "template">
@@ -18,7 +21,7 @@
         <ng-container *ngIf = "fields.truth == true; then Current; else NotCurrent"></ng-container>
         
         <ng-template #Current>
-            <td class="current-stage" [attr.bgcolor] = "fields.bg_color">
+            <td class="current-stage" width="100" align="center" [attr.bgcolor] = "fields.bg_color">
                 <b>{{ fields.label }}</b>
             </td>
             <ng-container *ngIf = "fields.label !== 'closed'; then Arrow"></ng-container>
@@ -28,7 +31,7 @@
         </ng-template>
         
         <ng-template #NotCurrent>
-            <td [attr.bgcolor] = "fields.bg_color">
+            <td width="100" align="center" [attr.bgcolor] = "fields.bg_color">
                 {{ fields.label }}
             </td>
             <ng-container *ngIf = "fields.label !== 'closed'; then Arrow"></ng-container>
@@ -43,5 +46,3 @@
 <ng-template #Arrow>
     &#8658;
 </ng-template>
-=======
--->
