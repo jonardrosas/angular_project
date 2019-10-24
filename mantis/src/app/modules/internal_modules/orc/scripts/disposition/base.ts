@@ -1,17 +1,10 @@
 import { MantisRecordModel } from './../../models';
-import {
-    getOrcChecksAction,
-    getiSTChecksAction,
-    getSoaChecksAction,
-    getOrcRecordCheckStateSelector,
-    getIstCheckSelector,
-    getSoaCheckSelector
-} from './../../store/';
-
 export interface DispostionParameter {
     mantisRecord: MantisRecordModel;
     modalService?;
     status?;
+    registeredCheckPopUps?;
+    store?;
 }
 
 
@@ -20,6 +13,7 @@ export interface MantisDispositionBaseInterface {
     deviceSummaryClass;
     checkTableClass;
     checkTableButtonsClass;
+    store;
     checkTableStoreAction?;
     checkTableStoreSelector?;
     checkTableStoreAssignedIstAction?;
@@ -33,22 +27,25 @@ export class MantisDispositionBase implements MantisDispositionBaseInterface {
     checkTableClass = null;
     checkTableButtonsClass = null;
     deviceSummaryClass = null;
+    store;
     progressBarClass = null;
     checkTableStoreAction;
     checkTableStoreSelector;
     checkTableStoreAssignedIstAction;
     checkTableStoreAssignedSoaAction;
-    checkTableStoreAssignedIstSelector = getIstCheckSelector;
-    checkTableStoreAssignedSoaSelector = getSoaCheckSelector;
+    checkTableStoreAssignedIstSelector;
+    checkTableStoreAssignedSoaSelector;
 
     constructor(dispoParams: DispostionParameter) {
         this.dispoParams = dispoParams
-
+        this.store = dispoParams.store;
         // Use this temporary as default, need to be override on the subclass
-        this.checkTableStoreAction = getOrcChecksAction;
-        this.checkTableStoreSelector = getOrcRecordCheckStateSelector;
-        this.checkTableStoreAssignedIstAction = getiSTChecksAction;
-        this.checkTableStoreAssignedSoaAction = getSoaChecksAction;
+        this.checkTableStoreAction = this.store.getOrcChecksAction;
+        this.checkTableStoreSelector = this.store.getOrcRecordCheckStateSelector;
+        this.checkTableStoreAssignedIstAction = this.store.getiSTChecksAction;
+        this.checkTableStoreAssignedSoaAction = this.store.getSoaChecksAction;
+        this.checkTableStoreAssignedIstSelector = this.store.getIstCheckSelector;
+        this.checkTableStoreAssignedSoaSelector = this.store.getSoaCheckSelector;
     }    
 
     getChecksTable(){

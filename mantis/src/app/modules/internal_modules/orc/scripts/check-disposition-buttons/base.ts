@@ -1,7 +1,3 @@
-import { BootstrapAlertComponent } from './../../../../../shared/';
-import { CheckAddNotesComponent } from './../../components/check-list/components/check-add-notes/check-add-notes.component';
-import { CheckUploadImageComponent } from './../../components/check-list/components/check-upload-image/check-upload-image.component';
-
 
 export interface CheckDisposeButtonInterface{
     allCheckButtons?;
@@ -13,7 +9,8 @@ interface checkDispoInterface {
     agGridApi;
     modalService;
     mantisRecord;
-    alerts;    
+    alerts;
+    popups;
 }
 
 /** All commoon function and buttons should be declared here */
@@ -25,11 +22,14 @@ export class CheckDisposeButtonBase implements CheckDisposeButtonInterface {
     protected modalService;
     protected mantisRecord;
     public buttonStatusClass;
+    public popups;
 
     constructor(dispoParams){
+        debugger;
         this.modalService = dispoParams.modalService;
         this.mantisRecord = dispoParams.mantisRecord;
         this.buttonStatusClass = dispoParams.status;        
+        this.popups = dispoParams.registeredCheckPopUps;
         this.allCheckButtons = [
             this.addNotes,
             this.addImage,
@@ -53,11 +53,11 @@ export class CheckDisposeButtonBase implements CheckDisposeButtonInterface {
             const selectedNodes = this.agGridApi.getSelectedNodes()
             const selectedData = selectedNodes.map(node => node.data);
             if(selectedData.length > 0){
-                const modalRef = this.modalService.open(CheckAddNotesComponent, {backdrop: 'static', keyboard: false})
+                const modalRef = this.modalService.open(this.popups.CheckAddNotesComponent, {backdrop: 'static', keyboard: false})
                 modalRef.componentInstance.selectedData = selectedData;
                 modalRef.componentInstance.mantisRecord = this.mantisRecord;
             }else{
-                const modalRef = this.modalService.open(BootstrapAlertComponent)
+                const modalRef = this.modalService.open(this.popups.BootstrapAlertComponent)
                 modalRef.componentInstance.data = {type: 'danger', message: 'No check selected', title: 'Warning'};
             }
         }
@@ -72,11 +72,11 @@ export class CheckDisposeButtonBase implements CheckDisposeButtonInterface {
             const selectedNodes = this.agGridApi.getSelectedNodes()
             const selectedData = selectedNodes.map(node => node.data);
             if(selectedData.length > 0){
-                const modalRef = this.modalService.open(CheckUploadImageComponent, {backdrop: 'static', keyboard: false})
+                const modalRef = this.modalService.open(this.popups.CheckUploadImageComponent, {backdrop: 'static', keyboard: false})
                 modalRef.componentInstance.selectedData = selectedData;
                 modalRef.componentInstance.mantisRecord = this.mantisRecord;
             }else{
-                const modalRef = this.modalService.open(BootstrapAlertComponent)
+                const modalRef = this.modalService.open(this.popups.BootstrapAlertComponent)
                 modalRef.componentInstance.data = {type: 'danger', message: 'No check selected', title: 'Warning'};
             }
         }

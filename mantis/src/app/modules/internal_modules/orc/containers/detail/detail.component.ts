@@ -8,7 +8,7 @@ import { MantisRecordModel } from './../../models';
 import { APP_CONFIG } from './../../../../../configs';
 import { JobreportSectionDirective } from './../../directives';
 import { MantisDispositionManager, DispostionParameter } from './../../scripts';
-import { ReportSectionComponent } from './../detail/detail.registered.section';
+import { ReportSectionComponent, ReportCheckDispostionPopups, reportStore } from './detail.component.configuration';
 import { DispoMangerService } from './../../services';
 
 @Component({
@@ -18,6 +18,7 @@ import { DispoMangerService } from './../../services';
 })
 export class DetailComponent implements OnInit, AfterViewInit {
     public reportSectionsComponents = ReportSectionComponent;
+    public reportCheckDispostionPopups = ReportCheckDispostionPopups;
     public dispoManagerInstance: MantisDispositionManager;
     public dispoManagerInstanceSubject;
     public mantisId: number;
@@ -29,9 +30,8 @@ export class DetailComponent implements OnInit, AfterViewInit {
 
     constructor(
         private activatedRoute: ActivatedRoute,
-        private modalService: NgbModal,
         private store: Store<any>,
-        private dispInstanceMangerService: DispoMangerService,
+        private dispoService: DispoMangerService,
         private componentFactoryResolver: ComponentFactoryResolver
     ) { }
 
@@ -55,13 +55,14 @@ export class DetailComponent implements OnInit, AfterViewInit {
                 if (data.id) {
                     const paramsIns: DispostionParameter = {
                         mantisRecord: this.mantisRecord,
-                        modalService: this.modalService,
+                        registeredCheckPopUps: ReportCheckDispostionPopups,
+                        store: reportStore                         
                     }
                     this.checkFilter['limit'] = 1000;
-                    this.dispoManagerInstance = new MantisDispositionManager(paramsIns);
-                    this.dispoManagerInstanceSubject = this.dispInstanceMangerService.dispoMangerSubject;
-                    this.dispoManagerInstanceSubject.next(this.dispoManagerInstance);
                     this.store.dispatch(orcModuleStore.getMantisErrorSummaryAction({id: this.mantisRecord.bug_text.id}));
+
+                    this.dispoManagerInstance = this.dispoService.initialized(paramsIns) 
+                    this.dispoManagerInstanceSubject = this.dispoService.dispoMangerSubject;
 
                     const loadAllCheckAction = this.dispoManagerInstance.dispositionInstance.checkTableStoreAction;
                     const loadIstCheckAction  = this.dispoManagerInstance.dispositionInstance.checkTableStoreAssignedIstAction;
