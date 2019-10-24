@@ -5,14 +5,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { NgbModal } from './../../../../third_party_modules/ng_bootstrap';
 import { AgGridAngular } from './../../../../third_party_modules/ag-grid';
-
 import { MantisDispositionManager } from './../../scripts';
 import { BootstrapAlertComponent } from './../../../../../shared';
 import * as orcModuleStore from './../../store';
 import { MantisRecordModel } from './../../models';
 import { ButtonCollapse } from './../../util/';
 import { CheckStatusTemplateComponent } from './../../components/check-list/components/check-status-template/check-status-template.component';
-import { getDistinctFieldAction, setSOAGroupAction } from '../../store/actions/orcrecord.actions';
+import { DispoMangerService } from './../../services';
 
 
 @Component({
@@ -26,7 +25,7 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
     @Input() public mantisId: number;
     public rowData: any = [];
     public columnDefs: any;
-    @Input() dispoManagerInstance: MantisDispositionManager;
+    public dispoManagerInstance: MantisDispositionManager;
     public mantisRecord: MantisRecordModel;
     public frameworkComponents = {
         checkStatusTemplateComponent: CheckStatusTemplateComponent
@@ -56,23 +55,28 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
         private store: Store<any>,
         private modalService: NgbModal,
         private activateRoute: ActivatedRoute,
+        private dispoService: DispoMangerService,
     ) {
         super()
     }
 
     ngOnInit() {
-        this.defaultAction = this.dispoManagerInstance.dispositionInstance.checkTableStoreAction;
-        this.defaultSelector = this.dispoManagerInstance.dispositionInstance.checkTableStoreSelector;
-        this.getAssignedIstAction = this.dispoManagerInstance.dispositionInstance.checkTableStoreAssignedIstAction;
-        this.getAssignedSoaAction = this.dispoManagerInstance.dispositionInstance.checkTableStoreAssignedSoaAction;
-        this.assignedIstSelector = this.dispoManagerInstance.dispositionInstance.checkTableStoreAssignedIstSelector;
-        this.assignedSoaSelector = this.dispoManagerInstance.dispositionInstance.checkTableStoreAssignedSoaSelector;
-        this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs();
-        this.buttons = this.dispoManagerInstance.getCheckActionButtons().allCheckButtons;   
+  
 
         this.store.pipe(select(orcModuleStore.getMantisRecordObjectStateSelector)).subscribe(
             (data) => {
                 this.mantisRecord = data;
+                this.dispoManagerInstance = this.dispoService.initialized({mantisRecord: data})
+
+                this.defaultAction = this.dispoManagerInstance.dispositionInstance.checkTableStoreAction;
+                this.defaultSelector = this.dispoManagerInstance.dispositionInstance.checkTableStoreSelector;
+                this.getAssignedIstAction = this.dispoManagerInstance.dispositionInstance.checkTableStoreAssignedIstAction;
+                this.getAssignedSoaAction = this.dispoManagerInstance.dispositionInstance.checkTableStoreAssignedSoaAction;
+                this.assignedIstSelector = this.dispoManagerInstance.dispositionInstance.checkTableStoreAssignedIstSelector;
+                this.assignedSoaSelector = this.dispoManagerInstance.dispositionInstance.checkTableStoreAssignedSoaSelector;
+
+                this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs();
+                this.buttons = this.dispoManagerInstance.getCheckActionButtons().allCheckButtons;                 
             }
         )
 

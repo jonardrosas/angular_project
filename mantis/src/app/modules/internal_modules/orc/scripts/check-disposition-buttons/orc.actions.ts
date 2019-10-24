@@ -1,10 +1,4 @@
 import { CheckDisposeButtonBase, CheckDisposeButtonInterface } from './base';
-import { CheckChangeStatusComponent } from './../../components/check-list/components/check-change-status/check-change-status.component';
-import { CheckEscalateIstComponent } from './../../components/check-list/components/check-escalte-ist-status/check-escalate-ist-status.component';
-import { CheckEscalateSoaComponent } from './../../components/check-list/components/check-escalate-soa/check-escalate-soa.component';
-import { CheckRecommendComponent } from './../../components/check-list/components/check-recommend/check-recommend.component';
-import { CheckRecommendAsSoaComponent } from './../../components/check-list/components/check-recommend-as-soa/check-recommend-as-soa.component';
-import { BootstrapAlertComponent } from './../../../../../shared/';
 
 
 export class OrcCheckDispositionButtonBase extends CheckDisposeButtonBase {
@@ -18,12 +12,12 @@ export class OrcCheckDispositionButtonBase extends CheckDisposeButtonBase {
             const selectedNodes = this.agGridApi.getSelectedNodes()
             const selectedData = selectedNodes.map(node => node.data);
             if(selectedData.length > 0){
-                const modalRef = this.modalService.open(CheckChangeStatusComponent, {backdrop: 'static', keyboard: false})
+                const modalRef = this.modalService.open(this.popups.CheckChangeStatusComponent, {backdrop: 'static', keyboard: false})
                 modalRef.componentInstance.selectedData = selectedData;
                 modalRef.componentInstance.mantisRecord = this.mantisRecord;
                 modalRef.componentInstance.dispoManagerInstance = dispoManagerInstance;
             }else{
-                const modalRef = this.modalService.open(BootstrapAlertComponent)
+                const modalRef = this.modalService.open(this.popups.BootstrapAlertComponent)
                 modalRef.componentInstance.data = {type: 'danger', message: 'No check selected', title: 'Warning'};
             }
         }        
@@ -37,11 +31,11 @@ export class OrcCheckDispositionButtonBase extends CheckDisposeButtonBase {
             const selectedNodes = this.agGridApi.getSelectedNodes()
             const selectedData = selectedNodes.map(node => node.data);
             if(selectedData.length > 0){
-                const modalRef = this.modalService.open(CheckEscalateIstComponent, {backdrop: 'static', keyboard: false})
+                const modalRef = this.modalService.open(this.popups.CheckEscalateIstComponent, {backdrop: 'static', keyboard: false})
                 modalRef.componentInstance.selectedData = selectedData;
                 modalRef.componentInstance.mantisRecord = this.mantisRecord;
             }else{
-                const modalRef = this.modalService.open(BootstrapAlertComponent)
+                const modalRef = this.modalService.open(this.popups.BootstrapAlertComponent)
                 modalRef.componentInstance.data = {type: 'danger', message: 'No check selected', title: 'Warning'};
             }
         }
@@ -55,11 +49,11 @@ export class OrcCheckDispositionButtonBase extends CheckDisposeButtonBase {
             const selectedNodes = this.agGridApi.getSelectedNodes()
             const selectedData = selectedNodes.map(node => node.data);
             if(selectedData.length > 0){
-                const modalRef = this.modalService.open(CheckEscalateSoaComponent, {backdrop: 'static', keyboard: false})
+                const modalRef = this.modalService.open(this.popups.CheckEscalateSoaComponent, {backdrop: 'static', keyboard: false})
                 modalRef.componentInstance.selectedData = selectedData;
                 modalRef.componentInstance.mantisRecord = this.mantisRecord;
             }else{
-                const modalRef = this.modalService.open(BootstrapAlertComponent)
+                const modalRef = this.modalService.open(this.popups.BootstrapAlertComponent)
                 modalRef.componentInstance.data = {type: 'danger', message: 'No check selected', title: 'Warning'};
             }
         }
@@ -73,12 +67,12 @@ export class OrcCheckDispositionButtonBase extends CheckDisposeButtonBase {
             const selectedNodes = this.agGridApi.getSelectedNodes()
             const selectedData = selectedNodes.map(node => node.data);
             if(selectedData.length > 0){
-                const modalRef = this.modalService.open(CheckRecommendComponent, {backdrop: 'static', keyboard: false})
+                const modalRef = this.modalService.open(this.popups.CheckRecommendComponent, {backdrop: 'static', keyboard: false})
                 modalRef.componentInstance.selectedData = selectedData;
                 modalRef.componentInstance.mantisRecord = this.mantisRecord;
                 modalRef.componentInstance.dispoManagerInstance = dispoManagerInstance;
             }else{
-                const modalRef = this.modalService.open(BootstrapAlertComponent)
+                const modalRef = this.modalService.open(this.popups.BootstrapAlertComponent)
                 modalRef.componentInstance.data = {type: 'danger', message: 'No check selected', title: 'Warning'};
             }
         }
@@ -92,12 +86,12 @@ export class OrcCheckDispositionButtonBase extends CheckDisposeButtonBase {
             const selectedNodes = this.agGridApi.getSelectedNodes()
             const selectedData = selectedNodes.map(node => node.data);
             if(selectedData.length > 0){
-                const modalRef = this.modalService.open(CheckRecommendAsSoaComponent, {backdrop: 'static', keyboard: false})
+                const modalRef = this.modalService.open(this.popups.CheckRecommendAsSoaComponent, {backdrop: 'static', keyboard: false})
                 modalRef.componentInstance.selectedData = selectedData;
                 modalRef.componentInstance.mantisRecord = this.mantisRecord;
                 modalRef.componentInstance.dispoManagerInstance = dispoManagerInstance;
             }else{
-                const modalRef = this.modalService.open(BootstrapAlertComponent)
+                const modalRef = this.modalService.open(this.popups.BootstrapAlertComponent)
                 modalRef.componentInstance.data = {type: 'danger', message: 'No check selected', title: 'Warning'};
             }
         }
