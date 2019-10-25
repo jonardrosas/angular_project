@@ -22,7 +22,19 @@
         <div class="card-body">                        
             <div class="row">
                 <div class="col-md-12">
-                    <input class="ml-2" type="checkbox"> F1_BEOL_Support
+                    <nav aria-label="breadcrumb">
+                        <ul class="nav">
+                            <li class="nav-item">
+                                <a class="nav-link active" [routerLink]="[url, mantisRecord.id]" [queryParams]="{check_section: queryParams, group: 'FEOL'}">FEOL</a>
+                            </li>
+                             <li class="nav-item">
+                                <a class="nav-link" href="#">Link</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Link</a>
+                            </li>                        
+                        </ul>
+                    </nav>                
                 </div>
             </div>        
             <div class="row-break">
@@ -32,7 +44,7 @@
                 <ag-grid-angular
                     #agGrid
                     [ngClass]="options.theme"
-                    [rowData]="rowData"
+                    [rowData]="rowData$ | async"
                     [columnDefs]="columnDefs"
                     rowSelection="multiple"
                     [suppressRowClickSelection]="true"

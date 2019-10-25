@@ -3,28 +3,30 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY } from 'rxjs';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 import { OrcCheckService, MantisRecordService, OrcRecordService } from '../../services';
+import { OrcCheckModel} from './../../models/'
 import * as orcRecordActions from '../actions/orcrecord.actions';
 
 
 @Injectable()
 export class OrcRecordEffects {
+    private checkInstance: OrcCheckModel = new OrcCheckModel();
 
     constructor(
         private actions$: Actions,
         private orcCheckService: OrcCheckService,
         private mantisService: MantisRecordService,
         private orcRecordService: OrcRecordService,
-    ) {}
+    ) {
+
+    }
 
     loadOrcRecordCheckFn = createEffect(() => this.actions$.pipe(
             ofType(orcRecordActions.GET_ORC_CHECK),
             mergeMap(
-                (payload: any) => this.orcCheckService.getQuerySet(
+                (payload: any) => this.checkInstance.objects.filter(
                     {
                         record: payload.record,
                         limit: payload.limit,
-                        checkassessments__assigned_group__id: payload.checkassessments__assigned_group__id,
-                        checkassessments__assigned_group__name: payload.checkassessments__assigned_group__name
                     })
                 .pipe(
                     map(
@@ -37,7 +39,6 @@ export class OrcRecordEffects {
     );
 
     
-
     loadOrcIstGroupsFn = createEffect(() => this.actions$.pipe(
         ofType(orcRecordActions.GET_IST_GROUP_OPTION),
         mergeMap(

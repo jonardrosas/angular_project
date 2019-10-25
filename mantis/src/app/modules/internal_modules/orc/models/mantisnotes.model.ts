@@ -27,7 +27,7 @@ export interface MantisNotesInterface {
 
 
 export class MantisNotes extends BaseModel implements MantisNotesInterface{
-    __url = URLS.DRF_MANTIS_RECORD_NOTE_URL
+    url = URLS.DRF_MANTIS_RECORD_NOTE_URL
     id: number;
     view_state?: number;
     note_type?: number;
@@ -40,4 +40,9 @@ export class MantisNotes extends BaseModel implements MantisNotesInterface{
     bug: number;
     reporter?: string;
     bugnote_text: MantisBugNoteText;
+
+    constructor(){
+        super()
+        this.setUp()
+    }      
 }

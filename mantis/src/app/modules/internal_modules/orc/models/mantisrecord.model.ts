@@ -50,7 +50,7 @@ export interface MantisRecordInterface {
 
 
 export class MantisRecordModel extends BaseModel implements MantisRecordInterface {
-    __url = URLS.DRF_MANTIS_RECORD_URL;
+    url = URLS.DRF_MANTIS_RECORD_URL;
     bug_text_id: number;
     date_generated: number;
     device: string;
@@ -93,6 +93,11 @@ export class MantisRecordModel extends BaseModel implements MantisRecordInterfac
     bug_text?: MantisRecordText;
     category?: number;
     drcentry?;    
+
+    constructor(){
+        super()
+        this.setUp()
+    }      
 
 }
 

@@ -8,11 +8,11 @@ import { AgGridAngular } from './../../../../third_party_modules/ag-grid';
 import { MantisDispositionManager } from './../../scripts';
 import { BootstrapAlertComponent } from './../../../../../shared';
 import * as orcModuleStore from './../../store';
-import { MantisRecordModel } from './../../models';
+import { MantisRecordModel, OrcCheckAsessment, OrcCheckInterface } from './../../models';
 import { ButtonCollapse } from './../../util/';
 import { CheckStatusTemplateComponent } from './../../components/check-list/components/check-status-template/check-status-template.component';
 import { DispoMangerService } from './../../services';
-
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-check-list',
@@ -20,22 +20,25 @@ import { DispoMangerService } from './../../services';
     styleUrls: ['./check-list.component.css']
 })
 
-
 export class CheckListComponent extends ButtonCollapse implements OnInit, AfterViewInit {
     @Input() public mantisId: number;
-    public rowData: any = [];
+    public rowData$:  Observable<OrcCheckInterface[] | OrcCheckAsessment[]>;
     public columnDefs: any;
     public dispoManagerInstance: MantisDispositionManager;
     public mantisRecord: MantisRecordModel;
+    public assessmentModel = new OrcCheckAsessment();
     public frameworkComponents = {
         checkStatusTemplateComponent: CheckStatusTemplateComponent
     }
+    public url: string = '/orc/view';
+    public queryParams: string;
     public mainTabs = [
-        { id: 1, title: 'All Checks', url: '/orc/view', param: 'default', count: 0},
-        { id: 2, title: 'Assigned iST', url: '/orc/view', param: 'assinged_ist', count: 0},
-        { id: 3, title: 'Assigned SOA', url: '/orc/view', param: 'assinged_soa', count: 0},
+        { id: 1, title: 'All Checks', url: this.url, param: 'default', count: 0},
+        { id: 2, title: 'Assigned iST', url: this.url, param: 'assinged_ist', count: 0},
+        { id: 3, title: 'Assigned SOA', url: this.url, param: 'assinged_soa', count: 0},
     ];
     public buttons;
+    public object$: Observable<OrcCheckAsessment>;
     @ViewChild('agGrid', { static: false }) agGrid: AgGridAngular;
     public options = {
         theme: `detail-check ag-theme-balham`
@@ -67,7 +70,6 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
             (data) => {
                 this.mantisRecord = data;
                 this.dispoManagerInstance = this.dispoService.initialized({mantisRecord: data})
-
                 this.defaultAction = this.dispoManagerInstance.dispositionInstance.checkTableStoreAction;
                 this.defaultSelector = this.dispoManagerInstance.dispositionInstance.checkTableStoreSelector;
                 this.getAssignedIstAction = this.dispoManagerInstance.dispositionInstance.checkTableStoreAssignedIstAction;
@@ -85,12 +87,15 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
                 this.filters = {};
                 this.filters['limit'] = 1000;
                 this.filters['record'] = this.mantisRecord.orc_record.id;
+                this.queryParams = data.check_section;
                 if(data.check_section == 'assinged_ist'){
                     this.getChecks(this.assignedIstSelector);
                     this.buttons = this.dispoManagerInstance.getCheckActionButtons().iSTCheckButtons;         
                 }else if(data.check_section == 'assinged_soa'){
                     this.getChecks(this.assignedSoaSelector);
                     this.buttons = this.dispoManagerInstance.getCheckActionButtons().sOACheckButtons;         
+                    this.rowData$ = this.assessmentModel.objects.filter({check__record: this.mantisRecord.orc_record.id})
+                    debugger;
                 }else if(data.check_section == 'default'){
                     this.getChecks(this.defaultSelector);
                     this.buttons = this.dispoManagerInstance.getCheckActionButtons().allCheckButtons;         
@@ -120,19 +125,11 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
     }
 
     getChecks(selector) {
-        this.store.pipe(select(selector)).subscribe(
-            (data) => {
-                this.rowData = data;
-                if(this.agGrid){
-                    this.agGrid.api.sizeColumnsToFit();
-                    this.agGrid.api.setDomLayout('autoHeight');
-                }
-            },
-            (err) => {
-                const modalRef = this.modalService.open(BootstrapAlertComponent, {backdrop: 'static', keyboard: false})
-                modalRef.componentInstance.data = {type: 'danger', message: err, title: 'Warning'};                
-            }
-        );
+        this.rowData$ = this.store.pipe(select(selector))
+        if(this.agGrid){
+            this.agGrid.api.sizeColumnsToFit();
+            this.agGrid.api.setDomLayout('autoHeight');
+        }
     }
 
 

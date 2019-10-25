@@ -25,7 +25,6 @@ export class CheckDisposeButtonBase implements CheckDisposeButtonInterface {
     public popups;
 
     constructor(dispoParams){
-        debugger;
         this.modalService = dispoParams.modalService;
         this.mantisRecord = dispoParams.mantisRecord;
         this.buttonStatusClass = dispoParams.status;        
