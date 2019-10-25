@@ -26,7 +26,7 @@ export interface OrcCheckInterface {
 
 
 export class OrcCheckModel extends BaseModel implements OrcCheckInterface {
-    __url = URLS.DRF_ORC_RECORD_CHECK_URL;
+    url = URLS.DRF_ORC_RECORD_CHECK_URL;
     id: number;
     name: string;
     type: string;
@@ -46,5 +46,10 @@ export class OrcCheckModel extends BaseModel implements OrcCheckInterface {
     record_id?: number;
     record?: number;
     vio_cnt?: number;
+
+    constructor(){
+        super()
+        this.setUp()
+    }    
 }
 

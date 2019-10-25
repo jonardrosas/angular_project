@@ -50,7 +50,7 @@ export interface OrcRecordInterface {
 
 
 export class OrcRecordModel extends BaseModel implements OrcRecordInterface {
-    __url = URLS.DRF_ORC_RECORD_URL;
+    url = URLS.DRF_ORC_RECORD_URL;
     archived: boolean;
     autopassed?: string;
     customer: string;
@@ -94,4 +94,10 @@ export class OrcRecordModel extends BaseModel implements OrcRecordInterface {
     workdir: string;
     orc_ext?: OrcRecordExtInterface;    
     checks?;
+
+    constructor(){
+        super()
+        this.setUp()
+    }
+
 }

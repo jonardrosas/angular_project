@@ -16,7 +16,7 @@ export interface MantisRecordHistoryInterface {
 
 
 export class MantisRecordHistory extends BaseModel implements MantisRecordHistoryInterface {
-    __url = URLS.DRF_MANTIS_RECORD_ATTACHMENT_URL;
+    url = URLS.DRF_MANTIS_RECORD_ATTACHMENT_URL;
     bug_id: number;
     date_modified: number;
     date_modified_string: string;
@@ -26,4 +26,9 @@ export class MantisRecordHistory extends BaseModel implements MantisRecordHistor
     old_value: string;
     type_type: number;
     username: number;
+
+    constructor(){
+        super()
+        this.setUp()
+    }      
 }

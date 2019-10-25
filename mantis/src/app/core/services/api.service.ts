@@ -7,9 +7,13 @@ import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class ApiService {
+  static instance: ApiService;
+
   constructor(
     private http?: HttpClient
-  ) {}
+  ) {
+    ApiService.instance = this;
+  }
 
   private formatErrors(error: any) {
     return  throwError(error.error);

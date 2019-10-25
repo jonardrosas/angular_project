@@ -32,7 +32,7 @@ export interface MantisRecordTextInterface{
 
 
 export class MantisRecordText extends BaseModel implements MantisRecordTextInterface {
-    __url = URLS.DRF_MANTIS_RECORD_TEXT_URL;
+    url = URLS.DRF_MANTIS_RECORD_TEXT_URL;
     id: number;
     description?: string;
     histogramfile?: string;
@@ -58,5 +58,10 @@ export class MantisRecordText extends BaseModel implements MantisRecordTextInter
     chip_bnd_y1?: string;
     chip_bnd_x2?: string;
     chip_bnd_y2?: string;    
+
+    constructor(){
+        super()
+        this.setUp()
+    }      
 
 }

@@ -16,7 +16,7 @@ export interface MantisAttachmentInterface {
 
 
 export class MantisAttachment extends BaseModel implements MantisAttachmentInterface{
-    __url = URLS.DRF_MANTIS_RECORD_ATTACHMENT_URL;
+    url = URLS.DRF_MANTIS_RECORD_ATTACHMENT_URL;
     id: number;
     bug_id: number;
     attachment_type: string;
@@ -27,4 +27,9 @@ export class MantisAttachment extends BaseModel implements MantisAttachmentInter
     filesize: number;
     title: string;
     user_id: number;    
+
+    constructor(){
+        super()
+        this.setUp()
+    }      
 }

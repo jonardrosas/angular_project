@@ -18,8 +18,8 @@ export interface OrcRecordExtInterface {
 }
 
 
-export class OrcRecordExt implements OrcRecordExtInterface {
-    __url = URLS.DRF_ORC_RECORD_EXT_URL;
+export class OrcRecordExt extends BaseModel  implements OrcRecordExtInterface {
+    url = URLS.DRF_ORC_RECORD_EXT_URL;
     orc_record: number;
     disposition_method: string;
     fab: string;
@@ -33,4 +33,10 @@ export class OrcRecordExt implements OrcRecordExtInterface {
     ptsr_table: string;
     assigned_group?;
     process_name?: string;
+
+    constructor(){
+        super()
+        this.setUp()
+    }
+
 }
