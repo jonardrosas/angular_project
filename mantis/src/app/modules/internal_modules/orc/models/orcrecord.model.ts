@@ -75,7 +75,7 @@ export class OrcRecordModel extends BaseModel implements OrcRecordInterface {
     mantis_resolution: string;
     maskset: string;
     neutralfile: string;
-    operation: string;
+    operation: any;
     orcn_id: string;
     pdb_status: string;
     process_id: number;

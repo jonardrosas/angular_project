@@ -4,6 +4,7 @@ import { LoginRequired } from './../../../core/guards';
 
 import { ListComponent } from './containers/list/list.component';
 import { DetailComponent } from './containers/detail/detail.component';
+import { OrcWorklistComponent } from './components/orc-worklist/orc-worklist.component';
 
 const routes: Routes = [
     {
@@ -14,6 +15,11 @@ const routes: Routes = [
     {
         path: 'view/:id',
         component: DetailComponent,
+        canActivate: [LoginRequired]
+    },
+    {
+        path: 'orc-worklist',
+        component: OrcWorklistComponent,
         canActivate: [LoginRequired]
     }
 ];

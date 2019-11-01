@@ -1,0 +1,24 @@
+.breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    list-style: none;
+    background-color: rgb(255, 255, 255);
+    border-radius: 0.25rem;
+}
+
+
+.mat-down-arrow{
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+}
+.mat-reset-icon{
+    font-size: 16px !important;
+    cursor: pointer;
+}
+
+.mat-close-icon{
+    right:16px !important;
+}
