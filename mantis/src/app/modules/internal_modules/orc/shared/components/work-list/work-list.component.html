@@ -135,15 +135,15 @@
             <mat-card-content>
                <p>
                   <shd-ngx-dt-table
-                  [rows]="rows"
-                  [columns]="gridConfig.columnDefs"
-                  [options]="options"
-                  [limit]="limit"
-                  [page]="page"
-                  [sort]="sort"
-                  (ngxfilter)="filterWorklist($event)"
-                  (ngxsort)="sortWorklist($event)"
-                  (ngxpage)="pageWorklist($event)"></shd-ngx-dt-table>
+                     [rows]="rows"
+                     [columns]="gridConfig.columnDefs"
+                     [options]="options"
+                     [limit]="limit"
+                     [page]="page"
+                     [sort]="sort"
+                     (ngxfilter)="filterWorklist($event)"
+                     (ngxsort)="sortWorklist($event)"
+                     (ngxpage)="pageWorklist($event)"></shd-ngx-dt-table>
                </p>
             </mat-card-content>
          </mat-card>

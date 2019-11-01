@@ -2,7 +2,7 @@ import { Component, OnInit, Output, Input, EventEmitter, AfterViewInit, Template
 import { Observable ,  BehaviorSubject ,  ReplaySubject } from 'rxjs';
 import * as moment from 'moment';
 import { FormControl } from '@angular/forms';
-import {MatMenuTrigger} from '@angular/material'
+import {MatMenuTrigger} from '@angular/material';
 import { NgxDtTableOptionsModel, NgxDtTablePage, TastypiePage, TastypieSort } from './ngx-dt-table.models';
 import { APP_CONFIG } from './../../../configs';
 import { NgxDtTableService } from './../../services';
@@ -154,11 +154,9 @@ export class NgxDtTableComponent implements OnInit, AfterViewInit {
             ...this.sort
         }
         this.ngxfilter.emit(queryParams);
-        this.triggerMenu.closeMenu();
     }
 
     clearFilter(event, column): void{
-        this.triggerMenu.closeMenu();
         column.filter.values = null;
         column.filter.filterStyle = null;
         if(this.filters){
@@ -179,13 +177,12 @@ export class NgxDtTableComponent implements OnInit, AfterViewInit {
             ...this.filterObj,
             ...this.page,
             ...this.sort
-        }
+        };
         this.ngxfilter.emit(queryParams);
     }
 
-    OnDateChange(value, column): void{
+    OnDateChange(dateArgs): void{
+        let [value, column] = dateArgs;
         column.filter.fieldValue = value;
     }
-
-
 }
