@@ -2,8 +2,7 @@
 /*
 @import "~@angular/material/prebuilt-themes/pink-bluegrey.css";
 */
-@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
-@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import '~@swimlane/ngx-datatable/index.css';
 @import '~@swimlane/ngx-datatable/themes/material.css';
 @import '~@swimlane/ngx-datatable/themes/bootstrap.css';
@@ -15,6 +14,7 @@
 html,
 body{
     height: 100%;
+    background-color: rgb(228, 229, 230);
 }
 
 .nav-container{
@@ -24,10 +24,8 @@ body{
 body{
     margin: 0;
 }
+.line-break { margin-top:20px; };
 
-.btn-small{
-    font-size: 10px;
-}
 
 .btn-toggle{
     text-shadow: 0 1px 0 #fff;
@@ -50,4 +48,25 @@ body{
 
 .nav-break{
     margin-top: 70px;
+}
+
+.mat-full-width{
+    width:100%;
+}
+
+.selectPanel{
+    margin-top: 30px !important;
+    font-size: 14px !important;
+    min-width: 220px !important;
+    margin-left: 22px !important;
+}
+
+.mat-menu-panel{
+        max-width: unset !important;
+}
+
+.cdk-overlay-pane .searchFilter {
+    padding:20px !important;
+    background: rgb(242, 242, 242) !important;
+    margin-top: 20px !important;
 }

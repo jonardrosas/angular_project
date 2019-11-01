@@ -48,7 +48,7 @@ import { AppComponent } from './app.component';
         EffectsModule.forRoot(orcModuleStore.effects)
     ],
     declarations: [
-        AppComponent,
+        AppComponent
     ],
     providers: [
         CookieService,

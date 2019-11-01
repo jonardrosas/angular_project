@@ -16,6 +16,8 @@ import { MaterialViolationViewerComponent } from './components/material-violatio
 import { MaterialLoginComponent } from './components/material-login/material-login.component';
 import { AgGridWrapperComponent } from './components/ag-grid-wrapper/ag-grid-wrapper.component';
 import { BootstrapAlertComponent } from './components/bootstrap-alert/bootstrap-alert.component';
+import { ArrayContainsPipe } from './pipes/array-contains.pipe';
+import { NgxDtTableService } from './services';
 
 
 @NgModule({
@@ -27,7 +29,7 @@ import { BootstrapAlertComponent } from './components/bootstrap-alert/bootstrap-
       MaterialModule,
       FormsModule,
       AgGridModule.withComponents([]),
-      ReactiveFormsModule,
+      ReactiveFormsModule
   ],
   declarations: [
       NgxDtTableComponent,
@@ -39,6 +41,7 @@ import { BootstrapAlertComponent } from './components/bootstrap-alert/bootstrap-
       MaterialLoginComponent,
       AgGridWrapperComponent,
       BootstrapAlertComponent,
+      MaterialLoginComponent
   ],
   exports: [
       NgxDtTableComponent,
@@ -49,8 +52,10 @@ import { BootstrapAlertComponent } from './components/bootstrap-alert/bootstrap-
       MaterialViolationViewerComponent,
       MaterialLoginComponent,
       AgGridWrapperComponent,
-      BootstrapAlertComponent
+      BootstrapAlertComponent,
+      MaterialLoginComponent
   ],
+  providers: [NgxDtTableService]
 
 })
 export class SharedModule { }

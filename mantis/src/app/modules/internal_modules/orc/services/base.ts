@@ -27,7 +27,7 @@ export class QueryHelper {
     }
 
     getQuerySet(filters): Observable<any> {
-        const params = this.buildFilter(filters);
+        let params = this.buildFilter(filters);
         return this.apiService.get(this.url, params);
     }
 
