@@ -15,6 +15,7 @@ import { OrcRecordService, MantisRecordService, OrcCheckService, DispoMangerServ
 import * as fromOrcModuleReducer from './store';
 import { OrcRoutingModule } from './orc-routing.module';
 import { ListComponent } from './containers/list/list.component';
+import { OrcSharedModule } from './shared/orc-shared.module';
 import { DetailComponent } from './containers/detail/detail.component';
 import { CheckListComponent } from './components/check-list/check-list.component';
 import { DeviceSummaryComponent } from './components/device-summary/device-summary.component';
@@ -35,6 +36,7 @@ import { CheckUploadImageComponent } from './components/check-list/components/ch
 import { CheckEscalateSoaComponent } from './components/check-list/components/check-escalate-soa/check-escalate-soa.component';
 import { CheckRecommendComponent } from './components/check-list/components/check-recommend/check-recommend.component';
 import { CheckRecommendAsSoaComponent } from './components/check-list/components/check-recommend-as-soa/check-recommend-as-soa.component';
+import { OrcWorklistComponent } from './components/orc-worklist/orc-worklist.component';
 
 @NgModule({
     imports: [
@@ -48,7 +50,8 @@ import { CheckRecommendAsSoaComponent } from './components/check-list/components
         AgGridModule.withComponents([CheckStatusTemplateComponent]),
         StoreModule.forFeature('orc', fromOrcModuleReducer.reducers),
         EffectsModule.forFeature(fromOrcModuleReducer.effects),
-        Ckeditor5AngularModule
+        Ckeditor5AngularModule,
+        OrcSharedModule
     ],
     declarations: [
         Safe,
@@ -72,6 +75,7 @@ import { CheckRecommendAsSoaComponent } from './components/check-list/components
         CheckEscalateSoaComponent,
         CheckRecommendComponent,
         CheckRecommendAsSoaComponent,
+        OrcWorklistComponent
     ],
     entryComponents: [
         CheckListComponent,
@@ -90,7 +94,9 @@ import { CheckRecommendAsSoaComponent } from './components/check-list/components
         CheckUploadImageComponent,
         CheckEscalateSoaComponent,
         CheckRecommendComponent,
-        CheckRecommendAsSoaComponent
+        CheckRecommendAsSoaComponent,
+        // CheckStatusTemplateComponent,
+        OrcWorklistComponent,
     ],
     providers: [OrcRecordService, MantisRecordService, OrcCheckService, DispoMangerService, DrcRecordService, DrcCheckService]
 })

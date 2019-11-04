@@ -43,4 +43,24 @@ export class ApiService {
       `${environment.api_url}${path}`
     ).pipe(catchError(this.formatErrors));
   }
+
+  buildFilter(filters) {
+        let params = new HttpParams();
+        for (const field in filters) {
+            if (filters[field]) {
+                const value = filters[field];
+                params = params.append(field, value);
+            }
+        }
+        return params;
+    }
+
+  getRequest(url, filters): Observable<any> {
+        const params = this.buildFilter(filters);
+        return this.get(url, params);
+  }
+
+  errorResponse(err) {
+      alert('Internal Error');
+  }
 }

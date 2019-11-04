@@ -1,0 +1,11 @@
+<orc-shd-work-list [rows] = "rowData"
+                        [gridConfig] = "gridConfig"
+                        (ngxsort)="getOrcWorklist($event)"
+                        (ngxpage)="getOrcWorklist($event)"
+                        (ngxfilter)="getOrcWorklist($event)"
+                        [options]="options"
+                        [limit]="limit"
+                        [page]="page"
+                        [sort]="sort"
+                        [filters]="filters"></orc-shd-work-list>
+

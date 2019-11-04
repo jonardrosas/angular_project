@@ -1,5 +1,6 @@
 <div class="ngx-dt-table-container">
-    <ngx-datatable
+   <ngx-datatable
+       class='material'
        [ngClass]="options.ngxClass"
        [columnMode]="'force'"
        [rows]="rows"
@@ -16,7 +17,87 @@
        [loadingIndicator]="options.loadingIndicator"
        [scrollbarH]=true
        [offset]="page.page"></ngx-datatable>
- </div>
+</div>
 <ng-template #linkTemplate let-row="row" let-value="value" let-i="index">
-  <a [routerLink]="['/orc/view/', value]">{{ value }}</a>
+   <a [routerLink]="['/orc/view/', value]">{{ value }}</a>
+</ng-template>
+<ng-template #hdrTpl let-column="column" let-sort="sortFn">
+   <span class="datatable-header-cell-wrapper" style="margin-right: 10px;">
+   <span class="datatable-header-cell-label draggable" (click)="sort()">{{column.name}}</span>
+   </span>
+   <ngx-column-filter [column] = "column" (updateFilter)="updateFilter($event, column)" (clearFilter)="clearFilter($event, column)" (OnDateChange)="OnDateChange($event, dateArgs)"></ngx-column-filter>
+   <!--<mat-icon [matMenuTriggerFor]="filterMenu" class="icon-display" *ngIf="column.filter"><i class="fas fa-filter fa-xs" [ngStyle]="column.filter.filterStyle"></i></mat-icon>-->
+   <!--<span *ngIf="column.filter && column.filter.values && column.filter.values.length>0">-->
+      <!--<br/>-->
+      <!--<mat-form-field class="mat-full-width">-->
+         <!--<input matInput [(ngModel)]="column.filter.values">-->
+      <!--</mat-form-field>-->
+   <!--</span>-->
+   <!--<mat-menu #filterMenu="matMenu" [overlapTrigger]="false">-->
+   <!--<form (keydown.tab)="$event.stopPropagation()">-->
+      <!--<mat-toolbar style="min-width:250px">-->
+         <!--<mat-toolbar-row (click)="$event.stopPropagation(); false;" *ngIf="column.filter && column.filter.type==='default'">-->
+         <!--<mat-form-field class="mat-full-width">-->
+            <!--<mat-select [(ngModel)]="column.filter.selected" name="default_select" disableOptionCentering panelClass="selectPanel">-->
+            <!--<mat-option *ngFor="let opt of column.filter.choices" [value] = "opt.value">{{opt.name}}</mat-option>-->
+            <!--</mat-select>-->
+         <!--</mat-form-field>-->
+         <!--</mat-toolbar-row>-->
+         <!--<mat-toolbar-row style="height: 85px;" (click)="$event.stopPropagation(); false;" *ngIf="column.filter && column.filter.type==='default'">-->
+         <!--<mat-form-field>-->
+            <!--<input matInput placeholder="Enter the value" name="value" [(ngModel)]="column.filter.fieldValue"/>-->
+            <!--<button mat-button matSuffix mat-icon-button aria-label="Clear Text" tabindex="-1" (click)="column.filter.fieldValue=''"-->
+            <!--[style.visibility]="!column.filter.fieldValue ? 'hidden' : 'visible'">-->
+            <!--<mat-icon>close</mat-icon>-->
+            <!--</button>-->
+         <!--</mat-form-field>-->
+         <!--</mat-toolbar-row>-->
+         <!--<mat-toolbar-row (click)="$event.stopPropagation(); false;" *ngIf="column.filter && column.filter.type==='date'">-->
+         <!--<mat-form-field class="mat-full-width">-->
+            <!--<mat-select [(ngModel)]="column.filter.selected" name="default_select" disableOptionCentering panelClass="selectPanel">-->
+            <!--<mat-option *ngFor="let opt of column.filter.choices" [value] = "opt.value">{{opt.name}}</mat-option>-->
+            <!--</mat-select>-->
+         <!--</mat-form-field>-->
+         <!--</mat-toolbar-row>-->
+         <!--<mat-toolbar-row style="height: 85px;" (click)="$event.stopPropagation(); false;" *ngIf="column.filter && column.filter.type==='date'">-->
+         <!--<mat-form-field color="accent">-->
+            <!--<input matInput [matDatepicker]="filterDatePicker"  name="date" (dateInput)="OnDateChange($event.value, column)" [(ngModel)]="column.filter.fieldValue" placeholder="Choose a date">-->
+            <!--<mat-datepicker-toggle matSuffix [for]="filterDatePicker"></mat-datepicker-toggle>-->
+            <!--<mat-datepicker #filterDatePicker></mat-datepicker>-->
+         <!--</mat-form-field>-->
+         <!--</mat-toolbar-row>-->
+         <!--<mat-toolbar-row style="height: 85px;" (click)="$event.stopPropagation(); false;" *ngIf="column.filter && column.filter.type==='multiselect'">-->
+         <!--<mat-form-field class="mat-full-width">-->
+            <!--<mat-select [(ngModel)]="column.filter.selected" name="multiselect" [formControl]="multiSelectFilter" multiple>-->
+            <!--<mat-select-trigger>-->
+               <!--{{multiSelectFilter.value ? multiSelectFilter.value[0] : ''}}-->
+               <!--<span *ngIf="multiSelectFilter.value?.length > 1" class="example-additional-selection">-->
+               <!--(+{{multiSelectFilter.value.length - 1}} {{multiSelectFilter.value?.length === 2 ? 'other' : 'others'}})-->
+               <!--</span>-->
+            <!--</mat-select-trigger>-->
+            <!--<mat-option *ngFor="let opt of column.filter.choices" [value]="opt.value">{{opt.name}}</mat-option>-->
+            <!--</mat-select>-->
+         <!--</mat-form-field>-->
+         <!--</mat-toolbar-row>-->
+         <!--<mat-toolbar-row (click)="$event.stopPropagation(); false;" *ngIf="column.filter && column.filter.type==='select'">-->
+         <!--<mat-form-field class="mat-full-width">-->
+            <!--<mat-select [(ngModel)]="column.filter.selected" name="select" disableOptionCentering panelClass="selectPanel">-->
+            <!--<mat-option *ngFor="let opt of column.filter.choices" [value]="opt.value">{{opt.name}}</mat-option>-->
+            <!--</mat-select>-->
+         <!--</mat-form-field>-->
+         <!--</mat-toolbar-row>-->
+         <!--<mat-toolbar-row style="padding: 0px; height: 48px;" (click)="$event.stopPropagation(); false;">-->
+            <!--<div class="row">-->
+               <!--<div class="col-md-6"></div>-->
+               <!--<div class="col-md-3">-->
+                  <!--<button mat-button (click)="updateFilter($event, column)" color="accent">Filter</button>-->
+               <!--</div>-->
+               <!--<div class="col-md-3">-->
+                  <!--<button mat-button (click)="clearFilter($event, column)">Clear</button>-->
+               <!--</div>-->
+            <!--</div>-->
+         <!--</mat-toolbar-row>-->
+      <!--</mat-toolbar>-->
+   <!--</form>-->
+   <!--</mat-menu>-->
 </ng-template>

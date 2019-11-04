@@ -1,0 +1,153 @@
+<div class="nav-break mt-50 cf-data">
+   <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="#">Home</a></li>
+         <li class="breadcrumb-item active" aria-current="page">F7 Orc Worklist</li>
+      </ol>
+   </nav>
+   <div class="container-fluid cf-data">
+      <div class="row">
+         <div class="col-md-12">
+            <mat-card class="example-card">
+               <mat-card-header>
+                  <mat-card-title>
+                     <h2>F7 Orc Worklist</h2>
+                  </mat-card-title>
+               </mat-card-header>
+               <mat-card-content>
+                  <div class="row">
+                     <div class="col">
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-md-4">
+                     </div>
+                     <div class="col-md-4">
+                        <mat-form-field class="mat-full-width">
+                           <button mat-button matPrefix mat-icon-button aria-label="Search" (click)="fnGlobalSearch(globalSearch)" tabindex="-1">
+                              <mat-icon><i class="fas fa-search"></i></mat-icon>
+                           </button>
+                           <input matInput placeholder="Quick Search..." [(ngModel)]="globalSearch" (keyup.enter)="fnGlobalSearch(globalSearch)" name="search"/>
+                           <button mat-button matSuffix mat-icon-button aria-label="Clear Text" tabindex="-1" class="mat-close-icon" (click)="globalSearch=''"
+                           [style.visibility]="!globalSearch ? 'hidden' : 'visible'">
+                           <mat-icon>close</mat-icon>
+                           </button>
+                        </mat-form-field>
+                        <mat-icon [matMenuTriggerFor]="searchFilter" class="icon-display mat-down-arrow" ><i class="fas fa-caret-down fa-xs"></i></mat-icon>
+                        <mat-menu #searchFilter="matMenu" xPosition="before" class="searchFilter" [overlapTrigger]="false">
+                        <mat-card (click)="$event.stopPropagation();">
+                           <form class="px-4 py-3" >
+                              <div class="form-group" (click)="$event.stopPropagation();" *ngFor="let column of gridConfig.columnDefs">
+                              <div class="row" *ngIf="column.filter && column.filter.type==='default'">
+                                 <div class="col-lg-4" (click)="$event.stopPropagation();">
+                                    <mat-form-field color="accent">
+                                       <mat-label>Filter</mat-label>
+                                       <mat-select [(ngModel)]="column.filter.selected" name="default_{{column.prop}}" required disableOptionCentering>
+                                       <mat-option *ngFor="let opt of column.filter.choices" [value] = "opt.value">{{opt.name}}</mat-option>
+                                       </mat-select>
+                                    </mat-form-field>
+                                 </div>
+                                 <div class="col-lg-1"></div>
+                                 <div class="col-lg-7">
+                                    <mat-form-field class="mat-full-width">
+                                       <mat-label>{{column.name}}</mat-label>
+                                       <input matInput placeholder="Enter the value" name="{{column.prop}}" [(ngModel)]="column.filter.fieldValue"/>
+                                       <button mat-button matSuffix mat-icon-button aria-label="Clear Text" tabindex="-1" (click)="column.filter.fieldValue=''"
+                                       [style.visibility]="!column.filter.fieldValue ? 'hidden' : 'visible'">
+                                       <mat-icon>close</mat-icon>
+                                       </button>
+                                    </mat-form-field>
+                                 </div>
+                              </div>
+                              <div class="row" *ngIf="column.filter && column.filter.type==='date'">
+                                 <div class="col-lg-4" (click)="$event.stopPropagation();">
+                                    <!--<mat-form-field color="accent">-->
+                                    <!--<mat-label>Filter</mat-label>-->
+                                    <!--<mat-select [(ngModel)]="column.filter.selected" name="default_select" required disableOptionCentering>-->
+                                    <!--<mat-option *ngFor="let opt of column.filter.choices" [value] = "opt.value">{{opt.name}}</mat-option>-->
+                                    <!--</mat-select>-->
+                                    <!--</mat-form-field>-->
+                                    <mat-form-field color="accent">
+                                       <mat-label>Filter11</mat-label>
+                                       <mat-select [(ngModel)]="column.filter.selected" name="date_{{column.prop}}" required disableOptionCentering>
+                                       <mat-option *ngFor="let opt of column.filter.choices" [value] = "opt.value">{{opt.name}}</mat-option>
+                                       </mat-select>
+                                    </mat-form-field>
+                                 </div>
+                                 <div class="col-lg-1"></div>
+                                 <div class="col-lg-7" >
+                                    <mat-form-field class="mat-full-width">
+                                       <mat-label>{{column.name}}</mat-label>
+                                       <input matInput [matDatepicker]="filterDatePicker" name="{{column.prop}}" (dateInput)="OnDateChange($event.value, column)" [(ngModel)]="column.filter.fieldValue" placeholder="Choose a date">
+                                       <mat-datepicker-toggle matSuffix [for]="filterDatePicker"></mat-datepicker-toggle>
+                                       <mat-datepicker #filterDatePicker></mat-datepicker>
+                                    </mat-form-field>
+                                 </div>
+                              </div>
+                              <div class="row" *ngIf="column.filter && column.filter.type==='select'">
+                                 <div class="col-lg-12" (click)="$event.stopPropagation();">
+                                    <mat-form-field class="mat-full-width">
+                                       <mat-label>{{column.name}}</mat-label>
+                                       <mat-select [(ngModel)]="column.filter.selected" name="{{column.prop}}" disableOptionCentering placeholder="Select the value">
+                                       <mat-option *ngFor="let opt of column.filter.choices" [value]="opt.value">{{opt.name}}</mat-option>
+                                       </mat-select>
+                                    </mat-form-field>
+                                 </div>
+                              </div>
+                              <div class="row" *ngIf="column.filter && column.filter.type==='multiselect'">
+                                 <div class="col-lg-12" (click)="$event.stopPropagation();">
+                                    <mat-form-field class="mat-full-width">
+                                       <mat-label>{{column.name}}</mat-label>
+                                       <mat-select [(ngModel)]="column.filter.selected" disableOptionCentering placeholder="Select the value" [formControl]="gMultiSelectFilter" multiple>
+                                       <mat-option *ngFor="let opt of column.filter.choices" [value]="opt.value">{{opt.name}}</mat-option>
+                                       </mat-select>
+                                    </mat-form-field>
+                                 </div>
+                              </div>
+                     </div>
+                     </form>
+                     <div class="dropdown-divider"></div>
+                     <div class="row">
+                     <div class="col-md-8"></div>
+                     <div class="col-md-2">
+                     <button mat-button (click)="applyFilter($event, gridConfig.columnDefs)" color="accent">Apply Filter</button>
+                     </div>
+                     <div class="col-md-2">
+                     <button mat-button (click)="clearFilter($event, gridConfig.columnDefs)">Clear</button>
+                     </div>
+                     </div>
+                     </mat-card>
+                     </mat-menu>
+                     <button mat-button mat-icon-button aria-label="Reset Search" tabindex="1" (click)="clearFilter($event, gridConfig.columnDefs)" style="position:absolute">
+                        <mat-icon class="mat-reset-icon"><i class="fas fa-sync-alt"></i></mat-icon>
+                     </button>
+                  </div>
+                  <div class="col-md-4">
+                  </div>
+         </div>
+         </mat-card-content>
+         </mat-card>
+      </div>
+   </div>
+   <div class="row line-break">
+      <div class="col-md-12">
+         <mat-card class="example-card">
+            <mat-card-content>
+               <p>
+                  <shd-ngx-dt-table
+                     [rows]="rows"
+                     [columns]="gridConfig.columnDefs"
+                     [options]="options"
+                     [limit]="limit"
+                     [page]="page"
+                     [sort]="sort"
+                     (ngxfilter)="filterWorklist($event)"
+                     (ngxsort)="sortWorklist($event)"
+                     (ngxpage)="pageWorklist($event)"></shd-ngx-dt-table>
+               </p>
+            </mat-card-content>
+         </mat-card>
+      </div>
+   </div>
+</div>
+</div>

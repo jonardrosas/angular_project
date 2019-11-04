@@ -26,6 +26,7 @@ export class AppComponent {
     tablist = [
        // {name: 'Home', url: '/', icon: 'fas fa-home'},
         {name: 'General List', url: 'orc/list'},
+        {name: 'F7 Orc Worklist', url: 'orc/orc-worklist'},
     ];
 
     constructor() {

@@ -43,8 +43,12 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
-const MaterialComponents = [
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
+
+let MaterialComponents = [
     A11yModule,
     CdkStepperModule,
     CdkTableModule,
@@ -86,13 +90,23 @@ const MaterialComponents = [
     MatTooltipModule,
     MatTreeModule,
     PortalModule,
-    ScrollingModule,   
+    ScrollingModule,
+    NgxMatSelectSearchModule,
+    NgxDaterangepickerMd,
+    FormsModule,
+    ReactiveFormsModule,
 ]
 
+let NgxMaterialComponents = [
+        NgxMatSelectSearchModule,
+        NgxDaterangepickerMd
+]
+
+let AllMatComp = MaterialComponents.concat(NgxMaterialComponents);
 @NgModule({
   declarations: [],
-  imports: [MaterialComponents],
-  exports: [MaterialComponents]
+  imports: [AllMatComp],
+  exports: [AllMatComp]
 })
 
 export class MaterialModule { }
