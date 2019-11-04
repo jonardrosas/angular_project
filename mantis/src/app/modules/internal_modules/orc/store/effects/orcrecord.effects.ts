@@ -30,7 +30,8 @@ export class OrcRecordEffects {
                     })
                 .pipe(
                     map(
-                        checks => orcRecordActions.setOrcChecksAction({checks: checks.results}),
+                        //checks => orcRecordActions.setOrcChecksAction({checks: checks.results}),
+                        checks => orcRecordActions.setOrcChecksAction({checks: checks}),
                         catchError(() => EMPTY)
                     )
                 )

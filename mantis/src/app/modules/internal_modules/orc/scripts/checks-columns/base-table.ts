@@ -1,15 +1,20 @@
 /****
  Check default column definition
  ****/
+import * as CONST from './../enums';
 
 interface CheckTableInterface {
     columnDefs;
     setColumnDefs(): void;
 }
 
-export class CheckBaseModel implements CheckTableInterface {
-    columnDefs: object[];
-    statusCellTemplate;
+
+export class CheckFields {
+    public idField = {
+        headerName:  'Id',
+        field: 'id',
+        sortable: true,
+    };
     public ruleNameField = {
         headerName: 'Rule Name',
         field: 'name',
@@ -158,12 +163,8 @@ export class CheckBaseModel implements CheckTableInterface {
             const assignedGroupStr = assignedGroups.join(', ')
             return assignedGroupStr;
         }
-    };
+    };    
 
-
-    constructor() {
-        this.setColumnDefs()
-    }
 
     formatStatus(val) {
         debugger;
@@ -173,6 +174,25 @@ export class CheckBaseModel implements CheckTableInterface {
     getClass(){
         debugger;
         return 'btn btn-danger';
+    }    
+
+}
+
+export class CheckBaseModel extends CheckFields implements CheckTableInterface {
+    columnDefs: any[];
+    assessmentDefs: any[];
+    statusCellTemplate;
+
+    constructor() {
+        super()
+        this.setColumnDefs()
+        this.setAssessmentColumn()
+    }
+
+    setAssessmentColumn(){
+        this.assessmentDefs = [
+            this.idField
+        ];
     }
 
     /* Default Columns Incase Operation is unknown */
@@ -188,7 +208,10 @@ export class CheckBaseModel implements CheckTableInterface {
         ];
     }
 
-    getColumnDefs() {
+    getColumnDefs(section?) {
+        if(section == CONST.TAB3){
+            return this.assessmentDefs;
+        }
         return this.columnDefs;
     }
 

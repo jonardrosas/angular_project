@@ -6,10 +6,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from './../../../../third_party_modules/ng_bootstrap';
 import { AgGridAngular } from './../../../../third_party_modules/ag-grid';
 import { MantisDispositionManager } from './../../scripts';
-import { BootstrapAlertComponent } from './../../../../../shared';
 import * as orcModuleStore from './../../store';
 import { MantisRecordModel, OrcCheckAsessment, OrcCheckInterface } from './../../models';
 import { ButtonCollapse } from './../../util/';
+import * as ENUMS from './../../../orc/scripts/';
 import { CheckStatusTemplateComponent } from './../../components/check-list/components/check-status-template/check-status-template.component';
 import { DispoMangerService } from './../../services';
 import { Observable } from 'rxjs';
@@ -33,9 +33,9 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
     public url: string = '/orc/view';
     public queryParams: string;
     public mainTabs = [
-        { id: 1, title: 'All Checks', url: this.url, param: 'default', count: 0},
-        { id: 2, title: 'Assigned iST', url: this.url, param: 'assinged_ist', count: 0},
-        { id: 3, title: 'Assigned SOA', url: this.url, param: 'assinged_soa', count: 0},
+        { id: ENUMS.TAB1, title: 'All Checks', url: this.url, param: 'default', count: 0},
+        { id: ENUMS.TAB2, title: 'Assigned iST', url: this.url, param: 'assinged_ist', count: 0},
+        { id: ENUMS.TAB3, title: 'Assigned SOA', url: this.url, param: 'assinged_soa', count: 0},
     ];
     public buttons;
     public object$: Observable<OrcCheckAsessment>;
@@ -76,9 +76,6 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
                 this.getAssignedSoaAction = this.dispoManagerInstance.dispositionInstance.checkTableStoreAssignedSoaAction;
                 this.assignedIstSelector = this.dispoManagerInstance.dispositionInstance.checkTableStoreAssignedIstSelector;
                 this.assignedSoaSelector = this.dispoManagerInstance.dispositionInstance.checkTableStoreAssignedSoaSelector;
-
-                this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs();
-                this.buttons = this.dispoManagerInstance.getCheckActionButtons().allCheckButtons;                 
             }
         )
 
@@ -88,21 +85,24 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
                 this.filters['limit'] = 1000;
                 this.filters['record'] = this.mantisRecord.orc_record.id;
                 this.queryParams = data.check_section;
-                if(data.check_section == 'assinged_ist'){
-                    this.getChecks(this.assignedIstSelector);
+                if(data.check_section == ENUMS.TAB2){
+                    this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs();
                     this.buttons = this.dispoManagerInstance.getCheckActionButtons().iSTCheckButtons;         
-                }else if(data.check_section == 'assinged_soa'){
-                    this.getChecks(this.assignedSoaSelector);
+                    this.rowData$ = this.store.pipe(select(this.assignedIstSelector))
+                }else if(data.check_section == ENUMS.TAB3){
+                    this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs('assinged_soa');
                     this.buttons = this.dispoManagerInstance.getCheckActionButtons().sOACheckButtons;         
                     this.rowData$ = this.assessmentModel.objects.filter({check__record: this.mantisRecord.orc_record.id})
-                    debugger;
-                }else if(data.check_section == 'default'){
-                    this.getChecks(this.defaultSelector);
+                }else if(data.check_section == ENUMS.TAB1){
+                    this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs(ENUMS.TAB1);
                     this.buttons = this.dispoManagerInstance.getCheckActionButtons().allCheckButtons;         
+                    this.rowData$ = this.store.pipe(select(this.defaultSelector))
                 }else{
-                    this.getChecks(this.defaultSelector);
+                    this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs(ENUMS.TAB1);
                     this.buttons = this.dispoManagerInstance.getCheckActionButtons().allCheckButtons;         
+                    this.rowData$ = this.store.pipe(select(this.defaultSelector))
                 }
+                this.refreshGrid()
             }
         )        
     }
@@ -114,21 +114,25 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
 
     getCount(id){
         let count$;
-        if(id == 2){
+        if(id == ENUMS.TAB2){
             count$ = this.store.pipe(select(this.assignedIstSelector));
-        }else if(id == 3){
+        }else if(id == ENUMS.TAB3){
             count$ = this.store.pipe(select(this.assignedSoaSelector));
-        }else if(id == 1){
+        }else if(id == ENUMS.TAB1){
             count$ = this.store.pipe(select(this.defaultSelector));
         }
         return count$
     }
 
-    getChecks(selector) {
-        this.rowData$ = this.store.pipe(select(selector))
+    refreshGrid() {
         if(this.agGrid){
-            this.agGrid.api.sizeColumnsToFit();
-            this.agGrid.api.setDomLayout('autoHeight');
+            setTimeout(
+                () => {
+                    this.agGrid.api.sizeColumnsToFit()
+                    this.agGrid.api.setDomLayout('autoHeight');
+                }
+            )
+            // this.agGrid.api.setDomLayout('autoHeight');
         }
     }
 

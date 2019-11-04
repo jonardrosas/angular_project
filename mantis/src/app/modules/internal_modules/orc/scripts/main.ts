@@ -36,9 +36,9 @@ export class MantisDispositionManager extends OrcModuleOperation implements Mant
         }   
     }
 
-    getCheckTableColDefs(){
+    getCheckTableColDefs(section?: string){
         this.checkTableInstance = this.dispositionInstance.getChecksTable();
-        return this.checkTableInstance.columnDefs;
+        return this.checkTableInstance.getColumnDefs(section);
     }
 
     getCheckActionButtons() {

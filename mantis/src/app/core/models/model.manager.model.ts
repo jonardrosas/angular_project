@@ -1,6 +1,7 @@
 import { HttpParams } from '@angular/common/http';
 import { ApiService } from './../../core/services';
-import { Observable, BehaviorSubject, ReplaySubject } from 'rxjs';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { URLS } from './../../configs';
 
 
@@ -25,13 +26,14 @@ export class QueryManager{
 
     filter(filters): Observable<any> {
         const params = this.buildFilter(filters);
-        return this.apiService.get(this.url, params);
+        return this.apiService.get(this.url, params).pipe(
+            map(data => data.results)
+        )
     }
 
     get(id): Observable<any> {
         return this.apiService.get(this.url + id + '/');
     }
-
 }
 
 

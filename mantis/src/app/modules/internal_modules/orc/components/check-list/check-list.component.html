@@ -10,7 +10,7 @@
                 <a 
                     class="shadow font-weight-bold text-dark nav-check-link"
                     [routerLink]="[mainTab.url, mantisRecord.id]"
-                    [queryParams]="{check_section: mainTab.param}" 
+                    [queryParams]="{check_section: mainTab.id}" 
                     routerLinkActive="active">
                     {{ mainTab.title }} 
                     <span *ngIf="(getCount(mainTab.id)| async)?.length > 0" class="count-badge badge badge-md badge-danger">{{ (getCount(mainTab.id)| async)?.length }}</span>
