@@ -37,6 +37,8 @@ import { CheckEscalateSoaComponent } from './components/check-list/components/ch
 import { CheckRecommendComponent } from './components/check-list/components/check-recommend/check-recommend.component';
 import { CheckRecommendAsSoaComponent } from './components/check-list/components/check-recommend-as-soa/check-recommend-as-soa.component';
 import { OrcWorklistComponent } from './components/orc-worklist/orc-worklist.component';
+import { DetailJobAssignToComponent } from './components/detail-job-action-section/detail-job-assign-to/detail-job-assign-to.component';
+import { DetailJobChangeStatusComponent } from './components/detail-job-action-section/detail-job-change-status/detail-job-change-status.component';
 
 @NgModule({
     imports: [
@@ -75,7 +77,9 @@ import { OrcWorklistComponent } from './components/orc-worklist/orc-worklist.com
         CheckEscalateSoaComponent,
         CheckRecommendComponent,
         CheckRecommendAsSoaComponent,
-        OrcWorklistComponent
+        OrcWorklistComponent,
+        DetailJobAssignToComponent,
+        DetailJobChangeStatusComponent,
     ],
     entryComponents: [
         CheckListComponent,
@@ -97,6 +101,8 @@ import { OrcWorklistComponent } from './components/orc-worklist/orc-worklist.com
         CheckRecommendAsSoaComponent,
         // CheckStatusTemplateComponent,
         OrcWorklistComponent,
+        DetailJobAssignToComponent,
+        DetailJobChangeStatusComponent,
     ],
     providers: [OrcRecordService, MantisRecordService, OrcCheckService, DispoMangerService, DrcRecordService, DrcCheckService]
 })

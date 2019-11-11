@@ -2,7 +2,8 @@ import { AdSection } from '../../util';
 import { 
     DeviceSummaryComponent , DetailErrorStatisticsComponent,
     DetailNotesSectionComponent, DetailAttachmentSectionComponent,
-    DetailJobHistorySectionComponent, CheckListComponent, ProgressBarComponent
+    DetailJobHistorySectionComponent, CheckListComponent,
+    ProgressBarComponent, DetailJobActionSectionComponent
 } from '../../components';
 import { CheckAddNotesComponent } from '../../components/check-list/components/check-add-notes/check-add-notes.component';
 import { CheckUploadImageComponent } from '../../components/check-list/components/check-upload-image/check-upload-image.component';
@@ -13,6 +14,8 @@ import { CheckChangeStatusComponent } from '../../components/check-list/componen
 import { CheckStatusTemplateComponent } from '../../components/check-list/components/check-status-template/check-status-template.component';
 import { CheckEscalateIstComponent } from '../../components/check-list/components/check-escalte-ist-status/check-escalate-ist-status.component';
 import { BootstrapAlertComponent } from '../../../../../shared/components/bootstrap-alert/bootstrap-alert.component';
+import { DetailJobChangeStatusComponent } from '../../components/detail-job-action-section/detail-job-change-status/detail-job-change-status.component';
+import { DetailJobAssignToComponent } from '../../components/detail-job-action-section/detail-job-assign-to/detail-job-assign-to.component';
 
 import * as orcModuleStore from './../../store';
 
@@ -28,6 +31,8 @@ export const ReportCheckDispostionPopups = {
     'CheckChangeStatusComponent': CheckChangeStatusComponent,
     'CheckStatusTemplateComponent': CheckStatusTemplateComponent,
     'CheckEscalateIstComponent': CheckEscalateIstComponent,
+    'DetailJobChangeStatusComponent': DetailJobChangeStatusComponent,
+    'DetailJobAssignToComponent': DetailJobAssignToComponent
 }
 
 // This section components
@@ -38,6 +43,7 @@ export const ReportSectionComponent = [
     new AdSection(DetailNotesSectionComponent, {title: 'Job Notes', panelIsOpen: true}),
     new AdSection(DetailAttachmentSectionComponent, {title: 'Job Attachment', panelIsOpen: true}),
     new AdSection(DetailJobHistorySectionComponent, {title: 'Job History', panelIsOpen: true}),
+    new AdSection(DetailJobActionSectionComponent, {title: 'Job Action', panelIsOpen: false}),
     new AdSection(CheckListComponent, {title: 'Check Table', panelIsOpen: false}),
 ]
 

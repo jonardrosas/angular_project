@@ -6,6 +6,8 @@ import { DispostionParameter } from './base';
 import { OrcProgressBarTable } from './../progress-bar';
 import { checkChangeStatusList } from './../../scripts/common/status';
 import { STATUS_GROUP } from './../../scripts/enums';
+import { JobActionBase } from './../job-action';
+
 
 export class OrcDispostion extends MantisDispositionBase {
     public checkTableClass = OrcCheckTable;
@@ -15,6 +17,7 @@ export class OrcDispostion extends MantisDispositionBase {
     public checkTableButtonsClass = OrcCheckDispositionButtonClass;
     public progressBarClass = OrcProgressBarTable;
     readonly checkStatus = checkChangeStatusList;
+    public detailJobActionSectionClass = JobActionBase;
 
     constructor(dispoParams: DispostionParameter) {
         super(dispoParams);

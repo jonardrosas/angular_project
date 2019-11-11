@@ -29,6 +29,7 @@ export class MantisDispositionBase implements MantisDispositionBaseInterface {
     deviceSummaryClass = null;
     store;
     progressBarClass = null;
+    detailJobActionSectionClass = null;
     checkTableStoreAction;
     checkTableStoreSelector;
     checkTableStoreAssignedIstAction;
@@ -46,7 +47,14 @@ export class MantisDispositionBase implements MantisDispositionBaseInterface {
         this.checkTableStoreAssignedSoaAction = this.store.getSoaChecksAction;
         this.checkTableStoreAssignedIstSelector = this.store.getIstCheckSelector;
         this.checkTableStoreAssignedSoaSelector = this.store.getSoaCheckSelector;
-    }    
+    }
+    
+    getDetailJobActionSection(){
+        if(this.detailJobActionSectionClass){
+            return new this.detailJobActionSectionClass(this.dispoParams)
+        }
+        throw new Error('JobActionBase required')
+    }
 
     getChecksTable(){
         if(this.checkTableClass){
