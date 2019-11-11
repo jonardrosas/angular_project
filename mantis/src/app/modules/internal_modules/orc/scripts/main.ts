@@ -9,6 +9,7 @@ interface MantisDispositionManagerInterface {
     jobReportTitle;
     dispoParams;
     progressBarInstance?;
+    detailJobActionSectionInstance?;
 }
 
 
@@ -19,6 +20,7 @@ export class MantisDispositionManager extends OrcModuleOperation implements Mant
     public deviceSummaryInstance;
     public jobReportTitle: string;
     public progressBarInstance;
+    public detailJobActionSectionInstance;
 
     constructor(public dispoParams: DispostionParameter){
         super();
@@ -34,6 +36,12 @@ export class MantisDispositionManager extends OrcModuleOperation implements Mant
         } else {
             this.dispositionInstance = new OrcDispostion(this.dispoParams);
         }   
+    }
+    
+    getDetailJobActionSection(){
+        this.detailJobActionSectionInstance = this.dispositionInstance.getDetailJobActionSection();
+        console.log(this.dispoParams.mantisRecord);
+        return this.detailJobActionSectionInstance;
     }
 
     getCheckTableColDefs(){

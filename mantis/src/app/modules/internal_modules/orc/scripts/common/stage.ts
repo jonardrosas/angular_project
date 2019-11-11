@@ -1,3 +1,5 @@
+import { STATUS_GROUP } from './../enums/main';
+
 export const MantisStageStatusModel = [
     {
         bg_color: '#F08080',
@@ -6,13 +8,7 @@ export const MantisStageStatusModel = [
         bold: false,
         passed: false,
         arrow: true,
-        status: [
-            "wait",
-            "notified",
-            "onhold",
-            "reopened",
-            "closed-no-layer"
-        ]
+        group: STATUS_GROUP.NEW
     },
     {
         bg_color: '#FFFACD',
@@ -21,9 +17,7 @@ export const MantisStageStatusModel = [
         bold: false,
         passed: false,
         arrow: true,
-        status: [
-            "assigned"
-        ]
+        group: STATUS_GROUP.ASSIGNED
     },
     {
         bg_color: '#FFA500',
@@ -32,15 +26,7 @@ export const MantisStageStatusModel = [
         bold: false,
         passed: false,
         arrow: true,
-        status: [
-            "init-supportteam-comment",
-            "owner-check",
-            "software-debug",
-            "recipe-improvement",
-            "external-recipe-issue",
-            "owner-check-process",
-            "closed-some-layer"
-        ]
+        group: STATUS_GROUP.DISPOSING
     },
     {
         bg_color: '#F0E68C',
@@ -51,7 +37,8 @@ export const MantisStageStatusModel = [
         arrow: true,
         status: [
             "final-supportteam-comment"
-        ]
+        ],
+        group: STATUS_GROUP.FST
     },
     {
         bg_color: '#F0E68C',
@@ -62,7 +49,8 @@ export const MantisStageStatusModel = [
         arrow: true,
         status: [
             "stake-owner-action"
-        ]
+        ],
+        group: STATUS_GROUP.SOA
     },
     {
         bg_color: '#F0E68C',
@@ -73,7 +61,8 @@ export const MantisStageStatusModel = [
         arrow: true,
         status: [
            "proto-owner-action"
-        ]
+        ],
+        group: STATUS_GROUP.FST
     },
     {
         bg_color: '#F0E68C',
@@ -83,7 +72,8 @@ export const MantisStageStatusModel = [
         passed: false,
         status: [
             "collaborator-revert-request"
-        ]
+        ],
+        group: STATUS_GROUP.FST
     },
     {
         bg_color: '#F0E68C',
@@ -94,7 +84,8 @@ export const MantisStageStatusModel = [
         arrow: true,
         status: [
             "pending-board-action"
-        ]
+        ],
+        group: STATUS_GROUP.FST
     },
     {
         bg_color: '#BDB76B',
@@ -105,7 +96,8 @@ export const MantisStageStatusModel = [
         arrow: true,
         status:[
             "pending-collaborator-action"
-        ]
+        ],
+        group: STATUS_GROUP.FST
     },
     {
         bg_color: '#D8BFD8',
@@ -116,7 +108,8 @@ export const MantisStageStatusModel = [
         arrow: true,
         status: [
             "manual-patch"
-        ]
+        ],
+        group: STATUS_GROUP.PATCHING
     },
     {
         bg_color: '#90EE90',
@@ -148,7 +141,8 @@ export const MantisStageStatusModel = [
             "pass-waive-outofscope",
             "pass-outofscope-customer",
             "passed-approved"
-        ]
+        ],
+        group: STATUS_GROUP.PASS
     },
 //    {
 //        bg_color: '#ADD8E6',

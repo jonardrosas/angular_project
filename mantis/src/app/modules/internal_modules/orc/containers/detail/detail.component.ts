@@ -74,6 +74,7 @@ export class DetailComponent implements OnInit, AfterViewInit {
                         this.store.dispatch(loadIstCheckAction(this.checkFilter));
                         this.store.dispatch(loadSoaCheckAction(this.checkFilter));                          
                     }
+                    // console.log(this.dispoManagerInstance);
    
 
                 }

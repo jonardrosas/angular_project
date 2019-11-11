@@ -1,3 +1,10 @@
-<button class="btn btn-sm btn-outline-primary">Job Assign To</button>
-<button class="ml-2 btn btn-sm btn-outline-primary">Job Change Status</button>
-<button class="ml-2 btn btn-sm btn-outline-light">Add Piye Approver</button>
+<div class="row-break">
+    <div class="col-md-12">
+        <button class="btn btn-sm btn-outline-primary" (click)="this.buttons.assignTo.function(dispoManagerInstance)">
+            Job Assign To
+        </button>
+        <button class="ml-2 btn btn-sm btn-outline-primary" (click)="this.buttons.changeStatus.function(dispoManagerInstance)">
+            Job Change Status
+        </button>
+    </div>
+</div>
