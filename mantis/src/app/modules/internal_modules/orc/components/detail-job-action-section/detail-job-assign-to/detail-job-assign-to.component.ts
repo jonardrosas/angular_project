@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -13,6 +13,7 @@ import { MantisDispositionManager } from '../../../scripts';
   styleUrls: ['./detail-job-assign-to.component.css']
 })
 export class DetailJobAssignToComponent implements OnInit {
+    @Input mantisDispoInstance: MantisDispositionManager;
     public jobAssignForm;
     public Editor = ClassicEditor;
     public alerts: NgAlertInterface[] = [];
