@@ -53,6 +53,9 @@ export class ProgressBarComponent implements OnInit {
     
     getColorList() {
         for(let progressBarElem of this.tableItem){
+            // this.currentColor = progressBarElem.bg_color;
+            // progressBarElem.bg_color = this.defaultColor;
+            // this.setBackgroundColor();
             if(this.currentStage == progressBarElem.label){
                 progressBarElem.truth = true;
                 progressBarElem.bold = true;
