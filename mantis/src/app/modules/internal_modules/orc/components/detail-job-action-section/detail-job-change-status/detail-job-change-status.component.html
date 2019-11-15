@@ -11,23 +11,29 @@
                 {{ jobChangeStatusForm.value | json }}
                 <div class="row bg-light border-dark">
                     <div class="col-md-12">
+                        <p><b>From stage: --> {{ nextStage }}</b></p>
+                    </div>
+                    <div class="col-md-12">
+                        <p><b>From status: --> {{ nextStatus }}</b></p>
+                    </div>
+                    <div class="col-md-12">
                         <div class="form-group">
                             <label for="stage">Change Stage</label>
-                            <select id="stage" class="form-control" formControlName="newStage" (change)="activateStatusList()">
+                            <select id="stage" class="form-control" formControlName="stage" (change)="activateStatusList()">
                                 <option value="" disabled>Choose new stage</option>
                                 <option *ngFor= "let stage of stageGroup">{{ stage.label }}</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="status">Change Status</label>
-                            <select id="status" class="form-control" formControlName="newStatus">
+                            <select id="status" class="form-control" formControlName="status">
                                 <option value="" disabled>Choose new status</option>
                                 <option *ngFor= "let status of statusGroup">{{ status }}</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="comment">Check Disposition Comments</label>
-                            <textarea id="comment" class="form-control" formControlName="comment"></textarea>
+                            <textarea id="comment" class="form-control" formControlName="comments"></textarea>
                         </div>
                     </div>
                 </div>

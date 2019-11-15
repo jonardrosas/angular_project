@@ -7,6 +7,8 @@ import { NgbActiveModal } from './../../../../../third_party_modules/ng_bootstra
 import { NgAlertInterface } from './../../../../../../core/models';
 import { checkChangeStatusList } from './../../../scripts/common/status';
 import { MantisStageStatusModel } from './../../../scripts/common/stage';
+import { URLS } from './../../../../../../configs/app-urls';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-detail-job-change-status',
@@ -25,22 +27,24 @@ export class DetailJobChangeStatusComponent implements OnInit {
     public heading: string = "JOB LEVEL DISPOSITION";
     public nextStage: string;
     public nextStageGroup;
+    public nextStatus: string;
     
     constructor (
         public activeModal: NgbActiveModal,
         private store: Store<any>,
+        private http: HttpClient,
     ) { }
     
     ngOnInit () {
         this.jobChangeStatusForm = new FormGroup ({
-            newStage: new FormControl('', Validators.required),
-            newStatus: new FormControl({value: '', disabled: true}, Validators.required),
-            comment: new FormControl('', Validators.required),
-            groups: new FormControl(''),
-            mantis_id: new FormControl('')
+            stage: new FormControl('', Validators.required),
+            status: new FormControl({value: '', disabled: true}, Validators.required),
+            comments: new FormControl('', Validators.required),
+            groups: new FormControl('test'),
+            mantis_ids: new FormControl('test')
         })
         this.getStageGroup();
-        console.log(this.mantisDispoManagerInstance);
+        // console.log(this.mantisDispoManagerInstance);
     }
     
     clearAlerts() {
@@ -60,11 +64,14 @@ export class DetailJobChangeStatusComponent implements OnInit {
                 this.statusGroup.push(element.label);
             }
         }
+        this.jobChangeStatusForm.controls.status.value = this.statusGroup[0];
+        // console.log(this.statusGroup[0]);
+        // console.log(this.jobChangeStatusForm.get('newStatus').value);
     }
     
     activateStatusList() {
-        this.jobChangeStatusForm.controls.newStatus.enable()
-        this.nextStage = this.jobChangeStatusForm.controls.newStage.value;
+        this.jobChangeStatusForm.controls.status.enable();
+        this.nextStage = this.jobChangeStatusForm.controls.stage.value;
         for (let element of MantisStageStatusModel){
             if (element.label == this.nextStage){
                 this.nextStageGroup = element.group;
@@ -80,6 +87,22 @@ export class DetailJobChangeStatusComponent implements OnInit {
                 this.alerts.push({type: 'danger', message: this.jobChangeStatusForm.controls.status.errors});
             }
         } else {
+            // console.log(this.jobChangeStatusForm.value);
+            // console.log(this.jobChangeStatusForm.get('groups').value);
+        
+            let formData = new FormData();
+            formData.append("stage", this.jobChangeStatusForm.get('stage').value);
+            formData.append("status", this.jobChangeStatusForm.get('status').value);
+            formData.append("comments", this.jobChangeStatusForm.get('comments').value);
+            formData.append("groups", this.jobChangeStatusForm.get('groups').value);
+            formData.append("mantis_ids", this.jobChangeStatusForm.get('mantis_ids').value);
+            
+            this.http.post(URLS.DRF_ORC_JOB_DISPOSE_URL, formData).subscribe(
+                (response) => console.log(response),
+                (error) => console.log(error)
+            )
+            // console.log(this.jobChangeStatusForm.get('newStatus').value);
+            // console.log(formData);
             this.alerts.push({type: 'success', message: 'Successfully updated(Not hitting Database yet).' });
         }
     }
