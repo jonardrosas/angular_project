@@ -7,8 +7,11 @@ import { NgbActiveModal } from './../../../../../third_party_modules/ng_bootstra
 import { NgAlertInterface } from './../../../../../../core/models';
 import { checkChangeStatusList } from './../../../scripts/common/status';
 import { MantisStageStatusModel } from './../../../scripts/common/stage';
+<<<<<<< HEAD
 import { URLS } from './../../../../../../configs/app-urls';
 import { HttpClient } from '@angular/common/http';
+=======
+>>>>>>> 689cde0133f1498837c4cd48f8c69293724689f9
 
 @Component({
   selector: 'app-detail-job-change-status',

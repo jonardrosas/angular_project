@@ -36,7 +36,10 @@ import { CheckUploadImageComponent } from './components/check-list/components/ch
 import { CheckEscalateSoaComponent } from './components/check-list/components/check-escalate-soa/check-escalate-soa.component';
 import { CheckRecommendComponent } from './components/check-list/components/check-recommend/check-recommend.component';
 import { CheckRecommendAsSoaComponent } from './components/check-list/components/check-recommend-as-soa/check-recommend-as-soa.component';
+<<<<<<< HEAD
 import { OrcWorklistComponent } from './components/orc-worklist/orc-worklist.component';
+=======
+>>>>>>> 689cde0133f1498837c4cd48f8c69293724689f9
 import { DetailJobAssignToComponent } from './components/detail-job-action-section/detail-job-assign-to/detail-job-assign-to.component';
 import { DetailJobChangeStatusComponent } from './components/detail-job-action-section/detail-job-change-status/detail-job-change-status.component';
 
@@ -99,10 +102,15 @@ import { DetailJobChangeStatusComponent } from './components/detail-job-action-s
         CheckEscalateSoaComponent,
         CheckRecommendComponent,
         CheckRecommendAsSoaComponent,
+<<<<<<< HEAD
         // CheckStatusTemplateComponent,
         OrcWorklistComponent,
         DetailJobAssignToComponent,
         DetailJobChangeStatusComponent,
+=======
+        DetailJobAssignToComponent,
+        DetailJobChangeStatusComponent
+>>>>>>> 689cde0133f1498837c4cd48f8c69293724689f9
     ],
     providers: [OrcRecordService, MantisRecordService, OrcCheckService, DispoMangerService, DrcRecordService, DrcCheckService]
 })
