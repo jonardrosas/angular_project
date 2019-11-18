@@ -14,12 +14,12 @@
                         <p><b>From stage: --> {{ nextStage }}</b></p>
                     </div>
                     <div class="col-md-12">
-                        <p><b>From status: --> {{ nextStatus }}</b></p>
+                        <p><b>From status: --> {{ jobChangeStatusForm.get('status').value }}</b></p>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="stage">Change Stage</label>
-                            <select id="stage" class="form-control" formControlName="stage" (change)="activateStatusList()">
+                            <select id="stage" class="form-control" formControlName="stage" (click)="resetStatus()">
                                 <option value="" disabled>Choose new stage</option>
                                 <option *ngFor= "let stage of stageGroup">{{ stage.label }}</option>
                             </select>
@@ -27,7 +27,6 @@
                         <div class="form-group">
                             <label for="status">Change Status</label>
                             <select id="status" class="form-control" formControlName="status">
-                                <option value="" disabled>Choose new status</option>
                                 <option *ngFor= "let status of statusGroup">{{ status }}</option>
                             </select>
                         </div>

@@ -13,7 +13,7 @@ import { MantisDispositionManager } from '../../../scripts';
   styleUrls: ['./detail-job-assign-to.component.css']
 })
 export class DetailJobAssignToComponent implements OnInit {
-    @Input mantisDispoInstance: MantisDispositionManager;
+    @Input() mantisDispoInstance: MantisDispositionManager;
     public jobAssignForm;
     public Editor = ClassicEditor;
     public alerts: NgAlertInterface[] = [];

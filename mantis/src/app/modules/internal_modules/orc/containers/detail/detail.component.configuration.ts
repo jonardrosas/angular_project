@@ -37,13 +37,13 @@ export const ReportCheckDispostionPopups = {
 
 // This section components
 export const ReportSectionComponent = [
+    new AdSection(DetailJobActionSectionComponent, {title: 'Job Action', panelIsOpen: false}),
     new AdSection(ProgressBarComponent, {title: 'Progress Bar', panelIsOpen: false}),
     new AdSection(DeviceSummaryComponent, {title: 'Device Summary', panelIsOpen: false}),
     new AdSection(DetailErrorStatisticsComponent, {title: 'Error Summary', panelIsOpen: true}),
     new AdSection(DetailNotesSectionComponent, {title: 'Job Notes', panelIsOpen: true}),
     new AdSection(DetailAttachmentSectionComponent, {title: 'Job Attachment', panelIsOpen: true}),
     new AdSection(DetailJobHistorySectionComponent, {title: 'Job History', panelIsOpen: true}),
-    new AdSection(DetailJobActionSectionComponent, {title: 'Job Action', panelIsOpen: false}),
     new AdSection(CheckListComponent, {title: 'Check Table', panelIsOpen: false}),
 ]
 

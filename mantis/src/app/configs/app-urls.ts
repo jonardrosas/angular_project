@@ -30,6 +30,7 @@ export const URLS = {
     DRF_DRC_RECORD_CHECK_URL: '/mantis/api/v2/drc_record_check/',
     DRF_DRC_RECORD_CHECK_ASSESSMENT_URL: '/mantis/api/v2/orc_check_assessment/',
     DRF_AUTH_GROUP_PROFILE_URL: '/mantis/api/v2/auth_group_profile/',
-    DRF_ORC_JOB_DISPOSE_URL: '/orc/multiplejobdispose/'
+    DRF_ORC_JOB_DISPOSE_URL: '/orc/multiplejobdispose/',
+    DRF_AUTH_USER_URL: '/mantis/api/v2/auth_user/'
 
 };

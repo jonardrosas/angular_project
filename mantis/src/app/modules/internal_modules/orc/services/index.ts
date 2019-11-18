@@ -4,3 +4,4 @@ export * from './orccheck.service';
 export * from './drccheck.service';
 export * from './drcrecord.service';
 export * from './disposition-manager.service';
+export * from './auth_user.service';
