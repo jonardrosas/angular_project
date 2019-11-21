@@ -105,8 +105,8 @@ let NgxMaterialComponents = [
 let AllMatComp = MaterialComponents.concat(NgxMaterialComponents);
 @NgModule({
   declarations: [],
-  imports: [AllMatComp],
-  exports: [AllMatComp]
+  imports: [MaterialComponents],
+  exports: [MaterialComponents]
 })
 
 export class MaterialModule { }

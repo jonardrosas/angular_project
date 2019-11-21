@@ -17,40 +17,41 @@ import { Observable } from 'rxjs';
 })
 
 export class CheckEscalateSoaComponent implements OnInit {
-  public escalateSoaGroupsForm;
-  public alerts: NgAlertInterface[] = [];
-  public heading: string = "Escalate to SOA Groups";
-  public Editor = ClassicEditor;
-  public soaGroups$: Observable<GroupProfileInterface[]>;
+    @Input() selectedData;
+    public escalateSoaGroupsForm;
+    public alerts: NgAlertInterface[] = [];
+    public heading: string = "Escalate to SOA Groups";
+    public Editor = ClassicEditor;
+    public soaGroups$: Observable<GroupProfileInterface[]>;
 
-  constructor(
-      public activeModal: NgbActiveModal,
-      private store: Store<any>,
-  ) {}
+    constructor(
+        public activeModal: NgbActiveModal,
+        private store: Store<any>,
+    ) {}
 
-  ngOnInit() {
-      this.getSOAGroups();
-      this.escalateSoaGroupsForm = new FormGroup({
-          group_id: new FormControl('', Validators.required),
-          comments: new FormControl('')
-      });
-  }
+    ngOnInit() {
+        this.getSOAGroups();
+        this.escalateSoaGroupsForm = new FormGroup({
+            group_id: new FormControl('', Validators.required),
+            comments: new FormControl('')
+        });
+    }
 
-  getSOAGroups() {
-      this.soaGroups$ = this.store.pipe(select(orcModuleStore.getSOASupportTeamGroupSelector))
-  }    
-  onSubmit() {
-      if (this.escalateSoaGroupsForm.status === 'INVALID') {
-          if (this.escalateSoaGroupsForm.controls.groups.invalid) {
-              this.alerts.push({type: 'danger', message: this.escalateSoaGroupsForm.controls.group_id.errors});
-          }
-      } else {
-          this.alerts.push({type: 'success', message: 'Successfully updated(Not hitting Database yet).' });
-      }
-  }
+    getSOAGroups() {
+        this.soaGroups$ = this.store.pipe(select(orcModuleStore.getSOASupportTeamGroupSelector))
+    }    
+    onSubmit() {
+        if (this.escalateSoaGroupsForm.status === 'INVALID') {
+            if (this.escalateSoaGroupsForm.controls.groups.invalid) {
+                this.alerts.push({type: 'danger', message: this.escalateSoaGroupsForm.controls.group_id.errors});
+            }
+        } else {
+            this.alerts.push({type: 'success', message: 'Successfully updated(Not hitting Database yet).' });
+        }
+    }
 
-  close(alert: NgAlertInterface) {
-      this.alerts.splice(this.alerts.indexOf(alert), 1)
-  }  
+    close(alert: NgAlertInterface) {
+        this.alerts.splice(this.alerts.indexOf(alert), 1)
+    }  
 
 }

@@ -15,38 +15,39 @@ import { } from './../../../../scripts/common/status';
 })
 
 export class CheckRecommendAsSoaComponent implements OnInit {
-  @Input() dispoManagerInstance;
-  public recommendForm;
-  public alerts: NgAlertInterface[] = [];
-  public heading: string = "Check Recommend";
-  public Editor = ClassicEditor;
-  public recommendations: string;
+    @Input() selectedData;
+    @Input() dispoManagerInstance;
+    public recommendForm;
+    public alerts: NgAlertInterface[] = [];
+    public heading: string = "Check Recommend";
+    public Editor = ClassicEditor;
+    public recommendations: string;
 
-  constructor(
-      public activeModal: NgbActiveModal,
-      private store: Store<any>,
-  ) {}
+    constructor(
+        public activeModal: NgbActiveModal,
+        private store: Store<any>,
+    ) {}
 
-  ngOnInit() {
-      this.recommendForm = new FormGroup({
-          status: new FormControl('', Validators.required),
-          comments: new FormControl('')
-      });
-      this.recommendations = this.dispoManagerInstance.dispositionInstance.recommendationOptions;
-  }
+    ngOnInit() {
+        this.recommendForm = new FormGroup({
+            status: new FormControl('', Validators.required),
+            comments: new FormControl('')
+        });
+        this.recommendations = this.dispoManagerInstance.dispositionInstance.recommendationOptions;
+    }
 
-  onSubmit() {
-      if (this.recommendForm.status === 'INVALID') {
-          if (this.recommendForm.controls.status.invalid) {
-              this.alerts.push({type: 'danger', message: this.recommendForm.controls.status.errors});
-          }
-      } else {
-          this.alerts.push({type: 'success', message: 'Successfully updated(Not hitting Database yet).' });
-      }
-  }
+    onSubmit() {
+        if (this.recommendForm.status === 'INVALID') {
+            if (this.recommendForm.controls.status.invalid) {
+                this.alerts.push({type: 'danger', message: this.recommendForm.controls.status.errors});
+            }
+        } else {
+            this.alerts.push({type: 'success', message: 'Successfully updated(Not hitting Database yet).' });
+        }
+    }
 
-  close(alert: NgAlertInterface) {
-      this.alerts.splice(this.alerts.indexOf(alert), 1)
-  }  
+    close(alert: NgAlertInterface) {
+        this.alerts.splice(this.alerts.indexOf(alert), 1)
+    }  
 
 }

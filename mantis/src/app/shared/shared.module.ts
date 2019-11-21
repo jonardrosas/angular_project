@@ -45,7 +45,8 @@ import { ColumnFilterComponent } from './components/ngx-dt-table/column-filter/c
       BootstrapAlertComponent,
       MaterialLoginComponent,
       //GlobalSearchComponent,
-      ColumnFilterComponent
+      ColumnFilterComponent,
+      ArrayContainsPipe
   ],
   exports: [
       NgxDtTableComponent,
