@@ -19,6 +19,9 @@ export class MantisDispositionManager extends OrcModuleOperation implements Mant
     public deviceSummaryInstance;
     public jobReportTitle: string;
     public progressBarInstance;
+    public loadCheck;
+    public checkComponentInstance;
+    public detailComponentInstance;
 
     constructor(public dispoParams: DispostionParameter){
         super();

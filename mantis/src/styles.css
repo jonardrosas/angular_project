@@ -24,9 +24,13 @@ body{
 body{
     margin: 0;
 }
+
 .line-break { margin-top:20px; };
 
-
+.btn-small{
+     font-size: 10px;
+}
+     
 .btn-toggle{
     text-shadow: 0 1px 0 #fff;
     background-image: -webkit-linear-gradient(top,#fff 0,#e0e0e0 100%);

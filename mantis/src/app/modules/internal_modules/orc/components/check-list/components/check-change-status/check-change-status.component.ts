@@ -3,6 +3,7 @@ import { Validators } from '@angular/forms';
 import { MantisRecordModel } from './../../../../models';
 import { NgbActiveModal } from './../../../../../../third_party_modules/ng_bootstrap';
 import { NgAlertInterface } from './../../../../../../../core/models';
+import { OrcRecordService } from './../../../../services/';
 import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
@@ -20,8 +21,12 @@ export class CheckChangeStatusComponent implements OnInit {
     public changeStatusForm;
     public alerts: NgAlertInterface[] = [];
     public showSelectedChecks = false ;
+    
 
-    constructor(public activeModal: NgbActiveModal) {}
+    constructor(
+        public activeModal: NgbActiveModal,
+        public orcRecordService: OrcRecordService
+    ) {}
 
     ngOnInit() {
         this.changeStatusForm = new FormGroup({
@@ -39,6 +44,21 @@ export class CheckChangeStatusComponent implements OnInit {
         this.showSelectedChecks = true;
     }
 
+    formData(){
+        let data: any  = {};
+        data.operation = this.mantisRecord.operation;
+        data.comments = this.changeStatusForm.value.description;
+        data.newStat = this.changeStatusForm.value.status;
+        data.record_id = this.mantisRecord.orc_record.id;
+        data.checks_list = [];
+        for(let key in this.selectedData){
+            data.checks_list.push(
+                {oldstatus: this.selectedData[key].status, id: this.selectedData[key].id}
+            )
+        }
+        return data;
+    }
+
     onSubmit() {
         this.clearAlerts();
         if (this.changeStatusForm.status === 'INVALID') {
@@ -46,7 +66,21 @@ export class CheckChangeStatusComponent implements OnInit {
                 this.alerts.push({type: 'danger', message: this.changeStatusForm.controls.status.errors});
             }
         } else {
-            this.alerts.push({type: 'success', message: 'Successfully updated(Not hitting Database yet).' });
+            let data = this.formData();
+            this.orcRecordService.changeStatus(data).subscribe(
+                (data) => {
+                    if(data.status == 'success'){
+                        this.alerts.push({type: 'success', message: data.msg});
+                        setTimeout(
+                            (data) => {
+                                this.activeModal.close(data)
+                            }, 2000
+                        )
+                    }else{
+                        this.alerts.push({type: 'danger', message: data.msg});
+                    }
+                }
+            )
         }
     }
 

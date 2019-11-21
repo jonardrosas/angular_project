@@ -5,6 +5,7 @@ import { NgbActiveModal } from '../../../../../../third_party_modules/ng_bootstr
 import { NgAlertInterface } from '../../../../../../../core/models';
 import { FormGroup, FormControl } from '@angular/forms';
 import * as orcModuleStore from './../../../../store';
+import { OrcRecordService } from './../../../../services/';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
@@ -25,6 +26,7 @@ export class CheckEscalateIstComponent implements OnInit {
     constructor(
         public activeModal: NgbActiveModal,
         private store: Store<any>,
+        public orcRecordService: OrcRecordService
     ) {}
 
     ngOnInit() {
@@ -46,6 +48,23 @@ export class CheckEscalateIstComponent implements OnInit {
         this.istGroups$ = this.store.pipe(select(orcModuleStore.getIstSupportTeamGroupSelector))
     }    
 
+    formData(){
+        let data: any  = {};
+        data.operation = this.mantisRecord.operation;
+        data.comments = this.escalateIstForm.value.comments;
+        data.group_id = this.escalateIstForm.value.group_id;
+        data.newStat = 'iST';
+        data.record_id = this.mantisRecord.orc_record.id;
+        data.checks_list = [];
+        for(let key in this.selectedData){
+            data.checks_list.push(
+                {oldstatus: this.selectedData[key].status, id: this.selectedData[key].id}
+            )
+        }
+        return data;
+    }
+
+
     onSubmit() {
         this.clearAlerts();
         if (this.escalateIstForm.status === 'INVALID') {
@@ -53,7 +72,21 @@ export class CheckEscalateIstComponent implements OnInit {
                 this.alerts.push({type: 'danger', message: this.escalateIstForm.controls.group_id.errors});
             }
         } else {
-            this.alerts.push({type: 'success', message: 'Successfully updated(Not hitting Database yet).' });
+            let data = this.formData();
+            this.orcRecordService.changeStatus(data).subscribe(
+                (data) => {
+                    if(data.status == 'success'){
+                        this.alerts.push({type: 'success', message: data.msg});
+                        setTimeout(
+                            (data) => {
+                                this.activeModal.close(data)
+                            }, 2000
+                        )
+                    }else{
+                        this.alerts.push({type: 'danger', message: data.msg});
+                    }
+                }
+            )
         }
     }
 

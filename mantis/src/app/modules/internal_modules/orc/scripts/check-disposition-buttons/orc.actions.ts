@@ -11,29 +11,51 @@ export class OrcCheckDispositionButtonBase extends CheckDisposeButtonBase {
             this.agGridApi = agGrid.api;
             const selectedNodes = this.agGridApi.getSelectedNodes()
             const selectedData = selectedNodes.map(node => node.data);
+            const selectedCheckId = selectedData.map(data => data.id);
+            debugger;
             if(selectedData.length > 0){
                 const modalRef = this.modalService.open(this.popups.CheckChangeStatusComponent, {backdrop: 'static', keyboard: false})
                 modalRef.componentInstance.selectedData = selectedData;
                 modalRef.componentInstance.mantisRecord = this.mantisRecord;
                 modalRef.componentInstance.dispoManagerInstance = dispoManagerInstance;
+                modalRef.result.then(
+                    (result) => {
+                        dispoManagerInstance.checkComponentInstance.previousSelectedRow = selectedCheckId;
+                        dispoManagerInstance.checkComponentInstance.loadCheck()
+                    }, (reason) => {
+                        // dispoManagerInstance.checkComponentInstance.previousSelectedRow = selectedCheckId;
+                        // dispoManagerInstance.checkComponentInstance.loadCheck()
+                    }
+                )
             }else{
                 const modalRef = this.modalService.open(this.popups.BootstrapAlertComponent)
                 modalRef.componentInstance.data = {type: 'danger', message: 'No check selected', title: 'Warning'};
             }
         }        
-    }    
+    }   
 
     public orcEscalateIst = {
         label: 'Escalate to iST',
         class: 'btn btn-secondary btn-sm',
-        function: (agGrid) =>  {
+        function: (agGrid, dispoManagerInstance) =>  {
             this.agGridApi = agGrid.api;
             const selectedNodes = this.agGridApi.getSelectedNodes()
             const selectedData = selectedNodes.map(node => node.data);
+            const selectedCheckId = selectedData.map(data => data.id);
             if(selectedData.length > 0){
                 const modalRef = this.modalService.open(this.popups.CheckEscalateIstComponent, {backdrop: 'static', keyboard: false})
                 modalRef.componentInstance.selectedData = selectedData;
                 modalRef.componentInstance.mantisRecord = this.mantisRecord;
+                modalRef.componentInstance.dispoManagerInstance = dispoManagerInstance;
+                modalRef.result.then(
+                    (result) => {
+                        dispoManagerInstance.checkComponentInstance.previousSelectedRow = selectedCheckId;
+                        dispoManagerInstance.checkComponentInstance.loadCheck()
+                    }, (reason) => {
+                        // dispoManagerInstance.checkComponentInstance.previousSelectedRow = selectedCheckId;
+                        // dispoManagerInstance.checkComponentInstance.loadCheck()
+                    }
+                )
             }else{
                 const modalRef = this.modalService.open(this.popups.BootstrapAlertComponent)
                 modalRef.componentInstance.data = {type: 'danger', message: 'No check selected', title: 'Warning'};
@@ -101,9 +123,9 @@ export class OrcCheckDispositionButtonBase extends CheckDisposeButtonBase {
         super(dispoParams);
         this.allCheckButtons = [
             this.orcEscalateIst,
-            this.orcEscalateSOA,
+            // this.orcEscalateSOA,
             this.orcChangeStatus,
-            this.checkRecommend,
+            // this.checkRecommend,
             this.addNotes,
             this.addImage
         ]

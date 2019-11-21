@@ -3,7 +3,9 @@ import { Validators } from '@angular/forms';
 import { NgbActiveModal } from '../../../../../../third_party_modules/ng_bootstrap';
 import { NgAlertInterface } from '../../../../../../../core/models';
 import { FormGroup, FormControl } from '@angular/forms';
+import { MantisRecordModel } from './../../../../models';
 import * as orcModuleStore from './../../../../store';
+import { OrcRecordService } from './../../../../services/';
 import { Store, select } from '@ngrx/store';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
@@ -13,6 +15,9 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
   styleUrls: ['./check-add-notes.component.css']
 })
 export class CheckAddNotesComponent implements OnInit {
+    @Input() selectedData;
+    @Input() dispoManagerInstance;
+    @Input() mantisRecord: MantisRecordModel;    
     public addNotesForm;
     public alerts: NgAlertInterface[] = [];
     public heading: string = "Add Notes";
@@ -21,6 +26,7 @@ export class CheckAddNotesComponent implements OnInit {
     constructor(
         public activeModal: NgbActiveModal,
         private store: Store<any>,
+        public orcRecordService: OrcRecordService
     ) {}
 
     ngOnInit() {
@@ -29,13 +35,36 @@ export class CheckAddNotesComponent implements OnInit {
         });
     }
 
+    formData(){
+        let data: any  = {};
+        data.comments = this.addNotesForm.value.notes;
+        data.record_id = this.mantisRecord.orc_record.id;
+        data.data = this.selectedData;
+        return data;
+    }    
+
     onSubmit() {
         if (this.addNotesForm.status === 'INVALID') {
             if (this.addNotesForm.controls.notes.invalid) {
                 this.alerts.push({type: 'danger', message: this.addNotesForm.controls.group_id.errors});
             }
         } else {
-            this.alerts.push({type: 'success', message: 'Successfully updated(Not hitting Database yet).' });
+            let data = this.formData();
+            this.orcRecordService.addNotes(data).subscribe(
+                (data) => {
+                    if(data.status == 'success'){
+                        this.alerts.push({type: 'success', message: data.msg});
+                        setTimeout(
+                            (data) => {
+                                this.activeModal.close(data)
+                            }, 2000
+                        )
+                    }else{
+                        this.alerts.push({type: 'danger', message: data.msg});
+                    }
+                }
+            )            
+
         }
     }
 

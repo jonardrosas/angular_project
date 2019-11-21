@@ -53,6 +53,8 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
     public getAssignedSoaAction;
     public assignedIstSelector;
     public assignedSoaSelector;
+    public previousSelectedRow = [];
+    public checkFilter: {limit?: number; record?: number} = {};
 
     constructor(
         private store: Store<any>,
@@ -64,7 +66,7 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
     }
 
     ngOnInit() {
-  
+     
 
         this.store.pipe(select(orcModuleStore.getMantisRecordObjectStateSelector)).subscribe(
             (data) => {
@@ -76,6 +78,8 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
                 this.getAssignedSoaAction = this.dispoManagerInstance.dispositionInstance.checkTableStoreAssignedSoaAction;
                 this.assignedIstSelector = this.dispoManagerInstance.dispositionInstance.checkTableStoreAssignedIstSelector;
                 this.assignedSoaSelector = this.dispoManagerInstance.dispositionInstance.checkTableStoreAssignedSoaSelector;
+                this.dispoManagerInstance.checkComponentInstance = this;
+
             }
         )
 
@@ -85,27 +89,37 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
                 this.filters['limit'] = 1000;
                 this.filters['record'] = this.mantisRecord.orc_record.id;
                 this.queryParams = data.check_section;
-                if(data.check_section == ENUMS.TAB2){
-                    this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs();
-                    this.buttons = this.dispoManagerInstance.getCheckActionButtons().iSTCheckButtons;         
-                    this.rowData$ = this.store.pipe(select(this.assignedIstSelector))
-                }else if(data.check_section == ENUMS.TAB3){
-                    this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs('assinged_soa');
-                    this.buttons = this.dispoManagerInstance.getCheckActionButtons().sOACheckButtons;         
-                    this.rowData$ = this.assessmentModel.objects.filter({check__record: this.mantisRecord.orc_record.id})
-                }else if(data.check_section == ENUMS.TAB1){
-                    this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs(ENUMS.TAB1);
-                    this.buttons = this.dispoManagerInstance.getCheckActionButtons().allCheckButtons;         
-                    this.rowData$ = this.store.pipe(select(this.defaultSelector))
-                }else{
-                    this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs(ENUMS.TAB1);
-                    this.buttons = this.dispoManagerInstance.getCheckActionButtons().allCheckButtons;         
-                    this.rowData$ = this.store.pipe(select(this.defaultSelector))
-                }
-                this.refreshGrid()
+                this.loadCheck()
             }
         )        
+
     }
+
+    loadCheck(){
+        this.checkFilter['record'] = this.mantisRecord.orc_record.id;
+        this.store.dispatch(this.dispoManagerInstance.dispositionInstance.checkTableStoreAction(this.checkFilter));
+        this.store.dispatch(this.dispoManagerInstance.dispositionInstance.checkTableStoreAssignedIstAction(this.checkFilter));
+        this.store.dispatch(this.dispoManagerInstance.dispositionInstance.checkTableStoreAssignedSoaAction(this.checkFilter));                          
+
+        if(this.queryParams == ENUMS.TAB2){
+            this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs();
+            this.buttons = this.dispoManagerInstance.getCheckActionButtons().iSTCheckButtons;         
+            this.rowData$ = this.store.pipe(select(this.assignedIstSelector))
+        }else if(this.queryParams == ENUMS.TAB3){
+            this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs('assinged_soa');
+            this.buttons = this.dispoManagerInstance.getCheckActionButtons().sOACheckButtons;         
+            this.rowData$ = this.assessmentModel.objects.filter({check__record: this.mantisRecord.orc_record.id})
+        }else if(this.queryParams == ENUMS.TAB1){
+            this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs(ENUMS.TAB1);
+            this.buttons = this.dispoManagerInstance.getCheckActionButtons().allCheckButtons;         
+            this.rowData$ = this.store.pipe(select(this.defaultSelector))
+        }else{
+            this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs(ENUMS.TAB1);
+            this.buttons = this.dispoManagerInstance.getCheckActionButtons().allCheckButtons;         
+            this.rowData$ = this.store.pipe(select(this.defaultSelector))
+        }        
+        this.refreshGrid()
+    }       
 
     ngAfterViewInit() {
         this.agGrid.api.sizeColumnsToFit();
@@ -124,6 +138,22 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
         return count$
     }
 
+    autoSelectCheck(){
+        setTimeout(
+            () => {
+                this.agGrid.api.forEachNode(
+                    (node) => {
+                        if(this.previousSelectedRow.indexOf(node.data.id) > -1){
+                            debugger;
+                            node.setSelected(true)
+                            console.log("Node >>>>> ", node.data.id)
+                        }
+                    }
+                )                
+            }, 1000
+        )
+    }
+
     refreshGrid() {
         if(this.agGrid){
             setTimeout(
@@ -132,9 +162,8 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
                     this.agGrid.api.setDomLayout('autoHeight');
                 }
             )
-            // this.agGrid.api.setDomLayout('autoHeight');
+            this.autoSelectCheck()
         }
     }
-
 
 }

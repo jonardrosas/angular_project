@@ -3,8 +3,11 @@ export const URLS = {
     // auth urls
     COOKIE_BASED_LOGIN_URL: '/accounts/login2/',
     COOKIE_BASED_LOGOUT_URL: '/accounts/logout2/',
+    ACL_SESSION_URL: '/aclsessions/',
     COOKIE_BASED_GET_SESSION: '/user_accounts/session_update/',
-    JWT_BASED_LOGIN_URL: '/jwt_api/token/',
+    JWT_BASED_LOGIN_URL: '/accounts/login2/',
+    JWT_BASED_LOGOUT_URL: '/accounts/logout2/',
+    // JWT_BASED_LOGIN_URL: '/jwt_api/token/',
     JWT_BASED_GET_SESSION: '/user_accounts/get_session/',
 
     // ORC URL
@@ -15,6 +18,13 @@ export const URLS = {
     JOB_NOTES_URL: '/orc/api/v1/notes/',
     JOB_ATTACHMENT_URL: '/orc/api/v1/attachments/',
     JOB_HISTORY_URL: '/mantis/api/v1/mantishistory/',
+
+    // ORC ACTIONS
+    ORC_CHECK_DISPOSE_URL: '/orc/disposecheck/',
+    ORC_CHECK_RECOMMEND_URL: '/orc/recommendcheck/',
+    ORC_CHECK_ADD_NOTES_URL: '/orc/addnotes/',
+    //ORC_CHECK_IMAGES_URL: '/orc/addcheckimage/',
+    ORC_CHECK_IMAGES_URL: '/mantis/check_image_upload/',
 
     // NEW DJANGO REST FRAMEWORK
     DRF_MANTIS_RECORD_URL: '/mantis/api/v2/mantis_record/',

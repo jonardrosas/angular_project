@@ -9,6 +9,7 @@ import { Observable, BehaviorSubject, ReplaySubject } from 'rxjs';
 @Injectable()
 export class MantisRecordService extends QueryHelper {
     public url = URLS.DRF_MANTIS_RECORD_URL;
+    public acl_session_url = URLS.ACL_SESSION_URL;
     public mantisRecordListUrl = URLS.DRF_MANTIS_RECORD_LIST_URL;
     public errorSummaryUrl = URLS.DRF_MANTIS_RECORD_TEXT_URL;
     public jobNotesUrl = URLS.DRF_MANTIS_RECORD_NOTE_URL;
@@ -25,6 +26,10 @@ export class MantisRecordService extends QueryHelper {
     getObject(id): Observable<any> {
         return this.apiService.get(this.url + id + '/');
     }    
+
+    getAclSession(id): Observable<any> {
+        return this.apiService.get(this.acl_session_url);
+    }        
 
     // override the default to use new url
     getQuerySet(filters): Observable<any> {
