@@ -8,6 +8,10 @@ import { Observable, BehaviorSubject, ReplaySubject } from 'rxjs';
 @Injectable()
 export class OrcRecordService extends QueryHelper {
     public url = URLS.DRF_ORC_RECORD_URL;
+    public changeStatusUrl = URLS.ORC_CHECK_DISPOSE_URL;
+    public checkRecommendUrl = URLS.ORC_CHECK_RECOMMEND_URL;
+    public addNotesUrl = URLS.ORC_CHECK_ADD_NOTES_URL;
+    public addCheckImageUrl = URLS.ORC_CHECK_IMAGES_URL;
 
     constructor(public apiService: ApiService) {
         super();
@@ -30,5 +34,25 @@ export class OrcRecordService extends QueryHelper {
         return this.apiService.get(url);
 
     }      
+
+    changeStatus(data: any): Observable<any> {
+        let url = `${this.changeStatusUrl}`;
+        return this.apiService.post(url, data);
+    }       
+
+    checkRecommend(data: any): Observable<any> {
+        let url = `${this.checkRecommendUrl}`;
+        return this.apiService.post(url, data);
+    }     
+
+    addCheckImages(data: any): Observable<any> {
+        let url = `${this.addCheckImageUrl}`;
+        return this.apiService.upload(url, data);
+    }     
+
+    addNotes(data: any): Observable<any> {
+        let url = `${this.addNotesUrl}`;
+        return this.apiService.post(url, data);
+    }    
 
 }

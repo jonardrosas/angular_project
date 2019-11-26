@@ -25,7 +25,7 @@
    <span class="datatable-header-cell-wrapper" style="margin-right: 10px;">
    <span class="datatable-header-cell-label draggable" (click)="sort()">{{column.name}}</span>
    </span>
-   <ngx-column-filter [column] = "column" (updateFilter)="updateFilter($event, column)" (clearFilter)="clearFilter($event, column)" (OnDateChange)="OnDateChange($event, dateArgs)"></ngx-column-filter>
+   <ngx-column-filter [column] = "column" (updateFilter)="updateFilter($event, column)" (clearFilter)="clearFilter($event, column)" (OnDateChange)="OnDateChange($event)"></ngx-column-filter>
    <!--<mat-icon [matMenuTriggerFor]="filterMenu" class="icon-display" *ngIf="column.filter"><i class="fas fa-filter fa-xs" [ngStyle]="column.filter.filterStyle"></i></mat-icon>-->
    <!--<span *ngIf="column.filter && column.filter.values && column.filter.values.length>0">-->
       <!--<br/>-->

@@ -1,4 +1,4 @@
-<div>
+<div class="check-upload">
     <form [formGroup]="uploadImageForm" (ngSubmit)="onSubmit()">
         <div class="modal-header bg-dark text-light">
             <h4 class="modal-title">{{ heading }}<span class="badge badge-primary">{{ selectedData.length }} selected</span> </h4>
@@ -8,13 +8,31 @@
         </div>
         <div class="modal-body">
             <div class="container-fluid">
-            {{ files | json }}
-                <div class="row bg-light border-dark">
-                    <div class="col-md-12">
+                <i>
+                    Note: You have 2 options to upload your image.
+                </i>
+                <div class="row p-2 bg-light border-dark">
+                    <b>Option 1: Select Manually</b>
+                    <div class="col-md-12 row-break">
                         <div class="form-group">
                             <label for="image">Image</label>
-                            <input type="file" name="file" id="file" (change)="onFileChanged($event)" />
+                            <input type="file" name="file" id="file" (change)="onFileChanged($event)"  multiple/>
                         </div>
+                    </div>
+                </div><br/>
+                <div class="row p-2 bg-secondary bg-light border-dark">
+                    <b>Option 2: Paste Copied Image</b>
+                    <div class="col-md-12 drop-box row-break">
+                        Paste (CTR+V your copied image here..)
+                    </div>
+                </div>
+                <div class="row row-break bg-light border-dark">
+                    <div class="col-md-12 overflow-auto">
+                        <p class="images">
+                            <ng-template ngFor let-imageUrl [ngForOf]="imageUrls">
+                                <img [src]="imageUrl" class="image" /><br/>
+                            </ng-template>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -23,7 +41,7 @@
             <p *ngFor="let alert of alerts">
                 <ngb-alert [type]="alert.type" (close)="close(alert)">{{ alert.message }}</ngb-alert>
             </p>        
-            <button type="submit" class="btn btn-success" [disabled]="files.length == 0">Submit</button>
+            <button type="submit" class="btn btn-success" [disabled]="imageUrls.length == 0">Submit</button>
         </div>
     </form>
 </div>

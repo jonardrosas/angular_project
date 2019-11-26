@@ -12,6 +12,7 @@ import { APP_CONFIG, URLS  } from './../../configs';
 @Injectable()
 export class JwtAuthenticationService {
     private  AUTH_URL: string = URLS.JWT_BASED_GET_SESSION;
+    private  LOGOUT_URL: string = URLS.JWT_BASED_LOGOUT_URL;
     private  LOGIN_URL: string = URLS.JWT_BASED_LOGIN_URL;
     private jwtService;
     private access_key_token = APP_CONFIG.JWT_ACCESS_TOKEN;
@@ -33,7 +34,7 @@ export class JwtAuthenticationService {
 
     logout():Observable<any> {
         this.jwtService.destroyToken(this.access_key_token);
-        return this.dummyLogoutSubjet;
+        return this.apiService.post(this.LOGOUT_URL);
     }
     
     attemptAuth(credentials): Observable<any> {

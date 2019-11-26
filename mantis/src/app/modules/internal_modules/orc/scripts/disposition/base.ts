@@ -24,7 +24,7 @@ export interface MantisDispositionBaseInterface {
 
 export class MantisDispositionBase implements MantisDispositionBaseInterface {
     dispoParams: DispostionParameter;
-    checkTableClass = null;
+    checkTableClass: any = null;
     checkTableButtonsClass = null;
     deviceSummaryClass = null;
     store;

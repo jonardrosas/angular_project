@@ -15,7 +15,4 @@ export class OrcCheckTable extends CheckBaseModel {
         super();
     }
 
-    getColumnDefs() {
-        return this.columnDefs;
-    }
 }

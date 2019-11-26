@@ -9,3 +9,9 @@ export enum STATUS_GROUP {
     FST = 'EscalatedfST',
     IST = 'EscalatedsST'
 }
+
+
+// Check sections
+export const TAB1: string = 'default'
+export const TAB2: string = 'assinged_ist'
+export const TAB3: string = 'assinged_soa'

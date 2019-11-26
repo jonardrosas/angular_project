@@ -23,8 +23,10 @@ export class AuthInterceptor implements HttpInterceptor {
         // cloned headers, updated with the authorization.
         const token = this.jwtService.getToken(this.jwtService.access_key_token);
         const authReq = req.clone({
+            withCredentials: true,
             setHeaders: {
-                'Content-Type' : 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                // 'Content-Type' : 'application/json',
                 'Accept': 'application/json',
                 'Authorization': `${APP_CONFIG.AUTHORIZATION_TYPE} ${token}`,
             }

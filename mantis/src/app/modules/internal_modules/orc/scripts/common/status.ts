@@ -61,11 +61,11 @@ export const checkStatusMapping  = {
 
 // This is the dropdown options when you change a check status
 export const checkChangeStatusList = [
-    { value: 'N', label: 'N: new', group: STATUS_GROUP.NEW},
+    //{ value: 'N', label: 'N: new', group: STATUS_GROUP.NEW},
     { value: 'A', label: 'A: assigned', group: STATUS_GROUP.ASSIGNED },
     { value: 'OC', label: 'OC: owner-check', group: STATUS_GROUP.DISPOSING },
-    { value: 'SOA', label: 'SOA: stake-owner-action', group: STATUS_GROUP.SOA },
-    { value: 'fST', label: 'fST: final-supportteam-comment', group: STATUS_GROUP.FST },
+    // { value: 'SOA', label: 'SOA: stake-owner-action', group: STATUS_GROUP.SOA },
+    //{ value: 'fST', label: 'fST: final-supportteam-comment', group: STATUS_GROUP.FST },
     { value: 'SD', label: 'SD: oc-sw-debug', group: STATUS_GROUP.DISPOSING},
     { value: 'RI', label: 'RI: oc-recipe-impr', group: STATUS_GROUP.DISPOSING},
     { value: 'ER', label: 'ER: oc-ext-recipe', group: STATUS_GROUP.DISPOSING },

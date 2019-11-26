@@ -33,8 +33,11 @@ export class NavigationComponent implements OnInit {
     }
 
     logOut() {
-        this.loginService.logOut()
-        this.router.navigate(['/login']);
+        this.loginService.logOut().subscribe(
+            (data) => {
+                this.router.navigate(['/login']);
+            }
+        )
     }
 
 }

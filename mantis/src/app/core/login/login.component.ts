@@ -6,6 +6,7 @@ import { AuthenticationService, LoginService} from './../services';
 import { Alert, LoginCredentials } from './../models';
 import { APP_CONFIG } from './../../configs';
 import * as coreStore from './../store';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Component({
@@ -25,7 +26,8 @@ export class LoginComponent implements OnInit {
         private logInService: LoginService,
         private router: Router,
         private activatedRoute: ActivatedRoute,
-        private store: Store<any>
+        private store: Store<any>,
+        private cookieService: CookieService
     ){}
 
     ngOnInit(){
@@ -39,9 +41,12 @@ export class LoginComponent implements OnInit {
         }
     }
 
-    invalidResponse(){
-        this.alert = {message: 'Incorrect username or password', type: 'warning'}
-        return 
+    invalidResponse(msg?): void{
+        let message = 'Incorrect username or password';
+        if(msg){
+            message = msg;
+        }
+        this.alert = {message: message, type: 'warning'}
     }
 
     authenticate(){
@@ -57,7 +62,13 @@ export class LoginComponent implements OnInit {
     onSubmit(credentials) {
         this.logInService.logIn(credentials)
             .subscribe(
-                data => this.authenticate(),
+                data => {
+                    if(data.status == 'success'){
+                        this.authenticate()
+                    }else{
+                        this.invalidResponse(data.msg)
+                    }
+                },
                 err => this.invalidResponse(),
                 () => console.log('finished')
             )
