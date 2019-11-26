@@ -38,7 +38,7 @@ export class MantisDispositionBase implements MantisDispositionBaseInterface {
     checkTableStoreAssignedSoaSelector;
 
     constructor(dispoParams: DispostionParameter) {
-        this.dispoParams = dispoParams
+        this.dispoParams = dispoParams;
         this.store = dispoParams.store;
         // Use this temporary as default, need to be override on the subclass
         this.checkTableStoreAction = this.store.getOrcChecksAction;

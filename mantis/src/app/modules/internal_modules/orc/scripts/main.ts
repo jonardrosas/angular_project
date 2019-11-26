@@ -40,7 +40,7 @@ export class MantisDispositionManager extends OrcModuleOperation implements Mant
     
     getDetailJobActionSection(){
         this.detailJobActionSectionInstance = this.dispositionInstance.getDetailJobActionSection();
-        console.log(this.dispoParams.mantisRecord);
+        console.log(this.detailJobActionSectionInstance);
         return this.detailJobActionSectionInstance;
     }
 
