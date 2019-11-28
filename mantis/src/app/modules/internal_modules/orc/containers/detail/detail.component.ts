@@ -21,6 +21,7 @@ export class DetailComponent implements OnInit, AfterViewInit {
     public reportCheckDispostionPopups = ReportCheckDispostionPopups;
     public dispoManagerInstance: MantisDispositionManager;
     public dispoManagerInstanceSubject;
+    public checkFilter;
     public mantisId: number;
     public mantisRecord: MantisRecordModel;
     public loadingImg: string = APP_CONFIG.LOADING_IMG;

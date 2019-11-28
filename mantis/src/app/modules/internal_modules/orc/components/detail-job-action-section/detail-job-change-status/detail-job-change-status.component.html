@@ -11,10 +11,10 @@
                 {{ jobChangeStatusForm.value | json }}
                 <div class="row bg-light border-dark">
                     <div class="col-md-12">
-                        <p><b>From stage: --> {{ nextStage }}</b></p>
+                        <p><b>From stage: {{ mantisRecord.status }} --> {{ nextStage }}</b></p>
                     </div>
                     <div class="col-md-12">
-                        <p><b>From status: --> {{ jobChangeStatusForm.get('status').value }}</b></p>
+                        <p><b>From status: {{ mantisRecord.resolution }} --> {{ jobChangeStatusForm.get('status').value }}</b></p>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">

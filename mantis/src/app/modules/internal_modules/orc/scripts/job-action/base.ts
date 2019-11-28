@@ -1,6 +1,8 @@
 export interface JobActionInterface {
     changeStatusButton?;
     assignToButton?;
+    mantisRecord?;
+    modalService?;
 }
 
 interface checkDispoInterface {
@@ -16,12 +18,12 @@ export class JobActionBase implements JobActionInterface {
     public assignToButton;
     public allButtons;
     // protected agGridApi;
-    protected modalService;
-    protected mantisRecord;
+    public modalService;
+    public mantisRecord;
     public popups;
     
     constructor(dispoParams) {
-        debugger;
+        //debugger;
         this.modalService = dispoParams.modalService;
         this.mantisRecord = dispoParams.mantisRecord;
         this.popups = dispoParams.registeredCheckPopUps;
@@ -39,9 +41,6 @@ export class JobActionBase implements JobActionInterface {
     
     public changeStatus = {
         function: () =>  {
-            // debugger;
-            // this.agGridApi = agGrid.api;
-            // const selectedNodes = this.agGridApi.getSelectedNodes();
             const modalRef = this.modalService.open(this.popups.DetailJobChangeStatusComponent, {backdrop: 'static', keyboard: false});
             modalRef.componentInstance.mantisRecord = this.mantisRecord;
         }
@@ -49,9 +48,6 @@ export class JobActionBase implements JobActionInterface {
     
     public assignTo = {
         function: () =>  {
-            // debugger;
-            // this.agGridApi = agGrid.api;
-            // const selectedNodes = this.agGridApi.getSelectedNodes();
             const modalRef = this.modalService.open(this.popups.DetailJobAssignToComponent, {backdrop: 'static', keyboard: false});
             modalRef.componentInstance.mantisRecord = this.mantisRecord;
         }

@@ -32,7 +32,7 @@ export class DetailJobActionSectionComponent implements OnInit {
     ngOnInit() {
         this.getObject();
         this.buttons = this.dispoManagerInstance.getDetailJobActionSection();
-        console.log(this.buttons);
+        // console.log(this.buttons);
     }
     
     getObject() {

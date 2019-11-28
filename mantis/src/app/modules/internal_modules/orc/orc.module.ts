@@ -10,7 +10,11 @@ import { AgGridModule } from './../../third_party_modules/ag-grid';
 import { Ckeditor5AngularModule } from './../../third_party_modules/ckeditor5-angular'
 
 import { SharedModule, BootstrapAlertComponent } from './../../../shared';
-import { OrcRecordService, MantisRecordService, OrcCheckService, DispoMangerService, DrcRecordService, DrcCheckService} from './services';
+import { OrcRecordService, MantisRecordService,
+        OrcCheckService, DispoMangerService,
+        DrcRecordService, DrcCheckService,
+        JobLevelDispositionPostService, AuthUserService,
+        JobLevelAssignPostService} from './services';
 
 import * as fromOrcModuleReducer from './store';
 import { OrcRoutingModule } from './orc-routing.module';
@@ -104,6 +108,16 @@ import { DetailJobChangeStatusComponent } from './components/detail-job-action-s
         DetailJobAssignToComponent,
         DetailJobChangeStatusComponent,
     ],
-    providers: [OrcRecordService, MantisRecordService, OrcCheckService, DispoMangerService, DrcRecordService, DrcCheckService]
+    providers: [
+        OrcRecordService,
+        MantisRecordService,
+        OrcCheckService,
+        DispoMangerService,
+        DrcRecordService,
+        DrcCheckService,
+        JobLevelDispositionPostService,
+        AuthUserService,
+        JobLevelAssignPostService,
+    ]
 })
 export class OrcModule { }

@@ -12,10 +12,10 @@
                 <div class="row bg-light border-dark">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="assigned_to">Assign to:</label>
+                            <label for="assigned_to">Please Select User: *</label>
                             <select id="assigned_to" class="form-control" formControlName="assigned_to">
                                 <option value="" disabled>Select user</option>
-                                <option *ngFor= "let user of testUserList">{{ user }}</option>
+                                <option *ngFor= "let user of userList">{{ user.username }} ({{ user.first_name }})</option>
                             </select>
                         </div>
                     </div>

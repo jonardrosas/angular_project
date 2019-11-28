@@ -6,6 +6,11 @@ import { Validators } from '@angular/forms';
 import { NgbActiveModal } from './../../../../../third_party_modules/ng_bootstrap';
 import { NgAlertInterface } from './../../../../../../core/models';
 import { MantisDispositionManager } from '../../../scripts';
+import { AuthUserService } from './../../../services/auth_user.service';
+import { URLS } from './../../../../../../configs/app-urls';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { JobLevelAssignPostService } from './../../../services/job-level-assign-post.service';
 
 @Component({
   selector: 'app-detail-job-assign-to',
@@ -14,26 +19,46 @@ import { MantisDispositionManager } from '../../../scripts';
 })
 export class DetailJobAssignToComponent implements OnInit {
     @Input() mantisDispoInstance: MantisDispositionManager;
+    public mantisRecord;
     public jobAssignForm;
     public Editor = ClassicEditor;
     public alerts: NgAlertInterface[] = [];
     public heading: string = "Job Assignment";
     public testUserList = ["tsudarso", "jonard", "queksf", "shchiang", "chsong"];
+    public userList: any[] = [];
 
     constructor(
         public activeModal: NgbActiveModal,
         private store: Store<any>,
+        private authUser: AuthUserService,
+        private http: HttpClient,
+        private postService: JobLevelAssignPostService,
     ) { }
 
     ngOnInit() {
         this.jobAssignForm = new FormGroup({
             assigned_to: new FormControl('', Validators.required),
-            comment: new FormControl('')
+            comment: new FormControl(''),
+            record_id: new FormControl(this.mantisRecord.id)
         });
+        this.getUserList();
     }
     
     clearAlerts() {
         this.alerts = [];
+    }
+    
+    getUserList() {
+        this.authUser.getAuthUser().subscribe(
+            (response) => {
+                for(let object of response.objects){
+                    for(let element of object.users){
+                        this.userList.push(element);
+                    }
+                }
+            },
+            (error) => console.log(error),
+        );
     }
     
     onSubmit(){
@@ -43,6 +68,10 @@ export class DetailJobAssignToComponent implements OnInit {
                 this.alerts.push({type: 'danger', message: this.jobAssignForm.controls.status.errors});
             }
         } else {
+            this.postService.submitForm(this.jobAssignForm.value).subscribe(
+                (response) => console.log(response),
+                (error) => console.log(error)
+            );
             this.alerts.push({type: 'success', message: 'Successfully updated(Not hitting Database yet).' });
         }
     }
