@@ -35,10 +35,11 @@
     border-right: 1px solid #212529;
     border-left: 1px solid #212529;
     border-bottom: 1px solid #212529;    
+    background-color: #8be9a1;
 }
 
 a.nav-check-link{
-    padding: 6px 5px 3px 5px;
+    padding: 6px 5px 5px 5px;
     display: block;
     border-top: 2px solid #aaa;
 }
@@ -47,4 +48,14 @@ a.active{
     background-color: #FFF;
     border-top: 2px solid blue;
     color: #000 !important;
+}
+
+.check-card-body{
+    padding: 0px 1rem;
+}
+
+.group-link{
+    text-decoration: none;
+    color: #FFF;
+    border-bottom: #000;
 }

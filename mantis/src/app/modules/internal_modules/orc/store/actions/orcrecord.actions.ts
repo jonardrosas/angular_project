@@ -24,7 +24,7 @@ export const setOrcChecksAction = createAction(SET_ORC_CHECK, props<{checks: Orc
 export const getDistinctFieldAction = createAction(GET_DISTINCT_CHECK_FIELDS, props<{record: number, fields: string}>());
 export const setDistinctFieldAction = createAction(SET_DISTINCT_CHECK_FIELDS, props<{data: any[]}>());
 
-export const getiSTChecksAction = createAction('[Orc Record] GetIstChecks', props<{record: number}>());
+export const getiSTChecksAction = createAction('[Orc Record] GetIstChecks', props<{record: number, group?: string}>());
 export const setiSTChecksAction = createAction('[Orc Record] SetIstChecks', props<{checks: OrcCheckModel[]}>());
 export const getSoaChecksAction = createAction('[Orc Record] GetSoaChecks', props<{record: number}>());
 export const setSoaChecksAction = createAction('[Orc Record] SetSoaChecks', props<{checks: OrcCheckModel[]}>());

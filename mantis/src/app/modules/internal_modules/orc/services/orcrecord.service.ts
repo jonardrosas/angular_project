@@ -24,8 +24,13 @@ export class OrcRecordService extends QueryHelper {
         return this.apiService.get(url, params);
     }
 
-    getIstChecks(id: number): Observable<any> {
+    getIstChecks(id: number, group?: string): Observable<any> {
+        debugger;
         let url = `${this.url}${id}/get_assigned_ist_jobs/`;
+        if(group){
+            let params = this.buildFilter({group: group});
+            return this.apiService.get(url, params);
+        }
         return this.apiService.get(url);
     }
     

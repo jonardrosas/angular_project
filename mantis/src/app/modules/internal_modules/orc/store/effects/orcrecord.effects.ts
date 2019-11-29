@@ -82,7 +82,7 @@ export class OrcRecordEffects {
     loadIstCheckFieldFn = createEffect(() => this.actions$.pipe(
         ofType(orcRecordActions.getiSTChecksAction),
         mergeMap(
-            (payload: any) => this.orcRecordService.getIstChecks(payload.record)
+            (payload: any) => this.orcRecordService.getIstChecks(payload.record, payload.group)
             .pipe(
                 map(
                     data => orcRecordActions.setiSTChecksAction({checks: data.results}),

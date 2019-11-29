@@ -32,6 +32,7 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
     }
     public url: string = '/orc/view';
     public queryParams: string;
+    public queryGroupTab: string;
     public mainTabs = [
         { id: ENUMS.TAB1, title: 'All Checks', url: this.url, param: 'default', count: 0},
         { id: ENUMS.TAB2, title: 'Assigned iST', url: this.url, param: 'assinged_ist', count: 0},
@@ -54,6 +55,8 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
     public assignedIstSelector;
     public assignedSoaSelector;
     public previousSelectedRow = [];
+    public isShowAssignedGroup: boolean = false;
+    public seciontAssignedGroup: string[] = [];
     public checkFilter: {limit?: number; record?: number} = {};
 
     constructor(
@@ -89,14 +92,23 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
                 this.filters['limit'] = 1000;
                 this.filters['record'] = this.mantisRecord.orc_record.id;
                 this.queryParams = data.check_section;
+                this.queryGroupTab = data.group;
                 this.loadCheck()
             }
         )        
 
     }
 
+
+    
+
     loadCheck(){
         this.checkFilter['record'] = this.mantisRecord.orc_record.id;
+
+        if(this.queryGroupTab){
+            this.checkFilter['group'] = this.queryGroupTab;
+        }
+
         this.store.dispatch(this.dispoManagerInstance.dispositionInstance.checkTableStoreAction(this.checkFilter));
         this.store.dispatch(this.dispoManagerInstance.dispositionInstance.checkTableStoreAssignedIstAction(this.checkFilter));
         this.store.dispatch(this.dispoManagerInstance.dispositionInstance.checkTableStoreAssignedSoaAction(this.checkFilter));                          
@@ -105,18 +117,23 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
             this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs();
             this.buttons = this.dispoManagerInstance.getCheckActionButtons().iSTCheckButtons;         
             this.rowData$ = this.store.pipe(select(this.assignedIstSelector))
+            this.isShowAssignedGroup = true;
+            this.getAssignedGroup(this.rowData$, 'reviews')
         }else if(this.queryParams == ENUMS.TAB3){
             this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs('assinged_soa');
             this.buttons = this.dispoManagerInstance.getCheckActionButtons().sOACheckButtons;         
             this.rowData$ = this.assessmentModel.objects.filter({check__record: this.mantisRecord.orc_record.id})
+            this.isShowAssignedGroup = true;
         }else if(this.queryParams == ENUMS.TAB1){
             this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs(ENUMS.TAB1);
             this.buttons = this.dispoManagerInstance.getCheckActionButtons().allCheckButtons;         
             this.rowData$ = this.store.pipe(select(this.defaultSelector))
+            this.isShowAssignedGroup = false;
         }else{
             this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs(ENUMS.TAB1);
             this.buttons = this.dispoManagerInstance.getCheckActionButtons().allCheckButtons;         
             this.rowData$ = this.store.pipe(select(this.defaultSelector))
+            this.isShowAssignedGroup = false;
         }        
         this.refreshGrid()
     }       
@@ -124,6 +141,39 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
     ngAfterViewInit() {
         this.agGrid.api.sizeColumnsToFit();
         this.agGrid.api.setDomLayout('autoHeight');
+    }
+
+    isActiveGroupTab(tab){
+        if(!this.queryGroupTab && tab == 'All'){
+            return 'active'
+        }
+        if(tab === this.queryGroupTab){
+            return 'active';
+        }else{
+            return '';
+        }
+    }
+
+
+    getAssignedGroup(rowData$, field){
+        this.seciontAssignedGroup = ['All'];
+        rowData$.subscribe(
+            (data) => {
+                if(data.length > 0){
+                    for( let key in data){
+                        let dat = data[key];
+                        for(let key2 in dat[field]){
+                            let review = dat[field][key2]
+                            if(review.assigned_group){
+                                if(this.seciontAssignedGroup.indexOf(review.assigned_group.name) == -1){
+                                    this.seciontAssignedGroup.push(review.assigned_group.name)
+                                }                                
+                            }
+                        }
+                    }
+                }
+            }
+        )
     }
 
     getCount(id){

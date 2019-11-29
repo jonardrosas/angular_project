@@ -13,8 +13,10 @@ export class CheckStatusTemplateComponent implements OnInit, ICellRendererAngula
 	readonly statusMapping: any = checkStatusMapping;
 
     agInit(params: any): void {
-		this.params = params;
-		this.btnClass =  this.statusMapping[this.params.value].btnClass;
+        this.params = params;
+        if(this.params.value){
+            this.btnClass =  this.statusMapping[this.params.value] ? this.statusMapping[this.params.value].btnClass : '';
+        }
     }
 
     constructor() { }

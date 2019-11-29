@@ -84,6 +84,22 @@ export class CommonSummaryField {
     public ptsrCrmDID = { field: 'orc_record__orc_ext__ptsr_table__CRMDID', headerName: 'CRMDID'};
     public ptsrServiceOptions = { field: 'orc_record__orc_ext__ptsr_table__service_options', headerName: 'Service Options'};
 
+
+    public ftrfFormName = { field: 'orc_record__orc_ext__ftrf_subform__form_id', headerName: 'Form Name'};
+    public ftrfFormStatus = { field: 'orc_record__orc_ext__ftrf_subform__form_status', headerName: 'Form Status'};
+    public ftrfTapeoutRoute = { field: 'orc_record__orc_ext__ftrf_subform__main_form__tapeout_route', headerName: 'Tapeout Route'};
+    public productName = { field: 'orc_record__orc_ext__ftrf_subform__main_form__product_name', headerName: 'Product Name'};
+    public productNameRevision = { field: 'orc_record__orc_ext__ftrf_subform__main_form__product_revision', headerName: 'Product Revision'};
+    public orcextreviewer = { field: 'orc_record__orc_ext__assigned_user', headerName: 'Reviewer'};
+    public ftrfSecureDevice = { field: 'orc_record__orc_ext__ftrf_subform__secure_device', headerName: 'Secure Device'};
+    public eccnColor = { field: 'orc_record__orc_ext__ftrf_subform__main_form__eccn_technology', headerName: 'ECCN Color'};
+    public ftrfProcessTech = { field: 'orc_record__orc_ext__ftrf_subform__main_form__process_technology', headerName: 'Process Technology'};
+    public ftrfProcessDevStatus = { field: 'orc_record__orc_ext__ftrf_subform__main_form__process_technology', headerName: 'Process Dev Status'};
+    public ftrfTechGeo = { field: 'orc_record__orc_ext__ftrf_subform__main_form__process_geometry', headerName: 'Tech Geo'};
+    public ftrfProcessId = { field: 'orc_record__orc_ext__ftrf_subform__main_form__process_id', headerName: 'Process Id'};
+    public ftrfServiceRequest = { field: 'orc_record__orc_ext__ftrf_subform__main_form__service_options', headerName: 'Service Request'};
+
+
 }
 
 
