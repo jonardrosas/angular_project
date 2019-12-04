@@ -20,11 +20,11 @@
     </ul>
     <div class="card ">
         <div class="card-body check-card-body">
-            <div class="row bg-secondary pt-3 mt-0" *ngIf="isShowAssignedGroup">
+            <div class="row bg-secondary pt-3 mt-0">
                 <div class="col-md-10">
                     <nav aria-label="breadcrumb">
                         <ul class="nav">
-                            <li class="ml-1 bg-secondarynav-item" *ngFor="let group of seciontAssignedGroup">
+                            <li class="ml-1 nav-check-link text-dark nav-item" *ngFor="let group of seciontAssignedGroup[queryParams]">
                                 <a class="group-link ml-0 p-1 font-weight-bold" [ngClass]="isActiveGroupTab(group)" [routerLink]="[url, mantisRecord.id]" [queryParams]="{check_section: queryParams, group: group}">{{ group }}</a>
                             </li>
                         </ul>
@@ -32,7 +32,7 @@
                 </div>
             </div>        
             <div class="row-break">
-                <button class="ml-2 shadow-sm btn-success" (click)="button.function(agGrid, dispoManagerInstance)" *ngFor="let button of buttons" ><i *ngIf="button.icon" [ngClass]="button.icon"></i>  {{ button.label }}</button>
+                <button class="ml-2 shadow-sm btn-info" (click)="button.function(agGrid, dispoManagerInstance)" *ngFor="let button of buttons" ><i *ngIf="button.icon" [ngClass]="button.icon"></i>  {{ button.label }}</button>
             </div>
             <div class="row-break">
                 <ag-grid-angular

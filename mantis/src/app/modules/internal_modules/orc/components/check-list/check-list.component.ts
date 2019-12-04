@@ -56,7 +56,7 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
     public assignedSoaSelector;
     public previousSelectedRow = [];
     public isShowAssignedGroup: boolean = false;
-    public seciontAssignedGroup: string[] = [];
+    public seciontAssignedGroup: any = {};
     public checkFilter: {limit?: number; record?: number} = {};
 
     constructor(
@@ -118,18 +118,22 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
             this.buttons = this.dispoManagerInstance.getCheckActionButtons().iSTCheckButtons;         
             this.rowData$ = this.store.pipe(select(this.assignedIstSelector))
             this.isShowAssignedGroup = true;
-            this.getAssignedGroup(this.rowData$, 'reviews')
+            this.getAssignedGroup(this.rowData$)
         }else if(this.queryParams == ENUMS.TAB3){
             this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs('assinged_soa');
             this.buttons = this.dispoManagerInstance.getCheckActionButtons().sOACheckButtons;         
-            this.rowData$ = this.assessmentModel.objects.filter({check__record: this.mantisRecord.orc_record.id})
+            // this.rowData$ = this.assessmentModel.objects.filter({check__record: this.mantisRecord.orc_record.id})
+            this.rowData$ = this.store.pipe(select(this.assignedSoaSelector))
             this.isShowAssignedGroup = true;
+            this.getAssignedGroup(this.rowData$)
         }else if(this.queryParams == ENUMS.TAB1){
+            this.seciontAssignedGroup[this.queryParams] = [];
             this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs(ENUMS.TAB1);
             this.buttons = this.dispoManagerInstance.getCheckActionButtons().allCheckButtons;         
             this.rowData$ = this.store.pipe(select(this.defaultSelector))
             this.isShowAssignedGroup = false;
         }else{
+            this.seciontAssignedGroup[this.queryParams] = [];
             this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs(ENUMS.TAB1);
             this.buttons = this.dispoManagerInstance.getCheckActionButtons().allCheckButtons;         
             this.rowData$ = this.store.pipe(select(this.defaultSelector))
@@ -154,19 +158,21 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
         }
     }
 
-
-    getAssignedGroup(rowData$, field){
-        this.seciontAssignedGroup = ['All'];
+    getAssignedGroup(rowData$){
+        debugger;
         rowData$.subscribe(
             (data) => {
                 if(data.length > 0){
+                    let field = ENUMS.QUERY_FIELD[this.queryParams]
+                    debugger;
+                    this.seciontAssignedGroup[this.queryParams] = ['All'];
                     for( let key in data){
                         let dat = data[key];
                         for(let key2 in dat[field]){
                             let review = dat[field][key2]
                             if(review.assigned_group){
-                                if(this.seciontAssignedGroup.indexOf(review.assigned_group.name) == -1){
-                                    this.seciontAssignedGroup.push(review.assigned_group.name)
+                                if(this.seciontAssignedGroup[this.queryParams].indexOf(review.assigned_group.name) == -1){
+                                    this.seciontAssignedGroup[this.queryParams].push(review.assigned_group.name)
                                 }                                
                             }
                         }
@@ -174,6 +180,10 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
                 }
             }
         )
+    }
+
+    test(){
+        this.seciontAssignedGroup = []
     }
 
     getCount(id){

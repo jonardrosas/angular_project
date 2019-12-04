@@ -15,3 +15,9 @@ export enum STATUS_GROUP {
 export const TAB1: string = 'default'
 export const TAB2: string = 'assinged_ist'
 export const TAB3: string = 'assinged_soa'
+
+
+export const QUERY_FIELD = {
+    'assinged_ist': 'reviews',
+    'assinged_soa': 'checkassessments'
+}

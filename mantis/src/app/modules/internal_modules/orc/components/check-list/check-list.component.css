@@ -46,7 +46,7 @@ a.nav-check-link{
 
 a.active{
     background-color: #FFF;
-    border-top: 2px solid blue;
+    border-top: 3px solid blue;
     color: #000 !important;
 }
 
@@ -56,6 +56,8 @@ a.active{
 
 .group-link{
     text-decoration: none;
-    color: #FFF;
+    color: #000;
     border-bottom: #000;
+    background-color: #e9ecef;
+    padding: .375rem .375rem 0 .375rem !important;
 }

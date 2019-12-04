@@ -19,7 +19,10 @@ export const getSOAGroupAction = createAction(GET_SOA_GROUP_OPTION, props<{statu
 export const setSOAGroupAction = createAction(SET_SOA_GROUP_OPTION, props<{groups: GroupProfileInterface[]}>());
 export const getOrcObjectAction = createAction('[Orc Record] GetOrcObject', props<{id: number}>());
 export const setOrcObjectAction = createAction('[Orc Record] setOrcObject', props<{objects: OrcRecordInterface}>());
-export const getOrcChecksAction = createAction(GET_ORC_CHECK, props<{record: number, limit: number, checkassessments__assigned_group__id?: number, checkassessments__assigned_group__name?: string}>());
+export const getOrcChecksAction = createAction(
+    GET_ORC_CHECK, 
+    props<{record: number, limit: number, checkassessments__assigned_group__id?: number, checkassessments__assigned_group__name?: string}>()
+);
 export const setOrcChecksAction = createAction(SET_ORC_CHECK, props<{checks: OrcCheckModel[]}>());
 export const getDistinctFieldAction = createAction(GET_DISTINCT_CHECK_FIELDS, props<{record: number, fields: string}>());
 export const setDistinctFieldAction = createAction(SET_DISTINCT_CHECK_FIELDS, props<{data: any[]}>());

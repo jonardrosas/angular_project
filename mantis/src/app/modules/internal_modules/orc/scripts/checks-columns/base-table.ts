@@ -138,7 +138,7 @@ export class CheckFields {
         field: 'reviews',
         cellRenderer: params => {
             const assignedGroups = [];
-            if(params.data.reviews.length > 0){
+            if(params.data.reviews && params.data.reviews.length > 0){
                 for (const review in params.data.reviews) {
                     if(params.data.reviews[review].assigned_group){
                         assignedGroups.push(params.data.reviews[review].assigned_group.name);
@@ -155,7 +155,7 @@ export class CheckFields {
         field: 'checkassessments',
         cellRenderer: params => {
             const assignedGroups = [];
-            if(params.data.checkassessments.length > 0){
+            if(params.data.checkassessments && params.data.checkassessments.length > 0){
                 for (const review in params.data.checkassessments) {
                     assignedGroups.push(params.data.checkassessments[review].assigned_group.name);
                 }
@@ -191,7 +191,13 @@ export class CheckBaseModel extends CheckFields implements CheckTableInterface {
 
     setAssessmentColumn(){
         this.assessmentDefs = [
-            this.idField
+            this.ruleNameField,
+            this.rawErrorCountField,
+            this.assignedGroupField,
+            this.assignedSoaGroupField,
+            this.pdbViolationCountField,
+            this.pdbValidatedField,
+            this.statusField            
         ];
     }
 
