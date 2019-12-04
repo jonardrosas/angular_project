@@ -18,6 +18,7 @@ import { AgGridWrapperComponent } from './components/ag-grid-wrapper/ag-grid-wra
 import { BootstrapAlertComponent } from './components/bootstrap-alert/bootstrap-alert.component';
 import { ArrayContainsPipe } from './pipes/array-contains.pipe';
 import { NgxDtTableService } from './services';
+// import { GlobalSearchComponent } from './components/global-search/global-search.component';
 //import { GlobalSearchComponent } from './components/global-search/global-search.component';
 import { ColumnFilterComponent } from './components/ngx-dt-table/column-filter/column-filter.component';
 
@@ -45,7 +46,8 @@ import { ColumnFilterComponent } from './components/ngx-dt-table/column-filter/c
       BootstrapAlertComponent,
       MaterialLoginComponent,
       //GlobalSearchComponent,
-      ColumnFilterComponent
+      ColumnFilterComponent,
+      ArrayContainsPipe
   ],
   exports: [
       NgxDtTableComponent,

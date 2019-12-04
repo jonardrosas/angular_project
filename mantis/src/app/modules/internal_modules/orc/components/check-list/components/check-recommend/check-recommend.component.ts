@@ -18,6 +18,7 @@ import { Observable } from 'rxjs';
 })
 
 export class CheckRecommendComponent implements OnInit {
+    @Input() selectedData;
     @Input() dispoManagerInstance;
     public recommendForm;
     public alerts: NgAlertInterface[] = [];

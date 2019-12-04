@@ -18,7 +18,7 @@ export class ColumnFilterComponent implements OnInit {
 
   public multiSelectFilter: FormControl = new FormControl();
 
-  private dateArgs:any;
+  public  dateArgs:any;
   constructor() { }
 
   ngOnInit() {

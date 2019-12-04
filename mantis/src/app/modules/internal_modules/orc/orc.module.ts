@@ -10,7 +10,11 @@ import { AgGridModule } from './../../third_party_modules/ag-grid';
 import { Ckeditor5AngularModule } from './../../third_party_modules/ckeditor5-angular'
 
 import { SharedModule, BootstrapAlertComponent } from './../../../shared';
-import { OrcRecordService, MantisRecordService, OrcCheckService, DispoMangerService, DrcRecordService, DrcCheckService} from './services';
+import { OrcRecordService, MantisRecordService,
+        OrcCheckService, DispoMangerService,
+        DrcRecordService, DrcCheckService,
+        JobLevelDispositionPostService, AuthUserService,
+        JobLevelAssignPostService} from './services';
 
 import * as fromOrcModuleReducer from './store';
 import { OrcRoutingModule } from './orc-routing.module';
@@ -37,6 +41,8 @@ import { CheckEscalateSoaComponent } from './components/check-list/components/ch
 import { CheckRecommendComponent } from './components/check-list/components/check-recommend/check-recommend.component';
 import { CheckRecommendAsSoaComponent } from './components/check-list/components/check-recommend-as-soa/check-recommend-as-soa.component';
 import { OrcWorklistComponent } from './components/orc-worklist/orc-worklist.component';
+import { DetailJobAssignToComponent } from './components/detail-job-action-section/detail-job-assign-to/detail-job-assign-to.component';
+import { DetailJobChangeStatusComponent } from './components/detail-job-action-section/detail-job-change-status/detail-job-change-status.component';
 
 @NgModule({
     imports: [
@@ -75,7 +81,9 @@ import { OrcWorklistComponent } from './components/orc-worklist/orc-worklist.com
         CheckEscalateSoaComponent,
         CheckRecommendComponent,
         CheckRecommendAsSoaComponent,
-        OrcWorklistComponent
+        OrcWorklistComponent,
+        DetailJobAssignToComponent,
+        DetailJobChangeStatusComponent,
     ],
     entryComponents: [
         CheckListComponent,
@@ -97,7 +105,19 @@ import { OrcWorklistComponent } from './components/orc-worklist/orc-worklist.com
         CheckRecommendAsSoaComponent,
         // CheckStatusTemplateComponent,
         OrcWorklistComponent,
+        DetailJobAssignToComponent,
+        DetailJobChangeStatusComponent,
     ],
-    providers: [OrcRecordService, MantisRecordService, OrcCheckService, DispoMangerService, DrcRecordService, DrcCheckService]
+    providers: [
+        OrcRecordService,
+        MantisRecordService,
+        OrcCheckService,
+        DispoMangerService,
+        DrcRecordService,
+        DrcCheckService,
+        JobLevelDispositionPostService,
+        AuthUserService,
+        JobLevelAssignPostService,
+    ]
 })
 export class OrcModule { }

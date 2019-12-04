@@ -21,6 +21,7 @@ export class DetailComponent implements OnInit, AfterViewInit {
     public reportCheckDispostionPopups = ReportCheckDispostionPopups;
     public dispoManagerInstance: MantisDispositionManager;
     public dispoManagerInstanceSubject;
+    public checkFilter;
     public mantisId: number;
     public mantisRecord: MantisRecordModel;
     public loadingImg: string = APP_CONFIG.LOADING_IMG;
@@ -60,7 +61,16 @@ export class DetailComponent implements OnInit, AfterViewInit {
                     this.store.dispatch(orcModuleStore.getMantisErrorSummaryAction({id: this.mantisRecord.bug_text.id}));
                     this.dispoManagerInstance = this.dispoService.initialized(paramsIns) 
                     this.dispoManagerInstanceSubject = this.dispoService.dispoMangerSubject;
+                    const loadAllCheckAction = this.dispoManagerInstance.dispositionInstance.checkTableStoreAction;
+                    const loadIstCheckAction  = this.dispoManagerInstance.dispositionInstance.checkTableStoreAssignedIstAction;
+                    const loadSoaCheckAction = this.dispoManagerInstance.dispositionInstance.checkTableStoreAssignedSoaAction;
 
+                    if(this.checkFilter.record != data.orc_record.id){
+                        this.checkFilter['record'] = this.mantisRecord.orc_record.id;
+                        this.store.dispatch(loadAllCheckAction(this.checkFilter));
+                        this.store.dispatch(loadIstCheckAction(this.checkFilter));
+                        this.store.dispatch(loadSoaCheckAction(this.checkFilter));                          
+                    }
                 }
             },
         );

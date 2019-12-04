@@ -4,7 +4,7 @@ import { DrcCheckTable } from './../checks-columns';
 import { DrcDeviceSummary } from './../device-summary';
 import { DispostionParameter } from './base';
 import { DrcProgressBarTable } from './../progress-bar';
-
+import { JobActionBase } from './../job-action';
 
 export class DrcDispostion extends MantisDispositionBase {
     public checkTableClass = DrcCheckTable;
@@ -12,7 +12,7 @@ export class DrcDispostion extends MantisDispositionBase {
     public checkTableStoreAction;
     public checkTableStoreAssignedIstAction;
     public checkTableStoreAssignedSoaAction;
-
+    public detailJobActionSectionClass = JobActionBase;
     public checkTableButtonsClass = DrcCheckDispositionButtonClass;
     public progressBarClass = DrcProgressBarTable;
     constructor(dispoParams: DispostionParameter) {
