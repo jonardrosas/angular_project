@@ -6,7 +6,6 @@ import { Validators } from '@angular/forms';
 import { NgbActiveModal } from './../../../../../third_party_modules/ng_bootstrap';
 import { NgAlertInterface } from './../../../../../../core/models';
 import { MantisDispositionManager } from '../../../scripts';
-import { AuthUserService } from './../../../services/auth_user.service';
 import { URLS } from './../../../../../../configs/app-urls';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -30,7 +29,6 @@ export class DetailJobAssignToComponent implements OnInit {
     constructor(
         public activeModal: NgbActiveModal,
         private store: Store<any>,
-        private authUser: AuthUserService,
         private http: HttpClient,
         private postService: JobLevelAssignPostService,
     ) { }
@@ -49,31 +47,10 @@ export class DetailJobAssignToComponent implements OnInit {
     }
     
     getUserList() {
-        this.authUser.getAuthUser().subscribe(
-            (response) => {
-                for(let object of response.objects){
-                    for(let element of object.users){
-                        this.userList.push(element);
-                    }
-                }
-            },
-            (error) => console.log(error),
-        );
+        return []
     }
     
     onSubmit(){
-        this.clearAlerts();
-        if (this.jobAssignForm.status === 'INVALID') {
-            if (this.jobAssignForm.controls.status.invalid) {
-                this.alerts.push({type: 'danger', message: this.jobAssignForm.controls.status.errors});
-            }
-        } else {
-            this.postService.submitForm(this.jobAssignForm.value).subscribe(
-                (response) => console.log(response),
-                (error) => console.log(error)
-            );
-            this.alerts.push({type: 'success', message: 'Successfully updated(Not hitting Database yet).' });
-        }
     }
     
     close(alert: NgAlertInterface) {

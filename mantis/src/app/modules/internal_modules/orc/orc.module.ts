@@ -13,7 +13,7 @@ import { SharedModule, BootstrapAlertComponent } from './../../../shared';
 import { OrcRecordService, MantisRecordService,
         OrcCheckService, DispoMangerService,
         DrcRecordService, DrcCheckService,
-        JobLevelDispositionPostService, AuthUserService,
+        JobLevelDispositionPostService,
         JobLevelAssignPostService} from './services';
 
 import * as fromOrcModuleReducer from './store';
@@ -116,7 +116,6 @@ import { DetailJobChangeStatusComponent } from './components/detail-job-action-s
         DrcRecordService,
         DrcCheckService,
         JobLevelDispositionPostService,
-        AuthUserService,
         JobLevelAssignPostService,
     ]
 })

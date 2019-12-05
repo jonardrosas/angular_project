@@ -1,7 +1,6 @@
 // Angular  imports
 import { Component, OnInit} from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { take, map } from 'rxjs/operators';
 
 // Third party import
 import { CookieService } from 'ngx-cookie-service';

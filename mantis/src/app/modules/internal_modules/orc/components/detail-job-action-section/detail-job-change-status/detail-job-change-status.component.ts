@@ -87,22 +87,6 @@ export class DetailJobChangeStatusComponent implements OnInit {
     }
     
     onSubmit () {
-        this.clearAlerts();
-        if (this.jobChangeStatusForm.status === 'INVALID') {
-            if (this.jobChangeStatusForm.controls.status.invalid) {
-                this.alerts.push({type: 'danger', message: this.jobChangeStatusForm.controls.status.errors});
-            }
-        } else {
-            this.postService.submitForm(this.jobChangeStatusForm.value).subscribe(
-                (response) => console.log(response),
-                (error) => console.log(error)
-            );
-            let formData = new FormData();
-            formData.append("stage", this.jobChangeStatusForm.get('stage').value);
-            formData.append("status", this.jobChangeStatusForm.get('status').value);
-            formData.append("comments", this.jobChangeStatusForm.get('comments').value);
-            formData.append("mantis_ids", this.jobChangeStatusForm.get('mantis_ids').value);
-        }
     }
     
     close(alert: NgAlertInterface) {

@@ -8,7 +8,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 // Third party imports
 import { CookieService } from 'ngx-cookie-service';
-import { DataTablesModule } from 'angular-datatables';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { MaterialModule } from './modules/third_party_modules/material/material.module';
 import { NgBootstrapModule } from './modules/third_party_modules/ng_bootstrap/ng_bootstrap.module';
@@ -40,7 +39,6 @@ import { AppComponent } from './app.component';
         }),
         NgBootstrapModule,
         MaterialModule,
-        DataTablesModule,
         OrcModule,
         HomeModule,
         BrowserAnimationsModule,
