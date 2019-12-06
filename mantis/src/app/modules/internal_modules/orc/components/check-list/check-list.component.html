@@ -4,20 +4,19 @@
     <i [ngClass]="isCollapse(data.panelIsOpen)"></i> Check Section
     </button>      
     <div id="historySection" class="row-break" [ngbCollapse]="data.panelIsOpen">
-    <ul class="d-flex nav nav-tabs m4-nav" role="tablist">
-        <li class="shadow-sm ml-1 nav-item"
-            *ngFor="let mainTab of mainTabs">
-                <a 
-                    class="shadow font-weight-bold text-dark nav-check-link"
-                    [routerLink]="[mainTab.url, mantisRecord.id]"
-                    [queryParams]="{check_section: mainTab.id}" 
-                    routerLinkActive="active">
-                    {{ mainTab.title }} 
-                    <span *ngIf="(getCount(mainTab.id)| async)?.length > 0" class="count-badge badge badge-md badge-danger">{{ (getCount(mainTab.id)| async)?.length }}</span>
-                </a>
-        </li>
-        <li class="nav-item ml-auto"><a class="nav-check-link bg-light text-dark border border-secondary ml-1" [routerLink]="" ><i class="fas fa-cog fa-lg"></i> </a></li>
-    </ul>
+        <ul class="d-flex nav nav-tabs m4-nav" role="tablist" *ngIf="mainTabs.length > 0">
+            <li class="shadow-sm ml-1 nav-item" *ngFor="let mainTab of mainTabs">
+                    <a 
+                        class="shadow font-weight-bold text-dark nav-check-link"
+                        [routerLink]="[mainTab.url, mantisRecord.id]"
+                        [queryParams]="{check_section: mainTab.id}" 
+                        routerLinkActive="active">
+                        {{ mainTab.title }} 
+                        <!--<span class="count-badge badge badge-md badge-danger" *ngIf="tabCount[mainTab.id].All != 0">{{ tabCount[mainTab.id].All }}</span>-->
+                    </a>
+            </li>
+            <li class="nav-item ml-auto"><a class="nav-check-link bg-light text-dark border border-secondary ml-1" [routerLink]="" ><i class="fas fa-cog fa-lg"></i> </a></li>
+        </ul>
     <div class="card ">
         <div class="card-body check-card-body">
             <div class="row bg-secondary pt-3 mt-0">
@@ -25,7 +24,12 @@
                     <nav aria-label="breadcrumb">
                         <ul class="nav">
                             <li class="ml-1 nav-check-link text-dark nav-item" *ngFor="let group of seciontAssignedGroup[queryParams]">
-                                <a class="group-link ml-0 p-1 font-weight-bold" [ngClass]="isActiveGroupTab(group)" [routerLink]="[url, mantisRecord.id]" [queryParams]="{check_section: queryParams, group: group}">{{ group }}</a>
+                                <a class="group-link ml-0 p-1 font-weight-bold" 
+                                    [ngClass]="isActiveGroupTab(group)"
+                                    [routerLink]="[url, mantisRecord.id]"
+                                    [queryParams]="{check_section: queryParams, group: group}">{{ group }}
+                                    <!--<span class="badge badge-md badge-danger">{{ tabCount[queryParams][group] }}</span>-->
+                                </a>
                             </li>
                         </ul>
                     </nav>                

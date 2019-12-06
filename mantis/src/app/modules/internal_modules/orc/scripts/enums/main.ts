@@ -12,9 +12,18 @@ export enum STATUS_GROUP {
 
 
 // Check sections
-export const TAB1: string = 'default'
-export const TAB2: string = 'assinged_ist'
-export const TAB3: string = 'assinged_soa'
+export const TAB1: any = {
+    id: 'default',
+    status: ['N', 'A', 'iST', 'SOA', 'POA']
+}
+export const TAB2: any = {
+    id: 'assinged_ist',
+    status: ['iST']
+}
+export const TAB3: any = {
+    id: 'assinged_soa',
+    status: ['SOA']
+}
 
 
 export const QUERY_FIELD = {

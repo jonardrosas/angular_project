@@ -13,6 +13,7 @@ import * as ENUMS from './../../../orc/scripts/';
 import { CheckStatusTemplateComponent } from './../../components/check-list/components/check-status-template/check-status-template.component';
 import { DispoMangerService } from './../../services';
 import { Observable } from 'rxjs';
+import { query } from '@angular/animations';
 
 @Component({
     selector: 'app-check-list',
@@ -34,9 +35,9 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
     public queryParams: string;
     public queryGroupTab: string;
     public mainTabs = [
-        { id: ENUMS.TAB1, title: 'All Checks', url: this.url, param: 'default', count: 0},
-        { id: ENUMS.TAB2, title: 'Assigned iST', url: this.url, param: 'assinged_ist', count: 0},
-        { id: ENUMS.TAB3, title: 'Assigned SOA', url: this.url, param: 'assinged_soa', count: 0},
+        { id: ENUMS.TAB1.id, title: 'All Checks', url: this.url, param: 'default', count: 0},
+        { id: ENUMS.TAB2.id, title: 'Assigned iST', url: this.url, param: 'assinged_ist', count: 0},
+        { id: ENUMS.TAB3.id, title: 'Assigned SOA', url: this.url, param: 'assinged_soa', count: 0},
     ];
     public buttons;
     public object$: Observable<OrcCheckAsessment>;
@@ -44,6 +45,8 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
     public options = {
         theme: `detail-check ag-theme-balham`
     };
+    public tabCount = {};
+    public tabGroupCount = {};
     public filters = {};
     public checkAction;
     public checkSelector;
@@ -93,52 +96,70 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
                 this.filters['record'] = this.mantisRecord.orc_record.id;
                 this.queryParams = data.check_section;
                 this.queryGroupTab = data.group;
-                this.loadCheck()
+                this.loadCheck(this.queryParams)
             }
-        )        
+        ) 
+
+        this.initializeTab()
 
     }
 
+    initializeTab(){
+        for (let key in this.mainTabs){
+            let queryParams = this.mainTabs[key].id
+            this.seciontAssignedGroup[queryParams] = ['All'];
+            if(queryParams != this.queryParams){
+                this.getMainTablCount(queryParams)
+                this.loadCheck(queryParams)
+            }
+        }        
+    }
 
-    
 
-    loadCheck(){
+    loadCheck(queryParams?){
         this.checkFilter['record'] = this.mantisRecord.orc_record.id;
+
+        if(queryParams){
+            queryParams = this.queryParams;
+        }
 
         if(this.queryGroupTab){
             this.checkFilter['group'] = this.queryGroupTab;
+        }else{
+            this.checkFilter['group'] = 'All';
         }
 
         this.store.dispatch(this.dispoManagerInstance.dispositionInstance.checkTableStoreAction(this.checkFilter));
         this.store.dispatch(this.dispoManagerInstance.dispositionInstance.checkTableStoreAssignedIstAction(this.checkFilter));
         this.store.dispatch(this.dispoManagerInstance.dispositionInstance.checkTableStoreAssignedSoaAction(this.checkFilter));                          
 
-        if(this.queryParams == ENUMS.TAB2){
+        if(queryParams == ENUMS.TAB2.id){
             this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs();
             this.buttons = this.dispoManagerInstance.getCheckActionButtons().iSTCheckButtons;         
             this.rowData$ = this.store.pipe(select(this.assignedIstSelector))
             this.isShowAssignedGroup = true;
-            this.getAssignedGroup(this.rowData$)
-        }else if(this.queryParams == ENUMS.TAB3){
+            this.getAssignedGroup(this.rowData$, queryParams)
+        }else if(queryParams == ENUMS.TAB3.id){
             this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs('assinged_soa');
             this.buttons = this.dispoManagerInstance.getCheckActionButtons().sOACheckButtons;         
             // this.rowData$ = this.assessmentModel.objects.filter({check__record: this.mantisRecord.orc_record.id})
             this.rowData$ = this.store.pipe(select(this.assignedSoaSelector))
             this.isShowAssignedGroup = true;
-            this.getAssignedGroup(this.rowData$)
-        }else if(this.queryParams == ENUMS.TAB1){
-            this.seciontAssignedGroup[this.queryParams] = [];
-            this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs(ENUMS.TAB1);
+            this.getAssignedGroup(this.rowData$, queryParams)
+        }else if(queryParams == ENUMS.TAB1.id){
+            this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs(ENUMS.TAB1.id);
             this.buttons = this.dispoManagerInstance.getCheckActionButtons().allCheckButtons;         
             this.rowData$ = this.store.pipe(select(this.defaultSelector))
             this.isShowAssignedGroup = false;
+            this.queryGroupTab = null;
         }else{
-            this.seciontAssignedGroup[this.queryParams] = [];
-            this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs(ENUMS.TAB1);
+            this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs(ENUMS.TAB1.id);
             this.buttons = this.dispoManagerInstance.getCheckActionButtons().allCheckButtons;         
             this.rowData$ = this.store.pipe(select(this.defaultSelector))
             this.isShowAssignedGroup = false;
+            this.queryGroupTab = null;
         }        
+
         this.refreshGrid()
     }       
 
@@ -158,21 +179,18 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
         }
     }
 
-    getAssignedGroup(rowData$){
-        debugger;
+    getAssignedGroup(rowData$, queryParams){
         rowData$.subscribe(
             (data) => {
                 if(data.length > 0){
-                    let field = ENUMS.QUERY_FIELD[this.queryParams]
-                    debugger;
-                    this.seciontAssignedGroup[this.queryParams] = ['All'];
+                    let field = ENUMS.QUERY_FIELD[queryParams]
                     for( let key in data){
                         let dat = data[key];
                         for(let key2 in dat[field]){
                             let review = dat[field][key2]
                             if(review.assigned_group){
-                                if(this.seciontAssignedGroup[this.queryParams].indexOf(review.assigned_group.name) == -1){
-                                    this.seciontAssignedGroup[this.queryParams].push(review.assigned_group.name)
+                                if(this.seciontAssignedGroup[queryParams].indexOf(review.assigned_group.name) == -1){
+                                    this.seciontAssignedGroup[queryParams].push(review.assigned_group.name)
                                 }                                
                             }
                         }
@@ -182,20 +200,43 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
         )
     }
 
-    test(){
-        this.seciontAssignedGroup = []
+
+    getOpenCount(data, status){
+        let count = 0
+        for(let k in data){
+            let row = data[k];
+            if(status.indexOf(row.status) != -1){
+                count += 1;
+            }
+        }
+        return count;
     }
 
-    getCount(id){
+    getMainTablCount(id){
         let count$;
-        if(id == ENUMS.TAB2){
+        this.tabCount[id] = {};
+        let openStatList: any;
+        if(id == ENUMS.TAB2.id){
             count$ = this.store.pipe(select(this.assignedIstSelector));
-        }else if(id == ENUMS.TAB3){
+            openStatList = ENUMS.TAB2.status;
+        }else if(id == ENUMS.TAB3.id){
             count$ = this.store.pipe(select(this.assignedSoaSelector));
-        }else if(id == ENUMS.TAB1){
+            openStatList = ENUMS.TAB3.status;
+        }else if(id == ENUMS.TAB1.id){
             count$ = this.store.pipe(select(this.defaultSelector));
+            openStatList = ENUMS.TAB1.status;
         }
-        return count$
+        count$.subscribe(
+            (data) => {
+                if(data){
+                    if(this.queryGroupTab){
+                        this.tabCount[id][this.queryGroupTab] = this.getOpenCount(data, openStatList)
+                    }else{
+                        this.tabCount[id]['All'] = this.getOpenCount(data, openStatList)
+                    }
+                }
+            }
+        )
     }
 
     autoSelectCheck(){
@@ -204,7 +245,6 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
                 this.agGrid.api.forEachNode(
                     (node) => {
                         if(this.previousSelectedRow.indexOf(node.data.id) > -1){
-                            debugger;
                             node.setSelected(true)
                             console.log("Node >>>>> ", node.data.id)
                         }
