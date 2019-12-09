@@ -96,7 +96,7 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
                 this.filters['record'] = this.mantisRecord.orc_record.id;
                 this.queryParams = data.check_section;
                 this.queryGroupTab = data.group;
-                this.loadCheck(this.queryParams)
+                this.loadCheck(this.queryParams);
             }
         ) 
 
@@ -118,8 +118,7 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
 
     loadCheck(queryParams?){
         this.checkFilter['record'] = this.mantisRecord.orc_record.id;
-
-        if(queryParams){
+        if(!queryParams){
             queryParams = this.queryParams;
         }
 
@@ -133,33 +132,33 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
         this.store.dispatch(this.dispoManagerInstance.dispositionInstance.checkTableStoreAssignedIstAction(this.checkFilter));
         this.store.dispatch(this.dispoManagerInstance.dispositionInstance.checkTableStoreAssignedSoaAction(this.checkFilter));                          
 
-        if(queryParams == ENUMS.TAB2.id){
+        if(queryParams === ENUMS.TAB2.id){
             this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs();
             this.buttons = this.dispoManagerInstance.getCheckActionButtons().iSTCheckButtons;         
             this.rowData$ = this.store.pipe(select(this.assignedIstSelector))
             this.isShowAssignedGroup = true;
-            this.getAssignedGroup(this.rowData$, queryParams)
-        }else if(queryParams == ENUMS.TAB3.id){
+        }else if(queryParams === ENUMS.TAB3.id){
             this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs('assinged_soa');
             this.buttons = this.dispoManagerInstance.getCheckActionButtons().sOACheckButtons;         
-            // this.rowData$ = this.assessmentModel.objects.filter({check__record: this.mantisRecord.orc_record.id})
             this.rowData$ = this.store.pipe(select(this.assignedSoaSelector))
             this.isShowAssignedGroup = true;
-            this.getAssignedGroup(this.rowData$, queryParams)
-        }else if(queryParams == ENUMS.TAB1.id){
+        }else if(queryParams === ENUMS.TAB1.id){
             this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs(ENUMS.TAB1.id);
             this.buttons = this.dispoManagerInstance.getCheckActionButtons().allCheckButtons;         
             this.rowData$ = this.store.pipe(select(this.defaultSelector))
-            this.isShowAssignedGroup = false;
-            this.queryGroupTab = null;
+            this.isShowAssignedGroup = true;
+            for(let key in ENUMS.QUERY_FIELD){
+                this.getAssignedGroup(this.rowData$, key)
+            }
         }else{
             this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs(ENUMS.TAB1.id);
             this.buttons = this.dispoManagerInstance.getCheckActionButtons().allCheckButtons;         
             this.rowData$ = this.store.pipe(select(this.defaultSelector))
-            this.isShowAssignedGroup = false;
-            this.queryGroupTab = null;
+            this.isShowAssignedGroup = true;
+            for(let key in ENUMS.QUERY_FIELD){
+                this.getAssignedGroup(this.rowData$, key)
+            }            
         }        
-
         this.refreshGrid()
     }       
 
