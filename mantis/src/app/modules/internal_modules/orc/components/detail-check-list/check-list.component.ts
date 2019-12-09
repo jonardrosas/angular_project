@@ -10,7 +10,7 @@ import * as orcModuleStore from './../../store';
 import { MantisRecordModel, OrcCheckAsessment, OrcCheckInterface } from './../../models';
 import { ButtonCollapse } from './../../util/';
 import * as ENUMS from './../../../orc/scripts/';
-import { CheckStatusTemplateComponent } from './../../components/check-list/components/check-status-template/check-status-template.component';
+import { CheckStatusTemplateComponent } from './../../components/detail-check-list/components/check-status-template/check-status-template.component';
 import { DispoMangerService } from './../../services';
 import { Observable } from 'rxjs';
 import { query } from '@angular/animations';

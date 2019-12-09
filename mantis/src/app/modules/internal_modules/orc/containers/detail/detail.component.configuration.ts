@@ -5,14 +5,14 @@ import {
     DetailJobHistorySectionComponent, CheckListComponent,
     ProgressBarComponent, DetailJobActionSectionComponent
 } from '../../components';
-import { CheckAddNotesComponent } from '../../components/check-list/components/check-add-notes/check-add-notes.component';
-import { CheckUploadImageComponent } from '../../components/check-list/components/check-upload-image/check-upload-image.component';
-import { CheckEscalateSoaComponent } from '../../components/check-list/components/check-escalate-soa/check-escalate-soa.component';
-import { CheckRecommendComponent } from '../../components/check-list/components/check-recommend/check-recommend.component';
-import { CheckRecommendAsSoaComponent } from '../../components/check-list/components/check-recommend-as-soa/check-recommend-as-soa.component';
-import { CheckChangeStatusComponent } from '../../components/check-list/components/check-change-status/check-change-status.component';
-import { CheckStatusTemplateComponent } from '../../components/check-list/components/check-status-template/check-status-template.component';
-import { CheckEscalateIstComponent } from '../../components/check-list/components/check-escalte-ist-status/check-escalate-ist-status.component';
+import { CheckAddNotesComponent } from '../../components/detail-check-list/components/check-add-notes/check-add-notes.component';
+import { CheckUploadImageComponent } from '../../components/detail-check-list/components/check-upload-image/check-upload-image.component';
+import { CheckEscalateSoaComponent } from '../../components/detail-check-list/components/check-escalate-soa/check-escalate-soa.component';
+import { CheckRecommendComponent } from '../../components/detail-check-list/components/check-recommend/check-recommend.component';
+import { CheckRecommendAsSoaComponent } from '../../components/detail-check-list/components/check-recommend-as-soa/check-recommend-as-soa.component';
+import { CheckChangeStatusComponent } from '../../components/detail-check-list/components/check-change-status/check-change-status.component';
+import { CheckStatusTemplateComponent } from '../../components/detail-check-list/components/check-status-template/check-status-template.component';
+import { CheckEscalateIstComponent } from '../../components/detail-check-list/components/check-escalte-ist-status/check-escalate-ist-status.component';
 import { BootstrapAlertComponent } from '../../../../../shared/components/bootstrap-alert/bootstrap-alert.component';
 import { DetailJobChangeStatusComponent } from '../../components/detail-job-action-section/detail-job-change-status/detail-job-change-status.component';
 import { DetailJobAssignToComponent } from '../../components/detail-job-action-section/detail-job-assign-to/detail-job-assign-to.component';

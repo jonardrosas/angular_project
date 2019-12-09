@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ICellRendererAngularComp  } from './../../../../../../third_party_modules/ag-grid';
+import { NgbModal } from './../../../../../../third_party_modules/ng_bootstrap';
 import { checkStatusMapping } from './../../../../scripts/common/status';
 
 @Component({
@@ -19,7 +20,9 @@ export class CheckStatusTemplateComponent implements OnInit, ICellRendererAngula
         }
     }
 
-    constructor() { }
+    constructor(
+        private modalService: NgbModal,
+    ) { }
 
     ngOnInit() {
     }
