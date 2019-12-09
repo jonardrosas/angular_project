@@ -22,7 +22,7 @@
             <div class="row bg-secondary pt-3 mt-0">
                 <div class="col-md-10">
                     <nav aria-label="breadcrumb">
-                        <ul class="nav">
+                        <ul class="nav" *ngIf="seciontAssignedGroup[queryParams].length > 1">
                             <li class="ml-1 nav-check-link text-dark nav-item" *ngFor="let group of seciontAssignedGroup[queryParams]">
                                 <a class="group-link ml-0 p-1 font-weight-bold" 
                                     [ngClass]="isActiveGroupTab(group)"

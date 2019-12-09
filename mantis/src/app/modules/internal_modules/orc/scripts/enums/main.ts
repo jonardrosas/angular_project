@@ -30,3 +30,5 @@ export const QUERY_FIELD = {
     'assinged_ist': 'reviews',
     'assinged_soa': 'checkassessments'
 }
+
+export const ALL = 'All';

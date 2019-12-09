@@ -72,8 +72,6 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
     }
 
     ngOnInit() {
-     
-
         this.store.pipe(select(orcModuleStore.getMantisRecordObjectStateSelector)).subscribe(
             (data) => {
                 this.mantisRecord = data;
@@ -96,11 +94,11 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
                 this.filters['record'] = this.mantisRecord.orc_record.id;
                 this.queryParams = data.check_section;
                 this.queryGroupTab = data.group;
+                this.initializeTab()
                 this.loadCheck(this.queryParams);
             }
         ) 
 
-        this.initializeTab()
 
     }
 
@@ -114,7 +112,6 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
             }
         }        
     }
-
 
     loadCheck(queryParams?){
         this.checkFilter['record'] = this.mantisRecord.orc_record.id;
@@ -168,7 +165,7 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
     }
 
     isActiveGroupTab(tab){
-        if(!this.queryGroupTab && tab == 'All'){
+        if(!this.queryGroupTab && tab == ENUMS.ALL){
             return 'active'
         }
         if(tab === this.queryGroupTab){
@@ -231,7 +228,7 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
                     if(this.queryGroupTab){
                         this.tabCount[id][this.queryGroupTab] = this.getOpenCount(data, openStatList)
                     }else{
-                        this.tabCount[id]['All'] = this.getOpenCount(data, openStatList)
+                        this.tabCount[id][ENUMS.ALL] = this.getOpenCount(data, openStatList)
                     }
                 }
             }
