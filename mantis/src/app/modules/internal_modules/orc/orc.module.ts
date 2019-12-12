@@ -22,7 +22,7 @@ import { ListComponent } from './containers/list/list.component';
 import { OrcSharedModule } from './shared/orc-shared.module';
 import { DetailComponent } from './containers/detail/detail.component';
 import { CheckListComponent } from './components/detail-check-list/check-list.component';
-import { DeviceSummaryComponent } from './components/device-summary/device-summary.component';
+import { DeviceSummaryComponent } from './components/detail-device-summary/device-summary.component';
 import { DetailJobActionSectionComponent } from './components/detail-job-action-section/detail-job-action-section.component';
 import { DetailErrorStatisticsComponent } from './components/detail-error-statistics/detail-error-statistics.component';
 import { DetailNotesSectionComponent } from './components/detail-notes-section/detail-notes-section.component';
@@ -34,7 +34,7 @@ import { CheckEscalateIstComponent } from './components/detail-check-list/compon
 import { Safe } from './../../../shared/pipes/safe-html';
 import { JobreportSectionDirective } from './directives/jobreport-section.directive';
 import { TestDivComponent } from './components/test-div/test-div.component';
-import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
+import { ProgressBarComponent } from './components/detail-progress-bar/progress-bar.component';
 import { CheckAddNotesComponent } from './components/detail-check-list/components/check-add-notes/check-add-notes.component';
 import { CheckUploadImageComponent } from './components/detail-check-list/components/check-upload-image/check-upload-image.component';
 import { CheckEscalateSoaComponent } from './components/detail-check-list/components/check-escalate-soa/check-escalate-soa.component';
@@ -43,6 +43,7 @@ import { CheckRecommendAsSoaComponent } from './components/detail-check-list/com
 import { OrcWorklistComponent } from './components/orc-worklist/orc-worklist.component';
 import { DetailJobAssignToComponent } from './components/detail-job-action-section/detail-job-assign-to/detail-job-assign-to.component';
 import { DetailJobChangeStatusComponent } from './components/detail-job-action-section/detail-job-change-status/detail-job-change-status.component';
+import { CheckDetailReportComponent } from './components/check-detail-report/check-detail-report.component';
 
 @NgModule({
     imports: [
@@ -84,6 +85,7 @@ import { DetailJobChangeStatusComponent } from './components/detail-job-action-s
         OrcWorklistComponent,
         DetailJobAssignToComponent,
         DetailJobChangeStatusComponent,
+        CheckDetailReportComponent,
     ],
     entryComponents: [
         CheckListComponent,
@@ -107,6 +109,7 @@ import { DetailJobChangeStatusComponent } from './components/detail-job-action-s
         OrcWorklistComponent,
         DetailJobAssignToComponent,
         DetailJobChangeStatusComponent,
+        CheckDetailReportComponent
     ],
     providers: [
         OrcRecordService,

@@ -5,6 +5,7 @@ import * as CONST from './../enums';
 
 interface CheckTableInterface {
     columnDefs;
+    checkDetailInfo;
     setColumnDefs(): void;
 }
 
@@ -22,7 +23,7 @@ export class CheckFields {
         filter: true,
         checkboxSelection: true,
         width: 130,
-        headerCheckboxSelection: true
+        headerCheckboxSelection: true,
     };
     public rawErrorCountField = {
         headerName: 'Raw Error Counts',
@@ -172,7 +173,6 @@ export class CheckFields {
     }
 
     getClass(){
-        debugger;
         return 'btn btn-danger';
     }    
 
@@ -182,6 +182,20 @@ export class CheckBaseModel extends CheckFields implements CheckTableInterface {
     columnDefs: any[];
     assessmentDefs: any[];
     statusCellTemplate;
+    checkDetailInfo = [
+        this.idField,
+        this.ruleNameField,
+        this.rawErrorCountField,
+        this.statusField
+    ]
+    checkReviewColumn = [
+        {headerName: 'Date', field: 'date', col: 2},
+        {headerName: 'User', field: 'user', col: 2},
+        {headerName: 'Assigned Group', field: 'assigned_group', col: 2, relatedName: 'name'},
+        {headerName: 'Old Status', field: 'old_status', col: 1},
+        {headerName: 'New Status', field: 'new_status', col: 1},
+        {headerName: 'Comments', field: 'comments', col: 4},
+    ]
 
     constructor() {
         super()

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ICellRendererAngularComp  } from './../../../../../../third_party_modules/ag-grid';
 import { NgbModal } from './../../../../../../third_party_modules/ng_bootstrap';
 import { checkStatusMapping } from './../../../../scripts/common/status';
+import { CheckDetailReportComponent } from './../../../check-detail-report/check-detail-report.component';
 
 @Component({
   selector: 'app-check-status-template',
@@ -29,6 +30,12 @@ export class CheckStatusTemplateComponent implements OnInit, ICellRendererAngula
 
     refresh(): boolean {
         return false;
-	}
+    }
+    
+    showCheckDetail(){
+        const modalRef = this.modalService.open(CheckDetailReportComponent, {size: 'xl'})
+        modalRef.componentInstance.data = this.params.data;
+        modalRef.componentInstance.checkId = this.params.data.id;
+    }
 	
 }

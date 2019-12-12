@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild, ComponentFactoryResolver, AfterViewInit} from '@angular/core';
+import { Component, OnInit, ViewChild, ComponentFactoryResolver, AfterViewInit, OnDestroy} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
-import { take } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 import { NgbModal } from './../../../../third_party_modules/ng_bootstrap';
 import * as orcModuleStore from './../../store';
 import { MantisRecordModel } from './../../models';
@@ -16,11 +16,12 @@ import { DispoMangerService } from './../../services';
     templateUrl: './detail.component.html',
     styleUrls: ['./detail.component.css']
 })
-export class DetailComponent implements OnInit, AfterViewInit {
+export class DetailComponent implements OnInit, AfterViewInit, OnDestroy {
     public reportSectionsComponents = ReportSectionComponent;
     public reportCheckDispostionPopups = ReportCheckDispostionPopups;
     public dispoManagerInstance: MantisDispositionManager;
     public dispoManagerInstanceSubject;
+    public mantisRecordSubscription: Subscription;
     public checkFilter;
     public mantisId: number;
     public mantisRecord: MantisRecordModel;
@@ -39,6 +40,11 @@ export class DetailComponent implements OnInit, AfterViewInit {
         setTimeout(()=> this.loadComponent(), 1500);
     }
 
+    ngOnDestroy(){
+        this.mantisRecordSubscription.unsubscribe()
+        
+    }
+
     ngOnInit() {
         this.activatedRoute.paramMap.subscribe(params => {
             this.mantisId = +params.get('id');
@@ -48,7 +54,7 @@ export class DetailComponent implements OnInit, AfterViewInit {
     }
 
     loadMantisRecord() {
-        this.store.pipe(select(orcModuleStore.getMantisRecordObjectStateSelector))
+        this.mantisRecordSubscription = this.store.pipe(select(orcModuleStore.getMantisRecordObjectStateSelector))
         .subscribe(
             (data) => {
                 this.mantisRecord = data;

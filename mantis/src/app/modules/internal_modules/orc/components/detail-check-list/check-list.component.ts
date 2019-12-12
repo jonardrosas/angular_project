@@ -94,8 +94,8 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
                 this.filters['record'] = this.mantisRecord.orc_record.id;
                 this.queryParams = data.check_section;
                 this.queryGroupTab = data.group;
-                this.initializeTab()
-                this.loadCheck(this.queryParams);
+                this.initializeTab() // need to know other tabs data
+                this.loadCheck(this.queryParams);  // current tab data
             }
         ) 
 
@@ -106,6 +106,7 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
         for (let key in this.mainTabs){
             let queryParams = this.mainTabs[key].id
             this.seciontAssignedGroup[queryParams] = ['All'];
+            // ignore current tab because it will be load in separate function
             if(queryParams != this.queryParams){
                 this.getMainTablCount(queryParams)
                 this.loadCheck(queryParams)
