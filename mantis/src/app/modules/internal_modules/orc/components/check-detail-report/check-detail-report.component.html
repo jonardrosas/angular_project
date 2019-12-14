@@ -1,19 +1,5 @@
-<!--
-<div class="modal-header">
-    <h4 class="modal-title">{{ checkData.name }}</h4>
-    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-    <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-<div class="modal-body">
-</div>
-<div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
-</div>
--->
-
-<div class="container-fluid p-4 check-detail">
-    <div class="row bg-secondary shadow p-2 text-white">
+<div class="container-fluid p-4 check-detail bg-light">
+    <div class="row row-break bg-light shadow p-2 text-dark border border-dark">
         <div class="col-md-12">
             <h5>Detail</h5>
             <hr/>
@@ -26,7 +12,7 @@
             </ul>
        </div>
     </div>
-    <div class="row row-break bg-secondary shadow p-2 text-white">
+    <div class="row row-break bg-light shadow p-2 text-dark border border-dark">
         <div class="col-md-12">
             <h5>Rule Reviews</h5>
             <hr/>
@@ -34,7 +20,7 @@
         <div class="col-md-12">
             <div class="container-fluid">
                 <div class="row bg-light text-dark">
-                    <div class="overflow-hidden col-md-{{ field.col }} border border-dark" *ngFor="let field of checkReviewColumn">
+                    <div class="bg-dark text-light overflow-hidden col-md-{{ field.col }} border border-dark" *ngFor="let field of checkReviewColumn">
                         <b>{{ field.headerName }} </b>
                     </div>
                 </div>
@@ -46,27 +32,30 @@
             </div>
         </div>
     </div>    
-    <div class="row row-break bg-secondary shadow p-2 text-white">
+    <div class="row row-break bg-light shadow p-2 text-dark border border-secondary">
         <div class="col-md-12">
             <h5>Rule Waiver Recommendation</h5>
             <hr/>
         </div>
         <div class="col-md-12">
-            <div class="container-fluid">
-                <div class="row bg-light text-dark">
-                    <div class="overflow-hidden col-md-{{ field.col }} border border-dark" *ngFor="let field of checkReviewColumn">
+            <div class="container-fluid" *ngIf="checkData.checkassessments && checkData.checkassessments.length > 0">
+                <div class="row bg-secondary text-light">
+                    <div class="overflow-hidden col-md-{{ field.col }} border border-dark" *ngFor="let field of checkAssessmentColumn">
                         <b>{{ field.headerName }} </b>
                     </div>
                 </div>
                 <div class="row bg-light text-dark" *ngFor="let review of checkData.checkassessments">
-                    <div class="overflow-hidden col-md-{{ field.col }} border border-secondary" *ngFor="let field of checkReviewColumn">
+                    <div class="overflow-hidden col-md-{{ field.col }} border border-secondary" *ngFor="let field of checkAssessmentColumn">
                         {{ getValue(field, review[field.field]) }}
                     </div>                      
                 </div>
             </div>
+            <div class="container-fluid" *ngIf="!checkData.checkassessments || checkData.checkassessments.length == 0">
+                    No available assessment
+            </div>
         </div>
     </div>      
-    <div class="row row-break bg-secondary shadow p-2 text-white">
+    <div class="row row-break bg-light shadow p-2 text-dark border border-dark">
         <div class="col-md-12">
             <h5>Rule Image</h5>
             <hr/>
@@ -75,6 +64,9 @@
             <div class="container-fluid">
                 <div class="row bg-light p-3" *ngFor="let image of checkImages">
                     <img [src]="image.check_image" class="img-fluid" alt="Image Responsive">
+                </div>
+                <div *ngIf="checkImages.length == 0">
+                    No available image
                 </div>
             </div>
         </div>

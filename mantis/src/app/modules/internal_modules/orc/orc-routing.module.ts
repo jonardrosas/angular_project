@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginRequired } from './../../../core/guards';
 
 import { ListComponent } from './containers/list/list.component';
+import { CheckDetailContainerComponent } from './containers/check-detail-container/check-detail-container.component';
 import { DetailComponent } from './containers/detail/detail.component';
 import { OrcWorklistComponent } from './components/orc-worklist/orc-worklist.component';
 
@@ -17,6 +18,11 @@ const routes: Routes = [
         component: DetailComponent,
         canActivate: [LoginRequired]
     },
+    {
+        path: 'check/:mantisId/:checkId',
+        component: CheckDetailContainerComponent,
+        canActivate: [LoginRequired]
+    },    
     {
         path: 'orc-worklist',
         component: OrcWorklistComponent,

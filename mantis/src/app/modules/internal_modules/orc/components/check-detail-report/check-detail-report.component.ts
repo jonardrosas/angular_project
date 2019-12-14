@@ -16,7 +16,6 @@ import { MantisDispositionManager } from './../../scripts';
   styleUrls: ['./check-detail-report.component.css']
 })
 export class CheckDetailReportComponent implements OnInit, OnDestroy {
-    @Input() data;
     @Input() checkId;
     checkDataSubscription: Subscription;
     checkImagesSubscription: Subscription;
@@ -26,22 +25,24 @@ export class CheckDetailReportComponent implements OnInit, OnDestroy {
     readonly DEFAULT_GRID_COL = 6;
     public checkReviews;
     public checkReviewColumn;
+    public checkAssessmentColumn;
     public checkImages;
 
     constructor(
-        public activeModal: NgbActiveModal,
         private activateRoute: ActivatedRoute,
         private store: Store<any>,
         private dispoService: DispoMangerService,
     ) {}  
 
     ngOnInit() {
+        debugger;
 
         this.store.pipe(select(orcModuleStore.getMantisRecordObjectStateSelector)).subscribe(
             (data) => {
                 this.dispoManagerInstance = this.dispoService.initialized({mantisRecord: data})
                 this.columnDefs = this.dispoManagerInstance.getCheckTableDetailInfo();
                 this.checkReviewColumn = this.dispoManagerInstance.dispositionInstance.getChecksTable().checkReviewColumn;
+                this.checkAssessmentColumn = this.dispoManagerInstance.dispositionInstance.getChecksTable().checkAssessmentColumn;
             }
         )
 

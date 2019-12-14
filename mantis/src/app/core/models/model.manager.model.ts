@@ -26,6 +26,7 @@ export class QueryManager{
 
     filter(filters): Observable<any> {
         const params = this.buildFilter(filters);
+        console.info("FILTER -------------", this.url)
         return this.apiService.get(this.url, params).pipe(
             map(data => data.results)
         )

@@ -21,7 +21,7 @@ export class DrcCheckEffects {
                 (payload: any) => this.drcCheckService.getQuerySet(
                     {
                         record: payload.record,
-                        limit: payload.limit,
+                        limit: 2000,
                     })
                 .pipe(
                     map(
@@ -36,10 +36,10 @@ export class DrcCheckEffects {
     loadDrcIstCheckFieldFn = createEffect(() => this.actions$.pipe(
         ofType(storeActions.getDrciSTChecksAction),
         mergeMap(
-            (payload: any) => this.drcRecordService.getIstChecks(payload.record)
+            (payload: any) => this.drcRecordService.getAssignedChecks(payload.record)
             .pipe(
                 map(
-                    data => storeActions.setiSTChecksAction({checks: data.results}),
+                    data => storeActions.setAssignedChecksAction({checks: data.results}),
                     catchError(() => EMPTY)
                 )
             )

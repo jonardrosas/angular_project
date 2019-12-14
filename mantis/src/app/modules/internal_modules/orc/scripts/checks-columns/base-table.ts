@@ -141,8 +141,9 @@ export class CheckFields {
             const assignedGroups = [];
             if(params.data.reviews && params.data.reviews.length > 0){
                 for (const review in params.data.reviews) {
-                    if(params.data.reviews[review].assigned_group){
-                        assignedGroups.push(params.data.reviews[review].assigned_group.name);
+                    const reviewObj =  params.data.reviews[review];
+                    if(reviewObj.new_status == 'iST' && reviewObj.assigned_group){
+                        assignedGroups.push(reviewObj.assigned_group.name);
                     }
                 }
             }
@@ -194,6 +195,14 @@ export class CheckBaseModel extends CheckFields implements CheckTableInterface {
         {headerName: 'Assigned Group', field: 'assigned_group', col: 2, relatedName: 'name'},
         {headerName: 'Old Status', field: 'old_status', col: 1},
         {headerName: 'New Status', field: 'new_status', col: 1},
+        {headerName: 'Comments', field: 'comments', col: 4},
+    ]
+
+    checkAssessmentColumn = [
+        {headerName: 'Date', field: 'date', col: 2},
+        {headerName: 'User', field: 'user', col: 2},
+        {headerName: 'Assigned Group', field: 'assigned_group', col: 2, relatedName: 'name'},
+        {headerName: 'Recommendation', field: 'assessment', col: 2},
         {headerName: 'Comments', field: 'comments', col: 4},
     ]
 

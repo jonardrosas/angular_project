@@ -2,6 +2,7 @@
 export interface CheckDisposeButtonInterface{
     allCheckButtons?;
     iSTCheckButtons?;
+    fSTCheckButtons?;
     sOACheckButtons?;
 }
 
@@ -17,6 +18,7 @@ interface checkDispoInterface {
 export class CheckDisposeButtonBase implements CheckDisposeButtonInterface {
     public allCheckButtons;
     public iSTCheckButtons;
+    public fSTCheckButtons;
     public sOACheckButtons;
     protected agGridApi;
     protected modalService;
@@ -41,6 +43,10 @@ export class CheckDisposeButtonBase implements CheckDisposeButtonInterface {
             this.addNotes,
             this.addImage            
         ];
+        this.fSTCheckButtons = [
+            this.addNotes,
+            this.addImage
+        ];        
     }
 
     public addNotes = {

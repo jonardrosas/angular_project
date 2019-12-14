@@ -44,6 +44,8 @@ import { OrcWorklistComponent } from './components/orc-worklist/orc-worklist.com
 import { DetailJobAssignToComponent } from './components/detail-job-action-section/detail-job-assign-to/detail-job-assign-to.component';
 import { DetailJobChangeStatusComponent } from './components/detail-job-action-section/detail-job-change-status/detail-job-change-status.component';
 import { CheckDetailReportComponent } from './components/check-detail-report/check-detail-report.component';
+import { CheckDetailContainerComponent } from './containers/check-detail-container/check-detail-container.component';
+import { CheckDetailPopupComponent } from './components/detail-check-list/components/check-detail-popup/check-detail-popup.component';
 
 @NgModule({
     imports: [
@@ -86,6 +88,8 @@ import { CheckDetailReportComponent } from './components/check-detail-report/che
         DetailJobAssignToComponent,
         DetailJobChangeStatusComponent,
         CheckDetailReportComponent,
+        CheckDetailContainerComponent,
+        CheckDetailPopupComponent,
     ],
     entryComponents: [
         CheckListComponent,
@@ -109,7 +113,8 @@ import { CheckDetailReportComponent } from './components/check-detail-report/che
         OrcWorklistComponent,
         DetailJobAssignToComponent,
         DetailJobChangeStatusComponent,
-        CheckDetailReportComponent
+        CheckDetailReportComponent,
+        CheckDetailPopupComponent,
     ],
     providers: [
         OrcRecordService,

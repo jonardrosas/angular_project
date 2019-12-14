@@ -13,11 +13,15 @@ export class DrcRecordService extends QueryHelper {
         this.setApiService(this.apiService);
     }
 
-    getIstChecks(id: number): Observable<any> {
-        let url = `${this.url}${id}/get_assigned_ist_jobs/`;
+    getAssignedChecks(id: number, group?: string, status?: string): Observable<any> {
+        let url = `${this.url}${id}/get_assigned_check_jobs/`;
+        if(group){
+            let params = this.buildFilter({group: group, status: status});
+            return this.apiService.get(url, params);
+        }
         return this.apiService.get(url);
-    }
-    
+    }        
+
     getSoaChecks(id: number): Observable<any> {
         let url = `${this.url}${id}/get_assigned_soa_jobs/`;
         return this.apiService.get(url);

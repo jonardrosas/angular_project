@@ -16,7 +16,7 @@ export interface MantisDispositionBaseInterface {
     store;
     checkTableStoreAction?;
     checkTableStoreSelector?;
-    checkTableStoreAssignedIstAction?;
+    checkTableStoreAssignedAction?;
     checkTableStoreAssignedSoaAction?;
     checkTableStoreAssignedIstSelector?;
     checkTableStoreAssignedSoaSelector?;    
@@ -32,21 +32,23 @@ export class MantisDispositionBase implements MantisDispositionBaseInterface {
     detailJobActionSectionClass = null;
     checkTableStoreAction;
     checkTableStoreSelector;
-    checkTableStoreAssignedIstAction;
+    checkTableStoreAssignedAction;
     checkTableStoreAssignedSoaAction;
     checkTableStoreAssignedIstSelector;
     checkTableStoreAssignedSoaSelector;
 
     constructor(dispoParams: DispostionParameter) {
         this.dispoParams = dispoParams;
-        this.store = dispoParams.store;
-        // Use this temporary as default, need to be override on the subclass
-        this.checkTableStoreAction = this.store.getOrcChecksAction;
-        this.checkTableStoreSelector = this.store.getOrcRecordCheckStateSelector;
-        this.checkTableStoreAssignedIstAction = this.store.getiSTChecksAction;
-        this.checkTableStoreAssignedSoaAction = this.store.getSoaChecksAction;
-        this.checkTableStoreAssignedIstSelector = this.store.getIstCheckSelector;
-        this.checkTableStoreAssignedSoaSelector = this.store.getSoaCheckSelector;
+        if(dispoParams.store){
+            this.store = dispoParams.store;
+            // Use this temporary as default, need to be override on the subclass
+            this.checkTableStoreAction = this.store.getOrcChecksAction;
+            this.checkTableStoreSelector = this.store.getOrcRecordCheckStateSelector;
+            this.checkTableStoreAssignedAction = this.store.getAssignedChecksAction;
+            this.checkTableStoreAssignedSoaAction = this.store.getSoaChecksAction;
+            this.checkTableStoreAssignedIstSelector = this.store.getIstCheckSelector;
+            this.checkTableStoreAssignedSoaSelector = this.store.getSoaCheckSelector;
+        }
     }   
     getDetailJobActionSection(){
         if(this.detailJobActionSectionClass){

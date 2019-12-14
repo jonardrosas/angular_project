@@ -123,9 +123,7 @@ export class OrcCheckDispositionButtonBase extends CheckDisposeButtonBase {
         super(dispoParams);
         this.allCheckButtons = [
             this.orcEscalateIst,
-            // this.orcEscalateSOA,
             this.orcChangeStatus,
-            // this.checkRecommend,
             this.addNotes,
             this.addImage
         ]
@@ -137,6 +135,11 @@ export class OrcCheckDispositionButtonBase extends CheckDisposeButtonBase {
         ]
         this.sOACheckButtons = [
             this.checkAsSoaRecommend,
+            this.addNotes,
+            this.addImage            
+        ]        
+        this.fSTCheckButtons = [
+            this.checkRecommend,
             this.addNotes,
             this.addImage            
         ]        
@@ -165,6 +168,7 @@ export class OrcCheckDispositionButtonClass {
         }
         this.buttons.allCheckButtons =  this.instance.allCheckButtons;
         this.buttons.iSTCheckButtons =  this.instance.iSTCheckButtons;
+        this.buttons.fSTCheckButtons =  this.instance.fSTCheckButtons;
         this.buttons.sOACheckButtons =  this.instance.sOACheckButtons;
     }    
 }

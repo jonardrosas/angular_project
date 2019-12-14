@@ -2,17 +2,17 @@
     <button type="button" class="btn btn-toggle" (click)="data.panelIsOpen = !data.panelIsOpen"
             [attr.aria-expanded]="!data.panelIsOpen" aria-controls="historySection">
     <i [ngClass]="isCollapse(data.panelIsOpen)"></i> Check Section
-    </button>      
+    </button>
     <div id="historySection" class="row-break" [ngbCollapse]="data.panelIsOpen">
         <ul class="d-flex nav nav-tabs m4-nav" role="tablist" *ngIf="mainTabs.length > 0">
             <li class="shadow-sm ml-1 nav-item" *ngFor="let mainTab of mainTabs">
                     <a 
                         class="shadow font-weight-bold text-dark nav-check-link"
-                        [routerLink]="[mainTab.url, mantisRecord.id]"
+                        [routerLink]="[url, mantisRecord.id]"
                         [queryParams]="{check_section: mainTab.id}" 
                         routerLinkActive="active">
                         {{ mainTab.title }} 
-                        <!--<span class="count-badge badge badge-md badge-danger" *ngIf="tabCount[mainTab.id].All != 0">{{ tabCount[mainTab.id].All }}</span>-->
+                        <span class="count-badge badge badge-md badge-danger" *ngIf="tabCount[mainTab.id] != 0" >{{ tabCount[mainTab.id] }}</span>
                     </a>
             </li>
             <li class="nav-item ml-auto"><a class="nav-check-link bg-light text-dark border border-secondary ml-1" [routerLink]="" ><i class="fas fa-cog fa-lg"></i> </a></li>
@@ -43,7 +43,7 @@
                 <ag-grid-angular
                     #agGrid
                     [ngClass]="options.theme"
-                    [rowData]="rowData$ | async"
+                    [rowData]="rowCurrentDataObj[queryParams] | async"
                     [columnDefs]="columnDefs"
                     rowSelection="multiple"
                     [suppressRowClickSelection]="true"

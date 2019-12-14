@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ICellRendererAngularComp  } from './../../../../../../third_party_modules/ag-grid';
 import { NgbModal } from './../../../../../../third_party_modules/ng_bootstrap';
 import { checkStatusMapping } from './../../../../scripts/common/status';
-import { CheckDetailReportComponent } from './../../../check-detail-report/check-detail-report.component';
+import { CheckDetailPopupComponent } from './../../components/check-detail-popup/check-detail-popup.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-check-status-template',
@@ -11,7 +12,8 @@ import { CheckDetailReportComponent } from './../../../check-detail-report/check
 })
 export class CheckStatusTemplateComponent implements OnInit, ICellRendererAngularComp {
 	public params: any;
-	public btnClass;
+    public btnClass;
+    public mantisId;
 	readonly statusMapping: any = checkStatusMapping;
 
     agInit(params: any): void {
@@ -23,9 +25,14 @@ export class CheckStatusTemplateComponent implements OnInit, ICellRendererAngula
 
     constructor(
         private modalService: NgbModal,
+        private activatedRoute: ActivatedRoute,
     ) { }
 
     ngOnInit() {
+        this.activatedRoute.paramMap.subscribe(params => {
+            this.mantisId = +params.get('id');    
+            debugger;
+        })        
     }
 
     refresh(): boolean {
@@ -33,9 +40,10 @@ export class CheckStatusTemplateComponent implements OnInit, ICellRendererAngula
     }
     
     showCheckDetail(){
-        const modalRef = this.modalService.open(CheckDetailReportComponent, {size: 'xl'})
+        const modalRef = this.modalService.open(CheckDetailPopupComponent, {size: 'xl'})
         modalRef.componentInstance.data = this.params.data;
         modalRef.componentInstance.checkId = this.params.data.id;
+        modalRef.componentInstance.mantisId = this.mantisId;
     }
 	
 }

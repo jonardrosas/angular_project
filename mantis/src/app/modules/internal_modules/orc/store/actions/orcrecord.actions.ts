@@ -1,17 +1,12 @@
 import { createAction, props } from '@ngrx/store';
 import { OrcCheckModel, OrcRecordInterface, GroupProfileInterface } from '../../models';
 
-
-export const GET_DISTINCT_CHECK_FIELDS = '[Orc Record] GetDisintctCheckFields';
-export const SET_DISTINCT_CHECK_FIELDS = '[Orc Record] SetDistinctCheckFields';
-
 export const GET_ORC_CHECK = '[Orc Record] GetOrcChecks';
 export const SET_ORC_CHECK = '[Orc Record] SetOrcChecks';
 export const GET_IST_GROUP_OPTION = '[Orc Record] GetIstGroup';
 export const SET_IST_GROUP_OPTION = '[Orc Record] SetIstGroup';
 export const GET_SOA_GROUP_OPTION = '[Orc Record] GetSOAGroup';
 export const SET_SOA_GROUP_OPTION = '[Orc Record] SetSOAGroup';
-
 
 export const getIstGroupAction = createAction(GET_IST_GROUP_OPTION, props<{status: string}>());
 export const setIstGroupAction = createAction(SET_IST_GROUP_OPTION, props<{groups: GroupProfileInterface[]}>());
@@ -24,10 +19,8 @@ export const getOrcChecksAction = createAction(
     props<{record: number, limit: number, checkassessments__assigned_group__id?: number, checkassessments__assigned_group__name?: string}>()
 );
 export const setOrcChecksAction = createAction(SET_ORC_CHECK, props<{checks: OrcCheckModel[]}>());
-export const getDistinctFieldAction = createAction(GET_DISTINCT_CHECK_FIELDS, props<{record: number, fields: string}>());
-export const setDistinctFieldAction = createAction(SET_DISTINCT_CHECK_FIELDS, props<{data: any[]}>());
 
-export const getiSTChecksAction = createAction('[Orc Record] GetIstChecks', props<{record: number, group?: string}>());
-export const setiSTChecksAction = createAction('[Orc Record] SetIstChecks', props<{checks: OrcCheckModel[]}>());
+export const getAssignedChecksAction = createAction('[Orc Record] GetIstChecks', props<{record: number, group?: string, status?: string}>());
+export const setAssignedChecksAction = createAction('[Orc Record] SetIstChecks', props<{checks: OrcCheckModel[]}>());
 export const getSoaChecksAction = createAction('[Orc Record] GetSoaChecks', props<{record: number}>());
 export const setSoaChecksAction = createAction('[Orc Record] SetSoaChecks', props<{checks: OrcCheckModel[]}>());

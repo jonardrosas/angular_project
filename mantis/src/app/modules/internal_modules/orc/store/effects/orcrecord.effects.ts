@@ -26,7 +26,7 @@ export class OrcRecordEffects {
                 (payload: any) => this.checkInstance.objects.filter(
                     {
                         record: payload.record,
-                        limit: payload.limit,
+                        limit: 1000,
                     })
                 .pipe(
                     map(
@@ -66,26 +66,13 @@ export class OrcRecordEffects {
         )
     ))
 
-    loadDistinctOrcCheckFieldFn = createEffect(() => this.actions$.pipe(
-        ofType(orcRecordActions.GET_DISTINCT_CHECK_FIELDS),
+    loadAssignedCheckFieldFn = createEffect(() => this.actions$.pipe(
+        ofType(orcRecordActions.getAssignedChecksAction),
         mergeMap(
-            (payload: any) => this.orcRecordService.getDistinctFields(payload.record, {field: payload.fields})
+            (payload: any) => this.orcRecordService.getAssignedChecks(payload.record, payload.group, payload.status)
             .pipe(
                 map(
-                    data => orcRecordActions.setDistinctFieldAction({data: data.data}),
-                    catchError(() => EMPTY)
-                )
-            )
-        )
-    ))
-
-    loadIstCheckFieldFn = createEffect(() => this.actions$.pipe(
-        ofType(orcRecordActions.getiSTChecksAction),
-        mergeMap(
-            (payload: any) => this.orcRecordService.getIstChecks(payload.record, payload.group)
-            .pipe(
-                map(
-                    data => orcRecordActions.setiSTChecksAction({checks: data.results}),
+                    data => orcRecordActions.setAssignedChecksAction({checks: data.results}),
                     catchError(() => EMPTY)
                 )
             )

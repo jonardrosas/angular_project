@@ -50,20 +50,7 @@ const orcRecordReducer = createReducer(
         }
     ),       
     on(
-        orcRecordActions.getDistinctFieldAction,
-        (state, { record, fields }) => {
-            return { ...state, id: 1 };
-        }
-    ),
-    on(
-        orcRecordActions.setDistinctFieldAction,
-        (state, { data }) => {
-            state.distinctFields = data;
-            return { ...state, loading: false };
-        }
-    ),       
-    on(
-        orcRecordActions.setiSTChecksAction,
+        orcRecordActions.setAssignedChecksAction,
         (state, { checks }) => {
             state.istChecks = checks;
             return { ...state, loading: false };
