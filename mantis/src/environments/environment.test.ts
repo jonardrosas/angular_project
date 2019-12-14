@@ -1,0 +1,7 @@
+export const environment = {
+api_url: "//mantistest.tapeout.cso:8080/mantis/v2",
+    media_url: "//mantistest.tapeout.cso:8080",
+    production: true,
+    csrf_cookie_name: "mantis3_token",
+    csrf_header_name: "X-CSRFToken",
+};

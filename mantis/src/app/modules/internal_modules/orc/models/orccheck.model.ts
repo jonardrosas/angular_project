@@ -15,6 +15,7 @@ export interface OrcCheckInterface {
     manual_review: boolean;
     reviews?: string[];
     rule_owner?: string;
+    checkassessments?: string[];
     corrupt_rule?: string;
     waiver_recommendation?: string;
     unbind_data?: string;
@@ -38,6 +39,7 @@ export class OrcCheckModel extends BaseModel implements OrcCheckInterface {
     validated: boolean;
     manual_review: boolean;
     reviews?: string[];
+    checkassessments?: string[];
     rule_owner?: string;
     corrupt_rule?: string;
     waiver_recommendation?: string;
