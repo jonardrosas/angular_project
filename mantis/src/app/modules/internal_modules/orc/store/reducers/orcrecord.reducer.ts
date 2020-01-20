@@ -62,6 +62,20 @@ const orcRecordReducer = createReducer(
             state.soaChecks = checks;
             return { ...state, loading: false };
         }
+    ),
+    on(
+        orcRecordActions.setRecordChecksAction,
+        (state, { checks }) => {
+            state.checks = checks;
+            return { ...state, loading: false };
+        }
+    ),      
+    on(
+        orcRecordActions.setRecordChecksStatCountAction,
+        (state, { checkStatCount }) => {
+            state.checkStatCount = checkStatCount;
+            return { ...state, loading: false };
+        }
     ),      
 
 );

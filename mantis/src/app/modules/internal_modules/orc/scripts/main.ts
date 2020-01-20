@@ -4,14 +4,13 @@ import { DispostionParameter, DrcDispostion, LMCDispostion, ValidatorDispostion,
 interface MantisDispositionManagerInterface {
     dispositionInstance;
     checkTableInstance;
-    checkDispoButtonsInstance;    
-    deviceSummaryInstance;    
+    checkDispoButtonsInstance;
+    deviceSummaryInstance;
     jobReportTitle;
     dispoParams;
     progressBarInstance?;
     detailJobActionSectionInstance?;
 }
-
 
 export class MantisDispositionManager extends OrcModuleOperation implements MantisDispositionManagerInterface {
     public dispositionInstance;
@@ -25,23 +24,23 @@ export class MantisDispositionManager extends OrcModuleOperation implements Mant
     public checkComponentInstance;
     public detailComponentInstance;
 
-    constructor(public dispoParams: DispostionParameter){
+    constructor(public dispoParams: DispostionParameter) {
         super();
         const operation = this.dispoParams.mantisRecord.operation;
         this.jobReportTitle = `${operation} Job Report`;
 
         if (this.drcOperation.indexOf(operation) !== -1) {
             this.dispositionInstance = new DrcDispostion(this.dispoParams);
-        }else if(this.lmcOperation.indexOf(operation) !== -1){
+        } else if (this.lmcOperation.indexOf(operation) !== -1) {
             this.dispositionInstance = new LMCDispostion(this.dispoParams);
-        }else if(this.validatorOperation.indexOf(operation) !== -1){
+        } else if (this.validatorOperation.indexOf(operation) !== -1) {
             this.dispositionInstance = new DrcDispostion(this.dispoParams);
         } else {
             this.dispositionInstance = new OrcDispostion(this.dispoParams);
-        }   
+        }
     }
-    
-    getDetailJobActionSection(){
+
+    getDetailJobActionSection() {
         this.detailJobActionSectionInstance = this.dispositionInstance.getDetailJobActionSection();
         return this.detailJobActionSectionInstance;
     }

@@ -4,6 +4,7 @@ import { EMPTY } from 'rxjs';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 import { OrcCheckModel, OrcCheckImage, OrcCheckImageInterface } from '../../models'
 import * as orcRecordCheckActions from '../actions/orcrecordcheck.actions';
+import * as mantisResolutionActions from '../actions/mantisresolution.actions';
 
 
 @Injectable()
@@ -41,7 +42,5 @@ export class OrcRecordCheckEffects {
             )
         )
     ))     
-
-     
 
 }

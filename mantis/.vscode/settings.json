@@ -1,0 +1,4 @@
+{
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "http.proxy": "sgproxy.gfoundries.com:8080"
+}

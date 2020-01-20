@@ -26,7 +26,8 @@ export class OrcRecordEffects {
                 (payload: any) => this.checkInstance.objects.filter(
                     {
                         record: payload.record,
-                        limit: 1000,
+                        limit: payload.limit,
+                        status: payload.status
                     })
                 .pipe(
                     map(
@@ -78,6 +79,32 @@ export class OrcRecordEffects {
             )
         )
     ))    
+
+    loadRecordCheckFieldFn = createEffect(() => this.actions$.pipe(
+        ofType(orcRecordActions.getRecordChecksAction),
+        mergeMap(
+            (payload: any) => this.orcRecordService.getChecks(payload.record, payload.group, payload.status, payload.limit)
+            .pipe(
+                map(
+                    data => orcRecordActions.setRecordChecksAction({checks: data.results}),
+                    catchError(() => EMPTY)
+                )
+            )
+        )
+    ))     
+
+    loadRecordCheckCountFieldFn = createEffect(() => this.actions$.pipe(
+        ofType(orcRecordActions.getRecordChecksStatCountAction),
+        mergeMap(
+            (payload: any) => this.orcRecordService.getCheckStatCount(payload.record)
+            .pipe(
+                map(
+                    data => orcRecordActions.setRecordChecksStatCountAction({checkStatCount: data.data}),
+                    catchError(() => EMPTY)
+                )
+            )
+        )
+    ))      
 
     loadSoaCheckFieldFn = createEffect(() => this.actions$.pipe(
         ofType(orcRecordActions.getSoaChecksAction),

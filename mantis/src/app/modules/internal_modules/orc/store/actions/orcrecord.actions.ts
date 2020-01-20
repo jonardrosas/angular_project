@@ -16,7 +16,7 @@ export const getOrcObjectAction = createAction('[Orc Record] GetOrcObject', prop
 export const setOrcObjectAction = createAction('[Orc Record] setOrcObject', props<{objects: OrcRecordInterface}>());
 export const getOrcChecksAction = createAction(
     GET_ORC_CHECK, 
-    props<{record: number, limit: number, checkassessments__assigned_group__id?: number, checkassessments__assigned_group__name?: string}>()
+    props<{record: number, limit: number, status?: string, group?: string}>()
 );
 export const setOrcChecksAction = createAction(SET_ORC_CHECK, props<{checks: OrcCheckModel[]}>());
 
@@ -24,3 +24,11 @@ export const getAssignedChecksAction = createAction('[Orc Record] GetIstChecks',
 export const setAssignedChecksAction = createAction('[Orc Record] SetIstChecks', props<{checks: OrcCheckModel[]}>());
 export const getSoaChecksAction = createAction('[Orc Record] GetSoaChecks', props<{record: number}>());
 export const setSoaChecksAction = createAction('[Orc Record] SetSoaChecks', props<{checks: OrcCheckModel[]}>());
+
+
+export const getRecordChecksAction = createAction('[Orc Record] GetRecordChecks', props<{record: number, group?: string, status?: string}>());
+export const setRecordChecksAction = createAction('[Orc Record] SetRecordChecks', props<{checks: OrcCheckModel[]}>());
+
+
+export const getRecordChecksStatCountAction = createAction('[Orc Record] GetRecordChecksStatCount', props<{record: number}>());
+export const setRecordChecksStatCountAction = createAction('[Orc Record] SetRecordChecksStatCount', props<{checkStatCount: any}>());

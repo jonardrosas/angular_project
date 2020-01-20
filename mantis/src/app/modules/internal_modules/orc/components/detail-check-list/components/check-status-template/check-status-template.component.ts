@@ -31,7 +31,6 @@ export class CheckStatusTemplateComponent implements OnInit, ICellRendererAngula
     ngOnInit() {
         this.activatedRoute.paramMap.subscribe(params => {
             this.mantisId = +params.get('id');    
-            debugger;
         })        
     }
 

@@ -7,7 +7,6 @@ export interface DispostionParameter {
     store?;
 }
 
-
 export interface MantisDispositionBaseInterface {
     dispoParams: DispostionParameter;
     deviceSummaryClass;
@@ -20,6 +19,15 @@ export interface MantisDispositionBaseInterface {
     checkTableStoreAssignedSoaAction?;
     checkTableStoreAssignedIstSelector?;
     checkTableStoreAssignedSoaSelector?;    
+    checkResolutionAction?;    
+    checkResolutionSelector?;    
+    checkResolutionOpenAction?;    
+    checkResolutionOpenSelector?;      
+    checkResolutionClosedAction?;    
+    checkResolutionClosedSelector?;    
+
+    checkCheckStatCountAction?;    
+    checkCheckStatCountSelector?;    
 }
 
 export class MantisDispositionBase implements MantisDispositionBaseInterface {
@@ -36,20 +44,38 @@ export class MantisDispositionBase implements MantisDispositionBaseInterface {
     checkTableStoreAssignedSoaAction;
     checkTableStoreAssignedIstSelector;
     checkTableStoreAssignedSoaSelector;
+    checkResolutionAction?;
+    checkResolutionSelector?;
+    checkResolutionOpenAction?;
+    checkResolutionOpenSelector?;
+    checkResolutionClosedAction?;
+    checkResolutionClosedSelector?;
+
+    checkCheckStatCountAction?;
+    checkCheckStatCountSelector?;
 
     constructor(dispoParams: DispostionParameter) {
         this.dispoParams = dispoParams;
         if(dispoParams.store){
             this.store = dispoParams.store;
             // Use this temporary as default, need to be override on the subclass
-            this.checkTableStoreAction = this.store.getOrcChecksAction;
+            this.checkTableStoreAction = this.store.getRecordChecksAction;
             this.checkTableStoreSelector = this.store.getOrcRecordCheckStateSelector;
             this.checkTableStoreAssignedAction = this.store.getAssignedChecksAction;
             this.checkTableStoreAssignedSoaAction = this.store.getSoaChecksAction;
             this.checkTableStoreAssignedIstSelector = this.store.getIstCheckSelector;
             this.checkTableStoreAssignedSoaSelector = this.store.getSoaCheckSelector;
+            this.checkResolutionSelector = this.store.getMantisResultionStateSelector;
+            this.checkResolutionAction = this.store.getMantisResolutionAction;
+            this.checkResolutionOpenAction = this.store.getMantisOpenResolutionAction;
+            this.checkResolutionOpenSelector = this.store.getMantisOpenStatusStateSelector;
+            this.checkResolutionClosedAction = this.store.getMantisCloseResolutionAction;
+            this.checkResolutionClosedSelector = this.store.getMantisOpenStatusStateSelector;
+            this.checkCheckStatCountAction = this.store.getRecordChecksStatCountAction;
+            this.checkCheckStatCountSelector = this.store.getRecordCheckStatCountSelector;
         }
-    }   
+    }
+
     getDetailJobActionSection(){
         if(this.detailJobActionSectionClass){
             return new this.detailJobActionSectionClass(this.dispoParams)

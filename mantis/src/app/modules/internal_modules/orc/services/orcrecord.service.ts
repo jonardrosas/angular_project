@@ -33,6 +33,20 @@ export class OrcRecordService extends QueryHelper {
         return this.apiService.get(url);
     }    
 
+    getChecks(id: number, group?: string, status?: string, limit?: string): Observable<any> {
+        let url = `${this.url}${id}/get_check/`;
+        if(group){
+            let params = this.buildFilter({group: group, status: status, limit: limit});
+            return this.apiService.get(url, params);
+        }
+        return this.apiService.get(url);
+    }      
+
+    getCheckStatCount(id: number): Observable<any> {
+        let url = `${this.url}${id}/get_count/`;
+        return this.apiService.get(url);
+    }     
+
     getSoaChecks(id: number): Observable<any> {
         let url = `${this.url}${id}/get_assigned_soa_jobs/`;
         return this.apiService.get(url);

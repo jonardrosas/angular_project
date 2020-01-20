@@ -27,9 +27,9 @@ export const getSOASupportTeamGroupSelector = createSelector(
     (state: OrcRecordStateInterface) => state.soaSupportTeamGroup
 );
 
-export const getDistinctFieldsFnSelector = createSelector(
+export const getRecordCheckStatCountSelector = createSelector(
     getOrcRecordStateSelector,
-    (state: OrcRecordStateInterface) => state.distinctFields
+    (state: OrcRecordStateInterface) => state.checkStatCount
 );
 
 export const getIstCheckSelector = createSelector(

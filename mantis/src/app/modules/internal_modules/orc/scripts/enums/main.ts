@@ -9,6 +9,7 @@ export enum STATUS_GROUP {
     FST = 'EscalatedfST',
     IST = 'EscalatedsST'
 }
+export const CLOSED = 'Closed'
 
 export const DEFAULT = 'default';
 export const ASSIGNED_IST = 'assinged_ist';
@@ -18,27 +19,28 @@ export const ASSIGNED_FST = 'assinged_fst';
 // Check sections
 export const TAB1: any = {
     id: DEFAULT,
-    status: ['N', 'A', 'iST', 'SOA', 'POA']
+    status: [CLOSED]
 }
 export const TAB2: any = {
     id: ASSIGNED_IST,
-    status: 'iST',
+    status: ['iST'],
     field: 'reviews'
 }
 
 export const TAB3: any = {
     id: ASSIGNED_SOA,
-    status: 'SOA',
+    status: ['SOA'],
     field: 'checkassessments'
 }
 
 export const TAB4: any = {
     id: ASSIGNED_FST,
-    status: 'fST',
+    status: ['fST'],
     field: 'reviews'
 }
 
 const _QUERY_FIELD = {}
+_QUERY_FIELD[DEFAULT] =  TAB1;
 _QUERY_FIELD[ASSIGNED_IST] =  TAB2;
 _QUERY_FIELD[ASSIGNED_SOA] =  TAB3;
 _QUERY_FIELD[ASSIGNED_FST] =  TAB4;
@@ -46,6 +48,17 @@ _QUERY_FIELD[ASSIGNED_FST] =  TAB4;
 export const QUERY_FIELD = _QUERY_FIELD;
 
 export const ALL = 'All'
+export const GROUP = 'Group'
+export const OPEN = 'Open'
+export const CHECK_STAGE = [ALL, OPEN, CLOSED]
+
+const _CHECK_STAGE_ICONS = {}
+_CHECK_STAGE_ICONS[ALL] = '<i class="fas fa-list"></i>'
+_CHECK_STAGE_ICONS[CLOSED] = '<i class="fas fa-book"></i>'
+_CHECK_STAGE_ICONS[OPEN] = '<i class="fas fa-book-open"></i>'
+_CHECK_STAGE_ICONS[DEFAULT] = '<i class="fas fa-home"></i>'
+_CHECK_STAGE_ICONS[GROUP] = '<i class="fas fa-users"></i>'
+export const CHECK_STAGE_ICONS = _CHECK_STAGE_ICONS
 
 export const JOB_REPORT_URL = '/orc/view'
 export const CHECK_REPORT_URL = '/orc/check'

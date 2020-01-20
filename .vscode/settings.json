@@ -1,0 +1,4 @@
+{
+    "typescript.tsdk": "/ORC_TDOPC/jonard/ANGULAR_PROJECT/mantis/node_modules/typescript/lib",
+    "http.proxy": "sgproxy.gfoundries.com:8080"
+}

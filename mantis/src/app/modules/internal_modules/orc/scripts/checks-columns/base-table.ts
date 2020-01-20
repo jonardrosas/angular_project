@@ -206,6 +206,10 @@ export class CheckBaseModel extends CheckFields implements CheckTableInterface {
         {headerName: 'Comments', field: 'comments', col: 4},
     ]
 
+    public mainTabs = [
+        { id: CONST.TAB1.id, title: 'All Checks'},
+    ];       
+
     constructor() {
         super()
         this.setColumnDefs()

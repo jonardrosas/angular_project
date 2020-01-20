@@ -9,7 +9,7 @@ export interface OrcRecordStateInterface {
     loading: boolean;
     istSupportTeamGroup?: GroupProfileInterface[];
     soaSupportTeamGroup?: GroupProfileInterface[];
-    distinctFields?: any[]
+    checkStatCount?: any;
 }
 
 export const orcRecordInitialState: OrcRecordStateInterface = {
@@ -21,5 +21,5 @@ export const orcRecordInitialState: OrcRecordStateInterface = {
     loading: false,
     soaChecks: [],
     istChecks: [],
-    distinctFields: []
+    checkStatCount: {}
 };
