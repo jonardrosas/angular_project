@@ -1,15 +1,21 @@
 import { BehaviorSubject } from 'rxjs'
 import { Injectable } from '@angular/core';
-import { MantisDispositionManager, DispostionParameter, MantisDispositionBaseInterface } from './../scripts';
+import { 
+    MantisDispositionManagerConfig,
+    DispostionParameter,
+    MantisDispositionBaseInterface,
+    MantisDispositionManager
+} from './../scripts';
 import { NgbModal } from './../../../third_party_modules/ng_bootstrap';
 
 @Injectable()
 export class DispoMangerService {
-    public dispoMangerInstance: MantisDispositionManager;
+    public dispoManagerInstance: MantisDispositionManager;
     // public dispositionInstance: MantisDispositionBaseInterface;
     public dispoMangerSubject = new BehaviorSubject({} as MantisDispositionManager);
     private defaultParams;
     private params;
+    public config;
 
     constructor(
         private modalService: NgbModal,
@@ -25,10 +31,10 @@ export class DispoMangerService {
             ...this.defaultParams,
             ...params
         }
-        this.dispoMangerInstance = new MantisDispositionManager(this.params);
-        // this.dispositionInstance = this.dispoMangerInstance.dispositionInstance;
-        this.dispoMangerSubject.next(this.dispoMangerInstance)
-        return this.dispoMangerInstance;
+        this.config = new MantisDispositionManagerConfig(this.params);
+        this.dispoManagerInstance = this.config.managerIns;
+        this.dispoMangerSubject.next(this.dispoManagerInstance)
+        return this.dispoManagerInstance;
     }
     
 }
