@@ -210,6 +210,12 @@ export class CheckBaseModel extends CheckFields implements CheckTableInterface {
         { id: CONST.TAB1.id, title: 'All Checks'},
     ];       
 
+    public defaultSubTab = [
+        CONST.ALL,
+        CONST.CLOSED,
+        CONST.OPEN
+    ]
+
     constructor() {
         super()
         this.setColumnDefs()

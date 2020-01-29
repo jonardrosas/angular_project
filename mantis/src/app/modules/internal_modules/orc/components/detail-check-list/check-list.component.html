@@ -11,8 +11,8 @@
                         [routerLink]="[url, mantisRecord.id]"
                         [queryParams]="{check_section: mainTab.id}" 
                         routerLinkActive="active">
-                        <span [innerHtml]="getSubTabIcons(mainTab.id)"></span> {{ mainTab.title }} 
-                        <span class="count-badge badge badge-md badge-danger" *ngIf="tabCount[mainTab.id] != 0" >{{ tabCount[mainTab.id] }}</span>
+                        <span [innerHtml]="getSubTabIcons(mainTab.id)"></span> {{ mainTab.title }}
+                        <span class="count-badge badge badge-md badge-danger" *ngIf="checkStat[mainTab.id] != 0">{{ checkStat[mainTab.id]  }}</span>
                     </a>
             </li>
             <li class="nav-item ml-auto"><a class="nav-check-link bg-light text-dark border border-secondary ml-1" [routerLink]="" ><i class="fas fa-cog fa-lg"></i> </a></li>
@@ -26,11 +26,11 @@
                         <ul class="nav" *ngIf="subTab[queryParams].length > 1">
                             <li class="ml-1 nav-check-link text-dark nav-item" *ngFor="let group of subTab[queryParams]">
                                 <a class="group-link ml-0 p-1 font-weight-bold" 
-                                    [ngClass]="isActiveGroupTab(group)"
+                                    [ngClass]="isActiveGroupTab(group.key)"
                                     [routerLink]="[url, mantisRecord.id]"
-                                    [queryParams]="{check_section: queryParams, group: group}">
-                                    <span [innerHtml]="getSubTabIcons(group)"></span> {{ group }}
-                                    <!--<span class="badge badge-md badge-danger">{{ tabCount[queryParams][group] }}</span>-->
+                                    [queryParams]="{check_section: queryParams, group: group.key}">
+                                    <span [innerHtml]="getSubTabIcons(group.key)"></span> {{ group.key  }}
+                                    <span class="badge badge-md badge-danger" *ngIf="group.count != 0">{{ group.count }}</span>
                                 </a>
                             </li>
                         </ul>

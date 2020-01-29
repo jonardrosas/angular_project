@@ -99,7 +99,7 @@ export class OrcRecordEffects {
             (payload: any) => this.orcRecordService.getCheckStatCount(payload.record)
             .pipe(
                 map(
-                    data => orcRecordActions.setRecordChecksStatCountAction({checkStatCount: data.data}),
+                    data => orcRecordActions.setRecordChecksStatCountAction({checkStatCount: data}),
                     catchError(() => EMPTY)
                 )
             )

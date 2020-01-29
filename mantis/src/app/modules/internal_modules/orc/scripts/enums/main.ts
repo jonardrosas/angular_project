@@ -10,6 +10,7 @@ export enum STATUS_GROUP {
     IST = 'EscalatedsST'
 }
 export const CLOSED = 'Closed'
+export const OPEN = 'Open'
 
 export const DEFAULT = 'default';
 export const ASSIGNED_IST = 'assinged_ist';
@@ -19,7 +20,7 @@ export const ASSIGNED_FST = 'assinged_fst';
 // Check sections
 export const TAB1: any = {
     id: DEFAULT,
-    status: [CLOSED]
+    status: [OPEN]
 }
 export const TAB2: any = {
     id: ASSIGNED_IST,
@@ -49,7 +50,6 @@ export const QUERY_FIELD = _QUERY_FIELD;
 
 export const ALL = 'All'
 export const GROUP = 'Group'
-export const OPEN = 'Open'
 export const CHECK_STAGE = [ALL, OPEN, CLOSED]
 
 const _CHECK_STAGE_ICONS = {}
