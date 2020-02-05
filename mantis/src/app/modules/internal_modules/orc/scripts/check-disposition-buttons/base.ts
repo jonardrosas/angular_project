@@ -1,10 +1,4 @@
-
-export interface CheckDisposeButtonInterface{
-    allCheckButtons?;
-    iSTCheckButtons?;
-    fSTCheckButtons?;
-    sOACheckButtons?;
-}
+import * as _ENUMS from './../enums';
 
 interface checkDispoInterface {
     agGridApi;
@@ -15,38 +9,33 @@ interface checkDispoInterface {
 }
 
 /** All commoon function and buttons should be declared here */
-export class CheckDisposeButtonBase implements CheckDisposeButtonInterface {
-    public allCheckButtons;
-    public iSTCheckButtons;
-    public fSTCheckButtons;
-    public sOACheckButtons;
+export class CheckDisposeButtonBase {
+    // public allCheckButtons;
+    // public iSTCheckButtons;
+    // public fSTCheckButtons;
+    // public sOACheckButtons;
     protected agGridApi;
     protected modalService;
     protected mantisRecord;
     public buttonStatusClass;
     public popups;
+    public buttonSet: any = {};
+    public buttons: any = {};
 
     constructor(dispoParams){
         this.modalService = dispoParams.modalService;
         this.mantisRecord = dispoParams.mantisRecord;
         this.buttonStatusClass = dispoParams.status;        
         this.popups = dispoParams.registeredCheckPopUps;
-        this.allCheckButtons = [
-            this.addNotes,
-            this.addImage,
-        ];
-        this.iSTCheckButtons = [
-            this.addNotes,
-            this.addImage
-        ];
-        this.sOACheckButtons = [
-            this.addNotes,
-            this.addImage            
-        ];
-        this.fSTCheckButtons = [
-            this.addNotes,
-            this.addImage
-        ];        
+        this._generateButtons()
+    }
+
+    protected _generateButtons(){
+        for (const k in _ENUMS.QUERY_FIELD){
+            if( k in this.buttons && this.buttons[k].length > 0){
+                this.buttonSet[k] = this.buttons[k];
+            }
+        }
     }
 
     public addNotes = {
@@ -66,7 +55,7 @@ export class CheckDisposeButtonBase implements CheckDisposeButtonInterface {
                 modalRef.result.then(
                     (result) => {
                         dispoManagerInstance.checkComponentInstance.previousSelectedRow = selectedCheckId;
-                        dispoManagerInstance.checkComponentInstance.loadCheck()
+                        dispoManagerInstance.checkComponentInstance.reloadCheck()
                     }, (reason) => {
                         console.log('Reason', reason);
                     }

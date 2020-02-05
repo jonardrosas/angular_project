@@ -44,7 +44,7 @@ export class OrcRecordEffects {
     loadOrcIstGroupsFn = createEffect(() => this.actions$.pipe(
         ofType(orcRecordActions.GET_IST_GROUP_OPTION),
         mergeMap(
-            (payload: any) => this.orcCheckService.getOrcIstGroup({status: payload.status})
+            (payload: any) => this.orcCheckService.getOrcIstGroup({status: payload.status, fab: payload.fab})
             .pipe(
                 map(
                     groups => orcRecordActions.setIstGroupAction({groups: groups.results}),

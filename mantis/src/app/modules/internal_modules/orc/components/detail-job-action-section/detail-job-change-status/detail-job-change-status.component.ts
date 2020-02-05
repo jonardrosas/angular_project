@@ -5,7 +5,6 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { NgbActiveModal } from './../../../../../third_party_modules/ng_bootstrap';
 import { NgAlertInterface } from './../../../../../../core/models';
-import { checkChangeStatusList } from './../../../scripts/common/status';
 import { MantisStageStatusModel } from './../../../scripts/common/stage';
 import { URLS } from './../../../../../../configs/app-urls';
 import { HttpClient } from '@angular/common/http';
@@ -61,6 +60,7 @@ export class DetailJobChangeStatusComponent implements OnInit {
     }
     
     getStatusList() {
+        /*
         this.statusGroup = [''];
         for (let element of checkChangeStatusList){
             if (element.group == this.nextStageGroup){
@@ -68,6 +68,7 @@ export class DetailJobChangeStatusComponent implements OnInit {
             }
         }
         this.jobChangeStatusForm.get('status').value = '';
+        */
     }
     
     resetStatus() {

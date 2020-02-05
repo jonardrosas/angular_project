@@ -1,4 +1,5 @@
 export * from './authentication.service';
+export * from './session-storage.service';
 export * from './api.service';
 export * from './jwt.service';
 export * from './auth_token.service';

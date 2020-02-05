@@ -6,6 +6,6 @@
         <app-material-side-navigation [tablist]="tablist" [userInstance]="userInstance" [logo]="logo" (logout)="logOut()"></app-material-side-navigation>
     </div>
     <div *ngSwitchDefault>
-        <app-bootstrap-navigation [tablist]="tablist" [userInstance]="userInstance" [logo]="logo" (logout)="logOut()"></app-bootstrap-navigation>
+        <app-bootstrap-navigation [groups]="groups" [selectedGroup]="selectedGroup" [tablist]="tablist" [userInstance]="userInstance" [logo]="logo" (logout)="logOut()" (setAclGid)="setAclGid($event)"></app-bootstrap-navigation>
     </div>
 </div>

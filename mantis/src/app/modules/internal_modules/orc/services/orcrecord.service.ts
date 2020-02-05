@@ -56,17 +56,17 @@ export class OrcRecordService extends QueryHelper {
     changeStatus(data: any): Observable<any> {
         let url = `${this.changeStatusUrl}`;
         return this.apiService.post(url, data);
-    }       
+    }
 
     checkRecommend(data: any): Observable<any> {
         let url = `${this.checkRecommendUrl}`;
         return this.apiService.post(url, data);
-    }     
+    }
 
     addCheckImages(data: any): Observable<any> {
         let url = `${this.addCheckImageUrl}`;
         return this.apiService.upload(url, data);
-    }     
+    }
 
     addNotes(data: any): Observable<any> {
         let url = `${this.addNotesUrl}`;

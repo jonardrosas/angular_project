@@ -1,4 +1,5 @@
-import { CheckDisposeButtonBase, CheckDisposeButtonInterface } from './base';
+import * as _ENUMS from './../enums';
+import { CheckDisposeButtonBase } from './base';
 
 
 export class OrcCheckDispositionButtonBase extends CheckDisposeButtonBase {
@@ -12,7 +13,6 @@ export class OrcCheckDispositionButtonBase extends CheckDisposeButtonBase {
             const selectedNodes = this.agGridApi.getSelectedNodes()
             const selectedData = selectedNodes.map(node => node.data);
             const selectedCheckId = selectedData.map(data => data.id);
-            debugger;
             if(selectedData.length > 0){
                 const modalRef = this.modalService.open(this.popups.CheckChangeStatusComponent, {backdrop: 'static', keyboard: false})
                 modalRef.componentInstance.selectedData = selectedData;
@@ -21,7 +21,7 @@ export class OrcCheckDispositionButtonBase extends CheckDisposeButtonBase {
                 modalRef.result.then(
                     (result) => {
                         dispoManagerInstance.checkComponentInstance.previousSelectedRow = selectedCheckId;
-                        dispoManagerInstance.checkComponentInstance.loadCheck()
+                        dispoManagerInstance.checkComponentInstance.reloadCheck()
                     }, (reason) => {
                         // dispoManagerInstance.checkComponentInstance.previousSelectedRow = selectedCheckId;
                         // dispoManagerInstance.checkComponentInstance.loadCheck()
@@ -50,7 +50,7 @@ export class OrcCheckDispositionButtonBase extends CheckDisposeButtonBase {
                 modalRef.result.then(
                     (result) => {
                         dispoManagerInstance.checkComponentInstance.previousSelectedRow = selectedCheckId;
-                        dispoManagerInstance.checkComponentInstance.loadCheck()
+                        dispoManagerInstance.checkComponentInstance.reloadCheck()
                     }, (reason) => {
                         // dispoManagerInstance.checkComponentInstance.previousSelectedRow = selectedCheckId;
                         // dispoManagerInstance.checkComponentInstance.loadCheck()
@@ -82,7 +82,7 @@ export class OrcCheckDispositionButtonBase extends CheckDisposeButtonBase {
     }    
 
     public checkRecommend = {
-        label: 'Recommend',
+        label: 'Change Status',
         class: 'btn btn-secondary btn-sm',
         function: (agGrid, dispoManagerInstance) =>  {
             this.agGridApi = agGrid.api;
@@ -119,56 +119,72 @@ export class OrcCheckDispositionButtonBase extends CheckDisposeButtonBase {
         }
     }       
 
-    constructor(private dispoParams){
+    constructor(public dispoParams){
         super(dispoParams);
-        this.allCheckButtons = [
+        this.buttons[_ENUMS.TAB1.id] = [
             this.orcEscalateIst,
             this.orcChangeStatus,
             this.addNotes,
             this.addImage
         ]
-        this.iSTCheckButtons = [
+        this.buttons[_ENUMS.TAB2.id] = [
             this.orcEscalateSOA,
             this.checkRecommend,
             this.addNotes,
             this.addImage            
         ]
-        this.sOACheckButtons = [
-            this.checkAsSoaRecommend,
-            this.addNotes,
-            this.addImage            
-        ]        
-        this.fSTCheckButtons = [
-            this.checkRecommend,
-            this.addNotes,
-            this.addImage            
-        ]        
+        this._generateButtons()
     }
 
 }
 
-export class OrcPtrfCheckDispositionButtonBase extends OrcCheckDispositionButtonBase {}
-export class OrcRitCheckDispositionButtonBase extends OrcCheckDispositionButtonBase {}
-export class OrcFtrfCheckDispositionButtonBase extends OrcCheckDispositionButtonBase {}
+/* LEVEL 2 */
+export class OrcPtrfCheckDispositionButtonBase extends OrcCheckDispositionButtonBase {
 
-
-export class OrcCheckDispositionButtonClass {
-    private instance;
-    public buttons: CheckDisposeButtonInterface = {};
-
-    constructor(private dispoParams){
-        if (this.dispoParams.mantisRecord.ptrf.startsWith("PTRF")){
-            this.instance = new OrcPtrfCheckDispositionButtonBase(dispoParams)
-        }else if(this.dispoParams.mantisRecord.ptrf.startsWith("RIT")){
-            this.instance = new OrcRitCheckDispositionButtonBase(dispoParams)
-        }else if(this.dispoParams.mantisRecord.ptrf.startsWith("FTRF")){
-            this.instance = new OrcFtrfCheckDispositionButtonBase(dispoParams)
-        }else{
-            this.instance = new OrcCheckDispositionButtonBase(dispoParams)
-        }
-        this.buttons.allCheckButtons =  this.instance.allCheckButtons;
-        this.buttons.iSTCheckButtons =  this.instance.iSTCheckButtons;
-        this.buttons.fSTCheckButtons =  this.instance.fSTCheckButtons;
-        this.buttons.sOACheckButtons =  this.instance.sOACheckButtons;
-    }    
+    constructor(public dispoParams){
+        super(dispoParams);
+        this._generateButtons()
+    }
 }
+
+
+export class OrcRitCheckDispositionButtonBase extends OrcCheckDispositionButtonBase {}
+export class OrcFtrfCheckDispositionButton extends OrcCheckDispositionButtonBase {
+
+    constructor(public dispoParams){
+        super(dispoParams);    
+    }
+
+}
+
+
+/* LEVEL3 */
+export class OrcPtrfF1CheckDispositionButtonBase extends OrcPtrfCheckDispositionButtonBase {
+    constructor(dispoParams){
+        super(dispoParams)
+        this.buttons[_ENUMS.TAB3.id] = [
+            this.checkAsSoaRecommend,
+            this.addNotes,
+            this.addImage            
+        ]        
+        this.buttons[_ENUMS.TAB4.id] = [
+            this.checkRecommend,
+            this.addNotes,
+            this.addImage            
+        ]        
+        this._generateButtons()        
+    }
+}
+
+export class OrcFtrfF7CheckDispositionButton extends OrcFtrfCheckDispositionButton {
+    constructor(dispoParams){
+        super(dispoParams)
+        this.buttons[_ENUMS.TAB2.id] = [
+            this.checkRecommend,
+            this.addNotes,
+            this.addImage            
+        ]        
+        this._generateButtons()
+    }
+}
+

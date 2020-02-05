@@ -79,7 +79,6 @@ export class DetailComponent implements OnInit, AfterViewInit, OnDestroy {
         this.store.dispatch(orcModuleStore.getMantisJobNotesAction({bug: this.mantisId}));
         this.store.dispatch(orcModuleStore.getMantisHistoryAction({bug: this.mantisId}));
         this.store.dispatch(orcModuleStore.getMantisAttachmentAction({ bug_id: this.mantisId }));
-        this.store.dispatch(orcModuleStore.getIstGroupAction({status: 'iST'}));
         this.store.dispatch(orcModuleStore.getSOAGroupAction({status: 'SOA'}));
         this.loadMantisRecord();
     }

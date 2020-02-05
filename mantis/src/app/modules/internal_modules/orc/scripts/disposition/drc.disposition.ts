@@ -1,5 +1,5 @@
 import { MantisDispositionBase } from './base';
-import { DrcCheckDispositionButtonClass } from './../check-disposition-buttons/';
+import { DrcCheckDispositionButtonBase } from './../check-disposition-buttons/';
 import { DrcCheckTable } from './../checks-columns';
 import { DrcDeviceSummary } from './../device-summary';
 import { DispostionParameter } from './base';
@@ -14,7 +14,7 @@ export class DrcDispostion extends MantisDispositionBase {
     public checkTableStoreAssignedIstAction;
     public checkTableStoreAssignedSoaAction;
     public detailJobActionSectionClass = JobActionBase;
-    public checkTableButtonsClass = DrcCheckDispositionButtonClass;
+    public checkTableButtonsClass = DrcCheckDispositionButtonBase;
     public progressBarClass = DrcProgressBarTable;
     public storeStoreManagerClass =  DrcStoreManager;
 

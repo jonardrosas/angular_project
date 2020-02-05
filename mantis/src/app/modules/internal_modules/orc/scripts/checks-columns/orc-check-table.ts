@@ -12,13 +12,6 @@ export class OrcCheckTable extends CheckBaseModel {
         this.statusField
     ];
 
-    public mainTabs = [
-        { id: CONST.TAB1.id, title: 'All Checks'},
-        { id: CONST.TAB2.id, title: 'Assigned iST'},
-        { id: CONST.TAB3.id, title: 'Assigned SOA'},
-        { id: CONST.TAB4.id, title: 'Assigned fST'},
-    ];      
-
     constructor(private dispoParams) {
         super();
     }

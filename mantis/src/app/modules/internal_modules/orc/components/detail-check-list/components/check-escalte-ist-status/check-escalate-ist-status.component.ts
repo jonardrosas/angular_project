@@ -5,7 +5,7 @@ import { NgbActiveModal } from '../../../../../../third_party_modules/ng_bootstr
 import { NgAlertInterface } from '../../../../../../../core/models';
 import { FormGroup, FormControl } from '@angular/forms';
 import * as orcModuleStore from './../../../../store';
-import { OrcRecordService } from './../../../../services/';
+import { OrcRecordService, DispoMangerService } from './../../../../services/';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
@@ -18,6 +18,7 @@ import { Observable } from 'rxjs';
 export class CheckEscalateIstComponent implements OnInit {
     @Input() selectedData;
     @Input() mantisRecord: MantisRecordModel;
+    @Input() dispoManagerInstance;
     public escalateIstForm;
     public istGroups$: Observable<GroupProfileInterface[]>;
     public alerts: NgAlertInterface[] = [];
@@ -26,7 +27,8 @@ export class CheckEscalateIstComponent implements OnInit {
     constructor(
         public activeModal: NgbActiveModal,
         private store: Store<any>,
-        public orcRecordService: OrcRecordService
+        public orcRecordService: OrcRecordService,
+        private dispoService: DispoMangerService,
     ) {}
 
     ngOnInit() {
@@ -45,7 +47,8 @@ export class CheckEscalateIstComponent implements OnInit {
     }
 
     getiSTGroups() {
-        this.istGroups$ = this.store.pipe(select(orcModuleStore.getIstSupportTeamGroupSelector))
+        this.store.dispatch(this.dispoManagerInstance.storeManagerIns.iSTGroupDispatchAction({status: 'iST', fab: this.mantisRecord.orc_record.orc_ext.fab}));
+        this.istGroups$ = this.store.pipe(select(this.dispoManagerInstance.storeManagerIns.iSTGroupSelector))
     }    
 
     formData(){

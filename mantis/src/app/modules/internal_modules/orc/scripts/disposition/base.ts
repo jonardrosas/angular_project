@@ -1,5 +1,6 @@
 import { MantisRecordModel } from './../../models';
 import { OrcStoreManager, StoreBaseManager } from './../store-manager';
+import { CheckNavigationBase } from './../check-navigation-tab';
 
 
 export interface DispostionParameter {
@@ -18,6 +19,7 @@ export interface MantisDispositionBaseInterface {
     storeStoreManagerClass;
     deviceSummaryClass;
     checkTableButtonsClass;
+    checkNavigationClass;
 
     checkTableIns;
     storeManagerIns;
@@ -30,12 +32,16 @@ export class MantisDispositionBase implements MantisDispositionBaseInterface {
     // required class
     checkTableClass: any = null;
     storeStoreManagerClass = OrcStoreManager;
+    checkNavigationClass = CheckNavigationBase;
     deviceSummaryClass = null;
     checkTableButtonsClass = null;
+    checkStatusClass;
+    changeStatusOption = {};
 
     //  instance
     checkTableIns;
     storeManagerIns;
+    checkStatusIns;
 
     progressBarClass = null;
     detailJobActionSectionClass = null;
@@ -77,14 +83,6 @@ export class MantisDispositionBase implements MantisDispositionBaseInterface {
         throw new Error('checkTableClass required')
     }
 
-    getCheckActionButtons(){
-        if(this.checkTableButtonsClass){
-            return new this.checkTableButtonsClass(this.dispoParams);
-        }
-        throw new Error('checkTableButtonsClass required')
-
-    }
-
     getDeviceSummaryTable(){
         if(this.deviceSummaryClass){
             return new this.deviceSummaryClass(this.dispoParams)
@@ -98,4 +96,26 @@ export class MantisDispositionBase implements MantisDispositionBaseInterface {
         }
         throw new Error('progressBar is required')
     }
+
+    createCheckStatusOptions(){
+        if(this.checkStatusClass){
+            return new this.checkStatusClass(this.dispoParams)
+        }
+    }
+
+    createCheckActionButtons(){
+        if(this.checkTableButtonsClass){
+            return new this.checkTableButtonsClass(this.dispoParams);
+        }
+        throw new Error('checkTableButtonsClass required')
+    }    
+
+    createCheckMainNavigationBase(){
+        if(this.checkNavigationClass){
+            return new this.checkNavigationClass();
+        }
+        throw new Error('checkNavigationClass required')        
+
+    }
+
 }

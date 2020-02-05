@@ -7,6 +7,7 @@ import { JwtAuthenticationService } from './auth_token.service';
 import { CookieAuthenticationService } from './auth_cookie.service';
 import { map, distinctUntilChanged, take, catchError } from 'rxjs/operators';
 import { environment } from './../../../environments/environment';
+import { URLS, APP_CONFIG } from './../../configs/';
 
 @Injectable()
 export class AuthenticationService {
@@ -52,7 +53,6 @@ export class AuthenticationService {
                 return this.unAuthorizedResponseSubject;  // dont send error to the subscriber, so that auth guard can handle it
             })
         );
-
     }    
 
     authenticate(source) {
@@ -70,4 +70,13 @@ export class AuthenticationService {
     errorResponseHander() {
         this.setUnAuthorized()
     }
+
+    setACLGid(id: number): Observable<any>{
+        if(id){
+            let postData = {}
+            postData[APP_CONFIG.ACL_GID_KEY] = id
+            return this.apiService.post(URLS.ACL_SESSION_URL, postData)
+        }
+    }
+
 }

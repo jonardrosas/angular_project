@@ -1,4 +1,5 @@
-import { CheckDisposeButtonBase, CheckDisposeButtonInterface } from './base';
+import { CheckDisposeButtonBase } from './base';
+import * as _ENUMS from './../enums';
 
 
 export class DrcCheckDispositionButtonBase extends CheckDisposeButtonBase {
@@ -10,7 +11,7 @@ export class DrcCheckDispositionButtonBase extends CheckDisposeButtonBase {
  
     constructor(private dispoParams){
         super(dispoParams);
-        this.allCheckButtons = [
+        this.buttons[_ENUMS.TAB1.id] = [
             this.rvAssignment,
             this.addNotes
         ]
@@ -21,24 +22,7 @@ export class DrcPtrfCheckDispositionButtonBase extends DrcCheckDispositionButton
 export class DrcRitCheckDispositionButtonBase extends DrcCheckDispositionButtonBase {}
 export class DrcFtrfCheckDispositionButtonBase extends DrcCheckDispositionButtonBase {}
 
+export class DrcPtrfF7CheckDispositionButtonBase extends DrcPtrfCheckDispositionButtonBase {}
+export class DrcPtrfF8CheckDispositionButtonBase extends DrcPtrfCheckDispositionButtonBase {}
+export class DrcPtrfF1CheckDispositionButtonBase extends DrcPtrfCheckDispositionButtonBase {}
 
-export class DrcCheckDispositionButtonClass {
-    private instance;
-    public buttons: CheckDisposeButtonInterface = {};
-
-    constructor(private dispoParams){
-        if (this.dispoParams.mantisRecord.ptrf.startsWith("PTRF")){
-            this.instance = new DrcPtrfCheckDispositionButtonBase(dispoParams)
-        }else if(this.dispoParams.mantisRecord.ptrf.startsWith("RIT")){
-            this.instance = new DrcRitCheckDispositionButtonBase(dispoParams)
-        }else if(this.dispoParams.mantisRecord.ptrf.startsWith("FTRF")){
-            this.instance = new DrcFtrfCheckDispositionButtonBase(dispoParams)
-        }else{
-            this.instance = new DrcCheckDispositionButtonBase(dispoParams)
-        }
-        this.buttons.allCheckButtons =  this.instance.allCheckButtons;
-        this.buttons.iSTCheckButtons =  this.instance.iSTCheckButtons;
-        this.buttons.sOACheckButtons =  this.instance.sOACheckButtons;
-    }        
-
-}

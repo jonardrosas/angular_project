@@ -14,6 +14,8 @@ export class StoreBaseManager{
     checkResolutionClosedSelector?;    
     checkCheckStatCountAction?;
     checkCheckStatCountSelector?;    
+    iSTGroupSelector?;
+    iSTGroupDispatchAction?;
 
     constructor(public store: any){
         this.checkTableStoreAction = this.store.getRecordChecksAction;
@@ -30,5 +32,7 @@ export class StoreBaseManager{
         this.checkResolutionClosedSelector = this.store.getMantisOpenStatusStateSelector;
         this.checkCheckStatCountAction = this.store.getRecordChecksStatCountAction;
         this.checkCheckStatCountSelector = this.store.getRecordCheckStatCountSelector;
+        this.iSTGroupSelector = this.store.getIstSupportTeamGroupSelector;
+        this.iSTGroupDispatchAction = this.store.getIstGroupAction;
     }
 }

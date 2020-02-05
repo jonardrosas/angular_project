@@ -17,6 +17,7 @@ import {
   JwtAuthenticationService,
   CookieAuthenticationService,
   LoginService,
+  SessionStorageService
   //AuthGuard,
 } from './services';
 
@@ -43,7 +44,8 @@ import { FooterComponent } from './footer/footer.component';
       JwtService,
       JwtAuthenticationService,
       CookieAuthenticationService,
-      LoginService
+      LoginService,
+      SessionStorageService
       //AuthGuard
   ],
   declarations: [LoginComponent, PageNotFoundComponent, NavigationComponent, FooterComponent],

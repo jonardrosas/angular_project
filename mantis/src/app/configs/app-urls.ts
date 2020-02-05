@@ -44,6 +44,7 @@ export const URLS = {
     DRF_AUTH_GROUP_PROFILE_URL: '/mantis/api/v2/auth_group_profile/',
     DRF_ORC_JOB_DISPOSE_URL: '/orc/multiplejobdispose/',
     DRF_AUTH_USER_URL: '/admin2/api/v1/group/?id=179',
+    DRF_AUTH_USER_CURRENT_GRP_URL: '/mantis/api/v2/auth_current_groups/',
     DRF_JOB_ASSIGNMENT_URL: '/orc/jobassignment/',
 
 };

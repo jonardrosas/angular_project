@@ -1,5 +1,8 @@
 import { OrcModuleOperation } from './common/operation.class';
-import { DispostionParameter, DrcDispostion, LMCDispostion, ValidatorDispostion, OrcDispostion  } from './disposition';
+import { 
+    DispostionParameter, DrcDispostion, LMCDispostion,
+    ValidatorDispostion, OrcDispostion, OrcFtrfF7Dispostion
+} from './disposition';
 
 
 interface MantisDispositionManagerInterface {
@@ -22,9 +25,15 @@ export class MantisDispositionManager extends OrcModuleOperation implements Mant
     public loadCheck;
     public checkComponentInstance;
     public detailComponentInstance;
+    public checkMainTabs;
+    public checkNavigation;
     public dispoParams: DispostionParameter;
     public storeManagerIns;
     public jobReportTitle;
+    public checkStatusInstance;
+    public changeStatusOption;
+    public recommendationOptions;
+    public checkDispositionButtons;
 
     constructor(dispositionInstance: any) {
         super();
@@ -32,11 +41,36 @@ export class MantisDispositionManager extends OrcModuleOperation implements Mant
         this.storeManagerIns = this.dispositionInstance.getStoreManager()
         this.checkTableInstance = this.dispositionInstance.getChecksTable()
         this.jobReportTitle = this.dispositionInstance.getJobReportTitle();
-        this.checkDispoButtonsInstance = this.dispositionInstance.getCheckActionButtons();
         this.deviceSummaryInstance = this.dispositionInstance.getDeviceSummaryTable();
         this.progressBarInstance = this.dispositionInstance.getMantisStageProgressBar();
         this.detailJobActionSectionInstance = this.dispositionInstance.getDetailJobActionSection();
+        this.createCheckStatusOptions()
+        this.createCheckDispoButtons()
+        this.createCheckNavigationTab()
+
     }
+
+    createCheckStatusOptions(){
+        this.checkStatusInstance = this.dispositionInstance.createCheckStatusOptions();
+        if(this.checkStatusInstance){
+            this.changeStatusOption =  this.checkStatusInstance.changeStatusOptions;
+            this.recommendationOptions =  this.checkStatusInstance.recommendationOptions;
+        }        
+    }
+
+    createCheckDispoButtons() {
+        this.checkDispoButtonsInstance = this.dispositionInstance.createCheckActionButtons();
+        if(this.checkDispoButtonsInstance){
+            this.checkDispositionButtons = this.checkDispoButtonsInstance.buttonSet;
+        }
+    }
+
+   createCheckNavigationTab(){
+        this.checkNavigation = this.dispositionInstance.createCheckMainNavigationBase();
+        if(this.checkNavigation){
+            this.checkMainTabs = this.checkNavigation.mainTabs;
+        }
+   } 
 
     getDetailJobActionSection() {
         return this.detailJobActionSectionInstance;
@@ -50,9 +84,6 @@ export class MantisDispositionManager extends OrcModuleOperation implements Mant
         return this.checkTableInstance.checkDetailInfo;
     }    
 
-    getCheckActionButtons() {
-        return this.checkDispoButtonsInstance.buttons;
-    }
 
     getDeviceSummaryTables() {
         return this.deviceSummaryInstance;
@@ -80,7 +111,13 @@ export class MantisDispositionManagerConfig extends OrcModuleOperation{
         } else if (this.validatorOperation.indexOf(operation) !== -1) {
             this.dispositionInstance = new DrcDispostion(this.dispoParams);
         } else {
-            this.dispositionInstance = new OrcDispostion(this.dispoParams);
+            if(this.dispoParams.mantisRecord.orc_record.orc_ext.fab == '1'){
+                this.dispositionInstance = new OrcFtrfF7Dispostion(this.dispoParams);
+            }else if(this.dispoParams.mantisRecord.orc_record.orc_ext.fab == '7'){
+                this.dispositionInstance = new OrcFtrfF7Dispostion(this.dispoParams);
+            }else{
+                this.dispositionInstance = new OrcDispostion(this.dispoParams);
+            }
         }
 
         this.managerIns = new MantisDispositionManager(this.dispositionInstance)

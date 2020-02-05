@@ -8,7 +8,7 @@ export const SET_IST_GROUP_OPTION = '[Orc Record] SetIstGroup';
 export const GET_SOA_GROUP_OPTION = '[Orc Record] GetSOAGroup';
 export const SET_SOA_GROUP_OPTION = '[Orc Record] SetSOAGroup';
 
-export const getIstGroupAction = createAction(GET_IST_GROUP_OPTION, props<{status: string}>());
+export const getIstGroupAction = createAction(GET_IST_GROUP_OPTION, props<{status: string, fab?: string}>());
 export const setIstGroupAction = createAction(SET_IST_GROUP_OPTION, props<{groups: GroupProfileInterface[]}>());
 export const getSOAGroupAction = createAction(GET_SOA_GROUP_OPTION, props<{status: string}>());
 export const setSOAGroupAction = createAction(SET_SOA_GROUP_OPTION, props<{groups: GroupProfileInterface[]}>());

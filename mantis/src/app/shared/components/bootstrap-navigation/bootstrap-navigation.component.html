@@ -1,3 +1,6 @@
+<ng-template #rt let-r="result" let-t="term">
+    <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
+</ng-template>
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark m3-nav-dark-bg">
     <a class="navbar-brand" href="/">
       <i class="fas fa-th-large"></i>
@@ -14,6 +17,21 @@
                 </a>
             </li>
         </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input
+          name="group"
+          id="typeahead-focus"
+          type="text"
+          class="form-control"
+          [(ngModel)]="selectedGroup"
+          (ngModelChange)="setSessionAclGid($event)"
+          [ngbTypeahead]="search"
+          (focus)="focus$.next($event.target.value)"
+          (click)="click$.next($event.target.value)"
+          (keyup)="focus$.next($event.target.value)"
+          [inputFormatter]="formatter"
+          [resultTemplate]="rt"/>
+        </form>        
         <ul class="navbar-nav text-white">
             <li class="nav-item">
               <a class="btn btn-xs rounded-circle">

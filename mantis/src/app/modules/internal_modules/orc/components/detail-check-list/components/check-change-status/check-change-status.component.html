@@ -1,47 +1,47 @@
 <div class="check-change-status-container">
-<form [formGroup]="changeStatusForm" (ngSubmit)="onSubmit()">
-    <div class="modal-header bg-dark text-light">
-        <h4 class="modal-title">Change Status  <span class="badge badge-primary">{{ selectedData.length }} selected</span> </h4>
-        <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <div class="container-fluid">
-            <div class="row bg-light border-dark">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="status">Check Status</label>
-                        <select id="status" class="form-control" formControlName="status">
-                            <option value="" disabled>Choose your status</option>
-                            <optgroup *ngFor="let group of statusGroup | keyvalue" [attr.label]="group.key">
-                                <option *ngFor="let stat of group.value" [ngValue]="stat.value">{{  stat.label }}</option>
-                            </optgroup>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="description">Check Disposition Comments</label>
-                        <textarea id="description" class="form-control" formControlName="description"></textarea>
+    <form [formGroup]="changeStatusForm" (ngSubmit)="onSubmit()">
+        <div class="modal-header bg-dark text-light">
+            <h4 class="modal-title">Change Status  <span class="badge badge-primary">{{ selectedData.length }} selected</span> </h4>
+            <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="container-fluid">
+                <div class="row bg-light border-dark">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="status">Check Status</label>
+                            <select id="status" class="form-control" formControlName="status">
+                                <option value="" disabled>Choose your status</option>
+                                <optgroup *ngFor="let group of statusGroup | keyvalue" [attr.label]="group.key">
+                                    <option *ngFor="let stat of group.value" [ngValue]="stat.value">{{  stat.label }}</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Check Disposition Comments</label>
+                            <textarea id="description" class="form-control" formControlName="description"></textarea>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row row-break" *ngIf="showSelectedChecks">
-                <table class="table table-sm table-bordered">
-                    <thead class="thead-secondary">
-                        <tr><th>RuleName</th></tr>
-                    </thead>
-                    <tr *ngFor="let check of selectedData">
-                        <td>{{ check.name }}</td>
-                    </tr>
-                </table>
+                <div class="row row-break" *ngIf="showSelectedChecks">
+                    <table class="table table-sm table-bordered">
+                        <thead class="thead-secondary">
+                            <tr><th>RuleName</th></tr>
+                        </thead>
+                        <tr *ngFor="let check of selectedData">
+                            <td>{{ check.name }}</td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="modal-footer">
-        <p *ngFor="let alert of alerts">
-            <ngb-alert [type]="alert.type" (close)="close(alert)">{{ alert.message }}</ngb-alert>
-        </p>        
-        <button type="submit" class="btn btn-success" [disabled]="!changeStatusForm.valid">Submit</button>
-    </div>
-</form>
+        <div class="modal-footer">
+            <p *ngFor="let alert of alerts">
+                <ngb-alert [type]="alert.type" (close)="close(alert)">{{ alert.message }}</ngb-alert>
+            </p>        
+            <button type="submit" class="btn btn-success" [disabled]="!changeStatusForm.valid">Submit</button>
+        </div>
+    </form>
 </div>

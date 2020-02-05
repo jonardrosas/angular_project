@@ -25,7 +25,7 @@ export class CheckChangeStatusComponent implements OnInit {
 
     constructor(
         public activeModal: NgbActiveModal,
-        public orcRecordService: OrcRecordService
+        public orcRecordService: OrcRecordService,
     ) {}
 
     ngOnInit() {
@@ -33,7 +33,7 @@ export class CheckChangeStatusComponent implements OnInit {
             status: new FormControl('', Validators.required),
             description: new FormControl(''),
         });
-        this.statusGroup = this.dispoManagerInstance.dispositionInstance.changeStatusOptions;
+        this.statusGroup = this.dispoManagerInstance.changeStatusOption;
     }
 
     clearAlerts() {

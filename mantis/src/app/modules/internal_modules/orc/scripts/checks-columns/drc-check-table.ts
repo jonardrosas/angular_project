@@ -16,12 +16,6 @@ export class DrcCheckTable extends CheckBaseModel {
         this.statusField
     ];
 
-    public mainTabs = [
-        { id: CONST.TAB1.id, title: 'All Checks'},
-        { id: CONST.TAB2.id, title: 'Assigned iST'},
-        { id: CONST.TAB3.id, title: 'Assigned SOA'},
-    ];      
-
     constructor(private dispoParams) {
         super();
     }

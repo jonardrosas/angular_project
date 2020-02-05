@@ -82,15 +82,21 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
                 this.getAssignedSoaAction = this.dispoManagerInstance.storeManagerIns.checkTableStoreAssignedSoaAction;
                 this.assignedIstSelector = this.dispoManagerInstance.storeManagerIns.checkTableStoreAssignedIstSelector;
                 this.assignedSoaSelector = this.dispoManagerInstance.storeManagerIns.checkTableStoreAssignedSoaSelector;
-                this.mainTabs = this.dispoManagerInstance.checkTableInstance.mainTabs;
+                this.mainTabs = this.dispoManagerInstance.checkMainTabs;
                 this.dispoManagerInstance.checkComponentInstance = this;
-                this.initializeTab(); // need to know other tabs data
             }
         )
 
         this.activatedRoute.paramMap.subscribe(params => {
             this.mantisId = +params.get('id');
             this.store.dispatch(orcModuleStore.getMantisObjectAction({id: this.mantisId}));
+            if(!this.queryParams){
+                this.queryParams = ENUMS.DEFAULT;
+            }
+            this.getCheckStatCount();
+            setTimeout(
+                () => this.loadCheck(this.queryParams), 600
+            )            
         });         
 
         this.activatedRoute.queryParams.subscribe(
@@ -100,7 +106,7 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
                 this.queryGroupTab = data.group;
                 setTimeout(
                     () => this.loadCheck(this.queryParams), 600
-               )
+                )
             }
         ) 
 
@@ -122,15 +128,11 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
         )
     }      
 
-    initializeTab(){
-        for (let key in this.mainTabs){
-            let queryParams = this.mainTabs[key].id
-            this.subTab[queryParams] = ['All'];
-            // ignore current tab because it will be load in separate function
-            // if(queryParams != this.queryParams){
-            //    this.loadCheck(queryParams)
-            // }
-        }        
+    // called from template
+    reloadCheck(){
+        const queryParams = this.queryParams ?  this.queryParams : ENUMS.DEFAULT;
+        debugger;
+        this.loadCheck(queryParams)
     }
 
     loadCheck(queryParams?){
@@ -152,7 +154,7 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
         if(queryParams === ENUMS.TAB2.id){
             this.checkFilter['status'] = ENUMS.TAB2.status;
             this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs();
-            this.buttons = this.dispoManagerInstance.getCheckActionButtons().iSTCheckButtons;         
+            this.buttons = this.dispoManagerInstance.checkDispositionButtons[ENUMS.TAB2.id]
 
             this.store.dispatch(this.dispoManagerInstance.storeManagerIns.checkTableStoreAssignedAction(this.checkFilter));
             this.rowData$ = this.store.pipe(select(this.assignedIstSelector));
@@ -161,7 +163,7 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
         }else if(queryParams === ENUMS.TAB3.id){
             this.checkFilter['status'] = ENUMS.TAB3.status;
             this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs('assinged_soa');
-            this.buttons = this.dispoManagerInstance.getCheckActionButtons().sOACheckButtons;         
+            this.buttons = this.dispoManagerInstance.checkDispositionButtons[ENUMS.TAB3.id]
 
             this.store.dispatch(this.dispoManagerInstance.storeManagerIns.checkTableStoreAssignedSoaAction(this.checkFilter));                          
             this.rowData$ = this.store.pipe(select(this.assignedSoaSelector))
@@ -170,7 +172,7 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
         }else if(queryParams === ENUMS.TAB4.id){
             this.checkFilter['status'] = ENUMS.TAB4.status;
             this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs();
-            this.buttons = this.dispoManagerInstance.getCheckActionButtons().fSTCheckButtons;         
+            this.buttons = this.dispoManagerInstance.checkDispositionButtons[ENUMS.TAB4.id]
 
             this.store.dispatch(this.dispoManagerInstance.storeManagerIns.checkTableStoreAssignedAction(this.checkFilter));
             this.rowData$ = this.store.pipe(select(this.assignedIstSelector))
@@ -179,7 +181,7 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
         }else{
             // this.checkFilter['status'] = ENUMS.TAB1.status;
             this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs(ENUMS.TAB1.id);
-            this.buttons = this.dispoManagerInstance.getCheckActionButtons().allCheckButtons;         
+            this.buttons = this.dispoManagerInstance.checkDispositionButtons[ENUMS.TAB1.id]
 
             this.store.dispatch(this.dispoManagerInstance.storeManagerIns.checkTableStoreAction(this.checkFilter));
             this.rowData$ = this.store.pipe(select(this.defaultSelector))
