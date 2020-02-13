@@ -77,7 +77,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
                     }   
                 )
             },
-            (err) => alert(31)
+            (err) => console.log('No groups')
         )
     }      
 
