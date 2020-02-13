@@ -10,15 +10,16 @@ import * as ENUMS from './../../../../scripts/';
 })
 
 export class CheckDetailPopupComponent implements OnInit {
-  @Input() checkId;
-  @Input() mantisId;
-  public url: string = ENUMS.CHECK_REPORT_URL;
+    @Input() checkId;
+    @Input() mantisId;
+    public url: string = ENUMS.CHECK_REPORT_URL;
 
-  constructor(
-      public activeModal: NgbActiveModal,
-  ) {}    
+    constructor(
+        public activeModal: NgbActiveModal,
+    ) {}    
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
+
 
 }

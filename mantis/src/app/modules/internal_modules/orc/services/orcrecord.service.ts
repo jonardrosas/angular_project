@@ -12,6 +12,8 @@ export class OrcRecordService extends QueryHelper {
     public checkRecommendUrl = URLS.ORC_CHECK_RECOMMEND_URL;
     public addNotesUrl = URLS.ORC_CHECK_ADD_NOTES_URL;
     public addCheckImageUrl = URLS.ORC_CHECK_IMAGES_URL;
+    public updateCheckImageDescUrl = URLS.ORC_CHECK_UPDATE_IMG_DESC_URL;
+    public deleteCheckImage = URLS.ORC_CHECK_DEL_IMG_URL;
 
     constructor(public apiService: ApiService) {
         super();
@@ -67,6 +69,16 @@ export class OrcRecordService extends QueryHelper {
         let url = `${this.addCheckImageUrl}`;
         return this.apiService.upload(url, data);
     }
+
+    updateImageDescription(data: any): Observable<any> {
+        let url = `${this.updateCheckImageDescUrl}`;
+        return this.apiService.post(url, data);
+    }
+
+    deleteImage(data: any): Observable<any> {
+        let url = `${this.deleteCheckImage}`;
+        return this.apiService.post(url, data);
+    }    
 
     addNotes(data: any): Observable<any> {
         let url = `${this.addNotesUrl}`;

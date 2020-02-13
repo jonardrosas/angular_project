@@ -68,7 +68,7 @@ export class DetailComponent implements OnInit, AfterViewInit, OnDestroy {
                     this.dispoManagerInstance = this.dispoService.initialized(paramsIns) 
                     this.dispoManagerInstanceSubject = this.dispoService.dispoMangerSubject;
                     this.store.dispatch(this.dispoManagerInstance.storeManagerIns.checkResolutionAction())
-                    this.store.dispatch(this.dispoManagerInstance.storeManagerIns.checkCheckStatCountAction({record: data.orc_record.id}))
+                    // this.store.dispatch(this.dispoManagerInstance.storeManagerIns.checkCheckStatCountAction({record: data.orc_record.id}))
                 }
             },
         );

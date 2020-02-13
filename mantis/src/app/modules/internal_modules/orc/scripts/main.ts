@@ -34,6 +34,7 @@ export class MantisDispositionManager extends OrcModuleOperation implements Mant
     public changeStatusOption;
     public recommendationOptions;
     public checkDispositionButtons;
+    public checkApi;
 
     constructor(dispositionInstance: any) {
         super();
@@ -50,7 +51,7 @@ export class MantisDispositionManager extends OrcModuleOperation implements Mant
 
     }
 
-    createCheckStatusOptions(){
+    private createCheckStatusOptions(){
         this.checkStatusInstance = this.dispositionInstance.createCheckStatusOptions();
         if(this.checkStatusInstance){
             this.changeStatusOption =  this.checkStatusInstance.changeStatusOptions;
@@ -58,19 +59,20 @@ export class MantisDispositionManager extends OrcModuleOperation implements Mant
         }        
     }
 
-    createCheckDispoButtons() {
+    private createCheckDispoButtons() {
         this.checkDispoButtonsInstance = this.dispositionInstance.createCheckActionButtons();
         if(this.checkDispoButtonsInstance){
             this.checkDispositionButtons = this.checkDispoButtonsInstance.buttonSet;
+            this.checkApi = this.checkDispoButtonsInstance.checkApiClass;
         }
     }
 
-   createCheckNavigationTab(){
+    private createCheckNavigationTab(){
         this.checkNavigation = this.dispositionInstance.createCheckMainNavigationBase();
         if(this.checkNavigation){
             this.checkMainTabs = this.checkNavigation.mainTabs;
         }
-   } 
+    } 
 
     getDetailJobActionSection() {
         return this.detailJobActionSectionInstance;
@@ -103,7 +105,6 @@ export class MantisDispositionManagerConfig extends OrcModuleOperation{
     constructor(public dispoParams: DispostionParameter) {
         super();
         const operation = this.dispoParams.mantisRecord.operation;        
-
         if (this.drcOperation.indexOf(operation) !== -1) {
             this.dispositionInstance = new DrcDispostion(this.dispoParams);
         } else if (this.lmcOperation.indexOf(operation) !== -1) {
@@ -111,9 +112,9 @@ export class MantisDispositionManagerConfig extends OrcModuleOperation{
         } else if (this.validatorOperation.indexOf(operation) !== -1) {
             this.dispositionInstance = new DrcDispostion(this.dispoParams);
         } else {
-            if(this.dispoParams.mantisRecord.orc_record.orc_ext.fab == '1'){
+            if('orc_ext' in this.dispoParams.mantisRecord.orc_record && this.dispoParams.mantisRecord.orc_record.orc_ext.fab == '1'){
                 this.dispositionInstance = new OrcFtrfF7Dispostion(this.dispoParams);
-            }else if(this.dispoParams.mantisRecord.orc_record.orc_ext.fab == '7'){
+            }else if('orc_ext' in this.dispoParams.mantisRecord.orc_record && this.dispoParams.mantisRecord.orc_record.orc_ext.fab == '7'){
                 this.dispositionInstance = new OrcFtrfF7Dispostion(this.dispoParams);
             }else{
                 this.dispositionInstance = new OrcDispostion(this.dispoParams);

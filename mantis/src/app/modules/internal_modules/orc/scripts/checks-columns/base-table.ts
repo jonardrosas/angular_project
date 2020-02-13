@@ -183,12 +183,14 @@ export class CheckBaseModel extends CheckFields implements CheckTableInterface {
     columnDefs: any[];
     assessmentDefs: any[];
     statusCellTemplate;
+
     checkDetailInfo = [
         this.idField,
         this.ruleNameField,
         this.rawErrorCountField,
         this.statusField
     ]
+    
     checkReviewColumn = [
         {headerName: 'Date', field: 'date', col: 2},
         {headerName: 'User', field: 'user', col: 2},

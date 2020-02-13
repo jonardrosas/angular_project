@@ -20,24 +20,28 @@ export const ASSIGNED_FST = 'assinged_fst';
 // Check sections
 export const TAB1: any = {
     id: DEFAULT,
-    status: [OPEN]
+    status: [OPEN],
+    title: 'All Checks'
 }
 export const TAB2: any = {
     id: ASSIGNED_IST,
     status: ['iST'],
-    field: 'reviews'
+    field: 'reviews',
+    title: 'Assigned iST'
 }
 
 export const TAB3: any = {
     id: ASSIGNED_SOA,
     status: ['SOA'],
-    field: 'checkassessments'
+    field: 'checkassessments',
+    title: 'Assigned SOA'
 }
 
 export const TAB4: any = {
     id: ASSIGNED_FST,
     status: ['fST'],
-    field: 'reviews'
+    field: 'reviews',
+    title: 'Assigned fST'
 }
 
 const _QUERY_FIELD = {}

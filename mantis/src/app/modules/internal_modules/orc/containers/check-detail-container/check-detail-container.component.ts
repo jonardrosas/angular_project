@@ -14,6 +14,7 @@ import { Store, select } from '@ngrx/store';
 export class CheckDetailContainerComponent implements OnInit {
   mantisId;
   checkId;
+  buttons;
   mantisRecord;
   dispoManagerInstance;
   url: string = ENUMS.JOB_REPORT_URL;

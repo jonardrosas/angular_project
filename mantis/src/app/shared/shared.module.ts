@@ -21,6 +21,7 @@ import { NgxDtTableService } from './services';
 // import { GlobalSearchComponent } from './components/global-search/global-search.component';
 //import { GlobalSearchComponent } from './components/global-search/global-search.component';
 import { ColumnFilterComponent } from './components/ngx-dt-table/column-filter/column-filter.component';
+import { BootstrapConfirmComponent } from './components/bootstrap-confirm/bootstrap-confirm.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { ColumnFilterComponent } from './components/ngx-dt-table/column-filter/c
       MaterialLoginComponent,
       //GlobalSearchComponent,
       ColumnFilterComponent,
-      ArrayContainsPipe
+      ArrayContainsPipe,
+      BootstrapConfirmComponent
   ],
   exports: [
       NgxDtTableComponent,
@@ -59,6 +61,7 @@ import { ColumnFilterComponent } from './components/ngx-dt-table/column-filter/c
       MaterialLoginComponent,
       AgGridWrapperComponent,
       BootstrapAlertComponent,
+      BootstrapConfirmComponent,
       MaterialLoginComponent,
       ColumnFilterComponent
   ],

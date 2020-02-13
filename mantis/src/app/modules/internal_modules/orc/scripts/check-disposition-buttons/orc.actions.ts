@@ -20,8 +20,10 @@ export class OrcCheckDispositionButtonBase extends CheckDisposeButtonBase {
                 modalRef.componentInstance.dispoManagerInstance = dispoManagerInstance;
                 modalRef.result.then(
                     (result) => {
-                        dispoManagerInstance.checkComponentInstance.previousSelectedRow = selectedCheckId;
-                        dispoManagerInstance.checkComponentInstance.reloadCheck()
+                        if(dispoManagerInstance.checkComponentInstance){
+                            dispoManagerInstance.checkComponentInstance.previousSelectedRow = selectedCheckId;
+                            dispoManagerInstance.checkComponentInstance.reloadCheck()
+                        }
                     }, (reason) => {
                         // dispoManagerInstance.checkComponentInstance.previousSelectedRow = selectedCheckId;
                         // dispoManagerInstance.checkComponentInstance.loadCheck()
@@ -49,8 +51,10 @@ export class OrcCheckDispositionButtonBase extends CheckDisposeButtonBase {
                 modalRef.componentInstance.dispoManagerInstance = dispoManagerInstance;
                 modalRef.result.then(
                     (result) => {
-                        dispoManagerInstance.checkComponentInstance.previousSelectedRow = selectedCheckId;
-                        dispoManagerInstance.checkComponentInstance.reloadCheck()
+                        if(dispoManagerInstance.checkComponentInstance){
+                            dispoManagerInstance.checkComponentInstance.previousSelectedRow = selectedCheckId;
+                            dispoManagerInstance.checkComponentInstance.reloadCheck()
+                        }
                     }, (reason) => {
                         // dispoManagerInstance.checkComponentInstance.previousSelectedRow = selectedCheckId;
                         // dispoManagerInstance.checkComponentInstance.loadCheck()
@@ -88,11 +92,21 @@ export class OrcCheckDispositionButtonBase extends CheckDisposeButtonBase {
             this.agGridApi = agGrid.api;
             const selectedNodes = this.agGridApi.getSelectedNodes()
             const selectedData = selectedNodes.map(node => node.data);
+            const selectedCheckId = selectedData.map(data => data.id);            
             if(selectedData.length > 0){
                 const modalRef = this.modalService.open(this.popups.CheckRecommendComponent, {backdrop: 'static', keyboard: false})
                 modalRef.componentInstance.selectedData = selectedData;
                 modalRef.componentInstance.mantisRecord = this.mantisRecord;
                 modalRef.componentInstance.dispoManagerInstance = dispoManagerInstance;
+                modalRef.result.then(
+                    (result) => {
+                        dispoManagerInstance.checkComponentInstance.previousSelectedRow = selectedCheckId;
+                        dispoManagerInstance.checkComponentInstance.reloadCheck()
+                    }, (reason) => {
+                        // dispoManagerInstance.checkComponentInstance.previousSelectedRow = selectedCheckId;
+                        // dispoManagerInstance.checkComponentInstance.loadCheck()
+                    }
+                )                
             }else{
                 const modalRef = this.modalService.open(this.popups.BootstrapAlertComponent)
                 modalRef.componentInstance.data = {type: 'danger', message: 'No check selected', title: 'Warning'};

@@ -9,12 +9,12 @@ import { MaterialModule } from './../../third_party_modules/material/material.mo
 import { AgGridModule } from './../../third_party_modules/ag-grid';
 import { Ckeditor5AngularModule } from './../../third_party_modules/ckeditor5-angular'
 
-import { SharedModule, BootstrapAlertComponent } from './../../../shared';
+import { SharedModule, BootstrapAlertComponent, BootstrapConfirmComponent } from './../../../shared';
 import { OrcRecordService, MantisRecordService,
         OrcCheckService, DispoMangerService,
         DrcRecordService, DrcCheckService,
         JobLevelDispositionPostService,
-        JobLevelAssignPostService} from './services';
+        JobLevelAssignPostService, } from './services';
 
 import * as fromOrcModuleReducer from './store';
 import { OrcRoutingModule } from './orc-routing.module';
@@ -102,6 +102,7 @@ import { CheckDetailPopupComponent } from './components/detail-check-list/compon
         CheckChangeStatusComponent,
         CheckEscalateIstComponent,
         BootstrapAlertComponent,
+        BootstrapConfirmComponent,
         ProgressBarComponent,
         TestDivComponent,
         CheckAddNotesComponent,

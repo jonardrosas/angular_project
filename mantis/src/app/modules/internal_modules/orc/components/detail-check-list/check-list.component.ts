@@ -84,6 +84,7 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
                 this.assignedSoaSelector = this.dispoManagerInstance.storeManagerIns.checkTableStoreAssignedSoaSelector;
                 this.mainTabs = this.dispoManagerInstance.checkMainTabs;
                 this.dispoManagerInstance.checkComponentInstance = this;
+                this.store.dispatch(this.dispoManagerInstance.storeManagerIns.checkCheckStatCountAction({record: data.orc_record.id}))
             }
         )
 
@@ -93,7 +94,6 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
             if(!this.queryParams){
                 this.queryParams = ENUMS.DEFAULT;
             }
-            this.getCheckStatCount();
             setTimeout(
                 () => this.loadCheck(this.queryParams), 600
             )            
@@ -114,6 +114,7 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
 
     ngOnDestroy(){
         this.countSubscription.unsubscribe()
+        this.modalService.dismissAll('haha')
     }        
 
 
@@ -131,7 +132,6 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
     // called from template
     reloadCheck(){
         const queryParams = this.queryParams ?  this.queryParams : ENUMS.DEFAULT;
-        debugger;
         this.loadCheck(queryParams)
     }
 

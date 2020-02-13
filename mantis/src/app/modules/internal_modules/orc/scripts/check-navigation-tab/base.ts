@@ -4,7 +4,7 @@ import * as _ENUMS from './../enums/main';
 export class CheckNavigationBase {
 
     public mainTabs = [
-        { id: _ENUMS.TAB1.id, title: 'All Checks'},
+        _ENUMS.TAB1
     ];       
 
     public defaultSubTab = [

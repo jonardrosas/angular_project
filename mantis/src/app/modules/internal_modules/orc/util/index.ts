@@ -7,6 +7,12 @@ export class AdSection {
 export class ButtonCollapse {
     @Input() data;
 
+    constructor(){
+        if(!this.data){
+            this.data = {}
+        }
+    }
+
     isCollapse(val){
         if (val) {
             return 'fas fa-caret-right';

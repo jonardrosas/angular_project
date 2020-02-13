@@ -23,6 +23,8 @@ export const URLS = {
     ORC_CHECK_DISPOSE_URL: '/orc/disposecheck/',
     ORC_CHECK_RECOMMEND_URL: '/orc/recommendcheck/',
     ORC_CHECK_ADD_NOTES_URL: '/orc/addnotes/',
+    ORC_CHECK_UPDATE_IMG_DESC_URL: '/orc/update_image_description/',
+    ORC_CHECK_DEL_IMG_URL: '/orc/del_check_img/',
     //ORC_CHECK_IMAGES_URL: '/orc/addcheckimage/',
     ORC_CHECK_IMAGES_URL: '/mantis/check_image_upload/',
 

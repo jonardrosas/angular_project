@@ -1,5 +1,6 @@
 import * as _ENUMS from './../enums';
 
+
 interface checkDispoInterface {
     agGridApi;
     modalService;
@@ -7,6 +8,37 @@ interface checkDispoInterface {
     alerts;
     popups;
 }
+
+
+export class checkApiBase{
+    private _dataSet: any = [];
+
+    constructor(){
+    }
+
+    public add(param){
+        const data = {'data': param}
+        this._dataSet.push(data)
+    }
+
+    public getSelectedNodes(){
+        return this._dataSet;
+    }
+}
+
+
+export class CheckApi{
+    public api: checkApiBase; 
+
+    constructor(data: any){
+        this.api = new checkApiBase()
+    }
+
+    add(param){
+        this.api.add(param)
+    }
+}
+
 
 /** All commoon function and buttons should be declared here */
 export class CheckDisposeButtonBase {
@@ -21,6 +53,7 @@ export class CheckDisposeButtonBase {
     public popups;
     public buttonSet: any = {};
     public buttons: any = {};
+    public checkApiClass = CheckApi;
 
     constructor(dispoParams){
         this.modalService = dispoParams.modalService;

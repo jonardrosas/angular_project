@@ -1,26 +1,91 @@
-<div class="container-fluid p-4 check-detail bg-light">
-    <div class="row row-break bg-light shadow p-2 text-dark border border-dark">
+<div class="container-fluid p-4 check-detail" *ngIf="checkData">
+    <div class="row" *ngIf="enableActionButtons">
+         <button class="ml-2 shadow-sm btn-info" (click)="button.function(agGrid, dispoManagerInstance)" *ngFor="let button of buttons" ><i *ngIf="button.icon" [ngClass]="button.icon"></i>  {{ button.label }}</button>        
+    </div>     
+    <div class="row row-break bg-light shadow p-2">
         <div class="col-md-12">
-            <h5>Detail</h5>
+           <button type="button" class="btn btn-toggle" (click)="data.img.panelIsOpen= !data.img.panelIsOpen"
+                [attr.aria-expanded]="!data.img.panelIsOpen" aria-controls="ruleImage">
+                <i [ngClass]="isCollapse(data.img.panelIsOpen)"></i>  Rule Image
+            </button> 
             <hr/>
         </div>
+        <div class="col-md-12" [ngbCollapse]="data.img.panelIsOpen">
+            <div class="container-fluid">
+                <div class="row media text-dark mb-1 p-2 border border-dark" *ngFor="let image of checkImages">
+                    <div class="col-md-12">
+                        <button (click)="deleteImgForm(image.id)"><i class="fas fa-trash"></i></button>
+                        <button class="ml-1" (click)="updateDescription()"><i class="fa fa-pencil-alt"></i></button>
+                        <br/>
+                    </div>
+                    <div class="col-md-6 p-2">
+                        <img [src]="image.check_image" class="img-fluid img-thumbnail rounded" alt="Image Responsive">
+                    </div>
+                    <div class="ml-1 col-md-5 media-body p-2 border-secondary border">
+                          <h6 class="mt-0 mb-1">Description </h6>
+                          <hr/>
+                          <div *ngIf="image.description; else noDesc">
+                                <div [ngSwitch]="ruleDescMode">
+                                  <div *ngSwitchCase="'edit'">
+                                    <form [formGroup]="imageForm[image.id]" (ngSubmit)="saveImgForm(image.id)">
+                                         <textarea id="description" class="form-control" formControlName="decription"></textarea> 
+                                         <button (click)="ruleDescMode = 'read'">Cancel</button>
+                                         <button class="ml-1" type="submit">Save</button>
+                                    </form>
+                                  </div>
+                                  <div *ngSwitchDefault>
+                                      {{ image.description }}
+                                  </div>
+                                </div>
+                          </div>
+                          <ng-template #noDesc>
+                            <i>No descriptions</i>
+                          </ng-template>
+                          <!--
+                          <div [ngSwitch]="ruleDescMode">
+                              <div *ngSwitchWhen="'edit'">
+                                 <textarea></textarea> 
+                              </div>
+                              <div *ngSwitchDefault="expression">
+                                  {{ image.description }}
+                              </div>
+                          </div>
+                      -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>       
+    <div class="row row-break bg-light shadow p-2 text-dark">
         <div class="col-md-12">
-            <ul>
-                <li *ngFor="let column of columnDefs">
-                    <b>{{ column.headerName }} </b>: {{ checkData[column.field] }} 
-                </li>
-            </ul>
+           <button type="button" class="btn btn-toggle" (click)="data.info.panelIsOpen= !data.info.panelIsOpen"
+                [attr.aria-expanded]="!data.info.panelIsOpen" aria-controls="ruleImage">
+                <i [ngClass]="isCollapse(data.info.panelIsOpen)"></i>  Rule Info
+            </button> 
+            <hr/>
+        </div>
+        <div class="col-md-12" [ngbCollapse]="data.info.panelIsOpen">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-3" *ngFor="let column of columnDefs">
+                        <b>{{ column.headerName }} </b>:  {{ checkData[column.field] }} 
+                    </div>
+                </div>
+            </div>
        </div>
     </div>
-    <div class="row row-break bg-light shadow p-2 text-dark border border-dark">
+    <div class="row row-break bg-light shadow p-2 text-dark">
         <div class="col-md-12">
-            <h5>Rule Reviews</h5>
+           <button type="button" class="btn btn-toggle" (click)="data.reviews.panelIsOpen= !data.reviews.panelIsOpen"
+                [attr.aria-expanded]="!data.reviews.panelIsOpen" aria-controls="ruleImage">
+                <i [ngClass]="isCollapse(data.reviews.panelIsOpen)"></i>  Rule Reviews
+            </button>             
             <hr/>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-12" [ngbCollapse]="data.reviews.panelIsOpen">
             <div class="container-fluid">
                 <div class="row bg-light text-dark">
-                    <div class="bg-dark text-light overflow-hidden col-md-{{ field.col }} border border-dark" *ngFor="let field of checkReviewColumn">
+                    <div class="bg-secondary text-light overflow-hidden col-md-{{ field.col }} border border-secondary" *ngFor="let field of checkReviewColumn">
                         <b>{{ field.headerName }} </b>
                     </div>
                 </div>
@@ -32,15 +97,18 @@
             </div>
         </div>
     </div>    
-    <div class="row row-break bg-light shadow p-2 text-dark border border-secondary">
+    <div class="row row-break bg-light shadow p-2 text-dark">
         <div class="col-md-12">
-            <h5>Rule Waiver Recommendation</h5>
+            <button type="button" class="btn btn-toggle" (click)="data.assessment.panelIsOpen= !data.assessment.panelIsOpen"
+                [attr.aria-expanded]="!data.assessment.panelIsOpen" aria-controls="ruleImage">
+                <i [ngClass]="isCollapse(data.assessment.panelIsOpen)"></i>  Rule Recommendation
+            </button>              
             <hr/>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-12" [ngbCollapse]="data.assessment.panelIsOpen">
             <div class="container-fluid" *ngIf="checkData.checkassessments && checkData.checkassessments.length > 0">
                 <div class="row bg-secondary text-light">
-                    <div class="overflow-hidden col-md-{{ field.col }} border border-dark" *ngFor="let field of checkAssessmentColumn">
+                    <div class="overflow-hidden col-md-{{ field.col }} border border-secondary" *ngFor="let field of checkAssessmentColumn">
                         <b>{{ field.headerName }} </b>
                     </div>
                 </div>
@@ -55,20 +123,5 @@
             </div>
         </div>
     </div>      
-    <div class="row row-break bg-light shadow p-2 text-dark border border-dark">
-        <div class="col-md-12">
-            <h5>Rule Image</h5>
-            <hr/>
-        </div>
-        <div class="col-md-12">
-            <div class="container-fluid">
-                <div class="row bg-light p-3" *ngFor="let image of checkImages">
-                    <img [src]="image.check_image" class="img-fluid" alt="Image Responsive">
-                </div>
-                <div *ngIf="checkImages.length == 0">
-                    No available image
-                </div>
-            </div>
-        </div>
-    </div>       
+    
 </div>
