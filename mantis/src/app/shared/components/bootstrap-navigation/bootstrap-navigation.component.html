@@ -24,7 +24,7 @@
           type="text"
           class="form-control"
           [(ngModel)]="selectedGroup"
-          (ngModelChange)="setSessionAclGid($event)"
+          (ngModelChange)="setSessionAclGid()"
           [ngbTypeahead]="search"
           (focus)="focus$.next($event.target.value)"
           (click)="click$.next($event.target.value)"

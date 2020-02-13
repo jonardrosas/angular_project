@@ -67,7 +67,6 @@ export class BootstrapNavigationComponent implements OnInit {
     formatter = (x: GroupInterface) => x.name;
 
     setSessionAclGid(){
-        debugger;
         this.setAclGid.emit(this.selectedGroup)
     }
 }
