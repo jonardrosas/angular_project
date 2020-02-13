@@ -15,7 +15,7 @@
                 <div class="row media text-dark mb-1 p-2 border border-dark" *ngFor="let image of checkImages">
                     <div class="col-md-12">
                         <button (click)="deleteImgForm(image.id)"><i class="fas fa-trash"></i></button>
-                        <button class="ml-1" (click)="updateDescription()"><i class="fa fa-pencil-alt"></i></button>
+                        <button class="ml-1" (click)="updateDescription(image.id)"><i class="fa fa-pencil-alt"></i></button>
                         <br/>
                     </div>
                     <div class="col-md-6 p-2">
@@ -25,11 +25,11 @@
                           <h6 class="mt-0 mb-1">Description </h6>
                           <hr/>
                           <div *ngIf="image.description; else noDesc">
-                                <div [ngSwitch]="ruleDescMode">
+                                <div [ngSwitch]="ruleDescMode[image.id]">
                                   <div *ngSwitchCase="'edit'">
                                     <form [formGroup]="imageForm[image.id]" (ngSubmit)="saveImgForm(image.id)">
                                          <textarea id="description" class="form-control" formControlName="decription"></textarea> 
-                                         <button (click)="ruleDescMode = 'read'">Cancel</button>
+                                         <button (click)="ruleDescMode[image.id] = 'read'">Cancel</button>
                                          <button class="ml-1" type="submit">Save</button>
                                     </form>
                                   </div>

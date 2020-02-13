@@ -43,7 +43,7 @@ export class CheckDetailReportComponent extends ButtonCollapse implements OnInit
         reviews: {},
         assessment: {},
     }
-    public ruleDescMode = 'read';
+    public ruleDescMode = {};
     public ruleDescData = {}    
     public imageForm = {};
     public alerts: NgAlertInterface[] = [];
@@ -129,8 +129,8 @@ export class CheckDetailReportComponent extends ButtonCollapse implements OnInit
     getCheckImages(){
         this.checkImagesSubscription = this.store.pipe(select(getCheckDetailImages)).subscribe(
             (data) => {
-                if(data){
-                    this.checkImages = []
+                this.checkImages = []
+                if(data.length > 0){
                     for (let key in data){
                         let img = data[key];
                         this.checkImages.push(img)
@@ -138,6 +138,7 @@ export class CheckDetailReportComponent extends ButtonCollapse implements OnInit
                             image_id: new FormControl(''),
                             decription: new FormControl(''),
                         });
+                        this.ruleDescMode[img.id] = 'read';
                         this.imageForm[img.id].controls.decription.setValue(img.description)
                         this.imageForm[img.id].controls.image_id.setValue(img.id)
                     }
@@ -166,8 +167,8 @@ export class CheckDetailReportComponent extends ButtonCollapse implements OnInit
         }
     }
 
-    updateDescription(){
-        this.ruleDescMode = 'edit'
+    updateDescription(id){
+        this.ruleDescMode[id] = 'edit'
     }
 
     saveImgForm(id){
@@ -179,7 +180,7 @@ export class CheckDetailReportComponent extends ButtonCollapse implements OnInit
                         (data) => {
                             this.store.dispatch(getOrcRecordCheckObjectImages({check: this.checkId}));
                             this.ruleDescMode = 'read'
-                            this.getCheckImages()
+                            this.getObject()
                         }, 1000
                     )
                 }else{
@@ -202,8 +203,7 @@ export class CheckDetailReportComponent extends ButtonCollapse implements OnInit
                                 setTimeout(
                                     (data) => {
                                         this.ruleDescMode = 'read'
-                                        this.store.dispatch(getOrcRecordCheckObjectImages({check: this.checkId}));
-                                        this.getCheckImages()
+                                        this.getObject()
                                     }, 2000
                                 )
                             }else{
