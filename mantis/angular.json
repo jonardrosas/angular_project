@@ -64,7 +64,7 @@
                 }
               ]
             },
-            "tet": {
+            "test": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",

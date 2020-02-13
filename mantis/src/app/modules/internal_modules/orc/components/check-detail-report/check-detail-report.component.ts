@@ -38,10 +38,10 @@ export class CheckDetailReportComponent extends ButtonCollapse implements OnInit
     public agGrid;
     public mainTabs;
     public data = {
-        img: {},
-        info: {},
-        reviews: {},
-        assessment: {},
+        img: {panelIsOpen: true},
+        info: {panelIsOpen: true},
+        reviews: {panelIsOpen: true},
+        assessment: {panelIsOpen: true},
     }
     public ruleDescMode = {};
     public ruleDescData = {}    
