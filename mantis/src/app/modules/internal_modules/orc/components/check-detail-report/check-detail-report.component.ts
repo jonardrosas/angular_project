@@ -38,10 +38,10 @@ export class CheckDetailReportComponent extends ButtonCollapse implements OnInit
     public agGrid;
     public mainTabs;
     public data = {
-        img: {panelIsOpen: true},
-        info: {panelIsOpen: true},
-        reviews: {panelIsOpen: true},
-        assessment: {panelIsOpen: true},
+        img: {panelIsOpen: false},
+        info: {panelIsOpen: false},
+        reviews: {panelIsOpen: false},
+        assessment: {panelIsOpen: false},
     }
     public ruleDescMode = {};
     public ruleDescData = {}    
@@ -179,9 +179,9 @@ export class CheckDetailReportComponent extends ButtonCollapse implements OnInit
                     setTimeout(
                         (data) => {
                             this.store.dispatch(getOrcRecordCheckObjectImages({check: this.checkId}));
-                            this.ruleDescMode = 'read'
+                            this.ruleDescMode[id] = 'read'
                             this.getObject()
-                        }, 1000
+                        }, 800
                     )
                 }else{
                     this.alerts.push({type: 'danger', message: data.msg});
@@ -202,9 +202,9 @@ export class CheckDetailReportComponent extends ButtonCollapse implements OnInit
                                 this.alerts.push({type: 'success', message: data.msg});
                                 setTimeout(
                                     (data) => {
-                                        this.ruleDescMode = 'read'
+                                        this.ruleDescMode[id] = 'read'
                                         this.getObject()
-                                    }, 2000
+                                    }, 800
                                 )
                             }else{
                                 this.alerts.push({type: 'danger', message: data.msg});

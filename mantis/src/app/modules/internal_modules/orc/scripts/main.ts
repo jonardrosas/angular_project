@@ -35,6 +35,7 @@ export class MantisDispositionManager extends OrcModuleOperation implements Mant
     public recommendationOptions;
     public checkDispositionButtons;
     public checkApi;
+    public jobButtons;
 
     constructor(dispositionInstance: any) {
         super();
@@ -44,11 +45,21 @@ export class MantisDispositionManager extends OrcModuleOperation implements Mant
         this.jobReportTitle = this.dispositionInstance.getJobReportTitle();
         this.deviceSummaryInstance = this.dispositionInstance.getDeviceSummaryTable();
         this.progressBarInstance = this.dispositionInstance.getMantisStageProgressBar();
-        this.detailJobActionSectionInstance = this.dispositionInstance.getDetailJobActionSection();
         this.createCheckStatusOptions()
         this.createCheckDispoButtons()
         this.createCheckNavigationTab()
+        this.createJobDispositionButton()
+    }
 
+    public filterJobProgressBar(stages){
+        this.progressBarInstance = this.dispositionInstance.getMantisStageProgressBar();
+        const jobProgressButtons = this.progressBarInstance.filterProgressBarStages(stages)
+        return jobProgressButtons;
+    }
+
+    private createJobDispositionButton(){
+        const detailJobActionSectionInstance = this.dispositionInstance.createJobDispositionButtons();
+        this.jobButtons = detailJobActionSectionInstance.allButtons; 
     }
 
     private createCheckStatusOptions(){

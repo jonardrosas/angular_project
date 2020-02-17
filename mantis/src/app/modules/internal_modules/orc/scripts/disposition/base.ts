@@ -1,6 +1,8 @@
 import { MantisRecordModel } from './../../models';
 import { OrcStoreManager, StoreBaseManager } from './../store-manager';
 import { CheckNavigationBase } from './../check-navigation-tab';
+import { JobActionBase } from './../job-action';
+import { ProgressBarBase } from './../progress-bar';
 
 
 export interface DispostionParameter {
@@ -43,8 +45,8 @@ export class MantisDispositionBase implements MantisDispositionBaseInterface {
     storeManagerIns;
     checkStatusIns;
 
-    progressBarClass = null;
-    detailJobActionSectionClass = null;
+    progressBarClass = ProgressBarBase;
+    detailJobActionSectionClass = JobActionBase;
 
     constructor(dispoParams: DispostionParameter) {
         this.dispoParams = dispoParams;
@@ -69,7 +71,7 @@ export class MantisDispositionBase implements MantisDispositionBaseInterface {
         return this.jobReportTitle;
     }
 
-    getDetailJobActionSection(){
+    createJobDispositionButtons(){
         if(this.detailJobActionSectionClass){
             return new this.detailJobActionSectionClass(this.dispoParams)
         }

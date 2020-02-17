@@ -4,5 +4,4 @@ export * from './orccheck.service';
 export * from './drccheck.service';
 export * from './drcrecord.service';
 export * from './disposition-manager.service';
-export * from './job-level-dispo-post.service';
 export * from './job-level-assign-post.service';

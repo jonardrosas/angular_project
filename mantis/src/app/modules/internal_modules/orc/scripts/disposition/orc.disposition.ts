@@ -7,7 +7,6 @@ import { OrcCheckTable } from './../checks-columns';
 import { OrcCheckStatus, OrcFtrfF7CheckStatus, OrcFtrfF1CheckStatus } from './../check-status';
 import { OrcDeviceSummary } from './../device-summary';
 import { DispostionParameter } from './base';
-import { OrcProgressBarTable } from './../progress-bar';
 import { STATUS_GROUP } from './../../scripts/enums';
 import { JobActionBase } from './../job-action';
 import { OrcCheckNavigation, OrcFtrfF7CheckNavigation, OrcFtrfF1CheckNavigation } from './../check-navigation-tab';
@@ -18,8 +17,6 @@ export class OrcDispostion extends MantisDispositionBase {
     public recommendationOptions;
     public deviceSummaryClass = OrcDeviceSummary;
     public checkTableButtonsClass = OrcCheckDispositionButtonBase;
-    public progressBarClass = OrcProgressBarTable;
-    public detailJobActionSectionClass = JobActionBase;
     public checkStatusClass = OrcCheckStatus;
     public checkNavigationClass = OrcCheckNavigation;
     public checkStatusIns;

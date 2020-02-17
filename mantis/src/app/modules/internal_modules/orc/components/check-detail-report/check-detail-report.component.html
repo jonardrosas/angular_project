@@ -24,19 +24,19 @@
                     <div class="ml-1 col-md-5 media-body p-2 border-secondary border">
                           <h6 class="mt-0 mb-1">Description </h6>
                           <hr/>
-                          <div *ngIf="image.description; else noDesc">
-                                <div [ngSwitch]="ruleDescMode[image.id]">
-                                  <div *ngSwitchCase="'edit'">
-                                    <form [formGroup]="imageForm[image.id]" (ngSubmit)="saveImgForm(image.id)">
-                                         <textarea id="description" class="form-control" formControlName="decription"></textarea> 
-                                         <button (click)="ruleDescMode[image.id] = 'read'">Cancel</button>
-                                         <button class="ml-1" type="submit">Save</button>
-                                    </form>
-                                  </div>
-                                  <div *ngSwitchDefault>
+                          <div [ngSwitch]="ruleDescMode[image.id]">
+                              <div *ngSwitchCase="'edit'">
+                                <form [formGroup]="imageForm[image.id]" (ngSubmit)="saveImgForm(image.id)">
+                                     <textarea id="description" class="form-control" formControlName="decription"></textarea> 
+                                     <button (click)="ruleDescMode[image.id] = 'read'">Cancel</button>
+                                     <button class="ml-1" type="submit">Save</button>
+                                </form>
+                              </div>
+                              <div *ngSwitchDefault>
+                                  <div *ngIf="image.description; else noDesc">
                                       {{ image.description }}
                                   </div>
-                                </div>
+                              </div>
                           </div>
                           <ng-template #noDesc>
                             <i>No descriptions</i>

@@ -17,27 +17,17 @@ import { NgbActiveModal } from '../../../../third_party_modules/ng_bootstrap';
   styleUrls: ['./detail-job-action-section.component.css']
 })
 export class DetailJobActionSectionComponent implements OnInit {
-    @Input() dispoManagerInstance: MantisDispositionManager;
     public buttons;
     public mantisRecord;
-    @ViewChild('agGrid', { static: false }) agGrid: AgGridAngular;
+    public dispoManagerInstance;
     
     constructor(
-        private modalService: NgbModal,
-        private store: Store<any>,
-        activateRoute: ActivatedRoute,
         private dispoService: DispoMangerService,
     ) { }
 
     ngOnInit() {
-        this.getObject();
-        this.buttons = this.dispoManagerInstance.getDetailJobActionSection();
-        // console.log(this.buttons);
+        this.dispoManagerInstance = this.dispoService.dispoManagerInstance;
+        this.buttons = this.dispoService.dispoManagerInstance.jobButtons;
     }
     
-    getObject() {
-        this.mantisRecord = {
-            ...this.dispoManagerInstance.dispoParams.mantisRecord,
-        }        
-    }
 }

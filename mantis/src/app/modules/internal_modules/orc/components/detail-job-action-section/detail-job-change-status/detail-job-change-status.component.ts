@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -8,7 +8,9 @@ import { NgAlertInterface } from './../../../../../../core/models';
 import { MantisStageStatusModel } from './../../../scripts/common/stage';
 import { URLS } from './../../../../../../configs/app-urls';
 import { HttpClient } from '@angular/common/http';
-import { JobLevelDispositionPostService } from './../../../services/job-level-dispo-post.service';
+import { MantisStage, MantisResolution } from './../../../models';
+import { MantisRecordService } from './../../../services';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-detail-job-change-status',
@@ -16,78 +18,91 @@ import { JobLevelDispositionPostService } from './../../../services/job-level-di
   styleUrls: ['./detail-job-change-status.component.css']
 })
 
-export class DetailJobChangeStatusComponent implements OnInit {
-    @Input() mantisID;
-    @Input() mantisDispoManagerInstance;
+export class DetailJobChangeStatusComponent implements OnInit, OnDestroy {
     public mantisRecord;
-    public stageGroup: any[] = [];
-    public statusGroup: string[] = [];
-    public jobChangeStatusForm;
-    public Editor = ClassicEditor;
     public alerts: NgAlertInterface[] = [];
     public heading: string = "JOB LEVEL DISPOSITION";
-    public nextStage: string;
-    public nextStageGroup;
-    public nextStatus: string;
+    public jobChangeStatusForm;
+    public StageModel: MantisStage;
+    public ResolutionModel: MantisResolution;
+    public stages: any[] = [];
+    public resolutions: any[] = [];
+    public stageSubscription: Subscription;
+    public resolutionSubscription: Subscription;
+
     
     constructor (
         public activeModal: NgbActiveModal,
-        private store: Store<any>,
-        private http: HttpClient,
-        private postService: JobLevelDispositionPostService,
+        public mantisRecordService: MantisRecordService
     ) { }
     
     ngOnInit () {
+
+        this.StageModel = new MantisStage()
+        this.ResolutionModel = new MantisResolution()
+
+
         this.jobChangeStatusForm = new FormGroup ({
             stage: new FormControl('', Validators.required),
-            status: new FormControl({value: '', disabled: true}, Validators.required),
+            status: new FormControl({value: ''}, Validators.required),
             comments: new FormControl('', Validators.required),
             // groups: new FormControl('test'),
             mantis_ids: new FormControl(this.mantisRecord.id)
         })
-        this.getStageGroup();
+        this.getStages();
         // console.log(this.mantisRecord);
+    }
+
+    ngOnDestroy(){
+        this.stageSubscription.unsubscribe()
+        this.resolutionSubscription.unsubscribe()
+
     }
     
     clearAlerts() {
         this.alerts = [];
     }
     
-    getStageGroup() {
-        for (let element of MantisStageStatusModel){
-            this.stageGroup.push({label: element.label, group: element.group});
-        }
+    getStages() {
+        const stages = this.StageModel.objects.all({})
+        this.stageSubscription = stages.subscribe(
+            (data) => {
+                this.stages = data.results;
+            }
+        )
     }
     
-    getStatusList() {
-        /*
-        this.statusGroup = [''];
-        for (let element of checkChangeStatusList){
-            if (element.group == this.nextStageGroup){
-                this.statusGroup.push(element.label);
-            }
+    getResolutions() {
+        const stage_id = this.jobChangeStatusForm.controls.stage.value.id;
+        if(stage_id){
+            const resolutions = this.ResolutionModel.objects.filter({stage: stage_id})
+            this.resolutionSubscription = resolutions.subscribe(
+                (data) => {
+                    this.resolutions = data;
+                }
+            )        
         }
-        this.jobChangeStatusForm.get('status').value = '';
-        */
     }
     
     resetStatus() {
         this.jobChangeStatusForm.controls.status.disable();
-        this.activateStatusList();
-    }
-    
-    activateStatusList() {
-        this.jobChangeStatusForm.controls.status.enable();
-        this.nextStage = this.jobChangeStatusForm.controls.stage.value;
-        for (let element of MantisStageStatusModel){
-            if (element.label == this.nextStage){
-                this.nextStageGroup = element.group;
-            }
-        }
-        this.getStatusList();
     }
     
     onSubmit () {
+        const data = {}
+        data['mantis_ids'] = [this.mantisRecord.id]
+        data['stage'] = this.jobChangeStatusForm.controls.stage.value.name;
+        data['status'] = this.jobChangeStatusForm.controls.status.value;
+        data['comments']  = this.jobChangeStatusForm.controls.comments.value;
+        this.mantisRecordService.changeJobStatus(data).subscribe(
+            (data) => {
+                if(data.status == 'success'){
+                    this.alerts.push({message: data.msg[this.mantisRecord.id], type: 'success'})
+                }else{
+                    this.alerts.push({message: data.msg[this.mantisRecord.id], type: 'danger'})
+                }
+            }
+        )
     }
     
     close(alert: NgAlertInterface) {

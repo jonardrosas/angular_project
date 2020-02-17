@@ -13,7 +13,6 @@ import { SharedModule, BootstrapAlertComponent, BootstrapConfirmComponent } from
 import { OrcRecordService, MantisRecordService,
         OrcCheckService, DispoMangerService,
         DrcRecordService, DrcCheckService,
-        JobLevelDispositionPostService,
         JobLevelAssignPostService, } from './services';
 
 import * as fromOrcModuleReducer from './store';
@@ -124,7 +123,6 @@ import { CheckDetailPopupComponent } from './components/detail-check-list/compon
         DispoMangerService,
         DrcRecordService,
         DrcCheckService,
-        JobLevelDispositionPostService,
         JobLevelAssignPostService,
     ]
 })

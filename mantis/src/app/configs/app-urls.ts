@@ -31,6 +31,7 @@ export const URLS = {
     // NEW DJANGO REST FRAMEWORK
     DRF_MANTIS_RECORD_URL: '/mantis/api/v2/mantis_record/',
     DRF_MANTIS_RESOLUTION_URL: '/mantis/api/v2/mantis_resolution/',
+    DRF_MANTIS_STAGE_URL: '/mantis/api/v2/mantis_stage/',
     DRF_MANTIS_RECORD_LIST_URL: '/mantis/api/v2/mantis_record_worklist/',
     DRF_MANTIS_RECORD_TEXT_URL: '/mantis/api/v2/mantis_record_text/',
     DRF_MANTIS_RECORD_NOTE_URL: '/mantis/api/v2/mantis_record_note/',

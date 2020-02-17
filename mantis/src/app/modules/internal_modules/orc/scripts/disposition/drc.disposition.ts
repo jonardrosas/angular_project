@@ -3,7 +3,6 @@ import { DrcCheckDispositionButtonBase } from './../check-disposition-buttons/';
 import { DrcCheckTable } from './../checks-columns';
 import { DrcDeviceSummary } from './../device-summary';
 import { DispostionParameter } from './base';
-import { DrcProgressBarTable } from './../progress-bar';
 import { JobActionBase } from './../job-action';
 import { DrcStoreManager } from './../store-manager';
 
@@ -15,7 +14,6 @@ export class DrcDispostion extends MantisDispositionBase {
     public checkTableStoreAssignedSoaAction;
     public detailJobActionSectionClass = JobActionBase;
     public checkTableButtonsClass = DrcCheckDispositionButtonBase;
-    public progressBarClass = DrcProgressBarTable;
     public storeStoreManagerClass =  DrcStoreManager;
 
     constructor(dispoParams: DispostionParameter) {

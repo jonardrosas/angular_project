@@ -2,11 +2,10 @@ import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import * as orcModuleStore from './../../store';
 
-import { MantisRecordService } from './../../services';
+import { MantisRecordService, DispoMangerService } from './../../services';
 import { MantisRecordModel } from './../../models';
 import { MantisDispositionManager, DispostionParameter } from './../../scripts';
-// import { DeviceSummaryComponent } from './../device-summary/device-summary.component';
-// import { ButtonCollapse } from '../../scripts/common/add-jobreport-section';
+import { MantisStage, MantisResolution } from './../../models';
 
 @Component({
     selector: 'progress-bar',
@@ -15,68 +14,54 @@ import { MantisDispositionManager, DispostionParameter } from './../../scripts';
 })
 
 export class ProgressBarComponent implements OnInit {
-    @Input() dispoManagerInstance: MantisDispositionManager;
-    public tableInstance;
-    public tableItem;
+    public StageModel;
+    public stages;
     public mantisRecord;
-    public currentStage: string;
+    public currentStage: number;
     public defaultColor: string = "ivory";
     public passedColor: string = "lightgray";
     public currentColor: string;
     
     constructor(
         private mantisRecordService: MantisRecordService,
-        private store: Store<any>        
+        private dispoMangerService: DispoMangerService,
     ) {
         // super();
     }
     
     ngOnInit(){
-        this.getObject();
-        this.tableInstance = this.dispoManagerInstance.getMantisStageProgressBars();
-        this.getCurrentStage(this.mantisRecord.status);
-        this.tableItem = this.tableInstance.progressBar;
-        this.searchCurrentColor();
-        this.setBackgroundColor();
-        this.getColorList();
+        this.StageModel = new MantisStage()
+        this.getStages()
+        this.currentStage = this.dispoMangerService.dispoManagerInstance.dispoParams.mantisRecord.status_code;
     }
     
     getCurrentStage(status){
-        this.currentStage = status;
+    }
+
+    filterStages(data){    
+        return  this.dispoMangerService.dispoManagerInstance.filterJobProgressBar(data)
+    }
+
+
+    getStages(){
+        this.StageModel.objects.all({}).subscribe(
+            (data) => {
+                this.stages = this.filterStages(data.results);
+            }
+        )
     }
     
-    getObject() {
-        this.mantisRecord = {
-            ...this.dispoManagerInstance.dispoParams.mantisRecord,
-        }        
-    }
-    
-    getColorList() {
-        for(let progressBarElem of this.tableItem){
-            if(this.currentStage == progressBarElem.label){
-                progressBarElem.truth = true;
-                progressBarElem.bold = true;
-                progressBarElem.bg_color = this.currentColor;
-                break;
-            }
-            else{
-                progressBarElem.bg_color = this.passedColor;
-                progressBarElem.passed = true;
-            }
+    setCurrentColor(stage){
+        if(stage.id <= this.currentStage){
+            return stage.color;
         }
     }
-    
-    searchCurrentColor(){
-        for(let progressBarElem of this.tableItem){
-            if(this.currentStage == progressBarElem.label){
-                this.currentColor = progressBarElem.bg_color;
-            }
+
+    setCurrentClass(stage){
+        if(stage.id == this.currentStage){
+            return 'shadow border-3 border border-dark';
+        }else{
+            return 'border-1';
         }
-    }
-    
-    setBackgroundColor(){
-        for(let progressBarElem of this.tableItem){
-            progressBarElem.bg_color = this.defaultColor;
-        }
-    }
+    }    
 }

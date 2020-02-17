@@ -4,7 +4,11 @@
         <table align="center" class="table-bordered table-sm">
             <tbody>
                 <tr>
-                    <ng-container *ngTemplateOutlet = "template">
+                    <ng-container *ngFor="let stage of stages">
+                        <td width="100" align="center" [attr.bgcolor]="setCurrentColor(stage)" [ngClass]="setCurrentClass(stage)">
+                            {{ stage.name   }}
+                        </td>
+                        <ng-container *ngIf = "stage.name !== 'closed'; then Arrow"></ng-container>
                     </ng-container>
                 </tr>
             </tbody>
@@ -12,33 +16,6 @@
     </div>
 </div>
 
-<ng-template #template>
-    <ng-container *ngFor="let fields of tableItem">
-        <ng-container *ngIf = "fields.truth == true; then Current; else NotCurrent"></ng-container>
-        
-        <ng-template #Current>
-            <td class="current-stage" width="100" align="center" [attr.bgcolor] = "fields.bg_color">
-                <b>{{ fields.label }}</b>
-            </td>
-            <ng-container *ngIf = "fields.label !== 'closed'; then Arrow"></ng-container>
-            <ng-template #Arrow>
-                &#8658;
-            </ng-template>
-        </ng-template>
-        
-        <ng-template #NotCurrent>
-            <td width="100" align="center" [attr.bgcolor] = "fields.bg_color">
-                {{ fields.label }}
-            </td>
-            <ng-container *ngIf = "fields.label !== 'closed'; then Arrow"></ng-container>
-            <ng-template #Arrow>
-                &#8658;
-            </ng-template>
-        </ng-template>
-        
-    </ng-container>
-</ng-template>
-
 <ng-template #Arrow>
-    &#8658;
+    <i class="fas fa-arrow-right fa-lg"></i>
 </ng-template>
