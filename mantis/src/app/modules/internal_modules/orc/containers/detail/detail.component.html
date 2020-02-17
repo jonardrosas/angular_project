@@ -10,10 +10,8 @@
         </div>
     </div>
     <div class="row row-break">
-        <div class="col-md-12">
-            <ng-template #loading>
-                <img [src]="loadingImg" alt="Loading...."/>
-            </ng-template>            
+        <div class="col-md-12" *ngIf="!mantisRecord.id && isSectionComponentLoaded">
+            <img [src]="fileNotFoundImg" alt="Page Not Found...."/>
         </div>    
     </div>    
 </div>

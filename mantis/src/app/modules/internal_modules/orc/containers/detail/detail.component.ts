@@ -26,6 +26,7 @@ export class DetailComponent implements OnInit, AfterViewInit, OnDestroy {
     public mantisId: number;
     public mantisRecord: MantisRecordModel;
     public loadingImg: string = APP_CONFIG.LOADING_IMG;
+    public fileNotFoundImg: string = APP_CONFIG.PAGENOTFOUND;
     public isSectionComponentLoaded: boolean = false;
     @ViewChild(JobreportSectionDirective, {static: false}) adSection: JobreportSectionDirective;
 
@@ -84,7 +85,7 @@ export class DetailComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     loadComponent() {
-        if(this.reportSectionsComponents.length > 0){
+        if(this.reportSectionsComponents.length > 0 && this.mantisRecord.id){
             for(let k in this.reportSectionsComponents){
                 const componentInstance = this.reportSectionsComponents[k]
                 const componentFactory = this.componentFactoryResolver.resolveComponentFactory(componentInstance.component);
