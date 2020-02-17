@@ -25,22 +25,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="row row-break" *ngIf="showSelectedChecks">
-                    <table class="table table-sm table-bordered">
-                        <thead class="thead-secondary">
-                            <tr><th>RuleName</th></tr>
-                        </thead>
-                        <tr *ngFor="let check of selectedData">
-                            <td>{{ check.name }}</td>
-                        </tr>
-                    </table>
+                <div class="row">
+                    <li *ngFor="let alert of alerts">
+                        <small><ngb-alert [type]="alert.type" (close)="close(alert)">{{ alert.message }}</ngb-alert></small>
+                    </li>        
                 </div>
             </div>
         </div>
         <div class="modal-footer">
-            <p *ngFor="let alert of alerts">
-                <ngb-alert [type]="alert.type" (close)="close(alert)">{{ alert.message }}</ngb-alert>
-            </p>        
             <button type="submit" class="btn btn-success" [disabled]="!changeStatusForm.valid">Submit</button>
         </div>
     </form>

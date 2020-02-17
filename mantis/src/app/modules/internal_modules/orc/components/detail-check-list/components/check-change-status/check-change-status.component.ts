@@ -14,6 +14,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 
 export class CheckChangeStatusComponent implements OnInit {
     @Input() selectedData;
+    @Input() validation;
     @Input() dispoManagerInstance;
     @Input() mantisRecord: MantisRecordModel;
     public statusGroup;
@@ -67,20 +68,27 @@ export class CheckChangeStatusComponent implements OnInit {
             }
         } else {
             let data = this.formData();
-            this.orcRecordService.changeStatus(data).subscribe(
-                (data) => {
-                    if(data.status == 'success'){
-                        this.alerts.push({type: 'success', message: data.msg});
-                        setTimeout(
-                            (data) => {
-                                this.activeModal.close(data)
-                            }, 2000
-                        )
-                    }else{
-                        this.alerts.push({type: 'danger', message: data.msg});
-                    }
+            const errors = this.validation(this.selectedData, data)
+            if(errors.length > 0){
+                for (let k in errors){
+                    this.alerts.push({type: 'danger', message: errors[k]});
                 }
-            )
+            }else{
+                this.orcRecordService.changeStatus(data).subscribe(
+                    (data) => {
+                        if(data.status == 'success'){
+                            this.alerts.push({type: 'success', message: data.msg});
+                            setTimeout(
+                                (data) => {
+                                    this.activeModal.close(data)
+                                }, 2000
+                            )
+                        }else{
+                            this.alerts.push({type: 'danger', message: data.msg});
+                        }
+                    }
+                )
+            }
         }
     }
 

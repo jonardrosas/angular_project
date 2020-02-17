@@ -4,6 +4,20 @@ import { CheckDisposeButtonBase } from './base';
 
 export class OrcCheckDispositionButtonBase extends CheckDisposeButtonBase {
     modalService;
+    restrictedStatus = ['PA']
+
+    public changeStatusValidation(checks, form){
+        let errors = []
+        for (var k in checks) {
+            let check = checks[k]
+            if(['PA'].indexOf(check.status) > -1){
+                errors.push(`Not allowed to dispose a PA rule (${check.name})`)
+            }else{
+                errors.push(`Changing a rule to same status (${check.name})`)
+            }
+        }
+        return errors
+    }
 
     public orcChangeStatus = {
         label: 'Change Status',
@@ -18,6 +32,7 @@ export class OrcCheckDispositionButtonBase extends CheckDisposeButtonBase {
                 modalRef.componentInstance.selectedData = selectedData;
                 modalRef.componentInstance.mantisRecord = this.mantisRecord;
                 modalRef.componentInstance.dispoManagerInstance = dispoManagerInstance;
+                modalRef.componentInstance.validation = this.changeStatusValidation;
                 modalRef.result.then(
                     (result) => {
                         if(dispoManagerInstance.checkComponentInstance){
@@ -33,7 +48,10 @@ export class OrcCheckDispositionButtonBase extends CheckDisposeButtonBase {
                 const modalRef = this.modalService.open(this.popups.BootstrapAlertComponent)
                 modalRef.componentInstance.data = {type: 'danger', message: 'No check selected', title: 'Warning'};
             }
-        }        
+        },
+        validation: [
+            (check, form) => console.log('I don tknow.....')
+        ]        
     }   
 
     public orcEscalateIst = {
