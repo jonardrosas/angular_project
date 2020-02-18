@@ -47,7 +47,8 @@ export class BootstrapNavigationComponent implements OnInit {
     }
 
     search = (text$: Observable<string>) => {
-        const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
+        const inputFocus$ = this.focus$.pipe(debounceTime(200), distinctUntilChanged());
+        // const debouncedText$ = text$.pipe(debounceTime(100), distinctUntilChanged());
         const clicksWithClosedPopup$ = this.click$.pipe(
             filter(
                 () => {
@@ -58,9 +59,19 @@ export class BootstrapNavigationComponent implements OnInit {
                 }
             )
         );
-        const inputFocus$ = this.focus$;
-        return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
-            map(term => term === '' ? this.groups : this.groups.filter(v => v.name.toLowerCase().includes(term.toLocaleLowerCase())).splice(0, 10))
+        debugger;
+        // return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
+        return merge(inputFocus$, clicksWithClosedPopup$).pipe(
+            map(term => {
+                    debugger;
+                if(term === '') {
+                    return this.groups
+                }else if(term === '_'){
+                    return this.groups
+                }else{
+                    return this.groups.filter(v => v.name.toLowerCase().includes(term.toLocaleLowerCase())).splice(0, 10)
+                }
+            })
         )
     }
 
@@ -68,5 +79,9 @@ export class BootstrapNavigationComponent implements OnInit {
 
     setSessionAclGid(){
         this.setAclGid.emit(this.selectedGroup)
+    }
+
+    checkA(){
+        this.click$.next('A')
     }
 }

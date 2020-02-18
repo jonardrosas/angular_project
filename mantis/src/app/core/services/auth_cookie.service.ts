@@ -22,7 +22,7 @@ export class CookieAuthenticationService {
     }
     
     logout(): Observable<any> {
-        return this.apiService.get(this.LOGOUT_URL)
+        return this.apiService.post(this.LOGOUT_URL)
     }
     
 

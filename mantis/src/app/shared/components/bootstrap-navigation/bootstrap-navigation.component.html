@@ -17,6 +17,7 @@
                 </a>
             </li>
         </ul>
+        <!--
         <form class="form-inline my-2 my-lg-0">
           <input
           name="group"
@@ -27,11 +28,16 @@
           (ngModelChange)="setSessionAclGid()"
           [ngbTypeahead]="search"
           (focus)="focus$.next($event.target.value)"
-          (click)="click$.next($event.target.value)"
           (keyup)="focus$.next($event.target.value)"
           [inputFormatter]="formatter"
           [resultTemplate]="rt"/>
         </form>        
+      -->
+        <form class="form-inline my-2 my-lg-0">
+            <select id="status" class="form-control" [(ngModel)]="selectedGroup" (ngModelChange)="setSessionAclGid()" [ngModelOptions]="{standalone: true}">
+                <option *ngFor="let group of groups" [ngValue]="group">{{  group.name }}</option>
+            </select>
+        </form>
         <ul class="navbar-nav text-white">
             <li class="nav-item">
               <a class="btn btn-xs rounded-circle">
