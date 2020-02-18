@@ -8,12 +8,15 @@ export class OrcCheckDispositionButtonBase extends CheckDisposeButtonBase {
 
     public changeStatusValidation(checks, form){
         let errors = []
+        const allowedForNew = ['A', 'iST', 'OC', 'SD', 'ER', 'OP', 'MP', 'PW', 'PT', 'PI', 'FD', 'FR']
         for (var k in checks) {
             let check = checks[k]
             if(['PA'].indexOf(check.status) > -1){
                 errors.push(`Not allowed to dispose a PA rule (${check.name})`)
-            }else{
+            }else if(check.status == form.newStat){
                 errors.push(`Changing a rule to same status (${check.name})`)
+            }else if(check.status == 'N' && allowedForNew.indexOf(form.newStat) == -1){
+                errors.push(`Cannot change from N to ${form.newStat} in the rule name (${check.name})`)
             }
         }
         return errors
