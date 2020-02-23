@@ -3,6 +3,7 @@ import { Validators } from '@angular/forms';
 import { MantisRecordModel, GroupProfileInterface } from '../../../../models';
 import { NgbActiveModal } from '../../../../../../third_party_modules/ng_bootstrap';
 import { NgAlertInterface } from '../../../../../../../core/models';
+import { APP_CONFIG } from '../../../../../../../configs/';
 import { FormGroup, FormControl } from '@angular/forms';
 import * as orcModuleStore from './../../../../store';
 import { OrcRecordService, DispoMangerService } from './../../../../services/';
@@ -19,10 +20,12 @@ export class CheckEscalateIstComponent implements OnInit {
     @Input() selectedData;
     @Input() mantisRecord: MantisRecordModel;
     @Input() dispoManagerInstance;
+    @Input() validation;
     public escalateIstForm;
     public istGroups$: Observable<GroupProfileInterface[]>;
     public alerts: NgAlertInterface[] = [];
     public showSelectedChecks;
+    public apiUrl: string = APP_CONFIG.BASE_URL;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -76,20 +79,27 @@ export class CheckEscalateIstComponent implements OnInit {
             }
         } else {
             let data = this.formData();
-            this.orcRecordService.changeStatus(data).subscribe(
-                (data) => {
-                    if(data.status == 'success'){
-                        this.alerts.push({type: 'success', message: data.msg});
-                        setTimeout(
-                            (data) => {
-                                this.activeModal.close(data)
-                            }, 2000
-                        )
-                    }else{
-                        this.alerts.push({type: 'danger', message: data.msg});
-                    }
+            const errors = this.validation(this.selectedData, data)
+            if(errors.length > 0){
+                for (let k in errors){
+                    this.alerts.push({type: 'danger', message: errors[k]});
                 }
-            )
+            }else{
+                this.orcRecordService.changeStatus(data).subscribe(
+                    (data) => {
+                        if(data.status == 'success'){
+                            this.alerts.push({type: 'success', message: data.msg});
+                            setTimeout(
+                                (data) => {
+                                    this.activeModal.close(data)
+                                }, 2000
+                            )
+                        }else{
+                            this.alerts.push({type: 'danger', message: data.msg});
+                        }
+                    }
+                )
+            }
         }
     }
 

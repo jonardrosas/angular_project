@@ -1,4 +1,4 @@
-<div class="container-fluid p-4 check-detail" *ngIf="checkData">
+<div class="container-fluid p-4 check-detail" *ngIf="checkIns">
     <div class="row" *ngIf="enableActionButtons">
          <button class="ml-2 shadow-sm btn-info" (click)="button.function(agGrid, dispoManagerInstance)" *ngFor="let button of buttons" ><i *ngIf="button.icon" [ngClass]="button.icon"></i>  {{ button.label }}</button>        
     </div>     
@@ -11,49 +11,7 @@
             <hr/>
         </div>
         <div class="col-md-12" [ngbCollapse]="data.img.panelIsOpen">
-            <div class="container-fluid">
-                <div class="row media text-dark mb-1 p-2 border border-dark" *ngFor="let image of checkImages">
-                    <div class="col-md-12">
-                        <button (click)="deleteImgForm(image.id)"><i class="fas fa-trash"></i></button>
-                        <button class="ml-1" (click)="updateDescription(image.id)"><i class="fa fa-pencil-alt"></i></button>
-                        <br/>
-                    </div>
-                    <div class="col-md-6 p-2">
-                        <img [src]="image.check_image" class="img-fluid img-thumbnail rounded" alt="Image Responsive">
-                    </div>
-                    <div class="ml-1 col-md-5 media-body p-2 border-secondary border">
-                          <h6 class="mt-0 mb-1">Description </h6>
-                          <hr/>
-                          <div [ngSwitch]="ruleDescMode[image.id]">
-                              <div *ngSwitchCase="'edit'">
-                                <form [formGroup]="imageForm[image.id]" (ngSubmit)="saveImgForm(image.id)">
-                                     <textarea id="description" class="form-control" formControlName="decription"></textarea> 
-                                     <button (click)="ruleDescMode[image.id] = 'read'">Cancel</button>
-                                     <button class="ml-1" type="submit">Save</button>
-                                </form>
-                              </div>
-                              <div *ngSwitchDefault>
-                                  <div *ngIf="image.description; else noDesc">
-                                      {{ image.description }}
-                                  </div>
-                              </div>
-                          </div>
-                          <ng-template #noDesc>
-                            <i>No descriptions</i>
-                          </ng-template>
-                          <!--
-                          <div [ngSwitch]="ruleDescMode">
-                              <div *ngSwitchWhen="'edit'">
-                                 <textarea></textarea> 
-                              </div>
-                              <div *ngSwitchDefault="expression">
-                                  {{ image.description }}
-                              </div>
-                          </div>
-                      -->
-                    </div>
-                </div>
-            </div>
+          <app-check-image-list-view [checkIns]="checkIns" (refresh)="getObject()"></app-check-image-list-view>
         </div>
     </div>       
     <div class="row row-break bg-light shadow p-2 text-dark">
@@ -68,7 +26,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-3" *ngFor="let column of columnDefs">
-                        <b>{{ column.headerName }} </b>:  {{ checkData[column.field] }} 
+                        <b>{{ column.headerName }} </b>:  {{ checkIns[column.field] }} 
                     </div>
                 </div>
             </div>
@@ -89,7 +47,7 @@
                         <b>{{ field.headerName }} </b>
                     </div>
                 </div>
-                <div class="row bg-light text-dark" *ngFor="let review of checkData.reviews">
+                <div class="row bg-light text-dark" *ngFor="let review of checkIns.reviews">
                     <div class="overflow-hidden col-md-{{ field.col }} border border-secondary" *ngFor="let field of checkReviewColumn">
                         {{ getValue(field, review[field.field]) }}
                     </div>                      
@@ -106,19 +64,19 @@
             <hr/>
         </div>
         <div class="col-md-12" [ngbCollapse]="data.assessment.panelIsOpen">
-            <div class="container-fluid" *ngIf="checkData.checkassessments && checkData.checkassessments.length > 0">
+            <div class="container-fluid" *ngIf="checkIns.checkassessments && checkIns.checkassessments.length > 0">
                 <div class="row bg-secondary text-light">
                     <div class="overflow-hidden col-md-{{ field.col }} border border-secondary" *ngFor="let field of checkAssessmentColumn">
                         <b>{{ field.headerName }} </b>
                     </div>
                 </div>
-                <div class="row bg-light text-dark" *ngFor="let review of checkData.checkassessments">
+                <div class="row bg-light text-dark" *ngFor="let review of checkIns.checkassessments">
                     <div class="overflow-hidden col-md-{{ field.col }} border border-secondary" *ngFor="let field of checkAssessmentColumn">
                         {{ getValue(field, review[field.field]) }}
                     </div>                      
                 </div>
             </div>
-            <div class="container-fluid" *ngIf="!checkData.checkassessments || checkData.checkassessments.length == 0">
+            <div class="container-fluid" *ngIf="!checkIns.checkassessments || checkIns.checkassessments.length == 0">
                     No available assessment
             </div>
         </div>

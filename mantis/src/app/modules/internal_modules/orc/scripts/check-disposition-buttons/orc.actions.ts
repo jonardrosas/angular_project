@@ -13,6 +13,7 @@ export class OrcCheckDispositionButtonBase extends CheckDisposeButtonBase {
         const allowedForOC = ['iST', 'OC', 'SD', 'ER', 'OP', 'MP', 'PW', 'PT', 'PI', 'FD', 'FR']
         const allowedForIST = ['PW', 'PC', 'PP', 'PT', 'PI', 'PNR', 'FD', 'FR']
         const allowedForMP = ['PW', 'PT', 'PI', 'FD', 'FR']
+        const allowedForDisposing = ['iST', 'OC', 'SD', 'ER', 'OP', 'MP', 'PW', 'PT', 'PI', 'FD', 'FR']
         const allowedForPass = ['PW', 'PT', 'PI', 'PC', 'PP', 'PNR']
         const allowedForFail = ['FD', 'FR', 'FS']
         for (var k in checks) {
@@ -25,8 +26,6 @@ export class OrcCheckDispositionButtonBase extends CheckDisposeButtonBase {
                 errors.push(`Cannot change from N to ${form.newStat} in the rule name (${check.name})`)
             }else if(check.status == 'A' && allowedForAssigned.indexOf(form.newStat) == -1){
                 errors.push(`Cannot change from A to ${form.newStat} in the rule name (${check.name})`)
-            }else if(check.status == 'OC' && allowedForOC.indexOf(form.newStat) == -1){
-                errors.push(`Cannot change from OC to ${form.newStat} in the rule name (${check.name})`)
             }else if(check.status == 'iST' && allowedForIST.indexOf(form.newStat) == -1){
                 errors.push(`Cannot change from iST to ${form.newStat} in the rule name (${check.name})`)
             }else if(check.status == 'MP' && allowedForMP.indexOf(form.newStat) == -1){
@@ -35,6 +34,23 @@ export class OrcCheckDispositionButtonBase extends CheckDisposeButtonBase {
                 errors.push(`Cannot change from ${check.status} to ${form.newStat} in the rule name (${check.name})`)
             }else if((allowedForFail.indexOf(check.status)  > -1) && (allowedForFail.indexOf(form.newStat) == -1)){
                 errors.push(`Cannot change from ${check.status} to ${form.newStat} in the rule name (${check.name})`)
+            }else if((allowedForDisposing.indexOf(check.status)  > -1) && (allowedForDisposing.indexOf(form.newStat) == -1)){
+                errors.push(`Cannot change from ${check.status} to ${form.newStat} in the rule name (${check.name})`)
+            }
+        }
+        return errors
+    }
+
+    public orcEscalateIstValidation(checks, form){
+        let errors = []
+        const allowedToiST = ['N', 'A', 'iST', 'OC', 'SD', 'ER', 'OP', 'MP']
+        for (var k in checks) {
+            let check = checks[k]        
+            debugger;
+            if(allowedToiST.indexOf(check.status) == -1){
+                errors.push(`Cannot change from ${check.status} to iST (${check.name})`)
+            }else if(check.status == form.newStat){
+                errors.push(`The rule is already at iST (${check.name})`)
             }
         }
         return errors
@@ -84,10 +100,11 @@ export class OrcCheckDispositionButtonBase extends CheckDisposeButtonBase {
             const selectedData = selectedNodes.map(node => node.data);
             const selectedCheckId = selectedData.map(data => data.id);
             if(selectedData.length > 0){
-                const modalRef = this.modalService.open(this.popups.CheckEscalateIstComponent, {backdrop: 'static', keyboard: false})
+                const modalRef = this.modalService.open(this.popups.CheckEscalateIstComponent, {backdrop: 'static', keyboard: false, size: 'xl'})
                 modalRef.componentInstance.selectedData = selectedData;
                 modalRef.componentInstance.mantisRecord = this.mantisRecord;
                 modalRef.componentInstance.dispoManagerInstance = dispoManagerInstance;
+                modalRef.componentInstance.validation = this.orcEscalateIstValidation;
                 modalRef.result.then(
                     (result) => {
                         if(dispoManagerInstance.checkComponentInstance){

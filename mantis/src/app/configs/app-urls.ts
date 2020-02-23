@@ -27,6 +27,7 @@ export const URLS = {
     ORC_CHECK_DEL_IMG_URL: '/orc/del_check_img/',
     //ORC_CHECK_IMAGES_URL: '/orc/addcheckimage/',
     ORC_CHECK_IMAGES_URL: '/mantis/check_image_upload/',
+    ORC_ADD_JOB_NOTES: '/orc/bugnotetextadd/',
 
     // NEW DJANGO REST FRAMEWORK
     DRF_MANTIS_RECORD_URL: '/mantis/api/v2/mantis_record/',

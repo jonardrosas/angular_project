@@ -16,6 +16,8 @@ import { CheckEscalateIstComponent } from '../../components/detail-check-list/co
 import { BootstrapAlertComponent } from '../../../../../shared/components/bootstrap-alert/bootstrap-alert.component';
 import { DetailJobChangeStatusComponent } from '../../components/detail-job-action-section/detail-job-change-status/detail-job-change-status.component';
 import { DetailJobAssignToComponent } from '../../components/detail-job-action-section/detail-job-assign-to/detail-job-assign-to.component';
+import { DetailJobActionAddNotesComponent } from '../../components/detail-job-action-section/detail-job-action-add-notes/detail-job-action-add-notes.component';
+import { DetailJobActionAddAttachmentComponent } from '../../components/detail-job-action-section/detail-job-action-add-attachment/detail-job-action-add-attachment.component';
 
 import * as orcModuleStore from './../../store';
 
@@ -32,7 +34,9 @@ export const ReportCheckDispostionPopups = {
     'CheckStatusTemplateComponent': CheckStatusTemplateComponent,
     'CheckEscalateIstComponent': CheckEscalateIstComponent,
     'DetailJobChangeStatusComponent': DetailJobChangeStatusComponent,
-    'DetailJobAssignToComponent': DetailJobAssignToComponent
+    'DetailJobAssignToComponent': DetailJobAssignToComponent,
+    'DetailJobActionAddNotesComponent': DetailJobActionAddNotesComponent,
+    'DetailJobActionAddAttachmentComponent': DetailJobActionAddAttachmentComponent,
 }
 
 // This section components

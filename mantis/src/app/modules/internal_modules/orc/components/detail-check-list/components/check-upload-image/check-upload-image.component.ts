@@ -59,7 +59,6 @@ export class CheckUploadImageComponent implements OnInit {
 
         this.orcRecordService.addCheckImages(formData).subscribe(
             (data) => {
-                debugger;
                 if(data.status == 'success'){
                     this.alerts.push({type: 'success', message: data.msg});
                     setTimeout(

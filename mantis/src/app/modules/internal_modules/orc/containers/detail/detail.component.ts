@@ -93,6 +93,7 @@ export class DetailComponent implements OnInit, AfterViewInit, OnDestroy {
                 const componentRef = viewContainerRef.createComponent(componentFactory);
                 (componentRef.instance as any).data =  componentInstance.data;
                 (componentRef.instance as any).dispoManagerInstance =  this.dispoManagerInstance;
+                (componentRef.instance as any).container =  this;
                 (componentRef.instance as any).mantisId =  this.mantisId;
             }        
         }

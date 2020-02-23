@@ -18,6 +18,7 @@ export class MantisRecordService extends QueryHelper {
     public mantisRecordSubject = new BehaviorSubject<MantisRecordModel>({} as MantisRecordModel);
     public groupUrl = URLS.DRF_AUTH_GROUP_PROFILE_URL;
     public jobChangeStatusUrl = URLS.DRF_ORC_JOB_DISPOSE_URL;
+    public jobAddNotesUrl = URLS.ORC_ADD_JOB_NOTES;
 
     constructor(public apiService: ApiService) {
         super();
@@ -65,8 +66,12 @@ export class MantisRecordService extends QueryHelper {
 
     changeJobStatus(data: any): Observable<any> {
         let url = `${this.jobChangeStatusUrl}`;
-        debugger;
         return this.apiService.post(url, data);
     }       
+
+    addJobNotes(data: any): Observable<any> {
+        let url = `${this.jobAddNotesUrl}`;
+        return this.apiService.post(url, data);
+    }        
 
 }

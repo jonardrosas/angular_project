@@ -45,6 +45,9 @@ import { DetailJobChangeStatusComponent } from './components/detail-job-action-s
 import { CheckDetailReportComponent } from './components/check-detail-report/check-detail-report.component';
 import { CheckDetailContainerComponent } from './containers/check-detail-container/check-detail-container.component';
 import { CheckDetailPopupComponent } from './components/detail-check-list/components/check-detail-popup/check-detail-popup.component';
+import { CheckImageListViewComponent } from './components/check-image-list-view/check-image-list-view.component';
+import { DetailJobActionAddNotesComponent } from './components/detail-job-action-section/detail-job-action-add-notes/detail-job-action-add-notes.component';
+import { DetailJobActionAddAttachmentComponent } from './components/detail-job-action-section/detail-job-action-add-attachment/detail-job-action-add-attachment.component';
 
 @NgModule({
     imports: [
@@ -89,6 +92,9 @@ import { CheckDetailPopupComponent } from './components/detail-check-list/compon
         CheckDetailReportComponent,
         CheckDetailContainerComponent,
         CheckDetailPopupComponent,
+        CheckImageListViewComponent,
+        DetailJobActionAddNotesComponent,
+        DetailJobActionAddAttachmentComponent,
     ],
     entryComponents: [
         CheckListComponent,
@@ -115,6 +121,8 @@ import { CheckDetailPopupComponent } from './components/detail-check-list/compon
         DetailJobChangeStatusComponent,
         CheckDetailReportComponent,
         CheckDetailPopupComponent,
+        DetailJobActionAddNotesComponent,
+        DetailJobActionAddAttachmentComponent
     ],
     providers: [
         OrcRecordService,

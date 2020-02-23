@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, Output, OnDestroy, EventEmitter } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -19,6 +19,9 @@ import { Observable, Subscription } from 'rxjs';
 })
 
 export class DetailJobChangeStatusComponent implements OnInit, OnDestroy {
+    @Input() filterStages;
+    @Input() filterResolution;
+    @Output() reload = new EventEmitter()
     public mantisRecord;
     public alerts: NgAlertInterface[] = [];
     public heading: string = "JOB LEVEL DISPOSITION";
@@ -67,7 +70,7 @@ export class DetailJobChangeStatusComponent implements OnInit, OnDestroy {
         const stages = this.StageModel.objects.all({})
         this.stageSubscription = stages.subscribe(
             (data) => {
-                this.stages = data.results;
+                this.stages = this.filterStages(data.results);
             }
         )
     }
@@ -78,7 +81,7 @@ export class DetailJobChangeStatusComponent implements OnInit, OnDestroy {
             const resolutions = this.ResolutionModel.objects.filter({stage: stage_id})
             this.resolutionSubscription = resolutions.subscribe(
                 (data) => {
-                    this.resolutions = data;
+                    this.resolutions = this.filterResolution(data)
                 }
             )        
         }
@@ -98,6 +101,9 @@ export class DetailJobChangeStatusComponent implements OnInit, OnDestroy {
             (data) => {
                 if(data.status == 'success'){
                     this.alerts.push({message: data.msg[this.mantisRecord.id], type: 'success'})
+                    setTimeout(
+                        ()=>this.activeModal.close()
+                    )                  
                 }else{
                     this.alerts.push({message: data.msg[this.mantisRecord.id], type: 'danger'})
                 }

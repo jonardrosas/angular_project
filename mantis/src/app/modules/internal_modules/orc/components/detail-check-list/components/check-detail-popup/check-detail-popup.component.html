@@ -4,12 +4,12 @@
             <button type="button" class="m-2 float-right btn btn-danger btn-sm" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
                 <i class="fas fa-times"></i>
             </button>
-             <a title="Check Report Page" class="m-2 float-right btn btn-secondary btn-sm" [routerLink]="[url, mantisId, checkId]"><i class="fas fa-external-link-alt"></i> </a>
+             <a title="Check Report Page" class="m-2 float-right btn btn-secondary btn-sm" [routerLink]="[url, mantisId, checkIns.id]"><i class="fas fa-external-link-alt"></i> </a>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
-            <app-check-detail-report [checkId]="checkId"></app-check-detail-report>
+            <app-check-detail-report [checkIns]="checkIns"></app-check-detail-report>
         </div>
     </div>
 </div>

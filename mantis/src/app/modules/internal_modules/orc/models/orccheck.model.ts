@@ -1,5 +1,6 @@
 import { BaseModel } from './base.model';
 import { URLS } from './../../../../configs';
+import { OrcCheckImage } from './orccheckimage.model';
 
 
 export interface OrcCheckInterface {
@@ -23,6 +24,7 @@ export interface OrcCheckInterface {
     record_id?: number;
     vio_cnt?: number;
     record?: number;
+    checkimages?:  OrcCheckImage
 }
 
 
@@ -48,6 +50,7 @@ export class OrcCheckModel extends BaseModel implements OrcCheckInterface {
     record_id?: number;
     record?: number;
     vio_cnt?: number;
+    checkimages:  OrcCheckImage
 
     constructor(){
         super()

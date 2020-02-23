@@ -48,6 +48,7 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
     public checkAction;
     public checkSelector;
     public checkStat = {
+        default: {},
         count: {},
         subtab: {},
     };

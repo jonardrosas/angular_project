@@ -1,0 +1,48 @@
+<div class="container-fluid">
+    <div class="row">
+        <button (click)="addImage()"> <i class="far fa-file-image"></i> Add Image </button>
+    </div>
+
+    <div class="row">
+       <div class="col-md-12">
+        <div class="container-fluid" *ngIf="checkImages.length > 0; else noImage">
+          <div class="row row-break media text-dark mb-1 p-2 bg-white border border-dark" *ngFor="let image of checkImages">
+              <div class="col-md-12">
+                  <button (click)="deleteImgForm(image.id)"><i class="fas fa-trash"></i></button>
+                  <button class="ml-1" (click)="updateDescription(image.id)"><i class="fa fa-pencil-alt"></i></button>
+                  <br/>
+              </div>
+              <div class="col-md-6 p-2">
+                  <img [src]="image.check_image" class="img-fluid img-thumbnail rounded" alt="Image Responsive">
+              </div>
+              <div class="ml-1 col-md-5 media-body p-2 border-secondary border bg-white">
+                    <h6 class="mt-0 mb-1">Description </h6>
+                    <hr/>
+                    <div [ngSwitch]="ruleDescMode[image.id]">
+                        <div *ngSwitchCase="'edit'">
+                          <form [formGroup]="imageForm[image.id]" (ngSubmit)="saveImgForm(image.id)">
+                               <textarea id="description" class="form-control" formControlName="decription"></textarea> 
+                               <button (click)="ruleDescMode[image.id] = 'read'">Cancel</button>
+                               <button class="ml-1" type="submit">Save</button>
+                          </form>
+                        </div>
+                        <div *ngSwitchDefault>
+                            <div *ngIf="image.description; else noDesc" class="bg-white">
+                                {{ image.description }}
+                            </div>
+                        </div>
+                    </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<ng-template #noDesc>
+    <i>No descriptions</i>
+</ng-template>
+
+<ng-template #noImage>
+    <small class="badge badge-danger"><i>No image available.</i></small>
+</ng-template>

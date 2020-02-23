@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DispoMangerService } from '../../services'
 import { DispostionParameter } from '../../scripts';
+import { OrcCheckModel } from '../../models';
+import {  } from '../../models';
 import * as ENUMS from './../../scripts/enums';
 import * as orcModuleStore from '../../store';
 import { Store, select } from '@ngrx/store';
@@ -13,9 +15,10 @@ import { Store, select } from '@ngrx/store';
 })
 export class CheckDetailContainerComponent implements OnInit {
   mantisId;
-  checkId;
+  checkIns;
   buttons;
   mantisRecord;
+  checkModelInst;
   dispoManagerInstance;
   url: string = ENUMS.JOB_REPORT_URL;
 
@@ -26,12 +29,15 @@ export class CheckDetailContainerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+      this.checkModelInst = new OrcCheckModel()
       this.activatedRoute.paramMap.subscribe(params => {
           this.mantisId = +params.get('mantisId');
-          this.checkId = +params.get('checkId');
+          const checkId = +params.get('checkId');
+          this.getCheckObject(checkId)
           this.store.dispatch(orcModuleStore.getMantisObjectAction({id: this.mantisId}));
           this.loadMantisRecord()
       });
+
   }  
 
   loadMantisRecord() {
@@ -49,6 +55,16 @@ export class CheckDetailContainerComponent implements OnInit {
           },
     );
   }
+
+  getCheckObject(id){
+      this.checkModelInst.objects.get(id).subscribe(
+          (data)=> {
+            if(data.id){
+              this.checkIns = data;
+            }
+          }
+      )
+  }  
 
 
 }

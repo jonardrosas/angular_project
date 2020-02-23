@@ -1,6 +1,11 @@
 <div class="row">
     <div class="col-md-12">
-    <button class="ml-1 btn-sm"  [ngClass]="button.class" (click)="button.function(dispoManagerInstance)" *ngFor="let button of buttons" ><i *ngIf="button.icon" [ngClass]="button.icon"></i>  {{ button.label }}</button>        
+    <button class="ml-1 btn-sm"  [ngClass]="button.class" (click)="button.function(container)" *ngFor="let button of buttons" ><i *ngIf="button.icon" [ngClass]="button.icon"></i>  {{ button.label }}</button>        
     </div>
 </div> 
+<div class="row">
+    <div class="col-md-12">
+        <a class="ml-1" (click)="scroll('checksection')">[Go to check section]</a>
+    </div>
+</div>
 <hr/>

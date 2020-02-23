@@ -81,7 +81,7 @@ export class CheckChangeStatusComponent implements OnInit {
                             setTimeout(
                                 (data) => {
                                     this.activeModal.close(data)
-                                }, 2000
+                                }
                             )
                         }else{
                             this.alerts.push({type: 'danger', message: data.msg});

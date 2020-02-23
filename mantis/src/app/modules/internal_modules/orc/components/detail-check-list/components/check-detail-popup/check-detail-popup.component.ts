@@ -10,7 +10,7 @@ import * as ENUMS from './../../../../scripts/';
 })
 
 export class CheckDetailPopupComponent implements OnInit {
-    @Input() checkId;
+    @Input() checkIns;
     @Input() mantisId;
     public url: string = ENUMS.CHECK_REPORT_URL;
 

@@ -21,8 +21,22 @@
                             <label for="comments">Check Disposition Comments</label>
                             <textarea id="comments" class="form-control" formControlName="comments"></textarea>
                         </div>                        
+                        <div class="container-fluid">
+                            <label>Check Images</label>
+                            <div class="row row-break bg-secondary" *ngFor="let check of selectedData">
+                                <div  class="col-md-12">
+                                    <h6 class="text-white">{{ check.name }}</h6>
+                                    <app-check-image-list-view [checkIns]="check" (refresh)="getObject()"></app-check-image-list-view>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <div class="row">
+                    <li *ngFor="let alert of alerts">
+                        <small><ngb-alert [type]="alert.type" (close)="close(alert)">{{ alert.message }}</ngb-alert></small>
+                    </li>        
+                </div>                
             </div>
         </div>
         <div class="modal-footer">

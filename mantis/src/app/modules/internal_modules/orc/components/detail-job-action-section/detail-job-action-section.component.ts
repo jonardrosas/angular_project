@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, ViewChild, EventEmitter } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 
 import { FormGroup, FormControl } from '@angular/forms';
@@ -17,17 +17,27 @@ import { NgbActiveModal } from '../../../../third_party_modules/ng_bootstrap';
   styleUrls: ['./detail-job-action-section.component.css']
 })
 export class DetailJobActionSectionComponent implements OnInit {
+    @Input() container;
     public buttons;
     public mantisRecord;
     public dispoManagerInstance;
     
     constructor(
         private dispoService: DispoMangerService,
+        private store: Store<any>
     ) { }
 
     ngOnInit() {
         this.dispoManagerInstance = this.dispoService.dispoManagerInstance;
         this.buttons = this.dispoService.dispoManagerInstance.jobButtons;
     }
+
+
+    scroll(id) {
+        debugger;
+        let el = document.getElementById(id);
+        el.scrollIntoView({behavior: 'smooth'});
+    }    
+
     
 }

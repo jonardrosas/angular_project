@@ -52,8 +52,12 @@ export class ProgressBarComponent implements OnInit {
     }
     
     setCurrentColor(stage){
-        if(stage.id <= this.currentStage){
-            return stage.color;
+        if(stage.id == this.currentStage){
+            return '#ffc107';
+        }else if(stage.id < this.currentStage){
+            return 'lightgreen';
+        }else{
+            return '#e2e2e2';
         }
     }
 

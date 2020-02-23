@@ -41,7 +41,7 @@ export class CheckStatusTemplateComponent implements OnInit, ICellRendererAngula
     showCheckDetail(){
         const modalRef = this.modalService.open(CheckDetailPopupComponent, {size: 'xl'})
         modalRef.componentInstance.data = this.params.data;
-        modalRef.componentInstance.checkId = this.params.data.id;
+        modalRef.componentInstance.checkIns = this.params.data;
         modalRef.componentInstance.mantisId = this.mantisId;
     }
 	
