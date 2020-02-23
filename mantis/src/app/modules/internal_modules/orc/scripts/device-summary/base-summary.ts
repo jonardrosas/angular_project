@@ -124,9 +124,9 @@ export class DetailSummaryBase extends CommonSummaryField implements DetailSumma
     setMantisInfoTable() {
         this.mantisInfoTable = {
             fields: [
-                this.orcRecordId,
-                this.jobId,
                 this.mantisId,
+                this.jobId,
+                this.orcRecordId,
                 this.aggregateStatus,
                 this.stage,
                 this.status,
