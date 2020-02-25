@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { ButtonCollapse } from './../../util/';
 import { DispoMangerService } from './../../services';
+import { APP_CONFIG } from './../../../../../configs';
 
 import * as orcModuleStore from './../../store';
 import { MantisAttachmentInterface } from './../../models';
@@ -19,6 +20,7 @@ export class DetailAttachmentSectionComponent extends ButtonCollapse implements 
     public attachments;
     public button;
     private attachmentSubscription: Subscription;
+    public media_url: string = APP_CONFIG.BASE_URL + '/media/job_reports/';
 
     constructor(
         private store: Store<any>,
@@ -28,12 +30,19 @@ export class DetailAttachmentSectionComponent extends ButtonCollapse implements 
     }
 
     ngOnInit() {
-      this.getObject();
+        this.getObject();
         this.button = this.dispoService.dispoManagerInstance.jobButtons.caddAttachment;
     }
 
     ngOnDestroy(){
        this.attachmentSubscription.unsubscribe()
+    }
+
+
+
+    getBaseUrl(mantisId: number){
+        const id = mantisId / 10000 | 0
+        return  this.media_url + id + '/';
     }
 
     getObject() {
@@ -43,6 +52,10 @@ export class DetailAttachmentSectionComponent extends ButtonCollapse implements 
                 this.attachments = data;
              }    
         );
+    }
+
+    deleteAttachment(attachment){
+        alert('Not working yet');
     }
 
 

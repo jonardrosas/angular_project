@@ -15,18 +15,22 @@
                         <tr>
                             <th>Name</th>
                             <th>Size</th>
-                            <th>Created</th>
+                            <th>Date Created</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let attachment of attachments">
-                            <td>{{ attachment.filename }}</td>
+                            <td>
+                                <a download="{{ attachment.filename }}" href="{{ getBaseUrl(attachment.bug_id) }}{{ attachment.filename }}"><i class="fas fa-download"></i></a>
+                                {{ attachment.filename }}
+                            </td>
                             <td>{{ attachment.filesize }}</td>
                             <td>{{ attachment.date_added }}</td>
                             <td>
-                                <button class="btn btn-sm">Download</button>
-                                <button class="btn btn-sm">Remove</button>
+                                <button class="btn btn-sm" (click)="deleteAttachment(attachment)">
+                                    <i class="text-danger fas fa-trash-alt"></i>
+                                </button>
                             </td>
                         </tr>
                     </tbody>
