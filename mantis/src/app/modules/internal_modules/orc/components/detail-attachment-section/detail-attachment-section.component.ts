@@ -15,6 +15,7 @@ import { MantisAttachmentInterface } from './../../models';
 })
 export class DetailAttachmentSectionComponent extends ButtonCollapse implements OnInit, OnDestroy {
     @Input() public mantisId: number;
+    @Input() public container;
     public attachments;
     public button;
     private attachmentSubscription: Subscription;

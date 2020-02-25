@@ -26,7 +26,7 @@
                             <div class="row row-break bg-secondary" *ngFor="let check of selectedData">
                                 <div  class="col-md-12">
                                     <h6 class="text-white">{{ check.name }}</h6>
-                                    <app-check-image-list-view [checkIns]="check" (refresh)="getObject()"></app-check-image-list-view>
+                                    <app-check-image-list-view [checkIns]="check"></app-check-image-list-view>
                                 </div>
                             </div>
                         </div>

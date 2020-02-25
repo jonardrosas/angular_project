@@ -19,7 +19,7 @@
         </div>
         <div class="modal-footer">
             <p *ngFor="let alert of alerts">
-                <ngb-alert [type]="alert.type" (close)="close(alert)">{{ alert.message }}</ngb-alert>
+                <ngb-alert [type]="alert.type">{{ alert.message }}</ngb-alert>
             </p>        
             <button type="submit" class="btn btn-success" (click)="onSubmit()" [disabled]="files.length == 0">Submit</button>
         </div>

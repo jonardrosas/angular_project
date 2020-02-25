@@ -1,5 +1,5 @@
 <div class="container-fluid detail-card-container detail-font" >
-    <div class="row row-break" *ngIf="(dispoManagerInstanceSubject | async) as dispoManagerInstance; else loading">
+    <div class="row row-break" *ngIf="(dispoManagerInstanceSubject | async) as dispoManagerInstance">
         <div class="col-md-12">
             <h2>{{ dispoManagerInstance.jobReportTitle.toUpperCase() }}</h2>
         </div>        
