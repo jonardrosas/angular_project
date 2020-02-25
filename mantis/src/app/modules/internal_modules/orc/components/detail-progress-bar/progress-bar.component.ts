@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 import * as orcModuleStore from './../../store';
 
 import { MantisRecordService, DispoMangerService } from './../../services';
@@ -13,7 +14,7 @@ import { MantisStage, MantisResolution } from './../../models';
     styleUrls: ['./progress-bar.component.css']
 })
 
-export class ProgressBarComponent implements OnInit {
+export class ProgressBarComponent implements OnInit, OnDestroy {
     public StageModel;
     public stages;
     public mantisRecord;
@@ -21,22 +22,34 @@ export class ProgressBarComponent implements OnInit {
     public defaultColor: string = "ivory";
     public passedColor: string = "lightgray";
     public currentColor: string;
+    private mantisRecordSubscription: Subscription;
     
     constructor(
         private mantisRecordService: MantisRecordService,
         private dispoMangerService: DispoMangerService,
+        private store: Store<any>,
     ) {
         // super();
+    }
+
+    ngOnDestroy(){
+        this.mantisRecordSubscription.unsubscribe()
     }
     
     ngOnInit(){
         this.StageModel = new MantisStage()
         this.getStages()
         this.currentStage = this.dispoMangerService.dispoManagerInstance.dispoParams.mantisRecord.status_code;
+        this.mantisRecordSubscription = this.store.pipe(select(orcModuleStore.getMantisRecordObjectStateSelector))
+        .subscribe(
+            (data) => {
+                if(data.id){
+                    this.currentStage = data.status_code;
+                }
+            }
+        )        
     }
     
-    getCurrentStage(status){
-    }
 
     filterStages(data){    
         return  this.dispoMangerService.dispoManagerInstance.filterJobProgressBar(data)

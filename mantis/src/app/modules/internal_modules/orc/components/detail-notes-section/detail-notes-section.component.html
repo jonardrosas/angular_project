@@ -1,12 +1,16 @@
 <div class="row-break">
     <button type="button" class="btn btn-toggle" (click)="data.panelIsOpen = !data.panelIsOpen"
             [attr.aria-expanded]="!data.panelIsOpen" aria-controls="notesSection">
-        <i [ngClass]="isCollapse(data.panelIsOpen)"></i>  Job Notes
-    </button>      
+        <i [ngClass]="isCollapse(data.panelIsOpen)"></i>  Job Notes 
+        <span class="badge badge-dark">{{ notes.length }} </span>
+    </button>   
 </div>
 <div id="notesSection" class="row-break" [ngbCollapse]="data.panelIsOpen">
-    <div class="card bg-light">
-        <div class="card-body">
+    <div class="row-break card bg-light" >
+        <div class="col-md-2 p-2">
+            <button class="pull-right" (click)="button.function(container)"><i *ngIf="button.icon" [ngClass]="button.icon"></i> {{ button.label }} </button><br/>
+        </div>
+        <div class="card-body" *ngIf="notes.length > 0; else noNotes">
             <table class="table table-sm table-bordered table-light table-striped">
                     <thead class="thead-dark">
                         <tr>
@@ -33,6 +37,11 @@
         </div>
     </div>           
 </div>
+<ng-template  #noNotes>
+    <small class="row-break text-danger ml-2 p-2"><i>
+        No notes available.
+    </i></small>
+</ng-template>
 
 
 

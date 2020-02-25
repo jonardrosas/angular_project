@@ -23,11 +23,14 @@ export class JobActionBase implements JobActionInterface {
         this.modalService = dispoParams.modalService;
         this.mantisRecord = dispoParams.mantisRecord;
         this.popups = dispoParams.registeredCheckPopUps;
-        this.allButtons = [
-            this.changeStatusButton,
-            this.addNotesButton,
-            this.addAttachmentButton,
-        ]
+
+        this.allButtons = {
+            'achangeStatus' : this.changeStatusButton,
+            'baddNotes': this.addNotesButton,
+            'caddAttachment': this.addAttachmentButton,
+        }
+
+        // number prefix is for ordering since the order is based from key 
     }
     
     public changeStatusButton = {
@@ -72,7 +75,7 @@ export class JobActionBase implements JobActionInterface {
     public addNotesButton = {
         label: 'Job Add Notes',
         class: 'btn btn-info btn-sm',
-        icon: 'fas fa-comment-alt',
+        icon: 'fas fa-pencil-alt',
         function: (container) =>  {
             const modalRef = this.modalService.open(this.popups.DetailJobActionAddNotesComponent, {backdrop: 'static', keyboard: false});
             modalRef.componentInstance.mantisRecord = this.mantisRecord;
@@ -95,9 +98,19 @@ export class JobActionBase implements JobActionInterface {
         label: 'Job Add Attachment',
         class: 'btn btn-info btn-sm',
         icon: 'fas fa-paperclip',        
-        function: () =>  {
+        function: (container) =>  {
             const modalRef = this.modalService.open(this.popups.DetailJobActionAddAttachmentComponent, {backdrop: 'static', keyboard: false});
             modalRef.componentInstance.mantisRecord = this.mantisRecord;
+            modalRef.componentInstance.container = container;
+            modalRef.result.then(
+                (result) => {
+                    if(container){
+                        container.getObjectUsingStore(this.mantisRecord.id)
+                    }
+                }, (reason) => {
+                    // dispoManagerInstance.checkComponentInstance.loadCheck()
+                }
+            )             
         }
     }   
     

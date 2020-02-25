@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-12">
-    <button class="ml-1 btn-sm border border-secondary"  [ngClass]="button.class" (click)="button.function(container)" *ngFor="let button of buttons" ><i *ngIf="button.icon" [ngClass]="button.icon"></i>  {{ button.label }}</button>        
+    <button class="ml-1 btn-sm border border-secondary"  [ngClass]="button.value.class" (click)="button.value.function(container)" *ngFor="let button of buttons | keyvalue" ><i *ngIf="button.value.icon" [ngClass]="button.value.icon"></i>  {{ button.value.label }}</button>
     </div>
 </div> 
 <div class="row">

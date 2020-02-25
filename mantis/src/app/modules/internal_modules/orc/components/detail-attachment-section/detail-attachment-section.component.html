@@ -2,10 +2,14 @@
     <button type="button" class="btn btn-toggle" (click)="data.panelIsOpen= !data.panelIsOpen"
             [attr.aria-expanded]="!data.panelIsOpen" aria-controls="attachmentSection">
         <i [ngClass]="isCollapse(data.panelIsOpen)"></i>  Attachment
+        <span class="badge badge-dark">{{ attachments.length }} </span>
     </button>      
     <div id="attachmentSection" class="row-break" [ngbCollapse]="data.panelIsOpen">
         <div class="card bg-light">
-            <div class="card-body">
+            <div class="col-md-2 p-2">
+                <button class="pull-right" (click)="button.function(container)"><i *ngIf="button.icon" [ngClass]="button.icon"></i> {{ button.label }} </button><br/>
+            </div>
+            <div class="card-body" *ngIf="attachments.length > 0; else noAttachment;">
                 <table class="table table-sm table-bordered table-light table-striped">
                     <thead class="thead-dark">
                         <tr>
@@ -16,7 +20,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let attachment of attachments$ | async">
+                        <tr *ngFor="let attachment of attachments">
                             <td>{{ attachment.filename }}</td>
                             <td>{{ attachment.filesize }}</td>
                             <td>{{ attachment.date_added }}</td>
@@ -31,6 +35,10 @@
         </div>           
     </div>
 </div>       
+
+<ng-template #noAttachment>
+        <small class="text-danger ml-2"><i>No attachment available</i></small>
+</ng-template>
     
 
 

@@ -1,1 +1,27 @@
-<p>detail-job-action-add-attachment works!</p>
+<div class="job-upload">
+    <form>
+        <div class="modal-header bg-dark text-light">
+            <h4 class="modal-title">{{ heading }}</h4>
+            <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="container-fluid">
+                <div class="row p-2 bg-light border-dark">
+                    <div class="col-md-12 row-break">
+                        <div class="form-group">
+                            <input type="file" name="file" id="file" (change)="onFileChanged($event)" multiple/>
+                        </div>
+                    </div>
+                </div><br/>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <p *ngFor="let alert of alerts">
+                <ngb-alert [type]="alert.type" (close)="close(alert)">{{ alert.message }}</ngb-alert>
+            </p>        
+            <button type="submit" class="btn btn-success" (click)="onSubmit()" [disabled]="files.length == 0">Submit</button>
+        </div>
+    </form>
+</div>

@@ -3,6 +3,7 @@ import { MantisNotesInterface } from './../../models';
 import { Observable, Subscription } from 'rxjs';
 import { MantisDispositionManager } from './../../scripts';
 import { ButtonCollapse } from './../../util/';
+import { DispoMangerService } from './../../services';
 
 import { Store, select } from '@ngrx/store';
 
@@ -16,12 +17,15 @@ import * as orcModuleStore from './../../store';
 export class DetailNotesSectionComponent extends ButtonCollapse implements OnInit, OnDestroy {
     @Input() dispoManagerInstance: MantisDispositionManager;    
     @Input() public mantisId: number;
+    @Input() public container: number;
     public notes;
+    public button;
     public notesSubscription: Subscription;
 
 
     constructor(
-        private store: Store<any>
+        private store: Store<any>,
+        private dispoService: DispoMangerService,
     ) {
         super()
      }
@@ -33,6 +37,7 @@ export class DetailNotesSectionComponent extends ButtonCollapse implements OnIni
 
     ngOnInit() {
         this.getObject();
+        this.button = this.dispoService.dispoManagerInstance.jobButtons.baddNotes;
     }
 
     getObject() {
