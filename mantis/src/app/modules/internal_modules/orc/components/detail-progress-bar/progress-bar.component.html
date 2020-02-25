@@ -1,11 +1,11 @@
 
 <div class="row row-break">
     <div class="col-md-12">
-        <table align="center" class="table-bordered table-sm">
+        <table align="center" class="table-sm">
             <tbody>
                 <tr>
-                    <ng-container *ngFor="let stage of stages">
-                        <td width="100" align="center" [attr.bgcolor]="setCurrentColor(stage)" [ngClass]="setCurrentClass(stage)">
+                    <ng-container *ngFor="let stage of stages" class="border border-danger">
+                        <td width="100" align="center" [attr.bgcolor]="setCurrentColor(stage)" class="rounded-pill " [ngClass]="setCurrentClass(stage)">
                             {{ stage.name   }}
                         </td>
                         <ng-container *ngIf = "stage.name !== 'closed'; then Arrow"></ng-container>
@@ -17,5 +17,5 @@
 </div>
 
 <ng-template #Arrow>
-    <i class="fas fa-arrow-right fa-lg"></i>
+    <i class="mt-2 fas fa-arrow-right fa-lg"></i>
 </ng-template>

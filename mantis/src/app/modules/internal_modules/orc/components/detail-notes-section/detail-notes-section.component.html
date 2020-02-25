@@ -12,7 +12,7 @@
                         <tr>
                             <th>Id</th>
                             <th>User</th>
-                            <th>Created</th>
+                            <th>Date</th>
                             <th>Stage</th>
                             <th>Note</th>
                         </tr>
@@ -21,11 +21,14 @@
                         <tr *ngFor="let note of notes">
                             <td> {{note.id }}</td>
                             <td> {{note.reporter.username }}</td>
-                            <td> {{note.date_submitted }}</td>
+                            <td> {{note.date_submitted | date }}</td>
                             <td> {{note.bug_status }}</td>
                             <td> {{note.bugnote_text.note }}</td>
                         </tr>
                     </tbody>
+                    <tfoot>
+                        <button class="btn btn-default"><i class=""></i></button>
+                    </tfoot>
             </table>
         </div>
     </div>           

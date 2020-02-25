@@ -63,9 +63,12 @@ export class ProgressBarComponent implements OnInit {
 
     setCurrentClass(stage){
         if(stage.id == this.currentStage){
-            return 'shadow border-3 border border-dark';
+            return '#ffc107 shadow-lg';
+        }else if(stage.id < this.currentStage){
+            return 'lightgreen shadow';
         }else{
-            return 'border-1';
+            return '#e2e2e2 shadow';
         }
+
     }    
 }
