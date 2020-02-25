@@ -16,6 +16,7 @@ import { OrcRecordService, MantisRecordService,
         JobLevelAssignPostService, } from './services';
 
 import * as fromOrcModuleReducer from './store';
+import { ToStageStringPipe } from './pipes';
 import { OrcRoutingModule } from './orc-routing.module';
 import { ListComponent } from './containers/list/list.component';
 import { OrcSharedModule } from './shared/orc-shared.module';
@@ -30,7 +31,6 @@ import { DetailJobHistorySectionComponent } from './components/detail-job-histor
 import { CheckChangeStatusComponent } from './components/detail-check-list/components/check-change-status/check-change-status.component';
 import { CheckStatusTemplateComponent } from './components/detail-check-list/components/check-status-template/check-status-template.component';
 import { CheckEscalateIstComponent } from './components/detail-check-list/components/check-escalte-ist-status/check-escalate-ist-status.component';
-import { Safe } from './../../../shared/pipes/safe-html';
 import { JobreportSectionDirective } from './directives/jobreport-section.directive';
 import { TestDivComponent } from './components/test-div/test-div.component';
 import { ProgressBarComponent } from './components/detail-progress-bar/progress-bar.component';
@@ -65,7 +65,6 @@ import { DetailJobActionAddAttachmentComponent } from './components/detail-job-a
         OrcSharedModule
     ],
     declarations: [
-        Safe,
         ListComponent,
         DetailComponent,
         CheckListComponent,
@@ -95,6 +94,7 @@ import { DetailJobActionAddAttachmentComponent } from './components/detail-job-a
         CheckImageListViewComponent,
         DetailJobActionAddNotesComponent,
         DetailJobActionAddAttachmentComponent,
+        ToStageStringPipe
     ],
     entryComponents: [
         CheckListComponent,

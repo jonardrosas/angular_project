@@ -3,6 +3,7 @@ import { OrcModuleState } from './../state';
 
 export * from './mantisrecord.selectors';
 export * from './mantisresolution.selector';
+export * from './mantisstage.selector';
 export * from './orcrecord.selectors';
 export * from './mantisobject.selector';
 

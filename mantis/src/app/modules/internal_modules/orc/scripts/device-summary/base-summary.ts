@@ -14,7 +14,7 @@ export class CommonSummaryField {
     public pdbStatus = { field: 'pdb_status', headerName: 'Pdb Status' };
     public dispositionMethod = { field: 'orc_record__orc_ext__disposition_method', headerName: 'Disposition Method' };
     public aggregateStatus = { field: 'orc_record__status', headerName: 'Aggregate Status',
-        cellTemplate: (val: string, row?)=>{
+        cellTemplate: (val: string, row?: any, extraMap?: any)=>{
             return `<span class="btn btn-small ${checkStatusMapping[val].btnClass}">${val}</span>`;
         }
     };
@@ -31,14 +31,20 @@ export class CommonSummaryField {
     public layer = {
         field: 'layer',
         headerName: 'Layer',
-        cellTemplate: (val, row?) => {
+        cellTemplate: (val: string, row?: any, extraMap?: any)=>{
             return `${val}[${row.layer_rev || ''}]`;
         }
     };
     public layerRev = { field: 'layer_rev', headerName: 'Layer Rev'};
     public processId = { field: 'process_id', headerName: 'Process Id'};
     public operation = { field: 'operation', headerName: 'Operation'};
-    public stage = { field: 'status', headerName: 'Stage'};
+    public stage = {
+        field: 'status_code',
+        headerName: 'Stage', 
+        cellTemplate: (val: string, row?: any, extraMap?: any)=>{
+            return `<span style="background-color: ${extraMap[val].color}">${extraMap[val].name}</span>`;
+        }    
+    };
     public status = { field: 'resolution', headerName: 'Status'};
     public resolutionCode  = { field: 'resolution_code', headerName: 'Resolution Code'};
     public fab = { field: 'orc_record__orc_ext__fab', headerName: 'Fab'};

@@ -23,6 +23,7 @@ export class ProgressBarComponent implements OnInit, OnDestroy {
     public passedColor: string = "lightgray";
     public currentColor: string;
     private mantisRecordSubscription: Subscription;
+    private stageSubscription: Subscription;
     
     constructor(
         private mantisRecordService: MantisRecordService,
@@ -34,6 +35,7 @@ export class ProgressBarComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(){
         this.mantisRecordSubscription.unsubscribe()
+        this.stageSubscription.unsubscribe()
     }
     
     ngOnInit(){
@@ -57,9 +59,10 @@ export class ProgressBarComponent implements OnInit, OnDestroy {
 
 
     getStages(){
-        this.StageModel.objects.all({}).subscribe(
+        this.stageSubscription = this.store.pipe(select(orcModuleStore.getMantisStagesStateSelector))
+        .subscribe(
             (data) => {
-                this.stages = this.filterStages(data.results);
+                this.stages = this.filterStages(data);
             }
         )
     }

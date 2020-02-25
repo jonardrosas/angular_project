@@ -16,7 +16,7 @@ import { MaterialViolationViewerComponent } from './components/material-violatio
 import { MaterialLoginComponent } from './components/material-login/material-login.component';
 import { AgGridWrapperComponent } from './components/ag-grid-wrapper/ag-grid-wrapper.component';
 import { BootstrapAlertComponent } from './components/bootstrap-alert/bootstrap-alert.component';
-import { ArrayContainsPipe } from './pipes/array-contains.pipe';
+import { ArrayContainsPipe, Safe, UnixToDatePipe } from './pipes';
 import { NgxDtTableService } from './services';
 // import { GlobalSearchComponent } from './components/global-search/global-search.component';
 //import { GlobalSearchComponent } from './components/global-search/global-search.component';
@@ -49,7 +49,9 @@ import { BootstrapConfirmComponent } from './components/bootstrap-confirm/bootst
       //GlobalSearchComponent,
       ColumnFilterComponent,
       ArrayContainsPipe,
-      BootstrapConfirmComponent
+      BootstrapConfirmComponent,
+      Safe,
+      UnixToDatePipe
   ],
   exports: [
       NgxDtTableComponent,
@@ -63,7 +65,9 @@ import { BootstrapConfirmComponent } from './components/bootstrap-confirm/bootst
       BootstrapAlertComponent,
       BootstrapConfirmComponent,
       MaterialLoginComponent,
-      ColumnFilterComponent
+      ColumnFilterComponent,
+      Safe,
+      UnixToDatePipe
   ],
   providers: [NgxDtTableService]
 

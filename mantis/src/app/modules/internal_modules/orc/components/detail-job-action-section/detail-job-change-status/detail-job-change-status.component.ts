@@ -11,6 +11,7 @@ import { HttpClient } from '@angular/common/http';
 import { MantisStage, MantisResolution } from './../../../models';
 import { MantisRecordService } from './../../../services';
 import { Observable, Subscription } from 'rxjs';
+import * as orcModuleStore from './../../../store';
 
 @Component({
   selector: 'app-detail-job-change-status',
@@ -36,6 +37,7 @@ export class DetailJobChangeStatusComponent implements OnInit, OnDestroy {
     
     constructor (
         public activeModal: NgbActiveModal,
+        private store: Store<any>,
         public mantisRecordService: MantisRecordService
     ) { }
     
@@ -66,14 +68,14 @@ export class DetailJobChangeStatusComponent implements OnInit, OnDestroy {
         this.alerts = [];
     }
     
-    getStages() {
-        const stages = this.StageModel.objects.all({})
-        this.stageSubscription = stages.subscribe(
+    getStages(){
+        this.stageSubscription = this.store.pipe(select(orcModuleStore.getMantisStagesStateSelector))
+        .subscribe(
             (data) => {
-                this.stages = this.filterStages(data.results);
+                this.stages = this.filterStages(data);
             }
         )
-    }
+    }    
     
     getResolutions() {
         const stage_id = this.jobChangeStatusForm.controls.stage.value.id;

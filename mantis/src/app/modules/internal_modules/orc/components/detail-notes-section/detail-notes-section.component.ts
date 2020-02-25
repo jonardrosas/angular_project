@@ -20,7 +20,9 @@ export class DetailNotesSectionComponent extends ButtonCollapse implements OnIni
     @Input() public container: number;
     public notes;
     public button;
+    public stageMapping: any;
     public notesSubscription: Subscription;
+    public stageSubscription: Subscription;
 
 
     constructor(
@@ -33,10 +35,12 @@ export class DetailNotesSectionComponent extends ButtonCollapse implements OnIni
 
     ngOnDestroy(){
         this.notesSubscription.unsubscribe()
+        this.stageSubscription.unsubscribe()
     }
 
     ngOnInit() {
         this.getObject();
+        this.getStages()
         this.button = this.dispoService.dispoManagerInstance.jobButtons.baddNotes;
     }
 
@@ -47,5 +51,17 @@ export class DetailNotesSectionComponent extends ButtonCollapse implements OnIni
             }
         );
     }
+
+    getStages(){
+        this.stageSubscription = this.store.pipe(select(orcModuleStore.getMantisStagesStateSelector))
+        .subscribe(
+            (data) => {
+                this.stageMapping = {};
+                for(let obj of data){
+                    this.stageMapping[obj.id] = obj;
+                }
+            }
+        )
+    }    
 
 }

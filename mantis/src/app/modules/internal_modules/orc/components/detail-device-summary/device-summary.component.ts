@@ -1,9 +1,10 @@
-import { Component, OnInit, Input, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { MantisRecordModel } from './../../models';
 import { Store, select } from '@ngrx/store';
 import * as orcModuleStore from './../../store';
 import { MantisDispositionManager } from './../../scripts';
 import { ButtonCollapse } from './../../util/';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-device-summary',
@@ -11,7 +12,7 @@ import { ButtonCollapse } from './../../util/';
     styleUrls: ['./device-summary.component.css']
 })
 
-export class DeviceSummaryComponent extends ButtonCollapse implements OnInit {
+export class DeviceSummaryComponent extends ButtonCollapse implements OnInit, OnDestroy {
     @Input() dispoManagerInstance: MantisDispositionManager;
     public mantisRecord;
     public summaryTableInstance;
@@ -22,6 +23,10 @@ export class DeviceSummaryComponent extends ButtonCollapse implements OnInit {
         directoriesTable;
         additionalInfoTable;
     };    
+    public stageSubscription: Subscription;
+    public mantisRecordSubscription: Subscription;
+    public stageMapping: any;
+    public kwargs: any = {}
 
     constructor(
         private store: Store<any>
@@ -31,13 +36,20 @@ export class DeviceSummaryComponent extends ButtonCollapse implements OnInit {
 
     ngOnInit() {
         this.summaryTableInstance = this.dispoManagerInstance.getDeviceSummaryTables();
-        this.store.pipe(select(orcModuleStore.getMantisRecordObjectStateSelector)).subscribe(
+        this.mantisRecordSubscription = this.store.pipe(select(orcModuleStore.getMantisRecordObjectStateSelector)).subscribe(
             (data) => {
                 this.mantisRecord = data;
+                this.kwargs['mantisRecord'] = data;
             }
        
         )
         this.tables = this.summaryTableInstance.getTables();
+        this.getStages()
+    }
+
+    ngOnDestroy(){
+        this.stageSubscription.unsubscribe()
+        this.mantisRecordSubscription.unsubscribe()
     }
 
     getClass(field) {
@@ -46,6 +58,18 @@ export class DeviceSummaryComponent extends ButtonCollapse implements OnInit {
         }
         return '3';
     }
+
+    getStages(){
+        this.stageSubscription = this.store.pipe(select(orcModuleStore.getMantisStagesStateSelector))
+        .subscribe(
+            (data) => {
+                this.stageMapping = {};
+                for(let obj of data){
+                    this.stageMapping[obj.id] = obj;
+                }
+            }
+        )
+    }      
 
     getColumnValue(columnField) {
           if(columnField.field){
@@ -59,7 +83,8 @@ export class DeviceSummaryComponent extends ButtonCollapse implements OnInit {
                   return '';
               }
               if(columnField.cellTemplate){
-                  return columnField.cellTemplate(value, this.mantisRecord)
+                  // return columnField.cellTemplate(value, this.mantisRecord)
+                  return columnField.cellTemplate(value, this.mantisRecord, this.stageMapping)
               }
               return value
           }else{

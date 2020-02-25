@@ -6,7 +6,7 @@
     </button>   
 </div>
 <div id="notesSection" class="row-break" [ngbCollapse]="data.panelIsOpen">
-    <div class="row-break card bg-light" >
+    <div class="row-break card bg-white border border-dark shadow">
         <div class="col-md-2 p-2">
             <button class="pull-right" (click)="button.function(container)"><i *ngIf="button.icon" [ngClass]="button.icon"></i> {{ button.label }} </button><br/>
         </div>
@@ -25,8 +25,8 @@
                         <tr *ngFor="let note of notes">
                             <td> {{note.id }}</td>
                             <td> {{note.reporter.username }}</td>
-                            <td> {{note.date_submitted | date }}</td>
-                            <td> {{note.bug_status }}</td>
+                            <td> {{note.date_submitted | unixToDate }}</td>
+                            <td><span class="p-1" [style.background-color]="stageMapping[note.bug_status].color">{{ stageMapping[note.bug_status].name }}</span></td>
                             <td> {{note.bugnote_text.note }}</td>
                         </tr>
                     </tbody>
