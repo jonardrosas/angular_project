@@ -2,9 +2,9 @@ import { checkStatusMapping } from './../common';
 
 
 interface DetailSummaryInterface {
-    setMantisInfoTable(): void;
-    setCadInfoTable(): void;
-    setTableDirectories(): void;
+    mantisInfoTable;
+    cadInfoTable;
+    directoriesTable;
 }
 
 export class CommonSummaryField {
@@ -14,9 +14,9 @@ export class CommonSummaryField {
     public pdbStatus = { field: 'pdb_status', headerName: 'Pdb Status' };
     public dispositionMethod = { field: 'orc_record__orc_ext__disposition_method', headerName: 'Disposition Method' };
     public aggregateStatus = { field: 'orc_record__status', headerName: 'Aggregate Status',
-        cellTemplate: (val: string, row?: any, extraMap?: any)=>{
+        /*cellTemplate: (val: string, row?: any, extraMap?: any)=>{
             return `<span class="btn btn-small ${checkStatusMapping[val].btnClass}">${val}</span>`;
-        }
+        }*/
     };
     public techtype = { field: 'techtype', headerName: 'Tech' };
     public jobId = { field: 'job_id', headerName: 'Job Id' };
@@ -110,97 +110,54 @@ export class CommonSummaryField {
 
 
 export class DetailSummaryBase extends CommonSummaryField implements DetailSummaryInterface {
-    public columns: any[];
-    public mantisInfoTable;
-    public cadInfoTable;
-    public headTable;
-    public mainTable;
-    public directoriesTable;
-    public additionalInfoTable;
-    public tables
 
-    constructor(protected dispoParams) {
-        super()
-        this.setMantisInfoTable()
-        this.setCadInfoTable()
-        this.setTableDirectories();
-        this.setAdditionalInfoTable();
+    public mantisInfoTable = {
+        fields: [
+            this.mantisId,
+            this.jobId,
+            this.orcRecordId,
+            this.aggregateStatus,
+            this.stage,
+            this.status,
+            this.reviewer,
+            this.fab
+        ]
     }
 
-    setMantisInfoTable() {
-        this.mantisInfoTable = {
-            fields: [
-                this.mantisId,
-                this.jobId,
-                this.orcRecordId,
-                this.aggregateStatus,
-                this.stage,
-                this.status,
-                this.reviewer,
-                this.fab
-            ]
-        }
-    }
-
-    setCadInfoTable() {
-        this.cadInfoTable = {
-            fields: [
-                    this.techtype,
-                    this.runHistory,
-                    this.gtoReviewStatus,
-                    this.dateGen,
-                    this.maskset,
-                    this.primeDieName,
-                    this.processId,
-                    this.operation,
-                    this.techfile,
-                    this.crmDid,
-                    this.customer,
-                    this.topCell,
-                    this.genericInfo,
-            ]
-        }
-    }
-
-    setTableDirectories() {
-        this.directoriesTable = {
-            fields: [
-                this.tapeoutWorkdir,
-                this.logfile,
-                this.layoutPath,
-                this.resultPath,
-                this.inlayoutMd5Sum,
-                this.inlayoutPath,                
-            ]
-        };
-    }
-
-    setAdditionalInfoTable() {
-        this.additionalInfoTable = { fields: []}
-    }
-
-    getHeadFields(){
-        const fields = {
-            headTable: [],
-        };
-        for(let r_index in this.headTable.fields) {
-            const row = this.headTable.fields[r_index]
-            for(let f_index in row){
-                const field = row[f_index]
-                fields.headTable.push(field)
-            }            
-        }        
-        return fields;
-    }
-
-    getTables() {
-        return {
-            mantisInfoTable: this.mantisInfoTable,
-            cadInfoTable: this.cadInfoTable,
-            directoriesTable: this.directoriesTable,
-            additionalInfoTable: this.additionalInfoTable,
-        };
+    public cadInfoTable = {
+        fields: [
+                this.operation,
+                this.techtype,
+                this.runHistory,
+                this.gtoReviewStatus,
+                this.dateGen,
+                this.maskset,
+                this.primeDieName,
+                this.processId,
+                this.ptrfName,
+                this.techfile,
+                this.crmDid,
+                this.customer,
+                this.topCell,
+                this.genericInfo,
+        ]
     }    
+    
+    public directoriesTable = {
+        fields: [
+            this.tapeoutWorkdir,
+            this.logfile,
+            this.layoutPath,
+            this.resultPath,
+            this.inlayoutMd5Sum,
+            this.inlayoutPath,                
+        ]
+    };    
+
+
+    constructor(dispoParams) {
+        super()
+    }
 
 
 }

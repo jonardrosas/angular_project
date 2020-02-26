@@ -39,9 +39,7 @@ export class ProgressBarComponent implements OnInit, OnDestroy {
     }
     
     ngOnInit(){
-        this.StageModel = new MantisStage()
         this.getStages()
-        this.currentStage = this.dispoMangerService.dispoManagerInstance.dispoParams.mantisRecord.status_code;
         this.mantisRecordSubscription = this.store.pipe(select(orcModuleStore.getMantisRecordObjectStateSelector))
         .subscribe(
             (data) => {

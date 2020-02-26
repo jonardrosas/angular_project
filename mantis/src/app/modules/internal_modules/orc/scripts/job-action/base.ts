@@ -35,7 +35,7 @@ export class JobActionBase implements JobActionInterface {
     
     public changeStatusButton = {
         label: 'Job Change Status',
-        class: 'btn btn-info btn-sm' ,
+        class: 'btn btn-outline-info btn-sm',
         icon: 'fas fa-share-square',
         function: (container) =>  {
             const modalRef = this.modalService.open(this.popups.DetailJobChangeStatusComponent, {backdrop: 'static', keyboard: false});
@@ -74,7 +74,7 @@ export class JobActionBase implements JobActionInterface {
 
     public addNotesButton = {
         label: 'Job Add Notes',
-        class: 'btn btn-info btn-sm',
+        class: 'btn btn-outline-info btn-sm' ,
         icon: 'fas fa-pencil-alt',
         function: (container) =>  {
             const modalRef = this.modalService.open(this.popups.DetailJobActionAddNotesComponent, {backdrop: 'static', keyboard: false});
@@ -96,7 +96,7 @@ export class JobActionBase implements JobActionInterface {
    
     public addAttachmentButton = {
         label: 'Job Add Attachment',
-        class: 'btn btn-info btn-sm',
+        class: 'btn btn-outline-info btn-sm' ,
         icon: 'fas fa-paperclip',        
         function: (container) =>  {
             const modalRef = this.modalService.open(this.popups.DetailJobActionAddAttachmentComponent, {backdrop: 'static', keyboard: false});

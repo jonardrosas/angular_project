@@ -13,4 +13,8 @@ export class CheckNavigationBase {
         _ENUMS.OPEN
     ]    
 
+    constructor(){
+
+    }
+
 }

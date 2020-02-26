@@ -26,7 +26,7 @@
                                 {{ attachment.filename }}
                             </td>
                             <td>{{ attachment.filesize }}</td>
-                            <td>{{ attachment.date_added }}</td>
+                            <td>{{ attachment.date_added | unixToDate }}</td>
                             <td>
                                 <button class="btn btn-sm" (click)="deleteAttachment(attachment)">
                                     <i class="text-danger fas fa-trash-alt"></i>

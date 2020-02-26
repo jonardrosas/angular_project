@@ -5,6 +5,7 @@ import * as orcModuleStore from './../../store';
 import { MantisDispositionManager } from './../../scripts';
 import { ButtonCollapse } from './../../util/';
 import { Observable, Subscription } from 'rxjs';
+import { DispoMangerService } from './../../services';
 
 @Component({
     selector: 'app-device-summary',
@@ -15,7 +16,7 @@ import { Observable, Subscription } from 'rxjs';
 export class DeviceSummaryComponent extends ButtonCollapse implements OnInit, OnDestroy {
     @Input() dispoManagerInstance: MantisDispositionManager;
     public mantisRecord;
-    public summaryTableInstance;
+    public deviceSummary;
     public tables;
     public fields: {
         headTable;
@@ -26,24 +27,23 @@ export class DeviceSummaryComponent extends ButtonCollapse implements OnInit, On
     public stageSubscription: Subscription;
     public mantisRecordSubscription: Subscription;
     public stageMapping: any;
-    public kwargs: any = {}
+    private defaultCol: string = '3';
 
     constructor(
-        private store: Store<any>
+        private store: Store<any>,
+        private dispoService: DispoMangerService,
     ) {
         super()
     }
 
     ngOnInit() {
-        this.summaryTableInstance = this.dispoManagerInstance.getDeviceSummaryTables();
         this.mantisRecordSubscription = this.store.pipe(select(orcModuleStore.getMantisRecordObjectStateSelector)).subscribe(
             (data) => {
                 this.mantisRecord = data;
-                this.kwargs['mantisRecord'] = data;
+                this.tables = this.dispoService.dispoManagerInstance.deviceSummary;
             }
        
         )
-        this.tables = this.summaryTableInstance.getTables();
         this.getStages()
     }
 
@@ -56,7 +56,7 @@ export class DeviceSummaryComponent extends ButtonCollapse implements OnInit, On
         if(field.col){
             return field.col;
         }
-        return '3';
+        return this.defaultCol;
     }
 
     getStages(){
@@ -83,7 +83,6 @@ export class DeviceSummaryComponent extends ButtonCollapse implements OnInit, On
                   return '';
               }
               if(columnField.cellTemplate){
-                  // return columnField.cellTemplate(value, this.mantisRecord)
                   return columnField.cellTemplate(value, this.mantisRecord, this.stageMapping)
               }
               return value

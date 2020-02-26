@@ -37,7 +37,7 @@
                     </div>
                 </div>        
                 <div class="row-break">
-                    <button class="ml-2 shadow-sm btn-info" (click)="button.function(agGrid, dispoManagerInstance)" *ngFor="let button of buttons" ><i *ngIf="button.icon" [ngClass]="button.icon"></i>  {{ button.label }}</button>
+                    <button class="btn btn-bold btn-sm btn-outline-dark ml-2 shadow-sm " (click)="button.function(agGrid, dispoManagerInstance)" *ngFor="let button of buttons" ><i *ngIf="button.icon" [ngClass]="button.icon"></i>  {{ button.label }}</button>
                 </div>
                 <div class="row-break">
                     <ag-grid-angular

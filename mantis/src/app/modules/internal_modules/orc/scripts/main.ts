@@ -1,17 +1,13 @@
 import { OrcModuleOperation } from './common/operation.class';
-import { 
-    DispostionParameter, DrcDispostion, LMCDispostion,
-    ValidatorDispostion, OrcDispostion, OrcFtrfF7Dispostion
-} from './disposition';
+import {DispostionParameter, } from './disposition';
+import { MainDispoHandler } from './disposition-handler'
 
 
 interface MantisDispositionManagerInterface {
     dispositionInstance;
     checkTableInstance;
     checkDispoButtonsInstance;
-    deviceSummaryInstance;
-    progressBarInstance?;
-    detailJobActionSectionInstance?;
+    deviceSummary;
 }
 
 
@@ -19,7 +15,7 @@ export class MantisDispositionManager extends OrcModuleOperation implements Mant
     public dispositionInstance;
     public checkTableInstance;
     public checkDispoButtonsInstance;
-    public deviceSummaryInstance;
+    public deviceSummary;
     public progressBarInstance;
     public detailJobActionSectionInstance;
     public loadCheck;
@@ -43,7 +39,7 @@ export class MantisDispositionManager extends OrcModuleOperation implements Mant
         this.storeManagerIns = this.dispositionInstance.getStoreManager()
         this.checkTableInstance = this.dispositionInstance.getChecksTable()
         this.jobReportTitle = this.dispositionInstance.getJobReportTitle();
-        this.deviceSummaryInstance = this.dispositionInstance.getDeviceSummaryTable();
+        this.deviceSummary = this.dispositionInstance.getDeviceSummaryTable();
         this.progressBarInstance = this.dispositionInstance.getMantisStageProgressBar();
         this.createCheckStatusOptions()
         this.createCheckDispoButtons()
@@ -85,10 +81,6 @@ export class MantisDispositionManager extends OrcModuleOperation implements Mant
         }
     } 
 
-    getDetailJobActionSection() {
-        return this.detailJobActionSectionInstance;
-    }
-
     getCheckTableColDefs(section?: string){
         return this.checkTableInstance.getColumnDefs(section);
     }
@@ -99,39 +91,20 @@ export class MantisDispositionManager extends OrcModuleOperation implements Mant
 
 
     getDeviceSummaryTables() {
-        return this.deviceSummaryInstance;
+        return this.deviceSummary;
     }
     
-    getMantisStageProgressBars() {
-        return this.progressBarInstance;
-    }
 }
 
 
-export class MantisDispositionManagerConfig extends OrcModuleOperation{
+export class MantisDispositionManagerConfig{
     managerIns: MantisDispositionManager;
     dispositionInstance;
     jobReportTitle: string;
 
     constructor(public dispoParams: DispostionParameter) {
-        super();
-        const operation = this.dispoParams.mantisRecord.operation;        
-        if (this.drcOperation.indexOf(operation) !== -1) {
-            this.dispositionInstance = new DrcDispostion(this.dispoParams);
-        } else if (this.lmcOperation.indexOf(operation) !== -1) {
-            this.dispositionInstance = new LMCDispostion(this.dispoParams);
-        } else if (this.validatorOperation.indexOf(operation) !== -1) {
-            this.dispositionInstance = new DrcDispostion(this.dispoParams);
-        } else {
-            if('orc_ext' in this.dispoParams.mantisRecord.orc_record && this.dispoParams.mantisRecord.orc_record.orc_ext.fab == '1'){
-                this.dispositionInstance = new OrcFtrfF7Dispostion(this.dispoParams);
-            }else if('orc_ext' in this.dispoParams.mantisRecord.orc_record && this.dispoParams.mantisRecord.orc_record.orc_ext.fab == '7'){
-                this.dispositionInstance = new OrcFtrfF7Dispostion(this.dispoParams);
-            }else{
-                this.dispositionInstance = new OrcDispostion(this.dispoParams);
-            }
-        }
-
+        this.dispositionInstance = new MainDispoHandler(dispoParams).disposition;
+        debugger;
         this.managerIns = new MantisDispositionManager(this.dispositionInstance)
         this.managerIns.dispoParams = this.dispoParams;
     }    

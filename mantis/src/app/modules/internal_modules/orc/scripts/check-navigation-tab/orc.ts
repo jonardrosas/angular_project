@@ -8,6 +8,10 @@ export class OrcCheckNavigation extends CheckNavigationBase {
          _ENUMS.TAB1,
     ];  
 
+   constructor() {
+        super();    
+    }
+
 }
 
 export class OrcPtrfCheckNavigation extends OrcCheckNavigation {}

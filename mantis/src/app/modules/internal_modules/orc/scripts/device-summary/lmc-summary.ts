@@ -12,7 +12,4 @@ export class LMCDeviceSummary extends OrcDeviceSummary {
         ]
     };
 
-    constructor(dispoParams) {
-        super(dispoParams);
-    }
 }

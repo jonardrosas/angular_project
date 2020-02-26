@@ -47,7 +47,7 @@ a.nav-check-link{
 a.active{
     background-color: #FFF;
     border-top: 3px solid blue;
-    color: #000 !important;
+    color: #007bff !important;
 }
 
 .check-card-body{

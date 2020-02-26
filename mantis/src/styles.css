@@ -46,6 +46,11 @@ body{
     font-weight: 700;    
 }
 
+
+.btn.btn-bold, .btn.btn-round {
+    border-bottom-width: 2px !important;
+}
+
 .row-break{
     margin-top: 10px;
 }
