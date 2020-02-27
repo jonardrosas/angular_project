@@ -26,7 +26,8 @@ export class OrcFtrfF1CheckNavigation extends OrcCheckNavigation {}
 export class OrcFtrfF7CheckNavigation extends OrcCheckNavigation {
     public mainTabs = [
          _ENUMS.TAB1,
-         _ENUMS.TAB2
+         _ENUMS.TAB2,
+         _ENUMS.TAB5
     ];  
 }
 

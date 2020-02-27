@@ -94,7 +94,6 @@ export class CheckImageListViewComponent implements OnInit, OnDestroy {
     }    
 
     deleteImgForm(id){
-
         const modalRef = this.modalService.open(BootstrapConfirmComponent)
         modalRef.componentInstance.data = {message: 'Are you sure?', type: 'info'}
         modalRef.result.then(
@@ -126,7 +125,6 @@ export class CheckImageListViewComponent implements OnInit, OnDestroy {
         modalRef.result.then(
                 (result) => {
                     this.getCheckImages()
-                    debugger;
                 }, (reason) => {
                     console.log('Reason', reason);
                 }

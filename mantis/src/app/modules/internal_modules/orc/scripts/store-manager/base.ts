@@ -1,7 +1,9 @@
 
 export class StoreBaseManager{
     checkTableStoreAction;
+    checkZeroTableStoreAction;
     checkTableStoreSelector;
+    checkZeroTableStoreSelector;
     checkTableStoreAssignedAction;
     checkTableStoreAssignedSoaAction;
     checkTableStoreAssignedIstSelector;
@@ -19,7 +21,9 @@ export class StoreBaseManager{
 
     constructor(public store: any){
         this.checkTableStoreAction = this.store.getRecordChecksAction;
+        this.checkZeroTableStoreAction = this.store.getRecordCheckZeroAction;
         this.checkTableStoreSelector = this.store.getOrcRecordCheckStateSelector;
+        this.checkZeroTableStoreSelector = this.store.getOrcRecordCheckZeroStateSelector;
         this.checkTableStoreAssignedAction = this.store.getAssignedChecksAction;
         this.checkTableStoreAssignedSoaAction = this.store.getSoaChecksAction;
         this.checkTableStoreAssignedIstSelector = this.store.getIstCheckSelector;

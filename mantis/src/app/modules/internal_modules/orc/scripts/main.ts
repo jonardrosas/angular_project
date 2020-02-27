@@ -32,12 +32,21 @@ export class MantisDispositionManager extends OrcModuleOperation implements Mant
     public checkDispositionButtons;
     public checkApi;
     public jobButtons;
+    public checkZeroColumn;
+    public checkColumnDefs;
+    public checkAssessmentDefs;
+
+    public checkReviewHistoryColumn;
+    public checkAssessmentHistoryColumn;
+    public checkDetailInfo;
+
 
     constructor(dispositionInstance: any) {
         super();
         this.dispositionInstance = dispositionInstance;
+        this.checkReviewHistoryColumn = this.dispositionInstance.checkReviewHistoryColumn;
+        this.checkAssessmentHistoryColumn = this.dispositionInstance.checkAssessmentHistoryColumn;
         this.storeManagerIns = this.dispositionInstance.getStoreManager()
-        this.checkTableInstance = this.dispositionInstance.getChecksTable()
         this.jobReportTitle = this.dispositionInstance.getJobReportTitle();
         this.deviceSummary = this.dispositionInstance.getDeviceSummaryTable();
         this.progressBarInstance = this.dispositionInstance.getMantisStageProgressBar();
@@ -45,6 +54,7 @@ export class MantisDispositionManager extends OrcModuleOperation implements Mant
         this.createCheckDispoButtons()
         this.createCheckNavigationTab()
         this.createJobDispositionButton()
+        this.buildCheckTable()
     }
 
     public filterJobProgressBar(stages){
@@ -81,14 +91,15 @@ export class MantisDispositionManager extends OrcModuleOperation implements Mant
         }
     } 
 
-    getCheckTableColDefs(section?: string){
-        return this.checkTableInstance.getColumnDefs(section);
+    public buildCheckTable(){
+        this.checkTableInstance = this.dispositionInstance.getChecksTable()
+        if(this.checkTableInstance){
+            this.checkZeroColumn = this.checkTableInstance.checkZeroColDef;
+            this.checkColumnDefs = this.checkTableInstance.columnDefs;
+            this.checkAssessmentDefs = this.checkTableInstance.assessmentDefs;
+            this.checkDetailInfo = this.checkTableInstance.checkDetailInfo;
+        }
     }
-
-    getCheckTableDetailInfo(){
-        return this.checkTableInstance.checkDetailInfo;
-    }    
-
 
     getDeviceSummaryTables() {
         return this.deviceSummary;

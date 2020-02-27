@@ -48,6 +48,24 @@ export class MantisDispositionBase implements MantisDispositionBaseInterface {
     progressBarClass = ProgressBarBase;
     detailJobActionSectionClass = JobActionBase;
 
+    checkReviewHistoryColumn = [
+        {headerName: 'Date', field: 'date', col: 2},
+        {headerName: 'User', field: 'user', col: 2},
+        {headerName: 'Assigned Group', field: 'assigned_group', col: 2, relatedName: 'name'},
+        {headerName: 'Old Status', field: 'old_status', col: 1},
+        {headerName: 'New Status', field: 'new_status', col: 1},
+        {headerName: 'Comments', field: 'comments', col: 4},
+    ]
+
+    checkAssessmentHistoryColumn = [
+        {headerName: 'Date', field: 'date', col: 2},
+        {headerName: 'User', field: 'user', col: 2},
+        {headerName: 'Assigned Group', field: 'assigned_group', col: 2, relatedName: 'name'},
+        {headerName: 'Recommendation', field: 'assessment', col: 2},
+        {headerName: 'Comments', field: 'comments', col: 4},
+    ]    
+
+
     constructor(dispoParams: DispostionParameter) {
         this.dispoParams = dispoParams;
         const operation = this.dispoParams.mantisRecord.operation;        

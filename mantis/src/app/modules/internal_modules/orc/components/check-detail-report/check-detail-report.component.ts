@@ -25,25 +25,23 @@ export class CheckDetailReportComponent extends ButtonCollapse implements OnInit
     @Input() checkIns;
     @Input() enableActionButtons;
     public dispoManagerInstance: MantisDispositionManager;
+    
     public columnDefs;
     readonly DEFAULT_GRID_COL = 6;
-    public checkReviews;
+
     public checkReviewColumn;
     public checkAssessmentColumn;
     
     public buttons;
     public agGrid;
     public mainTabs;
+
     public data = {
         img: {panelIsOpen: false},
         info: {panelIsOpen: false},
         reviews: {panelIsOpen: false},
         assessment: {panelIsOpen: false},
     }
-    // public ruleDescMode = {};
-    // public ruleDescData = {}    
-    // public imageForm = {};
-    // public alerts: NgAlertInterface[] = [];
 
     constructor(
         private store: Store<any>,
@@ -63,10 +61,10 @@ export class CheckDetailReportComponent extends ButtonCollapse implements OnInit
                             store: reportStore                              
                         }
                     )
-                    this.columnDefs = this.dispoManagerInstance.getCheckTableDetailInfo();
+                    this.columnDefs = this.dispoManagerInstance.checkDetailInfo;
                     this.mainTabs = this.dispoManagerInstance.checkMainTabs;
-                    this.checkReviewColumn = this.dispoManagerInstance.dispositionInstance.getChecksTable().checkReviewColumn;
-                    this.checkAssessmentColumn = this.dispoManagerInstance.dispositionInstance.getChecksTable().checkAssessmentColumn;
+                    this.checkReviewColumn = this.dispoManagerInstance.checkReviewHistoryColumn;
+                    this.checkAssessmentColumn = this.dispoManagerInstance.checkAssessmentHistoryColumn;
                 }
             }
         )

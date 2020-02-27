@@ -3,6 +3,7 @@ import { OrcCheckModel, OrcRecordInterface, GroupProfileInterface } from '../../
 
 export const GET_ORC_CHECK = '[Orc Record] GetOrcChecks';
 export const SET_ORC_CHECK = '[Orc Record] SetOrcChecks';
+
 export const GET_IST_GROUP_OPTION = '[Orc Record] GetIstGroup';
 export const SET_IST_GROUP_OPTION = '[Orc Record] SetIstGroup';
 export const GET_SOA_GROUP_OPTION = '[Orc Record] GetSOAGroup';
@@ -32,3 +33,7 @@ export const setRecordChecksAction = createAction('[Orc Record] SetRecordChecks'
 
 export const getRecordChecksStatCountAction = createAction('[Orc Record] GetRecordChecksStatCount', props<{record: number}>());
 export const setRecordChecksStatCountAction = createAction('[Orc Record] SetRecordChecksStatCount', props<{checkStatCount: any}>());
+
+
+export const getRecordCheckZeroAction = createAction('[Orc Record] GetRecordCheckZeroAction', props<{record: number}>());
+export const setRecordCheckZeroAction = createAction('[Orc Record] SetRecordCheckZeroAction', props<{checkszero: any}>());

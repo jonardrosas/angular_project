@@ -3,13 +3,14 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY } from 'rxjs';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 import { OrcCheckService, MantisRecordService, OrcRecordService } from '../../services';
-import { OrcCheckModel} from './../../models/'
+import { OrcCheckModel, OrcCheckZeroModel } from './../../models/'
 import * as orcRecordActions from '../actions/orcrecord.actions';
 
 
 @Injectable()
 export class OrcRecordEffects {
     private checkInstance: OrcCheckModel = new OrcCheckModel();
+    private checkZeroInstance: OrcCheckZeroModel = new OrcCheckZeroModel();
 
     constructor(
         private actions$: Actions,
@@ -39,6 +40,25 @@ export class OrcRecordEffects {
             )
         )
     );
+
+
+    loadOrcRecordCheckZeroFn = createEffect(() => this.actions$.pipe(
+            ofType(orcRecordActions.getRecordCheckZeroAction),
+            mergeMap(
+                (payload: any) => this.checkZeroInstance.objects.filter(
+                    {
+                        record: payload.record,
+                    })
+                .pipe(
+                    map(
+                        checks => orcRecordActions.setRecordCheckZeroAction({checkszero: checks}),
+                        catchError(() => EMPTY)
+                    )
+                )
+            )
+        )
+    );
+
 
     
     loadOrcIstGroupsFn = createEffect(() => this.actions$.pipe(

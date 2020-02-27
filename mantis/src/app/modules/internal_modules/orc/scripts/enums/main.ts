@@ -16,6 +16,7 @@ export const DEFAULT = 'default';
 export const ASSIGNED_IST = 'assinged_ist';
 export const ASSIGNED_SOA = 'assinged_soa';
 export const ASSIGNED_FST = 'assinged_fst';
+export const CHECK_ZERO = 'zero_count';
 
 // Check sections
 export const TAB1: any = {
@@ -44,11 +45,19 @@ export const TAB4: any = {
     title: 'Assigned fST'
 }
 
+export const TAB5: any = {
+    id: CHECK_ZERO,
+    status: ['fST'],
+    field: 'reviews',
+    title: 'Zero Check'
+}
+
 const _QUERY_FIELD = {}
-_QUERY_FIELD[DEFAULT] =  TAB1;
-_QUERY_FIELD[ASSIGNED_IST] =  TAB2;
-_QUERY_FIELD[ASSIGNED_SOA] =  TAB3;
-_QUERY_FIELD[ASSIGNED_FST] =  TAB4;
+_QUERY_FIELD[DEFAULT] = TAB1;
+_QUERY_FIELD[ASSIGNED_IST] = TAB2;
+_QUERY_FIELD[ASSIGNED_SOA] = TAB3;
+_QUERY_FIELD[ASSIGNED_FST] = TAB4;
+_QUERY_FIELD[CHECK_ZERO] = TAB5;
 
 export const QUERY_FIELD = _QUERY_FIELD;
 

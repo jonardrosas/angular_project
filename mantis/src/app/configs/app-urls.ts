@@ -44,6 +44,7 @@ export const URLS = {
     DRF_DRC_RECORD_URL: '/mantis/api/v2/drc_record/',
     DRF_ORC_RECORD_EXT_URL: '/mantis/api/v2/orc_record_ext/',
     DRF_ORC_RECORD_CHECK_URL: '/mantis/api/v2/orc_record_check/',
+    DRF_ORC_RECORD_CHECK_ZERO_URL: '/mantis/api/v2/orc_record_zero_check/',
     DRF_ORC_RECORD_CHECKIMAGE_URL: '/mantis/api/v2/orc_check_image/',
     DRF_DRC_RECORD_CHECK_URL: '/mantis/api/v2/drc_record_check/',
     DRF_DRC_RECORD_CHECK_ASSESSMENT_URL: '/mantis/api/v2/orc_check_assessment/',

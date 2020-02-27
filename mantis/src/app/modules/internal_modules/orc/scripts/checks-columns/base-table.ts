@@ -16,6 +16,15 @@ export class CheckFields {
         field: 'id',
         sortable: true,
     };
+    public ruleNameZeroField = {
+        headerName: 'Rule Name',
+        field: 'name',
+        sortable: true,
+        filter: false,
+        checkboxSelection: true,
+        width: 130,
+        headerCheckboxSelection: true,
+    };    
     public ruleNameField = {
         headerName: 'Rule Name',
         field: 'name',
@@ -28,9 +37,14 @@ export class CheckFields {
     public rawErrorCountField = {
         headerName: 'Raw Error Counts',
         field: 'hier_error_count',
-        sortable: true, filter: true,
+        sortable: true,
+        filter: true,
         cellRenderer: params => {
-            return `${params.value}(${params.data.flat_error_count})`;
+            if(params.data.flat_error_count){
+                return `${params.value}(${params.data.flat_error_count})`;
+            }
+            return `${params.value}`;
+
         },
         width: 100
     };
@@ -45,6 +59,7 @@ export class CheckFields {
     public pdbViolationCountField = {
         headerName: 'PDB Violation counts',
         field: 'vio_count',
+        filter: true,
         sortable: true, width: 50,
         valueGetter(params) {
             return params.data.vio_cnt;
@@ -88,6 +103,7 @@ export class CheckFields {
     public assignedRvField = { 
         headerName: 'Assigned RV',
         field: 'checkassessments',
+        filter: true,
         cellRenderer: params => {
             const assignedGroups = [];
             if(params.data.reviews.length > 0){
@@ -137,6 +153,7 @@ export class CheckFields {
     public assignedGroupField = {
         headerName: 'Assigned Group',
         field: 'reviews',
+        filter: true,
         cellRenderer: params => {
             const assignedGroups = [];
             if(params.data.reviews && params.data.reviews.length > 0){
@@ -155,6 +172,7 @@ export class CheckFields {
     public assignedSoaGroupField = {
         headerName: 'Assigned SOA',
         field: 'checkassessments',
+        filter: true,
         cellRenderer: params => {
             const assignedGroups = [];
             if(params.data.checkassessments && params.data.checkassessments.length > 0){
@@ -167,15 +185,6 @@ export class CheckFields {
         }
     };    
 
-
-    formatStatus(val) {
-        debugger;
-        return `<button [ngClass]="getClass()" type="button">${val}</button>`;
-    }
-
-    getClass(){
-        return 'btn btn-danger';
-    }    
 
 }
 
@@ -191,27 +200,10 @@ export class CheckBaseModel extends CheckFields implements CheckTableInterface {
         this.statusField
     ]
     
-    checkReviewColumn = [
-        {headerName: 'Date', field: 'date', col: 2},
-        {headerName: 'User', field: 'user', col: 2},
-        {headerName: 'Assigned Group', field: 'assigned_group', col: 2, relatedName: 'name'},
-        {headerName: 'Old Status', field: 'old_status', col: 1},
-        {headerName: 'New Status', field: 'new_status', col: 1},
-        {headerName: 'Comments', field: 'comments', col: 4},
-    ]
-
-    checkAssessmentColumn = [
-        {headerName: 'Date', field: 'date', col: 2},
-        {headerName: 'User', field: 'user', col: 2},
-        {headerName: 'Assigned Group', field: 'assigned_group', col: 2, relatedName: 'name'},
-        {headerName: 'Recommendation', field: 'assessment', col: 2},
-        {headerName: 'Comments', field: 'comments', col: 4},
-    ]
-
-    public defaultSubTab = [
-        CONST.ALL,
-        CONST.CLOSED,
-        CONST.OPEN
+    public checkZeroColDef = [
+        this.ruleNameZeroField,
+        // this.rawErrorCountField,
+        // this.statusField
     ]
 
     constructor() {
@@ -248,6 +240,8 @@ export class CheckBaseModel extends CheckFields implements CheckTableInterface {
     getColumnDefs(section?) {
         if(section == CONST.TAB3){
             return this.assessmentDefs;
+        }else{
+            return this.checkZeroColDef;
         }
         return this.columnDefs;
     }

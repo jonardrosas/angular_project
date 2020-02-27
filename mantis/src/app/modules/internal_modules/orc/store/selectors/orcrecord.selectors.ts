@@ -17,6 +17,12 @@ export const getOrcRecordCheckStateSelector = createSelector(
     (state: OrcRecordStateInterface) => state.checks
 );
 
+
+export const getOrcRecordCheckZeroStateSelector = createSelector(
+    getOrcRecordStateSelector,
+    (state: OrcRecordStateInterface) => state.checkszero
+);
+
 export const getIstSupportTeamGroupSelector = createSelector(
     getOrcRecordStateSelector,
     (state: OrcRecordStateInterface) => state.istSupportTeamGroup

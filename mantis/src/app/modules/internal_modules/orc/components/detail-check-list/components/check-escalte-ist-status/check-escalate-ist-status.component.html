@@ -1,4 +1,3 @@
-<div>
     <form [formGroup]="escalateIstForm" (ngSubmit)="onSubmit()">
         <div class="modal-header bg-dark text-light">
             <h4 class="modal-title">Escalate To Ist <span class="badge badge-primary">{{ selectedData.length }} selected</span> </h4>
@@ -8,7 +7,7 @@
         </div>
         <div class="modal-body">
             <div class="container-fluid">
-                <div class="row bg-light border-dark">
+                <div class="row  border-dark">
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="group_id">Check Status</label>
@@ -21,15 +20,7 @@
                             <label for="comments">Check Disposition Comments</label>
                             <textarea id="comments" class="form-control" formControlName="comments"></textarea>
                         </div>                        
-                        <div class="container-fluid">
-                            <label>Check Images</label>
-                            <div class="row row-break bg-secondary" *ngFor="let check of selectedData">
-                                <div  class="col-md-12">
-                                    <h6 class="text-white">{{ check.name }}</h6>
-                                    <app-check-image-list-view [checkIns]="check"></app-check-image-list-view>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
                 <div class="row">
@@ -39,6 +30,17 @@
                 </div>                
             </div>
         </div>
+        <div class="modal-body bg-dark">
+            <div class="container-fluid">
+                <label class="text-light">Check Images</label>
+                <div class="row row-break bg-light rounded panel-shadow" *ngFor="let check of selectedData">
+                    <div  class="col-md-12">
+                        <h6 class="text-dark">{{ check.name }}</h6>
+                        <app-check-image-list-view [checkIns]="check"></app-check-image-list-view>
+                    </div>
+                </div>
+            </div>            
+        </div>
         <div class="modal-footer">
             <p *ngFor="let alert of alerts">
                 <ngb-alert [type]="alert.type" (close)="close(alert)">{{ alert.message }}</ngb-alert>
@@ -46,4 +48,3 @@
             <button type="submit" class="btn btn-success" [disabled]="!escalateIstForm.valid">Submit</button>
         </div>
     </form>
-</div>

@@ -31,6 +31,7 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
     public mantisRecord: MantisRecordModel;
     public assessmentModel = new OrcCheckAsessment();
     public countSubscription: Subscription;
+    public mantisRecordSubscription: Subscription;
     public frameworkComponents = {
         checkStatusTemplateComponent: CheckStatusTemplateComponent
     }
@@ -53,10 +54,7 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
         subtab: {},
     };
 
-    public defaultAction;
     public defaultSelector;
-    public getAssignedIstAction;
-    public getAssignedSoaAction;
     public assignedIstSelector;
     public assignedSoaSelector;
     public previousSelectedRow = [];
@@ -73,16 +71,11 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
     }
 
     ngOnInit() {
-        this.store.pipe(select(orcModuleStore.getMantisRecordObjectStateSelector)).subscribe(
+        this.mantisRecordSubscription = this.store.pipe(select(orcModuleStore.getMantisRecordObjectStateSelector)).subscribe(
             (data) => {
                 this.mantisRecord = data;
                 this.dispoManagerInstance = this.dispoService.initialized({mantisRecord: data})
-                this.defaultAction = this.dispoManagerInstance.storeManagerIns.checkTableStoreAction;
-                this.defaultSelector = this.dispoManagerInstance.storeManagerIns.checkTableStoreSelector;
-                this.getAssignedIstAction = this.dispoManagerInstance.storeManagerIns.checkTableStoreAssignedIstAction;
-                this.getAssignedSoaAction = this.dispoManagerInstance.storeManagerIns.checkTableStoreAssignedSoaAction;
-                this.assignedIstSelector = this.dispoManagerInstance.storeManagerIns.checkTableStoreAssignedIstSelector;
-                this.assignedSoaSelector = this.dispoManagerInstance.storeManagerIns.checkTableStoreAssignedSoaSelector;
+
                 this.mainTabs = this.dispoManagerInstance.checkMainTabs;
                 this.dispoManagerInstance.checkComponentInstance = this;
                 this.store.dispatch(this.dispoManagerInstance.storeManagerIns.checkCheckStatCountAction({record: data.orc_record.id}))
@@ -111,10 +104,12 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
             }
         ) 
 
+
     }
 
     ngOnDestroy(){
         this.countSubscription.unsubscribe()
+        this.mantisRecordSubscription.unsubscribe()
         this.modalService.dismissAll('haha')
     }        
 
@@ -154,38 +149,44 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
 
         if(queryParams === ENUMS.TAB2.id){
             this.checkFilter['status'] = ENUMS.TAB2.status;
-            this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs();
+            this.columnDefs = this.dispoManagerInstance.checkColumnDefs;
             this.buttons = this.dispoManagerInstance.checkDispositionButtons[ENUMS.TAB2.id]
 
             this.store.dispatch(this.dispoManagerInstance.storeManagerIns.checkTableStoreAssignedAction(this.checkFilter));
-            this.rowData$ = this.store.pipe(select(this.assignedIstSelector));
+            this.rowData$ = this.store.pipe(select(this.dispoManagerInstance.storeManagerIns.checkTableStoreAssignedIstSelector));
             this.rowCurrentDataObj[queryParams] = this.rowData$;
 
         }else if(queryParams === ENUMS.TAB3.id){
             this.checkFilter['status'] = ENUMS.TAB3.status;
-            this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs('assinged_soa');
+            this.columnDefs = this.dispoManagerInstance.checkColumnDefs;
             this.buttons = this.dispoManagerInstance.checkDispositionButtons[ENUMS.TAB3.id]
 
             this.store.dispatch(this.dispoManagerInstance.storeManagerIns.checkTableStoreAssignedSoaAction(this.checkFilter));                          
-            this.rowData$ = this.store.pipe(select(this.assignedSoaSelector))
+            this.rowData$ = this.store.pipe(select(this.dispoManagerInstance.storeManagerIns.checkTableStoreAssignedSoaSelector))
             this.rowCurrentDataObj[queryParams] = this.rowData$;
 
         }else if(queryParams === ENUMS.TAB4.id){
             this.checkFilter['status'] = ENUMS.TAB4.status;
-            this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs();
+            this.columnDefs = this.dispoManagerInstance.checkColumnDefs;
             this.buttons = this.dispoManagerInstance.checkDispositionButtons[ENUMS.TAB4.id]
 
             this.store.dispatch(this.dispoManagerInstance.storeManagerIns.checkTableStoreAssignedAction(this.checkFilter));
-            this.rowData$ = this.store.pipe(select(this.assignedIstSelector))
+            this.rowData$ = this.store.pipe(select(this.dispoManagerInstance.storeManagerIns.checkTableStoreAssignedIstSelector));
             this.rowCurrentDataObj[queryParams] = this.rowData$;
-            
+        }
+        else if(queryParams === ENUMS.TAB5.id){
+            this.columnDefs = this.dispoManagerInstance.checkZeroColumn;
+            this.buttons = this.dispoManagerInstance.checkDispositionButtons[ENUMS.TAB5.id]
+
+            this.store.dispatch(this.dispoManagerInstance.storeManagerIns.checkZeroTableStoreAction(this.checkFilter))
+            this.rowData$ = this.store.pipe(select(this.dispoManagerInstance.storeManagerIns.checkZeroTableStoreSelector))
+            this.rowCurrentDataObj[queryParams] = this.rowData$;            
         }else{
-            // this.checkFilter['status'] = ENUMS.TAB1.status;
-            this.columnDefs = this.dispoManagerInstance.getCheckTableColDefs(ENUMS.TAB1.id);
+            this.columnDefs = this.dispoManagerInstance.checkColumnDefs;
             this.buttons = this.dispoManagerInstance.checkDispositionButtons[ENUMS.TAB1.id]
 
             this.store.dispatch(this.dispoManagerInstance.storeManagerIns.checkTableStoreAction(this.checkFilter));
-            this.rowData$ = this.store.pipe(select(this.defaultSelector))
+            this.rowData$ = this.store.pipe(select(this.dispoManagerInstance.storeManagerIns.checkTableStoreSelector))
             this.rowCurrentDataObj[queryParams] = this.rowData$;
         }        
 

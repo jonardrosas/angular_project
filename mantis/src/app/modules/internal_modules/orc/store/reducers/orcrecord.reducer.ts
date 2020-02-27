@@ -24,6 +24,25 @@ const orcRecordReducer = createReducer(
         }
     ),
     on(
+        orcRecordActions.setRecordCheckZeroAction,
+        (state, { checkszero }) => {
+            const name_list = checkszero.map((data) => data.name_list);
+            const final_data = []
+            for (let k in name_list){
+                const check_name_array = name_list[k]
+                for (let name of check_name_array){
+                    final_data.push({
+                        'name': name,
+                        'hier_error_count': 0,
+                        'status': 'PA'
+                    })
+                }
+            }
+            state.checkszero = final_data;
+            return { ...state, loading: false };
+        }
+    ),    
+    on(
         orcRecordActions.getIstGroupAction,
         (state, { status }) => {
             return { ...state, id: 1 };

@@ -1,6 +1,7 @@
 export * from './orcrecord.model';
 export * from './mantisrecord.model';
 export * from './orccheck.model';
+export * from './orccheckzero.model';
 export * from './orccheckimage.model';
 export * from './mantisnotes.model';
 export * from './orcrecordext.model';
