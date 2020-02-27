@@ -12,7 +12,6 @@ export class MainDispoHandler {
     constructor(dispoParams: DispostionParameter){
         const handler = this.getDispositionHandlers()
         this.disposition = handler.handle(dispoParams)
-        debugger;
 
     }
 

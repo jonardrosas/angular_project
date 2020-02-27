@@ -51,8 +51,24 @@ body{
     border-bottom-width: 2px !important;
 }
 
+.btn.btn-bold, .btn.btn-round {
+    border-bottom-left: 2px !important;
+}
+
 .row-break{
     margin-top: 10px;
+}
+
+.panel-shadow {
+    -moz-box-shadow: rgba(0, 0, 0, 0.3) 7px 7px 7px;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.3) 7px 7px 7px;
+    box-shadow: rgba(0, 0, 0, 0.3) 7px 7px 7px;
+}
+
+.panel-inline-shadow-5 {
+   -moz-box-shadow: inset 0 0 5px #000000;
+   -webkit-box-shadow: inset 0 0 5px #000000;
+    box-shadow: inset 0 0 5px #000000;
 }
 
 .nav-break{

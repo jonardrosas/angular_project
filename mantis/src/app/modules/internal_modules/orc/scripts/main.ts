@@ -104,7 +104,6 @@ export class MantisDispositionManagerConfig{
 
     constructor(public dispoParams: DispostionParameter) {
         this.dispositionInstance = new MainDispoHandler(dispoParams).disposition;
-        debugger;
         this.managerIns = new MantisDispositionManager(this.dispositionInstance)
         this.managerIns.dispoParams = this.dispoParams;
     }    

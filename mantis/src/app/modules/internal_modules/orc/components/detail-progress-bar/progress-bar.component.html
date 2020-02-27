@@ -1,18 +1,13 @@
-
-<div class="row row-break">
-    <div class="col-md-12">
-        <table align="center" class="table-sm">
-            <tbody>
-                <tr>
-                    <ng-container *ngFor="let stage of stages" class="border border-danger">
-                        <td width="100" align="center" [attr.bgcolor]="setCurrentColor(stage)" class="rounded-pill " [ngClass]="setCurrentClass(stage)">
-                            {{ stage.name   }}
-                        </td>
-                        <ng-container *ngIf = "stage.name !== 'closed'; then Arrow"></ng-container>
-                    </ng-container>
-                </tr>
-            </tbody>
-        </table>
+<div class="container-fluid">
+    <div class="row row-break">
+        <div class="col-md-12 mx-auto text-center">
+        <span *ngFor="let stage of stages">
+            <span class="pl-4 pt-2 pb-2 pr-4 border border-secondary rounded-pill mx-auto" [style.background-color]="setCurrentColor(stage)" [ngClass]="setCurrentClass(stage)">
+                <b>{{ stage.name.toUpperCase() }}</b>
+            </span>
+            <ng-container *ngIf = "stage.name !== 'closed'; then Arrow"></ng-container>
+        </span>
+        </div>
     </div>
 </div>
 
