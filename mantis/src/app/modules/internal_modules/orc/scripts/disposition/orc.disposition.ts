@@ -40,7 +40,11 @@ export class OrcRitDispostion extends OrcDispostion {
     public deviceSummaryClass = RitOrcDeviceSummary;;
 
 }
-export class OrcRitF7Dispostion extends OrcDispostion {}
+export class OrcRitF7Dispostion extends OrcRitDispostion {
+    public checkStatusClass = OrcFtrfF7CheckStatus;
+    public checkTableButtonsClass = OrcFtrfF7CheckDispositionButton;
+    public checkNavigationClass = OrcFtrfF7CheckNavigation;
+}
 
 /** FTRF ***/
 export class OrcFtrfDispostion extends OrcDispostion {}

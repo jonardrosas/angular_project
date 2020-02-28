@@ -28,7 +28,7 @@ export class OrcHandler extends BaseHandler {
                    return new disposition.OrcFtrfDispostion(dispoParams)
                }
             }else if(flow.toUpperCase().startsWith('RIT')){
-               return new disposition.OrcRitDispostion(dispoParams)
+                 return new disposition.OrcRitF7Dispostion(dispoParams)
             }else{
                return new disposition.OrcDispostion(dispoParams)
             }

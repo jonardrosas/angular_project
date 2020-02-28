@@ -25,9 +25,11 @@ export class DeviceSummaryComponent extends ButtonCollapse implements OnInit, On
         additionalInfoTable;
     };    
     public stageSubscription: Subscription;
+    public resolutionSubscription: Subscription;
     public mantisRecordSubscription: Subscription;
     public stageMapping: any;
     private defaultCol: string = '3';
+    private extraMap = {};
 
     constructor(
         private store: Store<any>,
@@ -45,6 +47,7 @@ export class DeviceSummaryComponent extends ButtonCollapse implements OnInit, On
        
         )
         this.getStages()
+        this.getResolutions()
     }
 
     ngOnDestroy(){
@@ -63,10 +66,24 @@ export class DeviceSummaryComponent extends ButtonCollapse implements OnInit, On
         this.stageSubscription = this.store.pipe(select(orcModuleStore.getMantisStagesStateSelector))
         .subscribe(
             (data) => {
-                this.stageMapping = {};
+                const Mapping = {};
                 for(let obj of data){
-                    this.stageMapping[obj.id] = obj;
+                    Mapping[obj.id] = obj;
                 }
+                this.extraMap['stage'] = Mapping 
+            }
+        )
+    }      
+
+    getResolutions(){
+        this.resolutionSubscription = this.store.pipe(select(orcModuleStore.getMantisResultionStateSelector))
+        .subscribe(
+            (data) => {
+                const Mapping = {};
+                for(let obj of data){
+                    Mapping[obj.id] = obj;
+                }
+                this.extraMap['status'] = Mapping 
             }
         )
     }      
@@ -83,7 +100,7 @@ export class DeviceSummaryComponent extends ButtonCollapse implements OnInit, On
                   return '';
               }
               if(columnField.cellTemplate){
-                  return columnField.cellTemplate(value, this.mantisRecord, this.stageMapping)
+                  return columnField.cellTemplate(value, this.mantisRecord, this.extraMap)
               }
               return value
           }else{

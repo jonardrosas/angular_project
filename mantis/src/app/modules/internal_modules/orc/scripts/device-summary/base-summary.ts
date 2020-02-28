@@ -42,10 +42,18 @@ export class CommonSummaryField {
         field: 'status_code',
         headerName: 'Stage', 
         cellTemplate: (val: string, row?: any, extraMap?: any)=>{
-            return `<span style="background-color: ${extraMap[val].color}">${extraMap[val].name}</span>`;
+            return `<span class="rounded pl-1 pr-1 border" style="background-color: ${extraMap.stage[val].color}">${extraMap.stage[val].name}</span>`;
         }    
     };
-    public status = { field: 'resolution', headerName: 'Status'};
+    public status = {
+        field: 'resolution_code',
+        headerName: 'Status',
+        cellTemplate: (val: string, row?: any, extraMap?: any)=>{
+            debugger;
+            return `<span class="rounded pl-1 pr-1 border" style="background-color: ${extraMap.status[val].color}">${extraMap.status[val].name}</span>`;
+        }            
+
+    };
     public resolutionCode  = { field: 'resolution_code', headerName: 'Resolution Code'};
     public fab = { field: 'orc_record__orc_ext__fab', headerName: 'Fab'};
     public keyword = { field: 'orc_record__techfile', headerName: 'Keyword'};

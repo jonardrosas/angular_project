@@ -43,7 +43,6 @@ export class DetailJobChangeStatusComponent implements OnInit, OnDestroy {
     
     ngOnInit () {
 
-        this.StageModel = new MantisStage()
         this.ResolutionModel = new MantisResolution()
 
 
