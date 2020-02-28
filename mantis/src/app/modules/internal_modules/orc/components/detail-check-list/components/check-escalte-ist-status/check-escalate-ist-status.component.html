@@ -7,7 +7,7 @@
         </div>
         <div class="modal-body">
             <div class="container-fluid">
-                <div class="row  border-dark">
+                <div class="row  border-secondary">
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="group_id">Check Status</label>
@@ -23,15 +23,10 @@
 
                     </div>
                 </div>
-                <div class="row">
-                    <li *ngFor="let alert of alerts">
-                        <small><ngb-alert [type]="alert.type" (close)="close(alert)">{{ alert.message }}</ngb-alert></small>
-                    </li>        
-                </div>                
             </div>
         </div>
-        <div class="modal-body bg-dark">
-            <div class="container-fluid">
+        <div class="modal-body bg-secondary">
+            <div class="container-fluid bg-white">
                 <label class="text-light">Check Images</label>
                 <div class="row row-break bg-light rounded panel-shadow" *ngFor="let check of selectedData">
                     <div  class="col-md-12">

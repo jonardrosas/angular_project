@@ -115,6 +115,7 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
 
 
     getCheckStatCount(){
+        this.store.dispatch(this.dispoManagerInstance.storeManagerIns.checkCheckStatCountAction({record: this.mantisRecord.orc_record.id}))
         this.countSubscription = this.store.pipe(select(this.dispoManagerInstance.storeManagerIns.checkCheckStatCountSelector)).subscribe(
             (data) => {        
                 this.checkStat = data.count;
@@ -129,6 +130,7 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
     reloadCheck(){
         const queryParams = this.queryParams ?  this.queryParams : ENUMS.DEFAULT;
         this.loadCheck(queryParams)
+        this.getCheckStatCount()
     }
 
     loadCheck(queryParams?){
