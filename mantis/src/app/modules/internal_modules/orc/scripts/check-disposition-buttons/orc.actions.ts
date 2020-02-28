@@ -46,7 +46,6 @@ export class OrcCheckDispositionButtonBase extends CheckDisposeButtonBase {
         const allowedToiST = ['N', 'A', 'iST', 'OC', 'SD', 'ER', 'OP', 'MP']
         for (var k in checks) {
             let check = checks[k]        
-            debugger;
             if(allowedToiST.indexOf(check.status) == -1){
                 errors.push(`Cannot change from ${check.status} to iST (${check.name})`)
             }else if(check.status == form.newStat){
@@ -154,6 +153,7 @@ export class OrcCheckDispositionButtonBase extends CheckDisposeButtonBase {
                 modalRef.componentInstance.selectedData = selectedData;
                 modalRef.componentInstance.mantisRecord = this.mantisRecord;
                 modalRef.componentInstance.dispoManagerInstance = dispoManagerInstance;
+                modalRef.componentInstance.validation = this.changeStatusValidation;
                 modalRef.result.then(
                     (result) => {
                         dispoManagerInstance.checkComponentInstance.previousSelectedRow = selectedCheckId;
