@@ -8,8 +8,7 @@
         </div>
         <div class="modal-body">
             <div class="container-fluid">
-            {{ addNotesForm.value | json }}
-                <div class="row bg-light border-dark">
+                <div class="row bg-light border-dark border panel-shadow">
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="notes">Notes</label>
@@ -17,12 +16,15 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-12" *ngFor="let alert of alerts">
+                        <ngb-alert [type]="alert.type" (close)="close(alert)">{{ alert.message }}</ngb-alert>
+                    </div>                     
+                </div>
             </div>
         </div>
         <div class="modal-footer">
-            <p *ngFor="let alert of alerts">
-                <ngb-alert [type]="alert.type" (close)="close(alert)">{{ alert.message }}</ngb-alert>
-            </p>        
+       
             <button type="submit" class="btn btn-success" [disabled]="!addNotesForm.valid">Submit</button>
         </div>
     </form>

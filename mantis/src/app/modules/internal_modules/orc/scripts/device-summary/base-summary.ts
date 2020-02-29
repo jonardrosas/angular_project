@@ -14,9 +14,9 @@ export class CommonSummaryField {
     public pdbStatus = { field: 'pdb_status', headerName: 'Pdb Status' };
     public dispositionMethod = { field: 'orc_record__orc_ext__disposition_method', headerName: 'Disposition Method' };
     public aggregateStatus = { field: 'orc_record__status', headerName: 'Aggregate Status',
-        /*cellTemplate: (val: string, row?: any, extraMap?: any)=>{
-            return `<span class="btn btn-small ${checkStatusMapping[val].btnClass}">${val}</span>`;
-        }*/
+        cellTemplate: (val: string, row?: any, extraMap?: any)=>{
+            return `<span class="p-0 pl-1 pr-1 btn btn-sm ${checkStatusMapping[val].btnClass}">${val}</span>`;
+        }
     };
     public techtype = { field: 'techtype', headerName: 'Tech' };
     public jobId = { field: 'job_id', headerName: 'Job Id' };
@@ -49,7 +49,6 @@ export class CommonSummaryField {
         field: 'resolution_code',
         headerName: 'Status',
         cellTemplate: (val: string, row?: any, extraMap?: any)=>{
-            debugger;
             return `<span class="rounded pl-1 pr-1 border" style="background-color: ${extraMap.status[val].color}">${extraMap.status[val].name}</span>`;
         }            
 

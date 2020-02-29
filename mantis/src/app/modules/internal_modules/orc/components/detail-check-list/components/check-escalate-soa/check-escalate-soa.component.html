@@ -8,12 +8,11 @@
         </div>
         <div class="modal-body">
             <div class="container-fluid">
-            {{ escalateSoaGroupsForm.value | json }}
-                <div class="row bg-light border-dark">
+                <div class="row bg-light border-dark border panel-shadow">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="group_id">Check Status</label>
-                            <select id="group_id" class="form-control" formControlName="group_id" multiple>
+                            <label for="soa_groups">Check Status</label>
+                            <select id="soa_groups" class="form-control" formControlName="soa_groups" multiple>
                                 <option value="" disabled>Choose SOA groups</option>
                                 <option *ngFor="let group of soaGroups$ | async" [ngValue]="group.id">{{  group.name }}</option>
                             </select>
@@ -24,12 +23,16 @@
                         </div>                        
                     </div>
                 </div>
+                <div class="row">
+                    <ul>
+                        <li *ngFor="let alert of alerts">
+                            <ngb-alert [type]="alert.type" (close)="close(alert)">{{ alert.message }}</ngb-alert>
+                        </li>        
+                    </ul>                    
+                </div>                
             </div>
         </div>
         <div class="modal-footer">
-            <p *ngFor="let alert of alerts">
-                <ngb-alert [type]="alert.type" (close)="close(alert)">{{ alert.message }}</ngb-alert>
-            </p>        
             <button type="submit" class="btn btn-success" [disabled]="!escalateSoaGroupsForm.valid">Submit</button>
         </div>
     </form>

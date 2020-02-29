@@ -15,7 +15,7 @@
                         <span class="count-badge badge badge-md badge-danger" *ngIf="checkStat[mainTab.id] != 0">{{ checkStat[mainTab.id]  }}</span>
                     </a>
             </li>
-            <li class="nav-item ml-auto"><a class="nav-check-link bg-light text-dark border border-secondary ml-1" [routerLink]="" ><i class="fas fa-cog fa-lg"></i> </a></li>
+            <li class="nav-item ml-auto"><a title="Resize Table" class="nav-check-link bg-light text-dark border border-secondary ml-1" (click)="refreshGrid()" ><i class="fas fa-sync"></i></a></li>
         </ul>
         <div class="card bg-white border border-dark shadow">
             <div class="card-body check-card-body">

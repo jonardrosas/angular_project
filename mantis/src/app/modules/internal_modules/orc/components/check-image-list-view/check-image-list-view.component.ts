@@ -120,7 +120,7 @@ export class CheckImageListViewComponent implements OnInit, OnDestroy {
     }        
 
     addImage(){
-        const modalRef = this.modalService.open(CheckUploadImageComponent)
+        const modalRef = this.modalService.open(CheckUploadImageComponent, {backdrop: 'static', keyboard: false, size: 'lg'})
         modalRef.componentInstance.selectedData = [this.checkIns]
         modalRef.result.then(
                 (result) => {

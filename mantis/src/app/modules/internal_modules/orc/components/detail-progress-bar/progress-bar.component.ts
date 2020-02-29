@@ -66,10 +66,17 @@ export class ProgressBarComponent implements OnInit, OnDestroy {
     }
     
     setCurrentColor(stage){
-        if(stage.id  > this.currentStage){
+        if(this.currentStage == 90){
+            return 'lightblue';
+        }else if (stage.id == 90){
             return '#e2e2e2';
+        }else if(stage.id  > this.currentStage){
+            return '#e2e2e2';
+        }else if(stage.id == this.currentStage){
+            return 'lightblue';
         }else{
-            return stage.color;
+            return 'lightgreen';
+            //return stage.color;
         }
     }
 

@@ -40,8 +40,12 @@ export class CheckFields {
         sortable: true,
         filter: true,
         cellRenderer: params => {
-            if(params.data.flat_error_count){
+            if(params.data.flat_error_count && params.data.hier_error_count){
                 return `${params.value}(${params.data.flat_error_count})`;
+            } else if(params.data.flat_error_count){
+                return `${params.data.flat_error_count}`;
+            } else if(params.data.hier_error_count){
+                return `${params.data.hier_error_count}`;
             }
             return `${params.value}`;
 

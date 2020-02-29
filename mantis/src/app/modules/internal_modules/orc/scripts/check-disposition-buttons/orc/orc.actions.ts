@@ -1,5 +1,5 @@
-import * as _ENUMS from './../enums';
-import { CheckDisposeButtonBase } from './base';
+import * as _ENUMS from './../../enums';
+import { CheckDisposeButtonBase } from './../base';
 
 
 export class OrcCheckDispositionButtonBase extends CheckDisposeButtonBase {
@@ -180,6 +180,7 @@ export class OrcCheckDispositionButtonBase extends CheckDisposeButtonBase {
                 modalRef.componentInstance.mantisRecord = this.mantisRecord;
                 modalRef.componentInstance.dispoManagerInstance = dispoManagerInstance;
                 modalRef.componentInstance.validation = this.changeStatusValidation;
+                modalRef.componentInstance.newStat = 'fST'
                 modalRef.result.then(
                     (result) => {
                         dispoManagerInstance.checkComponentInstance.previousSelectedRow = selectedCheckId;
@@ -196,24 +197,6 @@ export class OrcCheckDispositionButtonBase extends CheckDisposeButtonBase {
         }
     }    
 
-    public checkAsSoaRecommend = {
-        label: 'Recommend As SOA',
-        class: 'btn btn-secondary btn-sm',
-        function: (agGrid, dispoManagerInstance) =>  {
-            this.agGridApi = agGrid.api;
-            const selectedNodes = this.agGridApi.getSelectedNodes()
-            const selectedData = selectedNodes.map(node => node.data);
-            if(selectedData.length > 0){
-                const modalRef = this.modalService.open(this.popups.CheckRecommendAsSoaComponent, {backdrop: 'static', keyboard: false})
-                modalRef.componentInstance.selectedData = selectedData;
-                modalRef.componentInstance.mantisRecord = this.mantisRecord;
-                modalRef.componentInstance.dispoManagerInstance = dispoManagerInstance;
-            }else{
-                const modalRef = this.modalService.open(this.popups.BootstrapAlertComponent)
-                modalRef.componentInstance.data = {type: 'danger', message: 'No check selected', title: 'Warning'};
-            }
-        }
-    }       
 
     constructor(public dispoParams){
         super(dispoParams);

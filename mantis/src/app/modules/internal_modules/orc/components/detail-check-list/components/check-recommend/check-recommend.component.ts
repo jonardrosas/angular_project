@@ -20,6 +20,7 @@ import { Observable } from 'rxjs';
 export class CheckRecommendComponent implements OnInit {
     @Input() selectedData;
     @Input() validation;
+    @Input() newStat;
     public mantisRecord;
     public dispoManagerInstance;
     public recommendForm;
@@ -50,9 +51,10 @@ export class CheckRecommendComponent implements OnInit {
         let data: any  = {};
         data.comments = this.recommendForm.value.comments;
         data.final_recommendation= this.recommendForm.value.status;
-        data.newStat= 'fST'
+        data.newStat= this.newStat;
         data.record_id = this.mantisRecord.orc_record.id;
         data.data = [];
+        debugger;
         for(let key in this.selectedData){
             data.data.push(
                 {

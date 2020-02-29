@@ -7,7 +7,7 @@
         </div>
         <div class="modal-body">
             <div class="container-fluid">
-                <div class="row  border-secondary">
+                <div class="row  border border-secondary panel-shadow">
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="group_id">Check Status</label>
@@ -25,21 +25,29 @@
                 </div>
             </div>
         </div>
-        <div class="modal-body bg-secondary">
-            <div class="container-fluid bg-white">
-                <label class="text-light">Check Images</label>
-                <div class="row row-break bg-light rounded panel-shadow" *ngFor="let check of selectedData">
-                    <div  class="col-md-12">
-                        <h6 class="text-dark">{{ check.name }}</h6>
-                        <app-check-image-list-view [checkIns]="check"></app-check-image-list-view>
+        <div class="modal-body bg-light">
+            <div class="container-fluid">
+                <div class="row border border-secondary panel-shadow p-3">
+                    <div class="col-md-12">
+                        <label>Check Images</label>
+                    </div>
+                    <div class="border col-md-12 row-break bg-light rounded panel-shadow" *ngFor="let check of selectedData">
+                        <div  class="col-md-12">
+                            <h6 class="text-dark">{{ check.name }}</h6>
+                            <app-check-image-list-view [checkIns]="check"></app-check-image-list-view>
+                        </div>
                     </div>
                 </div>
+                <div class="row row-break">
+                    <ul>
+                        <li *ngFor="let alert of alerts">
+                            <ngb-alert [type]="alert.type" (close)="close(alert)">{{ alert.message }}</ngb-alert>
+                        </li>        
+                    </ul>                    
+                </div>                 
             </div>            
         </div>
         <div class="modal-footer">
-            <p *ngFor="let alert of alerts">
-                <ngb-alert [type]="alert.type" (close)="close(alert)">{{ alert.message }}</ngb-alert>
-            </p>        
             <button type="submit" class="btn btn-success" [disabled]="!escalateIstForm.valid">Submit</button>
         </div>
     </form>
