@@ -54,7 +54,6 @@ export class CheckRecommendComponent implements OnInit {
         data.newStat= this.newStat;
         data.record_id = this.mantisRecord.orc_record.id;
         data.data = [];
-        debugger;
         for(let key in this.selectedData){
             data.data.push(
                 {

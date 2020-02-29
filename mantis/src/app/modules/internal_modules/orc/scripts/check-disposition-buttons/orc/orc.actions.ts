@@ -11,13 +11,14 @@ export class OrcCheckDispositionButtonBase extends CheckDisposeButtonBase {
         const allowedForNew = ['A', 'iST', 'OC', 'SD', 'ER', 'OP', 'MP', 'PW', 'PT', 'PI', 'FD', 'FR']
         const allowedForAssigned = ['iST', 'OC', 'SD', 'ER', 'OP', 'MP', 'PW', 'PT', 'PI', 'FD', 'FR']
         const allowedForOC = ['iST', 'OC', 'SD', 'ER', 'OP', 'MP', 'PW', 'PT', 'PI', 'FD', 'FR']
-        const allowedForIST = ['PW', 'PC', 'PP', 'PT', 'PI', 'PNR', 'FD', 'FR']
+        const allowedForIST = ['PW', 'PC', 'PP', 'PT', 'PI', 'PNR', 'FD', 'FR', 'fST']
         const allowedForMP = ['PW', 'PT', 'PI', 'FD', 'FR']
         const allowedForDisposing = ['iST', 'OC', 'SD', 'ER', 'OP', 'MP', 'PW', 'PT', 'PI', 'FD', 'FR']
         const allowedForPass = ['PW', 'PT', 'PI', 'PC', 'PP', 'PNR']
         const allowedForFail = ['FD', 'FR', 'FS']
         for (var k in checks) {
             let check = checks[k]
+            debugger;
             if(['PA'].indexOf(check.status) > -1){
                 errors.push(`Not allowed to dispose a PA rule (${check.name})`)
             }else if(check.status == form.newStat){
@@ -27,6 +28,7 @@ export class OrcCheckDispositionButtonBase extends CheckDisposeButtonBase {
             }else if(check.status == 'A' && allowedForAssigned.indexOf(form.newStat) == -1){
                 errors.push(`Cannot change from A to ${form.newStat} in the rule name (${check.name})`)
             }else if(check.status == 'iST' && allowedForIST.indexOf(form.newStat) == -1){
+                debugger;
                 errors.push(`Cannot change from iST to ${form.newStat} in the rule name (${check.name})`)
             }else if(check.status == 'MP' && allowedForMP.indexOf(form.newStat) == -1){
                 errors.push(`Cannot change from MP to ${form.newStat} in the rule name (${check.name})`)
