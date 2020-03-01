@@ -27,7 +27,13 @@ export class CommonSummaryField {
     public maskset = { field: 'maskset', headerName: 'Maskset' };
     public device = { field: 'device', headerName: 'Device' };
     public primeDieName = { field: 'device', headerName: 'Prime Die Name' };
-    public ritName = { field: 'ptrf', headerName: 'RIT'};
+    public ritName = {
+        field: 'ptrf', 
+        headerName: 'RIT', 
+        cellTemplate: (val: string, row?: any, extraMap?: any)=>{
+            return `<span class="p-0 pl-1 pr-1 bg-secondary text-light">${val}</span>`;
+        }        
+    };
     public layer = {
         field: 'layer',
         headerName: 'Layer',
@@ -82,7 +88,11 @@ export class CommonSummaryField {
     public inlayoutMd5Sum = { field: 'orc_record__calibre_record__md5sum_string', headerName: 'Calibre Inlayout MD5SUM', colspan: 6};
     public inlayoutPath = { field: 'orc_record__calibre_record__md5sum_path', headerName: 'Calibre Inlayout Path', colspan: 6};
 
-    public ptrfName = { field: 'ptrf', headerName: 'PTRF'};
+    public ptrfName = { field: 'ptrf', headerName: 'PTRF',
+        cellTemplate: (val: string, row?: any, extraMap?: any)=>{
+            return `<span class="p-0 pl-1 pr-1 bg-secondary text-light">${val}</span>`;
+        }     
+    };
     public ptrfStatus = { field: 'orc_record__orc_ext__ptrf_table__ptrf_status', headerName: 'PTRF Status'}; 
     public ptrfSecureDevice = { field: 'orc_record__orc_ext__ptrf_table__SecureDevice', headerName: 'Secure Device'};
     public ptrfcrmDID = { field: 'orc_record__orc_ext__ptrf_table__crmDID', headerName: 'CRMDID'};  // need to locate
@@ -96,10 +106,12 @@ export class CommonSummaryField {
     public ptsrMaskLayers = { field: 'orc_record__orc_ext__ptsr_table__masklayers', headerName: 'Tapeout Layers', col: 12};
     public ptsrCrmDID = { field: 'orc_record__orc_ext__ptsr_table__CRMDID', headerName: 'CRMDID'};
     public ptsrServiceOptions = { field: 'orc_record__orc_ext__ptsr_table__service_options', headerName: 'Service Options'};
-
-
-    public ftrfFormName = { field: 'orc_record__orc_ext__ftrf_subform__form_id', headerName: 'Form Name'};
-    public ftrfFormStatus = { field: 'orc_record__orc_ext__ftrf_subform__form_status', headerName: 'Form Status'};
+    public ftrfFormName = { field: 'orc_record__orc_ext__ftrf_subform__form_id', headerName: 'T/O Form Id',
+        cellTemplate: (val: string, row?: any, extraMap?: any)=>{
+            return `<span class="p-0 pl-1 pr-1 bg-secondary text-light">${val}</span>`;
+        }        
+    };
+    public ftrfFormStatus = { field: 'orc_record__orc_ext__ftrf_subform__form_status', headerName: 'T/O Form Status'};
     public ftrfTapeoutRoute = { field: 'orc_record__orc_ext__ftrf_subform__main_form__tapeout_route', headerName: 'Tapeout Route'};
     public productName = { field: 'orc_record__orc_ext__ftrf_subform__main_form__product_name', headerName: 'Product Name'};
     public productNameRevision = { field: 'orc_record__orc_ext__ftrf_subform__main_form__product_revision', headerName: 'Product Revision'};

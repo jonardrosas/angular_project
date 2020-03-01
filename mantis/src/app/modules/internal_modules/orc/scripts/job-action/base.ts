@@ -40,6 +40,7 @@ export class JobActionBase implements JobActionInterface {
         function: (container) =>  {
             const modalRef = this.modalService.open(this.popups.DetailJobChangeStatusComponent, {backdrop: 'static', keyboard: false});
             modalRef.componentInstance.mantisRecord = this.mantisRecord;
+            modalRef.componentInstance.container = container;
             modalRef.componentInstance.filterStages =   (stages) => {
                 const sourceStages = []
                 for(let stage of stages){
@@ -79,6 +80,7 @@ export class JobActionBase implements JobActionInterface {
         function: (container) =>  {
             const modalRef = this.modalService.open(this.popups.DetailJobActionAddNotesComponent, {backdrop: 'static', keyboard: false});
             modalRef.componentInstance.mantisRecord = this.mantisRecord;
+            modalRef.componentInstance.container = container;
             modalRef.componentInstance.validation = (data, form) => {
                 return
             }

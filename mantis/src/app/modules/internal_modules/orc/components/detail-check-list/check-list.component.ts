@@ -24,6 +24,7 @@ import { Observable, Subscription } from 'rxjs';
 
 export class CheckListComponent extends ButtonCollapse implements OnInit, AfterViewInit, OnDestroy {
     @Input() public mantisId: number;
+    @Input() public container;
     public rowData$:  Observable<OrcCheckInterface[] | OrcCheckAsessment[]>;
     public rowCurrentDataObj: any = {};
     public columnDefs: any;
@@ -131,6 +132,7 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
         const queryParams = this.queryParams ?  this.queryParams : ENUMS.DEFAULT;
         this.loadCheck(queryParams)
         this.getCheckStatCount()
+        this.container.getObjectUsingStore(this.mantisId)
     }
 
     loadCheck(queryParams?){

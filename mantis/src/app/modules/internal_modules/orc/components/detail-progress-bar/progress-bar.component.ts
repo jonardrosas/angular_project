@@ -39,13 +39,13 @@ export class ProgressBarComponent implements OnInit, OnDestroy {
     }
     
     ngOnInit(){
-        this.getStages()
         this.mantisRecordSubscription = this.store.pipe(select(orcModuleStore.getMantisRecordObjectStateSelector))
         .subscribe(
             (data) => {
                 if(data.id){
                     this.currentStage = data.status_code;
                 }
+                this.getStages()
             }
         )        
     }
@@ -66,8 +66,8 @@ export class ProgressBarComponent implements OnInit, OnDestroy {
     }
     
     setCurrentColor(stage){
-        if(this.currentStage == 90){
-            return 'lightblue';
+        if(this.currentStage == 90 && stage.id == 90){
+            return 'lightgreen';
         }else if (stage.id == 90){
             return '#e2e2e2';
         }else if(stage.id  > this.currentStage){
@@ -75,7 +75,7 @@ export class ProgressBarComponent implements OnInit, OnDestroy {
         }else if(stage.id == this.currentStage){
             return 'lightblue';
         }else{
-            return 'lightgreen';
+            return '#cff3cf';
             //return stage.color;
         }
     }

@@ -14,6 +14,7 @@ import { NgbActiveModal } from './../../../../../third_party_modules/ng_bootstra
 export class DetailJobActionAddNotesComponent implements OnInit {
     @Input() mantisRecord;
     public jobAddNotesForm;
+    public container;
     public heading: string = "Add Notes";
     public alerts: NgAlertInterface[] = [];
     public placeholderComments: string = "job comments here (max=600 characters)";
@@ -24,9 +25,10 @@ export class DetailJobActionAddNotesComponent implements OnInit {
         ) { }
 
     ngOnInit() {
+        debugger;
         this.jobAddNotesForm = new FormGroup ({
             comments: new FormControl('', Validators.required),
-            bug_id: new FormControl(this.mantisRecord.id),
+            bug_id: new FormControl(this.container.mantisId),
             drc_sumry: new FormControl(false),
             drc_dwc_note: new FormControl(false)
         })
@@ -35,7 +37,6 @@ export class DetailJobActionAddNotesComponent implements OnInit {
 
     onSubmit () {
         const data = this.jobAddNotesForm.value
-        debugger;
         this.mantisRecordService.addJobNotes(data).subscribe(
             (data) => {
                 debugger;

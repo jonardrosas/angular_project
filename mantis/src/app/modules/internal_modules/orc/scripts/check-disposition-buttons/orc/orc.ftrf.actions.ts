@@ -28,7 +28,7 @@ export class OrcFtrfCheckDispositionButton extends OrcCheckDispositionButtonBase
                             errors.push(`The rule is already at SOA (${check.name})`)
                         }
                     }
-                    return errors                    
+                    return errors                        
                 };
                 modalRef.componentInstance.newStat = 'fST'
                 modalRef.result.then(

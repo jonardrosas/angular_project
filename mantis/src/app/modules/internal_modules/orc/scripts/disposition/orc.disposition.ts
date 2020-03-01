@@ -8,7 +8,7 @@ import { OrcCheckStatus, OrcFtrfF7CheckStatus, OrcFtrfF1CheckStatus } from './..
 import { OrcDeviceSummary, FTRFOrcDeviceSummary, RitOrcDeviceSummary, PtrfOrcDeviceSummary } from './../device-summary';
 import { DispostionParameter } from './base';
 import { STATUS_GROUP } from './../../scripts/enums';
-import { JobActionBase } from './../job-action';
+import { JobActionBase, OrcJobAction } from './../job-action';
 import { OrcPtrfF1ProgressBar } from './../progress-bar';
 
 import { 
@@ -46,6 +46,7 @@ export class OrcPtrfF1Dispostion extends OrcPtrfDispostion {
     progressBarClass = OrcPtrfF1ProgressBar;
     checkNavigationClass = OrcPtrfF1CheckNavigation;
     checkTableButtonsClass = OrcPtrfF1CheckDispositionButton;
+    detailJobActionSectionClass = OrcJobAction;
 }
 
 export class OrcPtrfF8Dispostion extends OrcPtrfDispostion {}

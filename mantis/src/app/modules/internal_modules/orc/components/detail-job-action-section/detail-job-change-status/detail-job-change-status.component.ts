@@ -24,6 +24,7 @@ export class DetailJobChangeStatusComponent implements OnInit, OnDestroy {
     @Input() filterResolution;
     @Output() reload = new EventEmitter()
     public mantisRecord;
+    public container;
     public alerts: NgAlertInterface[] = [];
     public heading: string = "JOB LEVEL DISPOSITION";
     public jobChangeStatusForm;
@@ -51,7 +52,7 @@ export class DetailJobChangeStatusComponent implements OnInit, OnDestroy {
             status: new FormControl({value: ''}, Validators.required),
             comments: new FormControl('', Validators.required),
             // groups: new FormControl('test'),
-            mantis_ids: new FormControl(this.mantisRecord.id)
+            mantis_ids: new FormControl(this.container.mantisId)
         })
         this.getStages();
         // console.log(this.mantisRecord);
@@ -106,7 +107,12 @@ export class DetailJobChangeStatusComponent implements OnInit, OnDestroy {
                         ()=>this.activeModal.close()
                     )                  
                 }else{
-                    this.alerts.push({message: data.msg[this.mantisRecord.id], type: 'danger'})
+                    if(data.msg.common){
+                        this.alerts.push({message: data.msg.common, type: 'danger'})
+                    }                    
+                    if( data.msg[this.mantisRecord.id]){
+                        this.alerts.push({message: data.msg[this.mantisRecord.id], type: 'danger'})
+                    }
                 }
             }
         )

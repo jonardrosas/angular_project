@@ -73,6 +73,7 @@ export class OrcCheckDispositionButtonBase extends CheckDisposeButtonBase {
                 modalRef.componentInstance.validation = this.changeStatusValidation;
                 modalRef.result.then(
                     (result) => {
+                        debugger;
                         if(dispoManagerInstance.checkComponentInstance){
                             dispoManagerInstance.checkComponentInstance.previousSelectedRow = selectedCheckId;
                             dispoManagerInstance.checkComponentInstance.reloadCheck()

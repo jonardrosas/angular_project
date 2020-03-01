@@ -1,0 +1,39 @@
+<div>
+    <form [formGroup]="releaseForMaskWriteForm" (ngSubmit)="onSubmit()">
+        <div class="modal-header bg-dark text-light">
+            <h4 class="modal-title">{{ heading }} {{ mantisRecord.id }}</h4>
+            <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="container-fluid">
+                <div class="row bg-light border-dark border border-secondary panel-shadow">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="comment">From Status</label><br/>
+                            <b>{{ mantisRecord.resolution }}</b>
+                        </div>                         
+                        <div class="form-group">
+                            <label for="status">To Status</label>
+                               <select id="status" class="form-control" formControlName="status">
+                                <option value="" disabled>Choose stage</option>
+                                <option *ngFor= "let stat of status" [ngValue]="stat">{{ stat }}</option>
+                            </select>
+                        </div>                        
+                        <div class="form-group">
+                            <label for="comments">Comments</label>
+                            <textarea id="comments" class="form-control" formControlName="comments"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <p *ngFor="let alert of alerts">
+                <ngb-alert [type]="alert.type" (close)="close(alert)">{{ alert.message }}</ngb-alert>
+            </p>        
+            <button type="submit" class="btn btn-success" [disabled]="!releaseForMaskWriteForm.valid">Submit</button>
+        </div>
+    </form>
+</div>

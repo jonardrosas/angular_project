@@ -21,6 +21,7 @@ export class MantisRecordService extends QueryHelper {
     public jobAddNotesUrl = URLS.ORC_ADD_JOB_NOTES;
     public jobAddAttachmentUrl = URLS.ORC_ADD_JOB_ATTACHMENT;
     public jobDeleteAttachmentUrl = URLS.ORC_DELETE_JOB_ATTACHMENT;
+    public relaseForMaskWriteUrl = URLS.ORC_JOB_RELEASE_FOR_WRITE;
 
     constructor(public apiService: ApiService) {
         super();
@@ -85,5 +86,10 @@ export class MantisRecordService extends QueryHelper {
         let url = `${this.jobDeleteAttachmentUrl}`;
         return this.apiService.post(url, data);
     }      
+
+    orcReleaseForMaskWrite(data: any): Observable<any> {
+        let url = `${this.relaseForMaskWriteUrl}`;
+        return this.apiService.post(url, data);
+    }        
 
 }

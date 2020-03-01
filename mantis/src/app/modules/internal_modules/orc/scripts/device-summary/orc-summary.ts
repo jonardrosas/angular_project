@@ -80,7 +80,6 @@ export class FTRFOrcDeviceSummary extends OrcDeviceSummary {
             this.primeDieName,
             this.layer,
             this.customer,
-            this.fab,
             this.productName,
             this.productNameRevision,
             this.ftrfSecureDevice,

@@ -28,6 +28,7 @@ export const URLS = {
     //ORC_CHECK_IMAGES_URL: '/orc/addcheckimage/',
     ORC_CHECK_IMAGES_URL: '/mantis/check_image_upload/',
     ORC_ADD_JOB_NOTES: '/orc/bugnotetextadd/',
+    ORC_JOB_RELEASE_FOR_WRITE: '/orcworklist/closejob/',
     ORC_ADD_JOB_ATTACHMENT: '/orc/fileattachmentadd/',
     ORC_DELETE_JOB_ATTACHMENT: '/orc/filedelete/',
 

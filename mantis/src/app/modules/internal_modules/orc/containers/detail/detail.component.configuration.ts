@@ -18,6 +18,7 @@ import { DetailJobChangeStatusComponent } from '../../components/detail-job-acti
 import { DetailJobAssignToComponent } from '../../components/detail-job-action-section/detail-job-assign-to/detail-job-assign-to.component';
 import { DetailJobActionAddNotesComponent } from '../../components/detail-job-action-section/detail-job-action-add-notes/detail-job-action-add-notes.component';
 import { DetailJobActionAddAttachmentComponent } from '../../components/detail-job-action-section/detail-job-action-add-attachment/detail-job-action-add-attachment.component';
+import { DetailReleaseForMaskwriteComponent } from '../../components/detail-job-action-section/detail-release-for-maskwrite/detail-release-for-maskwrite.component';
 
 import * as orcModuleStore from './../../store';
 
@@ -37,6 +38,7 @@ export const ReportCheckDispostionPopups = {
     'DetailJobAssignToComponent': DetailJobAssignToComponent,
     'DetailJobActionAddNotesComponent': DetailJobActionAddNotesComponent,
     'DetailJobActionAddAttachmentComponent': DetailJobActionAddAttachmentComponent,
+    'DetailReleaseForMaskwriteComponent': DetailReleaseForMaskwriteComponent,
 }
 
 // This section components
