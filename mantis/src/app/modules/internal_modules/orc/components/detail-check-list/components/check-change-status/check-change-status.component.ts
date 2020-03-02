@@ -32,7 +32,7 @@ export class CheckChangeStatusComponent implements OnInit {
     ngOnInit() {
         this.changeStatusForm = new FormGroup({
             status: new FormControl('', Validators.required),
-            description: new FormControl(''),
+            description: new FormControl('', Validators.required),
         });
         this.statusGroup = this.dispoManagerInstance.changeStatusOption;
     }

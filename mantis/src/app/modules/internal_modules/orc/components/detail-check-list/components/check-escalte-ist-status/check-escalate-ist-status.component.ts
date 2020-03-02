@@ -71,7 +71,7 @@ export class CheckEscalateIstComponent implements OnInit {
     }
 
 
-    onSubmit() {
+    onSubmit2() {
         this.clearAlerts();
         if (this.escalateIstForm.status === 'INVALID') {
             if (this.escalateIstForm.controls.status.invalid) {

@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="modal-footer">
-       
+            <button type="submit" class="btn btn-light border" (click)="activeModal.dismiss('Cross click')">Cancel</button>
             <button type="submit" class="btn btn-success" [disabled]="!addNotesForm.valid">Submit</button>
         </div>
     </form>

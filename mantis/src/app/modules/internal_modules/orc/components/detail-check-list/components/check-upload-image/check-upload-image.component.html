@@ -41,6 +41,7 @@
             <p *ngFor="let alert of alerts">
                 <ngb-alert [type]="alert.type" (close)="close(alert)">{{ alert.message }}</ngb-alert>
             </p>        
+            <button type="submit" class="btn btn-light border" (click)="activeModal.dismiss('Cross click')">Cancel</button>
             <button type="submit" class="btn btn-success" [disabled]="imageUrls.length == 0">Submit</button>
         </div>
     </form>

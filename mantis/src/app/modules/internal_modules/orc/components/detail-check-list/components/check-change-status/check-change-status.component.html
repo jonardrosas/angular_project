@@ -33,6 +33,7 @@
             </div>
         </div>
         <div class="modal-footer">
+            <button type="submit" class="btn btn-light border" (click)="activeModal.dismiss('Cross click')">Cancel</button>
             <button type="submit" class="btn btn-success" [disabled]="!changeStatusForm.valid">Submit</button>
         </div>
     </form>
