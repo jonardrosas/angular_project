@@ -49,7 +49,7 @@ export const TAB5: any = {
     id: CHECK_ZERO,
     status: ['fST'],
     field: 'reviews',
-    title: 'Zero Check'
+    title: 'Zero Count Checks'
 }
 
 const _QUERY_FIELD = {}

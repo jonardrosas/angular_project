@@ -31,7 +31,7 @@ export class CheckFields {
         sortable: true,
         filter: true,
         checkboxSelection: true,
-        width: 130,
+        width: 140,
         headerCheckboxSelection: true,
     };
     public rawErrorCountField = {
@@ -50,7 +50,7 @@ export class CheckFields {
             return `${params.value}`;
 
         },
-        width: 100
+        width: 70
     };
     public statusField = {
         headerName: 'Status',
@@ -74,8 +74,8 @@ export class CheckFields {
         field: 'validated',
         sortable: true,
         filter: true,
-        cellRenderer: params => {
-            if (params.value) {
+        valueGetter: params => {
+            if (params.data.validated) {
                 return 'Y';
             } else {
                 return 'N';

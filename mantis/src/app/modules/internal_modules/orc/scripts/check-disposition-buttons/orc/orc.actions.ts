@@ -8,6 +8,8 @@ export class OrcCheckDispositionButtonBase extends CheckDisposeButtonBase {
 
     public changeStatusValidation(checks, form){
         let errors = []
+        let cleanChecks = []
+        let finalData = {}
         const allowedForNew = ['A', 'iST', 'OC', 'SD', 'ER', 'OP', 'MP', 'PW', 'PT', 'PI', 'FD', 'FR']
         const allowedForAssigned = ['iST', 'OC', 'SD', 'ER', 'OP', 'MP', 'PW', 'PT', 'PI', 'FD', 'FR']
         const allowedForOC = ['iST', 'OC', 'SD', 'ER', 'OP', 'MP', 'PW', 'PT', 'PI', 'FD', 'FR']
@@ -18,7 +20,6 @@ export class OrcCheckDispositionButtonBase extends CheckDisposeButtonBase {
         const allowedForFail = ['FD', 'FR', 'FS']
         for (var k in checks) {
             let check = checks[k]
-            debugger;
             if(['PA'].indexOf(check.status) > -1){
                 errors.push(`Not allowed to dispose a PA rule (${check.name})`)
             }else if(check.status == form.newStat){
@@ -38,9 +39,13 @@ export class OrcCheckDispositionButtonBase extends CheckDisposeButtonBase {
                 errors.push(`Cannot change from ${check.status} to ${form.newStat} in the rule name (${check.name})`)
             }else if((allowedForDisposing.indexOf(check.status)  > -1) && (allowedForDisposing.indexOf(form.newStat) == -1)){
                 errors.push(`Cannot change from ${check.status} to ${form.newStat} in the rule name (${check.name})`)
+            }else{
+                cleanChecks.push(check)
             }
         }
-        return errors
+        finalData['errors'] = errors
+        finalData['cleanChecks'] = cleanChecks
+        return finalData
     }
 
     public orcEscalateIstValidation(checks, form){
@@ -182,7 +187,20 @@ export class OrcCheckDispositionButtonBase extends CheckDisposeButtonBase {
                 modalRef.componentInstance.selectedData = selectedData;
                 modalRef.componentInstance.mantisRecord = this.mantisRecord;
                 modalRef.componentInstance.dispoManagerInstance = dispoManagerInstance;
-                modalRef.componentInstance.validation = this.changeStatusValidation;
+                modalRef.componentInstance.validation = (checks, form) => {
+                    let errors = []
+                    const allowedToiST = ['iST']
+                    for (var k in checks) {
+                        let check = checks[k]        
+                        if(allowedToiST.indexOf(check.status) == -1){
+                            errors.push(`Cannot recommend from ${check.status} to ${form.final_recommendation} (${check.name})`)
+                        }else if(check.status == form.newStat){
+                            errors.push(`The rule is already at iST (${check.name})`)
+                        }
+                    }
+                    return errors                       
+                }
+
                 modalRef.componentInstance.newStat = 'fST'
                 modalRef.result.then(
                     (result) => {

@@ -45,18 +45,22 @@ export class CheckChangeStatusComponent implements OnInit {
         this.showSelectedChecks = true;
     }
 
+    getFinalCheckAfterValidation(validatedChecks){
+        let checksList = [];
+        for(let key in validatedChecks){
+            checksList.push(
+                {oldstatus: validatedChecks[key].status, id: validatedChecks[key].id}
+            )
+        }        
+        return checksList;
+    }
+
     formData(){
         let data: any  = {};
         data.operation = this.mantisRecord.operation;
         data.comments = this.changeStatusForm.value.description;
         data.newStat = this.changeStatusForm.value.status;
         data.record_id = this.mantisRecord.orc_record.id;
-        data.checks_list = [];
-        for(let key in this.selectedData){
-            data.checks_list.push(
-                {oldstatus: this.selectedData[key].status, id: this.selectedData[key].id}
-            )
-        }
         return data;
     }
 
@@ -68,12 +72,13 @@ export class CheckChangeStatusComponent implements OnInit {
             }
         } else {
             let data = this.formData();
-            const errors = this.validation(this.selectedData, data)
-            if(errors.length > 0){
-                for (let k in errors){
-                    this.alerts.push({type: 'danger', message: errors[k]});
+            const valildationData = this.validation(this.selectedData, data)
+            if(valildationData.cleanChecks.length == 0){
+                for (let k in valildationData.errors){
+                    this.alerts.push({type: 'danger', message: valildationData.errors[k]});
                 }
             }else{
+                data.checks_list = this.getFinalCheckAfterValidation(valildationData.cleanChecks)
                 this.orcRecordService.changeStatus(data).subscribe(
                     (data) => {
                         if(data.status == 'success'){
