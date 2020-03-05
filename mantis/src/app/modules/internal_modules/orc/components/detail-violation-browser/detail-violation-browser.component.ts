@@ -28,6 +28,7 @@ export class DetailViolationBrowserComponent extends ButtonCollapse implements O
     ]
 
     violationStat = {}
+    url: string = 'orc'
     violations: OrcViolationCardModel[] = [];
     private violationSubscription: Subscription;
     private mantisRecordSubscription: Subscription;
@@ -79,7 +80,7 @@ export class DetailViolationBrowserComponent extends ButtonCollapse implements O
         }
     }
 
-    selectAll(isSelect){
+    selectAll(){
         for (let vio in this.violationGroup){
             for(let k in this.violationGroup[vio]){
                 this.violationGroup[vio][k].isSelected = true
@@ -88,7 +89,7 @@ export class DetailViolationBrowserComponent extends ButtonCollapse implements O
         }
     }
 
-    unSelectAll(isSelect){
+    unSelectAll(){
         for (let vio in this.violationGroup){
             for(let k in this.violationGroup[vio]){
                 this.violationGroup[vio][k].isSelected = false
