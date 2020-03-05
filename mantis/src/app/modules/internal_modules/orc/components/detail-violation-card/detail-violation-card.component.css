@@ -1,0 +1,7 @@
+.thumbnail {
+    border: 2px dotted rgb(128, 128, 128);
+}
+
+input.larger { 
+    transform: scale(2); 
+}

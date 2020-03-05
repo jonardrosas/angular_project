@@ -30,6 +30,7 @@ export const URLS = {
     ORC_ADD_JOB_NOTES: '/orc/bugnotetextadd/',
     ORC_JOB_RELEASE_FOR_WRITE: '/orcworklist/closejob/',
     ORC_ADD_JOB_ATTACHMENT: '/orc/fileattachmentadd/',
+    ORC_VIOLATION_URL: '/orcjobreport/api/v1/violation/',
     ORC_DELETE_JOB_ATTACHMENT: '/orc/filedelete/',
 
     // NEW DJANGO REST FRAMEWORK

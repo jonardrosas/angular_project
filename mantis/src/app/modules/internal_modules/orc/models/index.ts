@@ -13,3 +13,4 @@ export * from './mantisrecordtext.model';
 export * from './auth_user.model';
 export * from './auth_groupprofile.model';
 export * from './orccheckassessment.model';
+export * from './orcviolation.model';

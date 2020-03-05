@@ -3,7 +3,8 @@ import {
     DeviceSummaryComponent , DetailErrorStatisticsComponent,
     DetailNotesSectionComponent, DetailAttachmentSectionComponent,
     DetailJobHistorySectionComponent, CheckListComponent,
-    ProgressBarComponent, DetailJobActionSectionComponent
+    ProgressBarComponent, DetailJobActionSectionComponent,
+    DetailViolationBrowserComponent
 } from '../../components';
 import { CheckAddNotesComponent } from '../../components/detail-check-list/components/check-add-notes/check-add-notes.component';
 import { CheckUploadImageComponent } from '../../components/detail-check-list/components/check-upload-image/check-upload-image.component';
@@ -51,6 +52,7 @@ export const ReportSectionComponent = [
     new AdSection(DetailAttachmentSectionComponent, {title: 'Job Attachment', panelIsOpen: true}),
     new AdSection(DetailJobHistorySectionComponent, {title: 'Job History', panelIsOpen: true}),
     new AdSection(CheckListComponent, {title: 'Check Table', panelIsOpen: false}),
+    new AdSection(DetailViolationBrowserComponent, {title: 'Violation Browser', panelIsOpen: false}),
 ]
 
 // NgrxStore default selector

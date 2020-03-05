@@ -31,7 +31,7 @@ export class CheckFields {
         sortable: true,
         filter: true,
         checkboxSelection: true,
-        width: 140,
+        // width: 140,
         headerCheckboxSelection: true,
     };
     public rawErrorCountField = {
@@ -90,7 +90,8 @@ export class CheckFields {
         filter: true,
         cellRenderer: params => {
             return `${params.value}`;
-        }
+        },
+        width: 50
     };
     public defaultRvField = {
         headerName: 'Default RV',

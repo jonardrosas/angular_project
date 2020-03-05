@@ -6,6 +6,7 @@ export * from './mantisresolution.selector';
 export * from './mantisstage.selector';
 export * from './orcrecord.selectors';
 export * from './mantisobject.selector';
+export * from './orcrecordviolation.selector';
 
 // selectors
 export const getOrcModuleStateSelector = createFeatureSelector<OrcModuleState>('orc');

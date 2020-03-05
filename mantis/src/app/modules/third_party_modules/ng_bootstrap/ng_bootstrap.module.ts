@@ -7,7 +7,8 @@ import {
     NgbModalModule,
     NgbTabsetModule,
     NgbTypeaheadModule,
-    NgbAccordionModule 
+    NgbAccordionModule,
+    NgbDropdownModule  
 } from '@ng-bootstrap/ng-bootstrap';
 
 const BootstrapComponents = [
@@ -16,7 +17,8 @@ const BootstrapComponents = [
     NgbModalModule,
     NgbTabsetModule,
     NgbTypeaheadModule,
-    NgbAccordionModule 
+    NgbAccordionModule,
+    NgbDropdownModule  
 ];
 
 @NgModule({

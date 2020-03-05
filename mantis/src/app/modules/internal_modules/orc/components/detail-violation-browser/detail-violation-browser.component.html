@@ -1,0 +1,79 @@
+<div class="row-break">
+    <button type="button" class="btn btn-toggle" (click)="data.panelIsOpen = !data.panelIsOpen"
+            [attr.aria-expanded]="!data.panelIsOpen" aria-controls="errorStatistics">
+        <i [ngClass]="isCollapse(data.panelIsOpen)"></i> PDB Violation Browser
+    </button>      
+</div>
+<div id="errorStatistics" class="row-break" [ngbCollapse]="data.panelIsOpen" *ngIf="mantisRecord.pdbstatus == 'validated'">
+    <ul class="d-flex nav nav-tabs m4-nav" role="tablist" *ngIf="mainTabs.length > 0">
+        <li class="shadow-sm ml-1 nav-item" *ngFor="let mainTab of mainTabs">
+            <a class="shadow font-weight-bold text-dark nav-check-link"
+                [routerLink]="[url, mantisRecord.id]"
+                [queryParams]="{violation_section: mainTab.id}" 
+                routerLinkActive="active">
+                {{ mainTab.title }}
+                <span class="count-badge badge badge-md badge-danger" *ngIf="violationStat[mainTab.id] != 0">{{ violationStat[mainTab.id]  }}</span>
+            </a>
+        </li>            
+    </ul>    
+    <div class="card bg-white border border-dark panel-shadow" *ngIf="violations.length > 0; else noAvailVio">
+        <div class="card-body">
+            <div class="row row-break">
+                <div class="col">
+                    <div ngbDropdown class="d-inline-block">
+                        <button class="btn btn-sm btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Group View</button>
+                        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                            <button ngbDropdownItem (click)="groupByField(option.id)" *ngFor="let option of vioGroupingOptions">{{ option.title }}</button>
+                        </div>
+                    </div>
+                    <button class="btn btn-sm btn-outline-primary ml-1" (click)="unSelectAll()">Unselect All 
+                        <span class="badge badge-info">{{ violationSelection.selected.length }}</span>
+                    </button>
+                    <button class="btn btn-sm btn-outline-primary ml-1" (click)="selectAll()">Select All </button>
+                    <button class="btn btn-sm btn-outline-primary ml-1" (click)="getViolations()"> Reload Violation </button>
+                </div>
+            </div>
+            <div class="row row-break">
+               <div class="col vio_display ">
+                    <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+                      <ngb-panel *ngFor="let item of violationGroup | keyvalue">
+                        <ng-template ngbPanelTitle>
+                            <span>{{ item.key  }} ({{ item.value.length }})</span>
+                        </ng-template>
+                        <ng-template ngbPanelContent>
+                            <div class="container-fluid">
+                                <div class="row">
+                                      <div class="col-md-3 media" *ngFor="let vio of item.value; index as i">
+                                            <app-detail-violation-card [vio]="vio" [index]="i" (isSelected)="addSelection($event)"></app-detail-violation-card>
+                                      </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                      </ngb-panel>
+                    </ngb-accordion>
+                </div>
+            </div>            
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+        </div>
+    </div>           
+</div>
+<ng-template #noAvailVio>
+    <h1>No violation available.</h1>
+</ng-template>

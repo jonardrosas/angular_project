@@ -7,6 +7,7 @@ import * as fromMantisStageReducer from './mantisstage.reducer';
 import * as fromOrcRecordReducer from './orcrecord.reducer';
 import * as fromMantisObject from './mantisobject.reducer';
 import * as fromOrcRecordCheckReducer from './orcrecordcheck.reducer';
+import * as orcRecordViolationReducer from './orcrecordviolation.reducer';
 
 export const reducers: ActionReducerMap<OrcModuleState> = {
     mantisRecordState: fromMantisReducer.reducer,
@@ -14,7 +15,8 @@ export const reducers: ActionReducerMap<OrcModuleState> = {
     mantisStageState: fromMantisStageReducer.reducer,
     mantisObjectState: fromMantisObject.reducer,
     orcRecordState: fromOrcRecordReducer.reducer,
-    orcRecordCheckState: fromOrcRecordCheckReducer.reducer
+    orcRecordCheckState: fromOrcRecordCheckReducer.reducer,
+    orcRecordViolationState: orcRecordViolationReducer.reducer,
 };
 
 

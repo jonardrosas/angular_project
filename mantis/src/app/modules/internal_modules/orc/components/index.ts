@@ -5,4 +5,6 @@ export * from './detail-job-action-section/detail-job-action-section.component';
 export * from './detail-job-history-section/detail-job-history-section.component';
 export * from './detail-device-summary/device-summary.component';
 export * from './detail-notes-section/detail-notes-section.component';
+export * from './detail-violation-browser/detail-violation-browser.component';
+export * from './detail-violation-card/detail-violation-card.component';
 export * from './detail-progress-bar/progress-bar.component';

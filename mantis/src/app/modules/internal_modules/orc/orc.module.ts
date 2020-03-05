@@ -49,6 +49,8 @@ import { CheckImageListViewComponent } from './components/check-image-list-view/
 import { DetailJobActionAddNotesComponent } from './components/detail-job-action-section/detail-job-action-add-notes/detail-job-action-add-notes.component';
 import { DetailJobActionAddAttachmentComponent } from './components/detail-job-action-section/detail-job-action-add-attachment/detail-job-action-add-attachment.component';
 import { DetailReleaseForMaskwriteComponent } from './components/detail-job-action-section/detail-release-for-maskwrite/detail-release-for-maskwrite.component';
+import { DetailViolationBrowserComponent } from './components/detail-violation-browser/detail-violation-browser.component';
+import { DetailViolationCardComponent } from './components/detail-violation-card/detail-violation-card.component';
 
 @NgModule({
     imports: [
@@ -96,7 +98,9 @@ import { DetailReleaseForMaskwriteComponent } from './components/detail-job-acti
         DetailJobActionAddNotesComponent,
         DetailJobActionAddAttachmentComponent,
         ToStageStringPipe,
-        DetailReleaseForMaskwriteComponent
+        DetailReleaseForMaskwriteComponent,
+        DetailViolationBrowserComponent,
+        DetailViolationCardComponent
     ],
     entryComponents: [
         CheckListComponent,
@@ -125,7 +129,8 @@ import { DetailReleaseForMaskwriteComponent } from './components/detail-job-acti
         CheckDetailPopupComponent,
         DetailJobActionAddNotesComponent,
         DetailJobActionAddAttachmentComponent,
-        DetailReleaseForMaskwriteComponent
+        DetailReleaseForMaskwriteComponent,
+        DetailViolationBrowserComponent
     ],
     providers: [
         OrcRecordService,

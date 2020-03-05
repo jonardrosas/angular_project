@@ -18,6 +18,8 @@ export class StoreBaseManager{
     checkCheckStatCountSelector?;    
     iSTGroupSelector?;
     iSTGroupDispatchAction?;
+    violationsAction?;
+    violationsSelector?;
 
     constructor(public store: any){
         this.checkTableStoreAction = this.store.getRecordChecksAction;
@@ -38,5 +40,7 @@ export class StoreBaseManager{
         this.checkCheckStatCountSelector = this.store.getRecordCheckStatCountSelector;
         this.iSTGroupSelector = this.store.getIstSupportTeamGroupSelector;
         this.iSTGroupDispatchAction = this.store.getIstGroupAction;
+        this.violationsAction = this.store.getOrcRecordViolationsAction;
+        this.violationsSelector = this.store.getViolationsSelector;
     }
 }

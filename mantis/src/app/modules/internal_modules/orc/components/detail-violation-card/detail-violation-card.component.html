@@ -1,0 +1,29 @@
+<div class="thumbnail media-body mb-4 p-2" [ngClass]="getThumbnailClass()">
+    <div class="row">
+        <div class="col-md-12 form-check">
+            <label class="form-check-label col-md-12" for="{{ vio.id }}">
+                <div class="d-flex bd-highlight">
+                    <div class="p-2 flex-grow-1 bd-highlight">
+                        <input class="form-check-input larger" [(ngModel)]="vio.isSelected" type="checkbox" id="{{ vio.id }}" (ngModelChange)="vioSelection($event)">
+                        <span class="h5 mt-0 mb-1 ml-2"> {{ vio.name }} </span>
+                    </div>
+                    <div class="p-2 bd-highlight">
+                        <h5>
+                            <span class="pull-right text-right badge badge-secondary">{{ index }} {{ vio.isSelected }} </span>
+                        </h5>
+                    </div>
+                </div>
+            </label>
+        </div>
+    </div>
+    <div class="row row-break">
+        <div class="col-md-12">
+            <button class="btn btn-sm" [ngClass]="getBtnClass(vio.status)">{{ vio.status }}</button>
+        </div>
+    </div>
+    <div class="row row-break">
+        <div class="col-md-12">
+            <img src="{{ media_url}}{{ vio.image }}" class="mr-3 img-fluid rounded" alt="...">
+        </div>
+    </div>
+</div>

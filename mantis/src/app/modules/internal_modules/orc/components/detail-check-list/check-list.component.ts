@@ -59,6 +59,7 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
     public assignedIstSelector;
     public assignedSoaSelector;
     public previousSelectedRow = [];
+    public validatedCheckName = [];
     public subTab = {};
     public checkFilter: {limit?: number; record?: number} = {};
 
@@ -104,6 +105,7 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
                 )
             }
         ) 
+        this.autoSelectOpenChecks()
 
 
     }
@@ -133,6 +135,7 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
         this.loadCheck(queryParams)
         this.getCheckStatCount()
         this.container.getObjectUsingStore(this.mantisId)
+        this.autoSelectPreviousSelectedChecks()
     }
 
     loadCheck(queryParams?){
@@ -195,6 +198,7 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
         }        
 
         this.refreshGrid()
+        this.autoSelectOpenChecks()
     }       
 
     ngAfterViewInit() {
@@ -219,7 +223,7 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
         }
     }
 
-    autoSelectCheck(){
+    autoSelectPreviousSelectedChecks(){
         setTimeout(
             () => {
                 this.agGrid.api.forEachNode(
@@ -233,6 +237,22 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
         )
     }
 
+    autoSelectOpenChecks(){
+        if(this.previousSelectedRow.length == 0) {
+            setTimeout(
+                () => {
+                    this.agGrid.api.forEachNode(
+                        (node) => {
+                            if(['PA'].indexOf(node.data.status) == -1){
+                                node.setSelected(true)
+                            }
+                        }
+                    )                
+                }, 1000
+            )
+        }
+    }    
+
     refreshGrid() {
         if(this.agGrid){
             setTimeout(
@@ -241,7 +261,6 @@ export class CheckListComponent extends ButtonCollapse implements OnInit, AfterV
                     this.agGrid.api.setDomLayout('autoHeight');
                 }
             )
-            this.autoSelectCheck()
         }
     }
 
